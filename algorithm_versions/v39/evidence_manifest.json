@@ -1,0 +1,7 @@
+{
+  "artifacts": [],
+  "backfill_status": "not_started",
+  "cache_root": ".cache/algorithm_versions/v39",
+  "policy": "Large experiment datasets stay in .cache/algorithm_versions/<key>; tracked manifests store paths, commands, and checksums.",
+  "schema_version": 1
+}

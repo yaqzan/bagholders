@@ -1,0 +1,40 @@
+{
+  "changed_paths": [
+    "api.py",
+    "database/models/core.py",
+    "recalculate_scores.py",
+    "simulator.py",
+    "trader.py"
+  ],
+  "name_status": [
+    {
+      "path": "api.py",
+      "status": "M"
+    },
+    {
+      "path": "database/models/core.py",
+      "status": "M"
+    },
+    {
+      "path": "recalculate_scores.py",
+      "status": "M"
+    },
+    {
+      "path": "simulator.py",
+      "status": "M"
+    },
+    {
+      "path": "trader.py",
+      "status": "M"
+    }
+  ],
+  "range": "a8cfc750..061362d6",
+  "stat": [
+    "api.py                  | 118 ++++++++++++-----",
+    " database/models/core.py | 336 +++++++++++++++++++++++++++++++++++++++---------",
+    " recalculate_scores.py   |  94 +++++++++-----",
+    " simulator.py            |  15 ++-",
+    " trader.py               | 111 ++++++++--------",
+    " 5 files changed, 488 insertions(+), 186 deletions(-)"
+  ]
+}

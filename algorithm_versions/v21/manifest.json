@@ -1,0 +1,166 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-04-20T19:58:11",
+    "git_commit": "aba4f5d",
+    "git_message": "Add ext-focal gradient dampener for puts above EMA50",
+    "id": 21,
+    "label": "v21",
+    "notes": null
+  },
+  "captured_at": "2026-05-13T16:10:59+00:00",
+  "classification": {
+    "category": "scoring_algorithm",
+    "reason": "Commit message names score-stage or score-context behavior.",
+    "scoring_algorithm_snapshot": true
+  },
+  "files": {
+    "portfolio_sources": [
+      {
+        "missing": true,
+        "source": "strategy_config.py"
+      },
+      {
+        "missing": true,
+        "source": "mechanism_registry.py"
+      },
+      {
+        "bytes": 31886,
+        "path": "monte_carlo.py",
+        "sha256": "6302ce41d022aa2bd64d043464ec7f2142e0a25ca43c07b51685797996c0c5be",
+        "source": "monte_carlo.py"
+      },
+      {
+        "missing": true,
+        "source": "monte_carlo_15dte.py"
+      },
+      {
+        "bytes": 31955,
+        "path": "backtest_cascade.py",
+        "sha256": "7302c9aa0b08aaf0d982de03ff7d15778a359cf7740255444964ad387eeda917",
+        "source": "backtest_cascade.py"
+      },
+      {
+        "missing": true,
+        "source": "backtest_cascade_15dte.py"
+      },
+      {
+        "bytes": 94700,
+        "path": "api.py",
+        "sha256": "bd80b717835322e61442dd9b5d4f17327332227f8f4529091763fea278494b29",
+        "source": "api.py"
+      },
+      {
+        "bytes": 122881,
+        "path": "trader.py",
+        "sha256": "b7c3c854280674ad747c767ac615e628cdce95660c1497e345b5c34ec2486376",
+        "source": "trader.py"
+      }
+    ],
+    "scoring": [
+      {
+        "bytes": 8,
+        "path": "ALGORITHM_VERSION",
+        "sha256": "cbeeae95a026090f31d3340b9a664316261aefc31eb47824f5fee2916324024f",
+        "source": "ALGORITHM_VERSION"
+      },
+      {
+        "missing": true,
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 15481,
+        "path": "database/utils/scoring.py",
+        "sha256": "317e014a63fca257865916926d187b299a99293b2eb9b1ffc58c673eeca3dc30",
+        "source": "database/utils/scoring.py"
+      },
+      {
+        "missing": true,
+        "source": "database/utils/sector_breadth_wave.py"
+      },
+      {
+        "bytes": 179382,
+        "path": "database/models/core.py",
+        "sha256": "8ee681e769c4a9f32182fee28d8baaf265ac2d97c703b4101f392e0715b9bed1",
+        "source": "database/models/core.py"
+      },
+      {
+        "bytes": 17689,
+        "path": "database/models/technical.py",
+        "sha256": "3f44c93f24cce14284787a5732ea0b8e471371fd27f4837041e24e47ee01b24d",
+        "source": "database/models/technical.py"
+      },
+      {
+        "bytes": 961,
+        "path": "database/project_root.py",
+        "sha256": "7fae4a33e2321f0a2098aeb9be4f976655d060552f7b09d08fcf15cf9ba39c3c",
+        "source": "database/project_root.py"
+      },
+      {
+        "bytes": 24055,
+        "path": "market_breadth.py",
+        "sha256": "ee48a20f94b622941f1e4760c70d18cab82efd170835e606e8488eb3ee16043b",
+        "source": "market_breadth.py"
+      },
+      {
+        "bytes": 31003,
+        "path": "market_regime.py",
+        "sha256": "d1a81d7ba5fdc22d0e19d6528f9f2af437556161cc101a97c87e4edbdbbe3c16",
+        "source": "market_regime.py"
+      },
+      {
+        "bytes": 32288,
+        "path": "volume_amplifier.py",
+        "sha256": "255c7f7006b5e9e26ffe8e2c9a6d56b855d9304ce299a61b1c4ed19528ca9822",
+        "source": "volume_amplifier.py"
+      },
+      {
+        "bytes": 26526,
+        "path": "simulator.py",
+        "sha256": "67926d81ebeffb93d64f1cf1c4a9ce8859cb514f6c00c60943140b06e1d24884",
+        "source": "simulator.py"
+      },
+      {
+        "bytes": 8904,
+        "path": "recalculate_scores.py",
+        "sha256": "bfae7e0629bfda0ab96b1f815d729e2ba297606dc4d32eeacc82d4808858c490",
+        "source": "recalculate_scores.py"
+      }
+    ]
+  },
+  "fingerprints": {
+    "manifest_inputs": "24f844ca62f923e1b9e7e9a743b7fb4a04341f6fa0acf2ef6a28c2767373a74a",
+    "portfolio_config": "cba30b2df9efa25063e56a7c79200919082ce009b32cb79b552b4edf6a83f831",
+    "portfolio_snapshot": "1980fb44138f406632feec71da8abfa47068cd100aaa500cbb085cb985bec355",
+    "portfolio_source_files": "47f05d24a0551dfbd0f9eecb3f8ab1ae084f127e1e3af47aa281925456df8957",
+    "scoring_config": "af73a503aa4a694ec2ccf8a54d8e0bc2eea5b05564ac3a02ebd2d2d195c5bf09",
+    "scoring_files": "2b52a07364dc4a889410f5a9b50d0e451a1196b25946dc891f3ec0bb141e938a"
+  },
+  "label": "v21",
+  "notes": [
+    "This snapshot was copied from the git commit recorded by AlgorithmVersion rather than from the current worktree.",
+    "Runtime scoring still imports the checkout code until the injected loader phase lands."
+  ],
+  "paths": {
+    "cache_root": ".cache/algorithm_versions/v21",
+    "evidence_manifest": "evidence_manifest.json",
+    "portfolio_config": "portfolio_config.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_sources": "portfolio_sources",
+    "root": "algorithm_versions/v21",
+    "scoring": "scoring",
+    "scoring_config": "scoring_config.json"
+  },
+  "previous_resolved_key": "v20",
+  "schema_version": 1,
+  "silo_key": "v21",
+  "source": {
+    "algorithm_version_file": "66af13d",
+    "commit": "aba4f5dade4700322370f84a8d727c8b0e0c7ed6",
+    "commit_body": "Puts (<=25) with price above EMA50 are profit-taking pullbacks in\nuptrends, not breakdown setups. Fine-grained 5y sweep found WR30\ndeclines monotonically from 70.3% at ext=-10..-4 to 60.7% at ext>+10.\nLift proportional to how bearish the score is and how far above EMA50.\n\n5y diff-assess vs v20: <25 WR15 +2.7pp / WR30 +2.7pp; <15 WR15 +2.6pp /\nWR30 +2.3pp; <5 WR15 +5.4pp / WR30 +4.1pp. Ret30 flips positive at\nevery put tier. Cap30 up across all tiers (MAE tightens + MFE expands).\nMonotonic WR gradient restored across put buckets.\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+    "commit_short": "aba4f5da",
+    "commit_subject": "Add ext-focal gradient dampener for puts above EMA50",
+    "mode": "git_ref",
+    "requested_ref": "aba4f5d"
+  },
+  "status": "shipped"
+}

@@ -1,0 +1,9 @@
+{
+  "assess_combos": null,
+  "extraction_error": "git_commit does not resolve to a commit: baseline",
+  "mechanism_registry": [],
+  "strategies": {
+    "15dte": null,
+    "30dte": null
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "algorithm_version": {
+    "created_at": "0000-00-00 00:00:00",
+    "git_commit": "baseline",
+    "git_message": "Pre-versioning baseline",
+    "id": 1,
+    "label": "v1",
+    "notes": null
+  },
+  "assess_combos": null,
+  "mechanism_registry": [],
+  "portfolio_snapshot_extraction_error": "git_commit does not resolve to a commit: baseline",
+  "schema_version": 1,
+  "silo_key": "v1",
+  "source": {
+    "manifest": "manifest.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_snapshot_sha256": "8788f8443073635a9e723b264b25baa34c0ce624f5075379cf26e8fd8fb22e35",
+    "portfolio_source_files_fingerprint": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+  },
+  "strategies": {
+    "15dte": {
+      "conflicts": [],
+      "field_count": 0,
+      "field_sources": {},
+      "fields": {},
+      "reason": "No statically evaluable legacy portfolio constants found for this strategy.",
+      "source_files": [],
+      "source_mode": "legacy_source_constants",
+      "status": "unavailable",
+      "strategy_key": "15dte",
+      "unsupported": []
+    },
+    "30dte": {
+      "conflicts": [],
+      "field_count": 0,
+      "field_sources": {},
+      "fields": {},
+      "reason": "No statically evaluable legacy portfolio constants found for this strategy.",
+      "source_files": [],
+      "source_mode": "legacy_source_constants",
+      "status": "unavailable",
+      "strategy_key": "30dte",
+      "unsupported": []
+    }
+  }
+}

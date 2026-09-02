@@ -1,0 +1,22 @@
+{
+  "changed_paths": [
+    "ALGORITHM_VERSION",
+    "database/utils/scoring.py"
+  ],
+  "name_status": [
+    {
+      "path": "ALGORITHM_VERSION",
+      "status": "M"
+    },
+    {
+      "path": "database/utils/scoring.py",
+      "status": "M"
+    }
+  ],
+  "range": "410a055a..83851dbb",
+  "stat": [
+    "ALGORITHM_VERSION         |  2 +-",
+    " database/utils/scoring.py | 30 ++++++++++++++++++++----------",
+    " 2 files changed, 21 insertions(+), 11 deletions(-)"
+  ]
+}

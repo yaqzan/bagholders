@@ -1,0 +1,32 @@
+{
+  "artifacts": [
+    {
+      "description": "v65 sidecar score recalc completion marker. Recalc wrote v65 score rows without flipping active scoring from v60.",
+      "path": ".codex/runs/weekly_partial_v65_ship_20260527_2243/recalc.done.json",
+      "sha256": "515d96d0ec56acf53dbecab38640df81517d79136663bbbeaba706feba923eac",
+      "type": "recalc_done"
+    },
+    {
+      "description": "v65 assessment and research-pack gate completion marker. The gate completed with assessment rows and research artifacts; historic-update logged a MySQL timeout warning.",
+      "path": ".codex/runs/v65_assess_ship_gates_20260528_0317/done.json",
+      "sha256": "ab75ebaaca0bfeea19389c0d1ac27842c01ad84129f3c5326353760482aa0b49",
+      "type": "assessment_gate_done"
+    },
+    {
+      "description": "Version-scoped research pack manifest for v65. Includes score coverage, assessment coverage, WR utility, horizon utility, and sentinel/core/apex portfolio stress windows.",
+      "path": ".cache/algorithm_versions/v65/research_pack/manifest.json",
+      "sha256": "156b4b0d567ca798a47926f0676d1da20952d957cc11763fe1555b90b0f07dd8",
+      "type": "research_pack_manifest"
+    },
+    {
+      "description": "v65 temporal refresh and final research-pack rebuild. Filled BacktestTemporalStats for 30DTE/15DTE across sentinel/core/apex and rebuilt the pack with temporal_complete=true.",
+      "path": ".codex/runs/v65_silo_temporal_pack_20260529_0045/done.json",
+      "sha256": "bb1aaf6d0ff0a9430d41d30d8b6e15d2fcc717b59abd97e76b7619f14e6c64ea",
+      "type": "temporal_research_pack_done"
+    }
+  ],
+  "backfill_status": "complete_for_comparison",
+  "cache_root": ".cache/algorithm_versions/v65",
+  "policy": "Large experiment datasets stay in .cache/algorithm_versions/<key>; tracked manifests store paths, commands, and checksums.",
+  "schema_version": 1
+}

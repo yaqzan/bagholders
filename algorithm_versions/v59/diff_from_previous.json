@@ -1,0 +1,58 @@
+{
+  "changed_paths": [
+    "ALGORITHM_VERSION",
+    "api.py",
+    "database/models/core.py",
+    "database/utils/scoring.py",
+    "recalculate_scores.py",
+    "strategy_config.py",
+    "trader.py",
+    "volume_amplifier.py"
+  ],
+  "name_status": [
+    {
+      "path": "ALGORITHM_VERSION",
+      "status": "M"
+    },
+    {
+      "path": "api.py",
+      "status": "M"
+    },
+    {
+      "path": "database/models/core.py",
+      "status": "M"
+    },
+    {
+      "path": "database/utils/scoring.py",
+      "status": "M"
+    },
+    {
+      "path": "recalculate_scores.py",
+      "status": "M"
+    },
+    {
+      "path": "strategy_config.py",
+      "status": "M"
+    },
+    {
+      "path": "trader.py",
+      "status": "M"
+    },
+    {
+      "path": "volume_amplifier.py",
+      "status": "M"
+    }
+  ],
+  "range": "3cfc4dc2..4fd7ffa9",
+  "stat": [
+    "ALGORITHM_VERSION         |   2 +-",
+    " api.py                    | 550 ++++++++++++++++++++++++++++++++++++++++++++--",
+    " database/models/core.py   | 389 ++++++++++++++++++++++++--------",
+    " database/utils/scoring.py | 213 ++++++++++++++++++",
+    " recalculate_scores.py     | 236 +++++++++++++++++++-",
+    " strategy_config.py        |  84 +++++--",
+    " trader.py                 | 237 +++++++++++++++-----",
+    " volume_amplifier.py       |  39 ++--",
+    " 8 files changed, 1538 insertions(+), 212 deletions(-)"
+  ]
+}

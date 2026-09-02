@@ -1,0 +1,58 @@
+{
+  "changed_paths": [
+    "ALGORITHM_VERSION",
+    "api.py",
+    "database/models/core.py",
+    "database/models/technical.py",
+    "database/utils/scoring.py",
+    "simulator.py",
+    "strategy_config.py",
+    "trader.py"
+  ],
+  "name_status": [
+    {
+      "path": "ALGORITHM_VERSION",
+      "status": "M"
+    },
+    {
+      "path": "api.py",
+      "status": "M"
+    },
+    {
+      "path": "database/models/core.py",
+      "status": "M"
+    },
+    {
+      "path": "database/models/technical.py",
+      "status": "M"
+    },
+    {
+      "path": "database/utils/scoring.py",
+      "status": "M"
+    },
+    {
+      "path": "simulator.py",
+      "status": "M"
+    },
+    {
+      "path": "strategy_config.py",
+      "status": "M"
+    },
+    {
+      "path": "trader.py",
+      "status": "M"
+    }
+  ],
+  "range": "5e6e3d31..e0830320",
+  "stat": [
+    "ALGORITHM_VERSION            |   2 +-",
+    " api.py                       |  43 ---------",
+    " database/models/core.py      | 206 ++++++++++--------------------------------",
+    " database/models/technical.py |  78 ----------------",
+    " database/utils/scoring.py    | 167 +++++++++++++++++-----------------",
+    " simulator.py                 |  82 +++--------------",
+    " strategy_config.py           |  50 +++++------",
+    " trader.py                    | 209 +++++++++++++++++++++++++++++++------------",
+    " 8 files changed, 312 insertions(+), 525 deletions(-)"
+  ]
+}

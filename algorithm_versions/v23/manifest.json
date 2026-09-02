@@ -1,0 +1,166 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-04-23T03:23:59",
+    "git_commit": "be057ce",
+    "git_message": "Ship v23: floored-regime x_conf gate (Priority #8 counter-trend capture)",
+    "id": 23,
+    "label": "v23",
+    "notes": null
+  },
+  "captured_at": "2026-05-13T16:10:49+00:00",
+  "classification": {
+    "category": "scoring_algorithm",
+    "reason": "Commit message names score-stage or score-context behavior.",
+    "scoring_algorithm_snapshot": true
+  },
+  "files": {
+    "portfolio_sources": [
+      {
+        "missing": true,
+        "source": "strategy_config.py"
+      },
+      {
+        "missing": true,
+        "source": "mechanism_registry.py"
+      },
+      {
+        "bytes": 34450,
+        "path": "monte_carlo.py",
+        "sha256": "ac84e4cb9eb10abd3fdd3f1430de8d6cc4b42f8bfdd30ca0e35bf4c05f7e1c6a",
+        "source": "monte_carlo.py"
+      },
+      {
+        "missing": true,
+        "source": "monte_carlo_15dte.py"
+      },
+      {
+        "bytes": 34023,
+        "path": "backtest_cascade.py",
+        "sha256": "9f71cf6e1a3d020f97c96647933a0684e6c7a5bf77230572f342069d239ac338",
+        "source": "backtest_cascade.py"
+      },
+      {
+        "missing": true,
+        "source": "backtest_cascade_15dte.py"
+      },
+      {
+        "bytes": 96659,
+        "path": "api.py",
+        "sha256": "b21837dd87adb81ff19fc785e96e8793dc1e0d63bd2df3ae1a0c8035a5e8e75f",
+        "source": "api.py"
+      },
+      {
+        "bytes": 126667,
+        "path": "trader.py",
+        "sha256": "04924aab9df518d58cca32d7f98efeb5ee0627c208d66eefa372d0e72fe049f0",
+        "source": "trader.py"
+      }
+    ],
+    "scoring": [
+      {
+        "bytes": 8,
+        "path": "ALGORITHM_VERSION",
+        "sha256": "3d2af9d4051b5d20aadac3d1ba5bdf44b23f856463c6128b52b89bb159ef03f8",
+        "source": "ALGORITHM_VERSION"
+      },
+      {
+        "missing": true,
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 17630,
+        "path": "database/utils/scoring.py",
+        "sha256": "d38d370c2af461a2a9616eb86e6568d764780730a4f7dfbf4bb9ea4b183fcb33",
+        "source": "database/utils/scoring.py"
+      },
+      {
+        "missing": true,
+        "source": "database/utils/sector_breadth_wave.py"
+      },
+      {
+        "bytes": 179382,
+        "path": "database/models/core.py",
+        "sha256": "8ee681e769c4a9f32182fee28d8baaf265ac2d97c703b4101f392e0715b9bed1",
+        "source": "database/models/core.py"
+      },
+      {
+        "bytes": 17689,
+        "path": "database/models/technical.py",
+        "sha256": "3f44c93f24cce14284787a5732ea0b8e471371fd27f4837041e24e47ee01b24d",
+        "source": "database/models/technical.py"
+      },
+      {
+        "bytes": 961,
+        "path": "database/project_root.py",
+        "sha256": "7fae4a33e2321f0a2098aeb9be4f976655d060552f7b09d08fcf15cf9ba39c3c",
+        "source": "database/project_root.py"
+      },
+      {
+        "bytes": 24055,
+        "path": "market_breadth.py",
+        "sha256": "ee48a20f94b622941f1e4760c70d18cab82efd170835e606e8488eb3ee16043b",
+        "source": "market_breadth.py"
+      },
+      {
+        "bytes": 31003,
+        "path": "market_regime.py",
+        "sha256": "d1a81d7ba5fdc22d0e19d6528f9f2af437556161cc101a97c87e4edbdbbe3c16",
+        "source": "market_regime.py"
+      },
+      {
+        "bytes": 32288,
+        "path": "volume_amplifier.py",
+        "sha256": "255c7f7006b5e9e26ffe8e2c9a6d56b855d9304ce299a61b1c4ed19528ca9822",
+        "source": "volume_amplifier.py"
+      },
+      {
+        "bytes": 26526,
+        "path": "simulator.py",
+        "sha256": "67926d81ebeffb93d64f1cf1c4a9ce8859cb514f6c00c60943140b06e1d24884",
+        "source": "simulator.py"
+      },
+      {
+        "bytes": 8904,
+        "path": "recalculate_scores.py",
+        "sha256": "bfae7e0629bfda0ab96b1f815d729e2ba297606dc4d32eeacc82d4808858c490",
+        "source": "recalculate_scores.py"
+      }
+    ]
+  },
+  "fingerprints": {
+    "manifest_inputs": "8c3a03d268f5d4a88267a7cfa4244b1da825dc8b931ff7e1bb14e9efe5fd692d",
+    "portfolio_config": "df5b8cba8b965bb40a3842021e2bbf39cdea2fb8597e6ce64f7306c463709647",
+    "portfolio_snapshot": "1980fb44138f406632feec71da8abfa47068cd100aaa500cbb085cb985bec355",
+    "portfolio_source_files": "958d7b0ff6e2c2a73505700a8745ab1971ac265e4809baa334fb71dcea70cf19",
+    "scoring_config": "af73a503aa4a694ec2ccf8a54d8e0bc2eea5b05564ac3a02ebd2d2d195c5bf09",
+    "scoring_files": "5d50afb487f528ec664ff4e7420993055a33558aaba83ce903a705f77031cb86"
+  },
+  "label": "v23",
+  "notes": [
+    "This snapshot was copied from the git commit recorded by AlgorithmVersion rather than from the current worktree.",
+    "Runtime scoring still imports the checkout code until the injected loader phase lands."
+  ],
+  "paths": {
+    "cache_root": ".cache/algorithm_versions/v23",
+    "evidence_manifest": "evidence_manifest.json",
+    "portfolio_config": "portfolio_config.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_sources": "portfolio_sources",
+    "root": "algorithm_versions/v23",
+    "scoring": "scoring",
+    "scoring_config": "scoring_config.json"
+  },
+  "previous_resolved_key": "v22",
+  "schema_version": 1,
+  "silo_key": "v23",
+  "source": {
+    "algorithm_version_file": "aba4f5d",
+    "commit": "be057ce043764c42dcecaa401d44310dfcce9804",
+    "commit_body": "Apply d_eff = d \u00d7 max(x_conf^0.50, 0.50) ONLY when regime is stressed\n(effective regime_mult < 0.92). Bull/neutral regimes pass through with\nd_eff = d, preserving TREND compounding in 2024-type tapes that v22's\nuniform gate destroyed (\u221291% on 2024 Realistic, DD-C floor breach on\n2023 + 5y).\n\nPut/call direction selected via base_sum < 50 ? put_regime_multiplier\n: regime_multiplier \u2014 mirrors the downstream regime-application logic.\n\nValidation evidence (see experiments/ct_phase_*.out):\n\nPhase I per-trade gates (floor sweep, 5y full universe, v21 diff-assess):\n  CT-PUT WR15  : 81.3%  \u2265 81%  \u2713  (gate: Priority #8)\n  AL-PUT WR15  : +0.4pp within \u00b10.5pp \u2713\n  AL-CALL WR15 : 0.0pp within \u00b10.5pp \u2713\n  Total N      : \u221210.8% outside \u00b15% \u2014 structural fingerprint, not risk\n                 signal (Phase F precedent: fl060_rc092 Phase-F-certified\n                 with similar N drop).\n\nPhase J portfolio gates (canonical 3-mode MC, 500 iter \u00d7 3 modes \u00d7\n2 windows, vs v19 baseline):\n  2023 Real    : +822.2% vs +319.6%  (+157%)  \u2713\n  2023 DD-C    : 69.3%   < 80%                \u2713\n  2025 Real    : +22,930.9% vs +18,517.5%  (+24%)  \u2713\n  2025 DD-C    : 58.5%   < 80%                \u2713\n\nv23 parameters: \u03b1=0.50, floor=0.50, regime_cutoff=0.92.\n\nCloses CLAUDE.md Open Optimization Priority #8 follow-up sweep plan\n(Design C regime-conditional + Design B floor, validated as hybrid).\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+    "commit_short": "be057ce0",
+    "commit_subject": "Ship v23: floored-regime x_conf gate (Priority #8 counter-trend capture)",
+    "mode": "git_ref",
+    "requested_ref": "be057ce"
+  },
+  "status": "shipped"
+}

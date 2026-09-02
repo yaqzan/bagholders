@@ -1,0 +1,37 @@
+{
+  "07e9722b5": {
+    "fingerprint": "cb6e56528b26dfecf3d5a3d43bca4f6c9a06bfecf876b65f135a66febef89093",
+    "note": "v73 dampener retirements ship 2026-06-12 (WCF+ICH+CWCF+CSWC+SCW off)",
+    "scoring_code_sha": "b0b3c330a787df14f693225eebaa4ad2cb17b5cb829c860730e9c3bd39f40194",
+    "scoring_config_sha": "7020edb38598a9e128797338ef088001645476b075008d8f3bbac2a9e0e45074",
+    "version_id": 73
+  },
+  "8b59206c3e4778f0eea1d240c34a48522ee64d1d": {
+    "fingerprint": "081597848cf451db1cf1df5ae9a074a3b18fe6691a7b218b2fb93e64eff00b96",
+    "note": "v69 weekly transition blend ship 2026-05-31",
+    "scoring_code_sha": "225fca584995c8d62299d7ece859cdf4554086eb7d9a04b4ce5b9757444ea72d",
+    "scoring_config_sha": "a64ba3c4271dbe675b54a3510ebfb6e1bed3c304f6fac7eb6de479cbc76bf3ae",
+    "version_id": 69
+  },
+  "d4a3e9fec": {
+    "fingerprint": "0b731751f2ddd4f8993bb15ae39b04c13a13d0c2c0a3214eb2859070ad1aaffa",
+    "note": "v60 production config; main computes v60-identical scores (0/5036 verified); v61-v66 flag-gated-off + siloed",
+    "scoring_code_sha": "a98ed0ec673da88e869dfd077640f3cef79e712f17e35339c17ed8dfe5d7f0ce",
+    "scoring_config_sha": "a64ba3c4271dbe675b54a3510ebfb6e1bed3c304f6fac7eb6de479cbc76bf3ae",
+    "version_id": 60
+  },
+  "f9fb7b934": {
+    "fingerprint": "99cf6f12987263389c84e652791fba02f85acd5afe82df1146454d1ddca87c3d",
+    "note": "v74 lock backfill (2026-07-17 hostile audit finding): guard was a silent no-op for the active version. Captured at post-b1bad05dc state (same-day bit-exact MOS core/bias refactor of ship f9fb7b934); SPREAD_TILT #6 ship (06-15/16) is portfolio-side, outside SCORING. Pins the operative state that has written all v74 rows since 2026-06-15.",
+    "scoring_code_sha": "32eb0534c5db683ae56694131c3ef7a3f355f79d701802e6a9f8eda72ae65fb3",
+    "scoring_config_sha": "894438078e78b7e5ec9d551d3a84c8244bfd12b4b7899009e3df98f3df9ca3e4",
+    "version_id": 74
+  },
+  "fc5671200": {
+    "fingerprint": "5ad401f5490bd27a5763e0e1d2e260926b60b7fedfda31679bffccf3d9bf7b47",
+    "note": "v72 WCF score-gate ramp ship 2026-06-11; re-captured 2026-06-12 after the holdout re-lock (CALIBRATION_CUTOFF_DATE None->2026-06-15) changed the config sha \u2014 proven the ONLY drift (formula + all scoring flags/constants bit-identical)",
+    "scoring_code_sha": "b0b3c330a787df14f693225eebaa4ad2cb17b5cb829c860730e9c3bd39f40194",
+    "scoring_config_sha": "d1b37fff44f73e6fafd8048bd29c865d5615275dda678ab525cb92eb347f9ffb",
+    "version_id": 72
+  }
+}

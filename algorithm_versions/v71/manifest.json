@@ -1,0 +1,179 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-06-10T04:17:24.958740",
+    "git_commit": "04044b21b",
+    "git_message": "v71 scoring: integrity-audit honest fixes (F1-F4) + 4 mechanism retirements",
+    "id": 71,
+    "label": "v71",
+    "notes": null
+  },
+  "captured_at": "2026-06-10T08:17:34+00:00",
+  "classification": {
+    "category": "scoring_algorithm",
+    "reason": "Commit message names score-stage or score-context behavior.",
+    "scoring_algorithm_snapshot": true
+  },
+  "files": {
+    "portfolio_sources": [
+      {
+        "bytes": 78386,
+        "path": "strategy_config.py",
+        "sha256": "c9c98685a9c7800944555cd4e5d07ec64d6b6d2d02a5c48ae32661e026a75b3b",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 31024,
+        "path": "mechanism_registry.py",
+        "sha256": "66c30f6b87f4dbea70eb777a130a25b268d2c439a6ec188df9a1f74828b90745",
+        "source": "mechanism_registry.py"
+      },
+      {
+        "bytes": 177910,
+        "path": "monte_carlo.py",
+        "sha256": "f853df57be1de8b91e6526d465e05712ed938da46907c2ee72229a272a6d339a",
+        "source": "monte_carlo.py"
+      },
+      {
+        "bytes": 90989,
+        "path": "monte_carlo_15dte.py",
+        "sha256": "6cf9cd5662ccbbd91a76127f13364c4bfa253fba18189def854bedbd184e2936",
+        "source": "monte_carlo_15dte.py"
+      },
+      {
+        "bytes": 143502,
+        "path": "backtest_cascade.py",
+        "sha256": "dd933c6239cb0705e5b24e314150e7525356e7b36dda0b26faf06438594f9d9d",
+        "source": "backtest_cascade.py"
+      },
+      {
+        "bytes": 87029,
+        "path": "backtest_cascade_15dte.py",
+        "sha256": "8e1100c9ee887e5f28945162a21988c79dbfdb3dcd7e40c780cb1be9970d5f89",
+        "source": "backtest_cascade_15dte.py"
+      },
+      {
+        "bytes": 258992,
+        "path": "api.py",
+        "sha256": "9d3566a5bb109470ec4b3ef4908208c507cde78afd422740ec810fdfff99ae1b",
+        "source": "api.py"
+      },
+      {
+        "bytes": 266531,
+        "path": "trader.py",
+        "sha256": "f516b3c11e7486e977babe99d44be92c8f3c6374bbc05c9efa0737fa5f7ce0fd",
+        "source": "trader.py"
+      }
+    ],
+    "scoring": [
+      {
+        "bytes": 41,
+        "path": "ALGORITHM_VERSION",
+        "sha256": "db738745c2bb8a4de12107d7162a34363c3e80a7e7815aeb6daad870dcd42202",
+        "source": "ALGORITHM_VERSION"
+      },
+      {
+        "bytes": 78386,
+        "path": "strategy_config.py",
+        "sha256": "c9c98685a9c7800944555cd4e5d07ec64d6b6d2d02a5c48ae32661e026a75b3b",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 90858,
+        "path": "database/utils/scoring.py",
+        "sha256": "ab5d3499bfe14ebea9a134b86a67d2c05d4db459cc37ae6c083ef153b0ca9196",
+        "source": "database/utils/scoring.py"
+      },
+      {
+        "bytes": 14255,
+        "path": "database/utils/sector_breadth_wave.py",
+        "sha256": "fe860a16f6276a00d3fa55408b37ce9d348e6d0b995eddaf2f6ec4072f04b279",
+        "source": "database/utils/sector_breadth_wave.py"
+      },
+      {
+        "bytes": 291998,
+        "path": "database/models/core.py",
+        "sha256": "98db294803ddb1f6a3b62754be7cec18fa196513a57a04aa413a950c6a270677",
+        "source": "database/models/core.py"
+      },
+      {
+        "bytes": 24417,
+        "path": "database/models/technical.py",
+        "sha256": "aa267949307463164561744e895afea43746a467e6f918d0f7fc2603c62372f9",
+        "source": "database/models/technical.py"
+      },
+      {
+        "bytes": 961,
+        "path": "database/project_root.py",
+        "sha256": "7fae4a33e2321f0a2098aeb9be4f976655d060552f7b09d08fcf15cf9ba39c3c",
+        "source": "database/project_root.py"
+      },
+      {
+        "bytes": 41126,
+        "path": "market_breadth.py",
+        "sha256": "e9bc8d559261731032af7c7d19f263209645ff3511d82e15360d491a86c73c5c",
+        "source": "market_breadth.py"
+      },
+      {
+        "bytes": 31003,
+        "path": "market_regime.py",
+        "sha256": "d1a81d7ba5fdc22d0e19d6528f9f2af437556161cc101a97c87e4edbdbbe3c16",
+        "source": "market_regime.py"
+      },
+      {
+        "bytes": 39523,
+        "path": "volume_amplifier.py",
+        "sha256": "13f2844acb4de8ad892803411e8f82734048c35733247654f499bf7dfcc1a0c2",
+        "source": "volume_amplifier.py"
+      },
+      {
+        "bytes": 48200,
+        "path": "simulator.py",
+        "sha256": "6cf35aeb22e6000019252dadafc6760e9b9b5012594ea4c9dd5606780c46344a",
+        "source": "simulator.py"
+      },
+      {
+        "bytes": 19620,
+        "path": "recalculate_scores.py",
+        "sha256": "b54195b8bac40540488ea272269ad61d31031a936daa08c366633a0ae194b5e9",
+        "source": "recalculate_scores.py"
+      }
+    ]
+  },
+  "fingerprints": {
+    "manifest_inputs": "3e3259dd9bc1cf2c7328dcec8a2edeff7449ebe25b790767d75bcd448ab59cca",
+    "portfolio_config": "46b50be8046b28a43fbe0419281d4b3fabaaebcfc08b7642972af5c72c831b54",
+    "portfolio_snapshot": "7f93ec5a43784fa70b4a980184a1c925ed1050f401f58360bd65409a48ce430b",
+    "portfolio_source_files": "ad98bbb58dbc0af0a35708a915fade8266e65bfa4b0dc9842a6d1967e3f61cb2",
+    "scoring_config": "f381e1f057cd3666a2b0090311b5dd1129bfc3d3f336279aa36e2b1c14d254cd",
+    "scoring_files": "9bbf41217df458d40aa680b380e5a42f07db011e5c24b73167f32df01ff4e06e"
+  },
+  "label": null,
+  "notes": [
+    "This snapshot was copied from the git commit recorded by AlgorithmVersion rather than from the current worktree.",
+    "Runtime scoring still imports the checkout code until the injected loader phase lands."
+  ],
+  "paths": {
+    "cache_root": ".cache/algorithm_versions/v71",
+    "evidence_manifest": "evidence_manifest.json",
+    "portfolio_config": "portfolio_config.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_sources": "portfolio_sources",
+    "root": "algorithm_versions/v71",
+    "scoring": "scoring",
+    "scoring_config": "scoring_config.json"
+  },
+  "previous_resolved_key": "v70",
+  "promoted_at": "2026-06-10T09:59:08+00:00",
+  "schema_version": 1,
+  "silo_key": "v71",
+  "source": {
+    "algorithm_version_file": "c70d16d22dc8ad900d19f7014907774edaa3ae26",
+    "commit": "04044b21b374bd955456395b8ec38764c340f7bb",
+    "commit_body": "F2: SPY weekly composite look-ahead removed \u00e2\u20ac\u201d _spy_wk_last_completed() (-7d,\n    last-completed-week) at ALL per-date sites (single-row, mis-stress map,\n    reapply_regime_today, batched, recalc) + simulator map. v69 leak class.\nF4: point-in-time mcap proxy (mcap_t = mcap_latest * close_t / latest_close)\n    in all scoring paths \u00e2\u20ac\u201d kills the grown-into-large-cap survivorship leak.\nF1: sector Market Wave loud inert/stale guards + self-contained source\n    rebuilder (the v57 source CSV silently vanished; wave was inert in all\n    v60/v69/v70 row sets).\nF3: continuation-echo barrier-cache coverage guard (cache was truncated to\n    117 days; rebuilt to 2016-04-26..2026-06-09 via queue #101).\n\nRetirements (honest 5y full-universe A/B, option barrier, bias-to-retire):\n- mis_stress (MIS_STRESS_CALL_DAMPEN=0): 75+ admits below baseline\n  (50.7 vs 55.2, z=-1.03); original evidence was leak-measured.\n- JA4 put-regime blend (_JA4_SPY_WK_WEIGHT=0): wash at <=25, mildly negative\n  at <=30 (z=-2.48); puts OFF portfolio-wide; removes sim/prod divergence.\n- MCD (MCD_ENABLED=False): PIT ladder collapses 8.2pp->2.6pp z=+2.61 (<W1 3),\n  non-monotonic; removals near-baseline (53.0 vs 55.0); ~42% of 75+ N freed.\n- Sector Market Wave (SECTOR_BREADTH_WAVE_ENABLED=False): formal retirement \u00e2\u20ac\u201d\n  inert all era; rebuilt-source A/B removes ABOVE-baseline winners (-28% 75+ N).\n\nBundle (= this ship state) vs stored v70: 75+ supply +49% at FLAT honest WR,\nputs unchanged, gradient intact. Validation: legacy arm reproduces stored v70\nat 98.43% exact (936,580 rows). Evidence: experiments/integrity_audit_2026_06/\n(FINDINGS.md, ab_eval.py, analyze_ab.py); regression tests\ntests/test_integrity_guards.py (24 green). Adversarial review: 0 blockers.\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>",
+    "commit_short": "04044b21b",
+    "commit_subject": "v71 scoring: integrity-audit honest fixes (F1-F4) + 4 mechanism retirements",
+    "mode": "git_ref",
+    "requested_ref": "04044b21b"
+  },
+  "status": "shipped"
+}

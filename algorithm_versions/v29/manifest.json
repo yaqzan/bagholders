@@ -1,0 +1,166 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-04-28T18:54:30",
+    "git_commit": "8473cba",
+    "git_message": null,
+    "id": 29,
+    "label": "v29",
+    "notes": null
+  },
+  "captured_at": "2026-05-13T16:10:28+00:00",
+  "classification": {
+    "category": "scoring_algorithm",
+    "reason": "Commit message names score-stage or score-context behavior.",
+    "scoring_algorithm_snapshot": true
+  },
+  "files": {
+    "portfolio_sources": [
+      {
+        "missing": true,
+        "source": "strategy_config.py"
+      },
+      {
+        "missing": true,
+        "source": "mechanism_registry.py"
+      },
+      {
+        "bytes": 63465,
+        "path": "monte_carlo.py",
+        "sha256": "86528e042d9a69e7c2a88410bb1be0eb961f620120236de351bba407ac8b62ec",
+        "source": "monte_carlo.py"
+      },
+      {
+        "missing": true,
+        "source": "monte_carlo_15dte.py"
+      },
+      {
+        "bytes": 61257,
+        "path": "backtest_cascade.py",
+        "sha256": "d7058318976f3b47deaa78c6da871c73aea64a4743b72c503f54a3f0d809b620",
+        "source": "backtest_cascade.py"
+      },
+      {
+        "missing": true,
+        "source": "backtest_cascade_15dte.py"
+      },
+      {
+        "bytes": 127715,
+        "path": "api.py",
+        "sha256": "7b08a9b0e47bf991fbfcfc9897ae054a1877822ec653c15757c35a04b9a1f7e2",
+        "source": "api.py"
+      },
+      {
+        "bytes": 145349,
+        "path": "trader.py",
+        "sha256": "380e9bcd8f30491d46b8ad76f71ac56b63c0ada973c525f5801a2f8c3c59fb6d",
+        "source": "trader.py"
+      }
+    ],
+    "scoring": [
+      {
+        "bytes": 8,
+        "path": "ALGORITHM_VERSION",
+        "sha256": "d8445a3050358c59f10cbffee950d8fac578c8343c75540a6b92fef50d388638",
+        "source": "ALGORITHM_VERSION"
+      },
+      {
+        "missing": true,
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 24286,
+        "path": "database/utils/scoring.py",
+        "sha256": "c835ff2a56a6772df3fee1da4ebb6d11ac911c614b42553459e46a13f9ba31b7",
+        "source": "database/utils/scoring.py"
+      },
+      {
+        "missing": true,
+        "source": "database/utils/sector_breadth_wave.py"
+      },
+      {
+        "bytes": 192434,
+        "path": "database/models/core.py",
+        "sha256": "327ec8d25bafbc9d56033b9581a3c24ad79e2cfc679b4d9a9196c0c60a36872e",
+        "source": "database/models/core.py"
+      },
+      {
+        "bytes": 23553,
+        "path": "database/models/technical.py",
+        "sha256": "2752501ca5f3171ca2368ef5357fb66e2a468242b03a55381916273001762fc3",
+        "source": "database/models/technical.py"
+      },
+      {
+        "bytes": 961,
+        "path": "database/project_root.py",
+        "sha256": "7fae4a33e2321f0a2098aeb9be4f976655d060552f7b09d08fcf15cf9ba39c3c",
+        "source": "database/project_root.py"
+      },
+      {
+        "bytes": 24055,
+        "path": "market_breadth.py",
+        "sha256": "ee48a20f94b622941f1e4760c70d18cab82efd170835e606e8488eb3ee16043b",
+        "source": "market_breadth.py"
+      },
+      {
+        "bytes": 31003,
+        "path": "market_regime.py",
+        "sha256": "d1a81d7ba5fdc22d0e19d6528f9f2af437556161cc101a97c87e4edbdbbe3c16",
+        "source": "market_regime.py"
+      },
+      {
+        "bytes": 35908,
+        "path": "volume_amplifier.py",
+        "sha256": "049f0132c58fb7593bae19d3115901fc66e29256e98b134fb327baf15615cc06",
+        "source": "volume_amplifier.py"
+      },
+      {
+        "bytes": 31815,
+        "path": "simulator.py",
+        "sha256": "a22e8a9cbed923ee485dfdac744452aa7032118c10eca9a3104651ee8de4b7bf",
+        "source": "simulator.py"
+      },
+      {
+        "bytes": 9763,
+        "path": "recalculate_scores.py",
+        "sha256": "1a08dfd87bb07fb12e33ea02581a0941ba17309937c32dab02a3cef1191d5434",
+        "source": "recalculate_scores.py"
+      }
+    ]
+  },
+  "fingerprints": {
+    "manifest_inputs": "e224e47565417541cb3d62b41de2e0ffc3e894a3deecdae2b6b92bd4f5d51db5",
+    "portfolio_config": "753b01c7ac36ec744782b7b6ce4111cb5c9c79eab5ebfd7da3becf82cc171a61",
+    "portfolio_snapshot": "1980fb44138f406632feec71da8abfa47068cd100aaa500cbb085cb985bec355",
+    "portfolio_source_files": "a6ed68b38da2cf7cfca75c6afdb9e9dc69c054cd38f83b80113a3b8713f9522d",
+    "scoring_config": "af73a503aa4a694ec2ccf8a54d8e0bc2eea5b05564ac3a02ebd2d2d195c5bf09",
+    "scoring_files": "284f7abc1d25b8f29507bcd58b3e5c9b8d5663fdd7ff9dd7e44ecd000a51a5d2"
+  },
+  "label": "v29",
+  "notes": [
+    "This snapshot was copied from the git commit recorded by AlgorithmVersion rather than from the current worktree.",
+    "Runtime scoring still imports the checkout code until the injected loader phase lands."
+  ],
+  "paths": {
+    "cache_root": ".cache/algorithm_versions/v29",
+    "evidence_manifest": "evidence_manifest.json",
+    "portfolio_config": "portfolio_config.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_sources": "portfolio_sources",
+    "root": "algorithm_versions/v29",
+    "scoring": "scoring",
+    "scoring_config": "scoring_config.json"
+  },
+  "previous_resolved_key": "v28",
+  "schema_version": 1,
+  "silo_key": "v29",
+  "source": {
+    "algorithm_version_file": "e3c8678",
+    "commit": "8473cba17de3990edc66d3cbd7a74d874fe1bceb",
+    "commit_body": "Replaces the prior binary \u00b11-day null in volume_amplifier with a smooth\npre-earnings log-gradient blend toward NEUTRAL. Mirrors v28's earnings-boost\nproximity formula log(W+1-d)/log(W+1) so the two stages compose on the\nsame curve.\n\nMechanism:\n    nearest_d = (nearest forward earnings) - today, calendar days\n    if 0 <= nearest_d <= W:\n        strength = M * log(W+1-nearest_d) / log(W+1)\n        result   = blend(amplifier_output, NEUTRAL, strength)\n    where W=2, M=1.0.\n\nPre-only direction (no suppression for nearest_d < 0). V7 (post-only)\nsweep confirmed post-earnings price action carries genuine directional\nsignal \u2014 even mild post-fade collapses 95+ WR by 11pp.\n\nPer-trade evidence (5y diff-assess vs v28 production, full universe):\n- 95+:  N 38 -> 46 (+21%), WR15 92.1% -> 93.5% (+1.4pp)\n- 90+:  N 150 -> 170 (+13%), WR15 80.7% -> 81.8% (+1.1pp)\n- 85+:  N 478 -> 523 (+9%), WR15 80.0% -> 80.6% (+0.6pp)\n- 70+:  WR15 71.3% -> 71.4% (\u2248)\n- <25:  WR15 75.3% -> 75.0% (\u2248, put side indifferent)\n- <5:   WR15 80.5% -> 80.2% (\u2248)\n\nThe pattern is N expansion AT HIGHER WR \u2014 opposite of the V1/V4/V5\ndilution failure mode. The smooth ramp recovers genuinely informative\nsignals that the binary D-1 null was hard-filtering at the boundary.\n\nNote on v24 reversion (2026-04-25): the prior fix attempt removed D-1\nsuppression entirely (binary OFF\u2192ON at boundary), losing \u221240% to \u221259%\non canonical MC. V6 keeps D-1 partially suppressed (s=0.631) so the\nanticipation-noise filter is preserved as a smooth ramp, not eliminated.\n\nValidation gate (canonical 3-mode MC vs v28 baseline) runs after\nrecalculate. If the gate fails, revert via `trader revert v28`.\n\nPatch sites:\n- volume_amplifier.py: removed binary suppression in _analyze and\n  _analyze_from_cache; added _earnings_supp_strength, _apply_earn_supp,\n  _query_earn_nearest_d_db, _earn_nearest_d_from_set helpers; outer\n  wrappers (get_volume_multiplier, get_volume_multiplier_from_cache)\n  apply the gradient at end-of-pipeline.\n- experiments/v28_optimization/phase_evs_per_trade.py \u2014 8-variant\n  per-trade A/B harness (V0/V1/V2..V7) + 2y output.\n- experiments/v28_optimization/phase_evs_per_trade_v6_focus.py \u2014\n  focused 5y run on V6 + neighbors (W=3, M=0.85, hybrid V8) + output.\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+    "commit_short": "8473cba1",
+    "commit_subject": "v29: earnings volume suppression \u2014 V6 log-gradient (pre-only, W=2, M=1.0)",
+    "mode": "git_ref",
+    "requested_ref": "8473cba"
+  },
+  "status": "shipped"
+}

@@ -1,0 +1,47 @@
+{
+  "artifacts": [
+    {
+      "kind": "research_pack",
+      "path": ".cache/algorithm_versions/v59/research_pack/manifest.json",
+      "sha256": "2f5562d2787b86a5afed583d128227b71164f4bfa069dc78d2bdb082a5d00352",
+      "summary": {
+        "assessment_complete": true,
+        "portfolio_windows_run": true,
+        "score_date_max": "2026-05-15",
+        "score_date_min": "2020-12-31",
+        "score_rows": 993426,
+        "temporal_complete": true,
+        "utility_5y_wr7_complete": true
+      }
+    },
+    {
+      "kind": "score_coverage",
+      "path": ".cache/algorithm_versions/v59/research_pack/score_coverage.json",
+      "sha256": "7b79c693fc18ca544e913c844f278f3af4a355812a921e41aa78cd7a3fbc5565"
+    },
+    {
+      "kind": "assessment_coverage",
+      "path": ".cache/algorithm_versions/v59/research_pack/assessment_coverage.json",
+      "sha256": "8e627fa13d59de8821c8412dac035cdee4ad28be03c16425ccd7b84bcaee5fcd"
+    },
+    {
+      "kind": "utility_5y_wr7",
+      "path": ".cache/algorithm_versions/v59/research_pack/utility_5y_wr7.json",
+      "sha256": "cd7aac6d45307aa3c311aa65557c3c8d18dfa1b70c1db8e299766ac0edd19a4b"
+    },
+    {
+      "kind": "stress_windows",
+      "path": ".cache/algorithm_versions/v59/research_pack/stress_windows.json",
+      "sha256": "ddb0bed8bb35088a906d165d7e0545f556c698e40837a39e44bd3052ee2ee8c3"
+    },
+    {
+      "kind": "temporal_summary",
+      "path": ".cache/algorithm_versions/v59/research_pack/temporal_summary.json",
+      "sha256": "5e0570eefed1b7a9ef34484800fa5e5a84af19eb2de2f7c0e772c8f743e53d50"
+    }
+  ],
+  "backfill_status": "5y_complete_10y_deferred",
+  "cache_root": ".cache/algorithm_versions/v59",
+  "policy": "Large experiment datasets stay in .cache/algorithm_versions/<key>; tracked manifests store paths, commands, and checksums.",
+  "schema_version": 1
+}

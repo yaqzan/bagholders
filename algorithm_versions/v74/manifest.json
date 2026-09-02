@@ -1,0 +1,178 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-06-15T01:11:30",
+    "git_commit": "f9fb7b934",
+    "git_message": "v74 lean scoring: retire post-pre_boost dampener tail (cont-echo, WVD, daily-volume, EARN_BOOST)",
+    "id": 74,
+    "label": "v74",
+    "notes": null
+  },
+  "captured_at": "2026-06-15T06:26:33+00:00",
+  "classification": {
+    "category": "scoring_algorithm",
+    "reason": "Commit message names score-stage or score-context behavior.",
+    "scoring_algorithm_snapshot": true
+  },
+  "files": {
+    "portfolio_sources": [
+      {
+        "bytes": 85798,
+        "path": "strategy_config.py",
+        "sha256": "bfb2dc9d4305644e90a94df5d53e92d84bb3a5125d088e7f5d1d727c3a20953e",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 32973,
+        "path": "mechanism_registry.py",
+        "sha256": "e1f2b24730eaee584b97951809ddf3fff86bcea403be92f35640f0d71115fc11",
+        "source": "mechanism_registry.py"
+      },
+      {
+        "bytes": 183922,
+        "path": "monte_carlo.py",
+        "sha256": "d060394fea30fe556968b520a6b7e2b6882cc0cb73c09a0e07bc0c5034fda22c",
+        "source": "monte_carlo.py"
+      },
+      {
+        "bytes": 90989,
+        "path": "monte_carlo_15dte.py",
+        "sha256": "6cf9cd5662ccbbd91a76127f13364c4bfa253fba18189def854bedbd184e2936",
+        "source": "monte_carlo_15dte.py"
+      },
+      {
+        "bytes": 149070,
+        "path": "backtest_cascade.py",
+        "sha256": "129bd045329ba431abbcd9f0ce2d1b6112513b13f57e1fe3fb83cd77cbbfcd49",
+        "source": "backtest_cascade.py"
+      },
+      {
+        "bytes": 87029,
+        "path": "backtest_cascade_15dte.py",
+        "sha256": "8e1100c9ee887e5f28945162a21988c79dbfdb3dcd7e40c780cb1be9970d5f89",
+        "source": "backtest_cascade_15dte.py"
+      },
+      {
+        "bytes": 268086,
+        "path": "api.py",
+        "sha256": "964fae6bd8bf52a62b3dc512a2bfc2e26431f092d73f4c986febde176d37f105",
+        "source": "api.py"
+      },
+      {
+        "bytes": 269932,
+        "path": "trader.py",
+        "sha256": "721ab7c2f5017b35d01c68c3459d9cebc65510f128ec72288f4d40e3a9936344",
+        "source": "trader.py"
+      }
+    ],
+    "scoring": [
+      {
+        "bytes": 10,
+        "path": "ALGORITHM_VERSION",
+        "sha256": "eb2d12bccc6646d24a24a2e238e5d8b1858132f2ceb9d56149f50b6fba8f6efc",
+        "source": "ALGORITHM_VERSION"
+      },
+      {
+        "bytes": 85798,
+        "path": "strategy_config.py",
+        "sha256": "bfb2dc9d4305644e90a94df5d53e92d84bb3a5125d088e7f5d1d727c3a20953e",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 91890,
+        "path": "database/utils/scoring.py",
+        "sha256": "66da3ef0fd3feaabc8fab117ab4ead0be597ad3c6aaaff27c87ab7f5f4d73d02",
+        "source": "database/utils/scoring.py"
+      },
+      {
+        "bytes": 14255,
+        "path": "database/utils/sector_breadth_wave.py",
+        "sha256": "fe860a16f6276a00d3fa55408b37ce9d348e6d0b995eddaf2f6ec4072f04b279",
+        "source": "database/utils/sector_breadth_wave.py"
+      },
+      {
+        "bytes": 292672,
+        "path": "database/models/core.py",
+        "sha256": "75a580e2c599eb70f6f434cc6326ce47da3de5c08ded6a26aaacbf782137406f",
+        "source": "database/models/core.py"
+      },
+      {
+        "bytes": 24417,
+        "path": "database/models/technical.py",
+        "sha256": "aa267949307463164561744e895afea43746a467e6f918d0f7fc2603c62372f9",
+        "source": "database/models/technical.py"
+      },
+      {
+        "bytes": 961,
+        "path": "database/project_root.py",
+        "sha256": "7fae4a33e2321f0a2098aeb9be4f976655d060552f7b09d08fcf15cf9ba39c3c",
+        "source": "database/project_root.py"
+      },
+      {
+        "bytes": 41126,
+        "path": "market_breadth.py",
+        "sha256": "e9bc8d559261731032af7c7d19f263209645ff3511d82e15360d491a86c73c5c",
+        "source": "market_breadth.py"
+      },
+      {
+        "bytes": 31003,
+        "path": "market_regime.py",
+        "sha256": "d1a81d7ba5fdc22d0e19d6528f9f2af437556161cc101a97c87e4edbdbbe3c16",
+        "source": "market_regime.py"
+      },
+      {
+        "bytes": 39523,
+        "path": "volume_amplifier.py",
+        "sha256": "13f2844acb4de8ad892803411e8f82734048c35733247654f499bf7dfcc1a0c2",
+        "source": "volume_amplifier.py"
+      },
+      {
+        "bytes": 48200,
+        "path": "simulator.py",
+        "sha256": "6cf35aeb22e6000019252dadafc6760e9b9b5012594ea4c9dd5606780c46344a",
+        "source": "simulator.py"
+      },
+      {
+        "bytes": 19620,
+        "path": "recalculate_scores.py",
+        "sha256": "b54195b8bac40540488ea272269ad61d31031a936daa08c366633a0ae194b5e9",
+        "source": "recalculate_scores.py"
+      }
+    ]
+  },
+  "fingerprints": {
+    "manifest_inputs": "c47878fbdd05e1c6b6fb3db4767d7a5cd0d5717b817ac5844b24a9835c1b5851",
+    "portfolio_config": "bf48ae5539431e67cd11282997bb24e13339812c43b237861b50a75c28ccdcb1",
+    "portfolio_snapshot": "63537a38a451010ae587cc52b5108080389ed9a7ff310913b36b065dbdca0611",
+    "portfolio_source_files": "02f33c7918dc136c3c22b3b04307e0546472a878df00a882e2fc84b396ac6b73",
+    "scoring_config": "ee6ca5a92c4f964a6b84fcdf302f1c581a39a3a5116faf4d1d0ab94bac220ae2",
+    "scoring_files": "cea1c15d9264a4d48f81adea067d5efa3409ec57819f5f98ff807be6db609911"
+  },
+  "label": null,
+  "notes": [
+    "This snapshot was copied from the git commit recorded by AlgorithmVersion rather than from the current worktree.",
+    "Runtime scoring still imports the checkout code until the injected loader phase lands."
+  ],
+  "paths": {
+    "cache_root": ".cache/algorithm_versions/v74",
+    "evidence_manifest": "evidence_manifest.json",
+    "portfolio_config": "portfolio_config.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_sources": "portfolio_sources",
+    "root": "algorithm_versions/v74",
+    "scoring": "scoring",
+    "scoring_config": "scoring_config.json"
+  },
+  "previous_resolved_key": "v73",
+  "schema_version": 1,
+  "silo_key": "v74",
+  "source": {
+    "algorithm_version_file": "07e9722b5",
+    "commit": "f9fb7b9343cafeccb18fd4b9966d19441add00c6",
+    "commit_body": "Phase 3d parsimony ablation on the Verification Substrate: the post-pre_boost score-stage tail is net-dilutive on the funded Apex book. Per-member apex-EV attribution (30dte_apex payoff): cont-echo + EARN_BOOST = neutral-EV supply that hurts via over-deployment DD; daily-volume = negative-EV adds; WVD = dampens out the highest-EV signals. Whole-tail ablation MC N=300x8: lean 5y +1,143%/51.3%DD vs full +1,097%/62.1%DD, collapse=0. EARN_BOOST's apparent +7% apex-EV was N=77 sample noise (regressed to +0.2pp at N=179; matches v70 honest-recal 'thin/hygiene-not-alpha'). Keeps lean core (components+weekly+regime+ext-focal+CWWD/CSWC). Reversible via /revert. Evidence: experiments/skill_vs_baseline/OVERNIGHT_FINDINGS.md\n\nCo-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>",
+    "commit_short": "f9fb7b934",
+    "commit_subject": "v74 lean scoring: retire post-pre_boost dampener tail (cont-echo, WVD, daily-volume, EARN_BOOST)",
+    "mode": "git_ref",
+    "requested_ref": "f9fb7b934"
+  },
+  "status": "shipped"
+}

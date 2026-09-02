@@ -1,0 +1,10 @@
+4200:    elif command == 'update':
+4202:    elif command == 'close-update':
+4204:    elif command in ('score-versions-gapfill', 'score-version-gapfill', 'score-versions-backfill'):
+4245:    elif command in ('update-delisted', 'legacy-oos-update'):
+4438:    elif command in ('recalculate', 'backfill'):
+4991:    elif command in ('algorithm', 'algorithms', 'algorithm-version', 'algorithm-versions'):
+4994:    elif command in ('portfolio-snapshot', 'portfolio-snapshots'):
+5161:    elif command in ('tp', 'stop', 'sl'):
+5220:    elif command in ('intraday-swings', 'intraday-swing'):
+5222:    elif command in ('intraday-drill', 'intraday'):

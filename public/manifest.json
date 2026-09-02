@@ -1,0 +1,25 @@
+{
+  "short_name": "BagHolder",
+  "name": "Bagholder Terminal — Options Analysis",
+  "description": "Directional technical analysis terminal for options signals — mean-reversion scoring, regime-aware",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#0A0A0B",
+  "background_color": "#020617"
+}

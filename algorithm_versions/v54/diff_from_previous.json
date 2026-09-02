@@ -1,0 +1,64 @@
+{
+  "changed_paths": [
+    "ALGORITHM_VERSION",
+    "api.py",
+    "database/models/core.py",
+    "database/utils/scoring.py",
+    "database/utils/sector_breadth_wave.py",
+    "market_breadth.py",
+    "simulator.py",
+    "strategy_config.py",
+    "trader.py"
+  ],
+  "name_status": [
+    {
+      "path": "ALGORITHM_VERSION",
+      "status": "M"
+    },
+    {
+      "path": "api.py",
+      "status": "M"
+    },
+    {
+      "path": "database/models/core.py",
+      "status": "M"
+    },
+    {
+      "path": "database/utils/scoring.py",
+      "status": "M"
+    },
+    {
+      "path": "database/utils/sector_breadth_wave.py",
+      "status": "A"
+    },
+    {
+      "path": "market_breadth.py",
+      "status": "M"
+    },
+    {
+      "path": "simulator.py",
+      "status": "M"
+    },
+    {
+      "path": "strategy_config.py",
+      "status": "M"
+    },
+    {
+      "path": "trader.py",
+      "status": "M"
+    }
+  ],
+  "range": "e3ed8060..8af574bd",
+  "stat": [
+    "ALGORITHM_VERSION                     |   2 +-",
+    " api.py                                |  53 +++++++-",
+    " database/models/core.py               |  29 +++++",
+    " database/utils/scoring.py             |  83 +++++++++++++",
+    " database/utils/sector_breadth_wave.py | 186 ++++++++++++++++++++++++++++",
+    " market_breadth.py                     | 220 +++++++++++++++++++++++++++++++++-",
+    " simulator.py                          |   2 +",
+    " strategy_config.py                    |  61 ++++++++++",
+    " trader.py                             |   6 +-",
+    " 9 files changed, 634 insertions(+), 8 deletions(-)"
+  ]
+}

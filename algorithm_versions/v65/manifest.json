@@ -1,0 +1,179 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-05-27T22:42:35",
+    "git_commit": "14a5981cb",
+    "git_message": "v65 scoring: unify weekly partial context",
+    "id": 65,
+    "label": "v65",
+    "notes": null
+  },
+  "captured_at": "2026-05-29T04:36:19+00:00",
+  "classification": {
+    "category": "scoring_algorithm",
+    "reason": "Commit message names score-stage or score-context behavior.",
+    "scoring_algorithm_snapshot": true
+  },
+  "files": {
+    "portfolio_sources": [
+      {
+        "bytes": 62689,
+        "path": "strategy_config.py",
+        "sha256": "936b98302d53868ec0bb501fcddc34cf7542ecf1bf2c21af14323cd8cade63d3",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 23022,
+        "path": "mechanism_registry.py",
+        "sha256": "f586f3c1f631c7982cd3ed04efc8db70d9173e61a3af38d7acfa81bd9befc1d7",
+        "source": "mechanism_registry.py"
+      },
+      {
+        "bytes": 131444,
+        "path": "monte_carlo.py",
+        "sha256": "c521d45ac988491962a6849b19f4e97477b824d55fa4f81b61d3f294a1271e85",
+        "source": "monte_carlo.py"
+      },
+      {
+        "bytes": 90354,
+        "path": "monte_carlo_15dte.py",
+        "sha256": "71e893ea7abf52595587c7d1ec343fcd9ff2a240b50a548e1f8d813a22c24d1d",
+        "source": "monte_carlo_15dte.py"
+      },
+      {
+        "bytes": 111000,
+        "path": "backtest_cascade.py",
+        "sha256": "7a449fda7d9c62e8fe3956af5cab60f8f23b24fbe943e35f93bfbef9b4e9cb36",
+        "source": "backtest_cascade.py"
+      },
+      {
+        "bytes": 86823,
+        "path": "backtest_cascade_15dte.py",
+        "sha256": "cd3820f1dea7f382bee9f6d2402de4786c718d9e228d61eaef4a2133a508b588",
+        "source": "backtest_cascade_15dte.py"
+      },
+      {
+        "bytes": 224183,
+        "path": "api.py",
+        "sha256": "616fe770c4dfb1ff7d4c703503e507a5f2535ace29fd5e953a7f152b3a95558d",
+        "source": "api.py"
+      },
+      {
+        "bytes": 243847,
+        "path": "trader.py",
+        "sha256": "967b3a9a3989d1ec4090035b3dde582d22e78cf0b95ae48393957d1805e868e7",
+        "source": "trader.py"
+      }
+    ],
+    "scoring": [
+      {
+        "bytes": 9,
+        "path": "ALGORITHM_VERSION",
+        "sha256": "238ff82d0a678c3bd8956b971bcfa4b4a14020db7c3b4ea3862a5bcc67043e4f",
+        "source": "ALGORITHM_VERSION"
+      },
+      {
+        "bytes": 62689,
+        "path": "strategy_config.py",
+        "sha256": "936b98302d53868ec0bb501fcddc34cf7542ecf1bf2c21af14323cd8cade63d3",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 87568,
+        "path": "database/utils/scoring.py",
+        "sha256": "63b5f1cc0e226c1c9e051338746a99fe00203fe0d8eb10aa38bd0ddabc008b90",
+        "source": "database/utils/scoring.py"
+      },
+      {
+        "bytes": 12659,
+        "path": "database/utils/sector_breadth_wave.py",
+        "sha256": "02548d3dacecfbce0f92469068797933711d8ccf61c7ebe0d990a68b73ef61a2",
+        "source": "database/utils/sector_breadth_wave.py"
+      },
+      {
+        "bytes": 283066,
+        "path": "database/models/core.py",
+        "sha256": "ee58048c2d06cf86b48238a157476f284a2a06f1ab5e9f01bcacfd494c2ff46a",
+        "source": "database/models/core.py"
+      },
+      {
+        "bytes": 24417,
+        "path": "database/models/technical.py",
+        "sha256": "aa267949307463164561744e895afea43746a467e6f918d0f7fc2603c62372f9",
+        "source": "database/models/technical.py"
+      },
+      {
+        "bytes": 961,
+        "path": "database/project_root.py",
+        "sha256": "7fae4a33e2321f0a2098aeb9be4f976655d060552f7b09d08fcf15cf9ba39c3c",
+        "source": "database/project_root.py"
+      },
+      {
+        "bytes": 41126,
+        "path": "market_breadth.py",
+        "sha256": "e9bc8d559261731032af7c7d19f263209645ff3511d82e15360d491a86c73c5c",
+        "source": "market_breadth.py"
+      },
+      {
+        "bytes": 31003,
+        "path": "market_regime.py",
+        "sha256": "d1a81d7ba5fdc22d0e19d6528f9f2af437556161cc101a97c87e4edbdbbe3c16",
+        "source": "market_regime.py"
+      },
+      {
+        "bytes": 37033,
+        "path": "volume_amplifier.py",
+        "sha256": "c40b9b979c6306d24b7e4ba55f40d69f6bae1757c01d1a69ba1358aeaf9d2224",
+        "source": "volume_amplifier.py"
+      },
+      {
+        "bytes": 43422,
+        "path": "simulator.py",
+        "sha256": "36c859e655b4fabd35a40489ed9c0b7c3e020c1865e2bd4e3e226752acaaeeb4",
+        "source": "simulator.py"
+      },
+      {
+        "bytes": 19620,
+        "path": "recalculate_scores.py",
+        "sha256": "b54195b8bac40540488ea272269ad61d31031a936daa08c366633a0ae194b5e9",
+        "source": "recalculate_scores.py"
+      }
+    ]
+  },
+  "fingerprints": {
+    "manifest_inputs": "03e6d7d70aa06df42ec52c0569487603b39631ac9f3569f0cff0a9f994aa91c1",
+    "portfolio_config": "52ee91275ce4ebeb1d7e995c9240851656f7f1437cc68395981234672118c717",
+    "portfolio_snapshot": "ce8324fd0ae01127ba9275684c57b0a84b5d780f8f355e0656bf626209872c55",
+    "portfolio_source_files": "45668281f7e2a259a0ddc0993f5edb1dafc76b0b3c033f090d8d97083cf45acb",
+    "scoring_config": "2166150e4ae9d94cac2ce4d8d230d82ab2d12fbf7ac675971831e6f84d96bd12",
+    "scoring_files": "049ad4e748b568d3300c34a1035e6f9b3366a06c513320963fd266721b84a6ca"
+  },
+  "label": "v65-weekly-partial-comparison",
+  "notes": [
+    "This snapshot was copied from the git commit recorded by AlgorithmVersion rather than from the current worktree.",
+    "Runtime scoring still imports the checkout code until the injected loader phase lands."
+  ],
+  "paths": {
+    "cache_root": ".cache/algorithm_versions/v65",
+    "evidence_manifest": "evidence_manifest.json",
+    "portfolio_config": "portfolio_config.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_sources": "portfolio_sources",
+    "root": "algorithm_versions/v65",
+    "scoring": "scoring",
+    "scoring_config": "scoring_config.json"
+  },
+  "previous_resolved_key": "v64",
+  "promoted_at": "2026-05-29T04:36:34+00:00",
+  "schema_version": 1,
+  "silo_key": "v65",
+  "source": {
+    "algorithm_version_file": "d4a3e9fec",
+    "commit": "14a5981cb3b986af401f134d30e374867e856334",
+    "commit_body": "",
+    "commit_short": "14a5981cb",
+    "commit_subject": "v65 scoring: unify weekly partial context",
+    "mode": "git_ref",
+    "requested_ref": "14a5981cb"
+  },
+  "status": "shipped"
+}

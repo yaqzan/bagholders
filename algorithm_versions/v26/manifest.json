@@ -1,0 +1,166 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-04-26T14:46:14",
+    "git_commit": "18c3e70",
+    "git_message": "EARN_SUPP_PUT: drop puts in [16,20] within 5 trd days of earnings",
+    "id": 26,
+    "label": "v26",
+    "notes": null
+  },
+  "captured_at": "2026-05-13T16:10:38+00:00",
+  "classification": {
+    "category": "scoring_algorithm",
+    "reason": "Commit message names score-stage or score-context behavior.",
+    "scoring_algorithm_snapshot": true
+  },
+  "files": {
+    "portfolio_sources": [
+      {
+        "missing": true,
+        "source": "strategy_config.py"
+      },
+      {
+        "missing": true,
+        "source": "mechanism_registry.py"
+      },
+      {
+        "bytes": 48868,
+        "path": "monte_carlo.py",
+        "sha256": "5c0aec7256b9e198129fc5ff9e77eebf5f6648f4e4f9b68532e40ac848623762",
+        "source": "monte_carlo.py"
+      },
+      {
+        "missing": true,
+        "source": "monte_carlo_15dte.py"
+      },
+      {
+        "bytes": 56144,
+        "path": "backtest_cascade.py",
+        "sha256": "467cc707ac2ec7b67afa80df6ef5adc51da04ed3f921eb1c1b4ca064c279b869",
+        "source": "backtest_cascade.py"
+      },
+      {
+        "missing": true,
+        "source": "backtest_cascade_15dte.py"
+      },
+      {
+        "bytes": 120825,
+        "path": "api.py",
+        "sha256": "9a9ee05c998ea442420c195e20528eecdb38ae137f05c2d8cd409c41259e0d99",
+        "source": "api.py"
+      },
+      {
+        "bytes": 143635,
+        "path": "trader.py",
+        "sha256": "6998af6dfab093b1acf78bb8c45886bdfddb694e89d2ab00997c1d38f4760b53",
+        "source": "trader.py"
+      }
+    ],
+    "scoring": [
+      {
+        "bytes": 8,
+        "path": "ALGORITHM_VERSION",
+        "sha256": "ebdcb07112b5e3187b6f4a63c572741b4957de68399529e5890e866e5923f2b5",
+        "source": "ALGORITHM_VERSION"
+      },
+      {
+        "missing": true,
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 16402,
+        "path": "database/utils/scoring.py",
+        "sha256": "61051417e6323b32339330bd85d695a0b3f470fa78d1cefae622386086a26541",
+        "source": "database/utils/scoring.py"
+      },
+      {
+        "missing": true,
+        "source": "database/utils/sector_breadth_wave.py"
+      },
+      {
+        "bytes": 187587,
+        "path": "database/models/core.py",
+        "sha256": "6eed721d2b8b2715c3f2f4cb2f42e16f89c1b20a12dc3723038ea74b064127df",
+        "source": "database/models/core.py"
+      },
+      {
+        "bytes": 17689,
+        "path": "database/models/technical.py",
+        "sha256": "3f44c93f24cce14284787a5732ea0b8e471371fd27f4837041e24e47ee01b24d",
+        "source": "database/models/technical.py"
+      },
+      {
+        "bytes": 961,
+        "path": "database/project_root.py",
+        "sha256": "7fae4a33e2321f0a2098aeb9be4f976655d060552f7b09d08fcf15cf9ba39c3c",
+        "source": "database/project_root.py"
+      },
+      {
+        "bytes": 24055,
+        "path": "market_breadth.py",
+        "sha256": "ee48a20f94b622941f1e4760c70d18cab82efd170835e606e8488eb3ee16043b",
+        "source": "market_breadth.py"
+      },
+      {
+        "bytes": 31003,
+        "path": "market_regime.py",
+        "sha256": "d1a81d7ba5fdc22d0e19d6528f9f2af437556161cc101a97c87e4edbdbbe3c16",
+        "source": "market_regime.py"
+      },
+      {
+        "bytes": 32288,
+        "path": "volume_amplifier.py",
+        "sha256": "255c7f7006b5e9e26ffe8e2c9a6d56b855d9304ce299a61b1c4ed19528ca9822",
+        "source": "volume_amplifier.py"
+      },
+      {
+        "bytes": 30650,
+        "path": "simulator.py",
+        "sha256": "3d11e1475921027bd140847a62d9e2c8a8c1723ec9bd789ab971371251fcf343",
+        "source": "simulator.py"
+      },
+      {
+        "bytes": 8904,
+        "path": "recalculate_scores.py",
+        "sha256": "bfae7e0629bfda0ab96b1f815d729e2ba297606dc4d32eeacc82d4808858c490",
+        "source": "recalculate_scores.py"
+      }
+    ]
+  },
+  "fingerprints": {
+    "manifest_inputs": "7f14c1f059247c443f4a38fc30ba72a0ea5dc773a882ac843cc74271cb0f0989",
+    "portfolio_config": "0194a1ae932e2e3e2fb0ed18007cce58828657c4e329b64ebc202cccdf8193cc",
+    "portfolio_snapshot": "1980fb44138f406632feec71da8abfa47068cd100aaa500cbb085cb985bec355",
+    "portfolio_source_files": "369721cffa0c4504ae9a29080f106123eb3ed88d57315f7a93967030e375b89a",
+    "scoring_config": "af73a503aa4a694ec2ccf8a54d8e0bc2eea5b05564ac3a02ebd2d2d195c5bf09",
+    "scoring_files": "3ed6c7256571e5234ff7cfbb79dda5c59bf3e8eff44f7d6c6183a20f24967ad4"
+  },
+  "label": "v26",
+  "notes": [
+    "This snapshot was copied from the git commit recorded by AlgorithmVersion rather than from the current worktree.",
+    "Runtime scoring still imports the checkout code until the injected loader phase lands."
+  ],
+  "paths": {
+    "cache_root": ".cache/algorithm_versions/v26",
+    "evidence_manifest": "evidence_manifest.json",
+    "portfolio_config": "portfolio_config.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_sources": "portfolio_sources",
+    "root": "algorithm_versions/v26",
+    "scoring": "scoring",
+    "scoring_config": "scoring_config.json"
+  },
+  "previous_resolved_key": "v25",
+  "schema_version": 1,
+  "silo_key": "v26",
+  "source": {
+    "algorithm_version_file": "9463f02",
+    "commit": "18c3e70fba2d139f0b6052b6edde9e7da926bf89",
+    "commit_body": "Portfolio-stage filter validated by N=1000 canonical 3-mode MC\n(experiments/esp_d5_validate_n1000.py): 5y compound +44.7% Realistic\nvs production baseline; all annual windows within +/-7%; all DD-C\nunder 80% (5y DD-C improved 77.1% -> 75.0%); 0% collapse.\n\nPer-trade A/B (experiments/earn_supp_put_pretest.py, 5y): 16-20 puts\nin earnings window regress -3.1pp WR15 at d=3 (N=735); shrinks to\n-0.4pp at d=5 (N=1186). 21-25 neutral; <=15 actually OUTPERFORM.\nMechanism: ~982 puts/year filtered, freeing slot capacity in the\nshared 14-pool. Per-trade signal small but slot-displacement\ncompounds across the cascade (same lesson as F3f knob 2026-04-24).\n\nWired into: monte_carlo.py, backtest_cascade.py, trader.py CLI\nbacktest + day-signals. api.py simulate_trader is calls-only.\n\nAlso documents two null results from the same investigation:\n- Put concentration (PT15/PT20/Design D) - all FAIL canonical gate;\n  same capital-velocity paradox as A050/rollups/v22-v23.\n- Earnings-window call PROMOTION - per-trade WR uplift +16pp on\n  75-79 PRE-ern; ALL meaningful boost variants FAIL by -25 to -38%\n  on 5y. Per-trade-WR != option-TP-rate due to IV crush.\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+    "commit_short": "18c3e70f",
+    "commit_subject": "EARN_SUPP_PUT: drop puts in [16,20] within 5 trd days of earnings",
+    "mode": "git_ref",
+    "requested_ref": "18c3e70"
+  },
+  "status": "shipped"
+}

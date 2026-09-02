@@ -1,0 +1,58 @@
+{
+  "changed_paths": [
+    "ALGORITHM_VERSION",
+    "api.py",
+    "database/models/core.py",
+    "database/utils/scoring.py",
+    "database/utils/sector_breadth_wave.py",
+    "market_breadth.py",
+    "strategy_config.py",
+    "trader.py"
+  ],
+  "name_status": [
+    {
+      "path": "ALGORITHM_VERSION",
+      "status": "M"
+    },
+    {
+      "path": "api.py",
+      "status": "M"
+    },
+    {
+      "path": "database/models/core.py",
+      "status": "M"
+    },
+    {
+      "path": "database/utils/scoring.py",
+      "status": "M"
+    },
+    {
+      "path": "database/utils/sector_breadth_wave.py",
+      "status": "M"
+    },
+    {
+      "path": "market_breadth.py",
+      "status": "M"
+    },
+    {
+      "path": "strategy_config.py",
+      "status": "M"
+    },
+    {
+      "path": "trader.py",
+      "status": "M"
+    }
+  ],
+  "range": "8af574bd..bfad76ab",
+  "stat": [
+    "ALGORITHM_VERSION                     |   2 +-",
+    " api.py                                |  14 ++++",
+    " database/models/core.py               |  14 ++++",
+    " database/utils/scoring.py             | 120 +++++++++++++---------------------",
+    " database/utils/sector_breadth_wave.py |   2 +-",
+    " market_breadth.py                     | 112 +++++++++++++++++++++++++------",
+    " strategy_config.py                    | 103 ++++++++++++-----------------",
+    " trader.py                             |  14 ++++",
+    " 8 files changed, 222 insertions(+), 159 deletions(-)"
+  ]
+}

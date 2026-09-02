@@ -1,0 +1,8 @@
+{
+  "artifacts": [],
+  "backfill_status": "metadata_only",
+  "cache_root": ".cache/algorithm_versions/v1",
+  "policy": "Large experiment datasets stay in .cache/algorithm_versions/<key>; tracked manifests store paths, commands, and checksums.",
+  "reason": "git_commit does not resolve to a commit: baseline",
+  "schema_version": 1
+}

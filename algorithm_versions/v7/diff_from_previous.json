@@ -1,0 +1,22 @@
+{
+  "changed_paths": [
+    "database/models/core.py",
+    "recalculate_scores.py"
+  ],
+  "name_status": [
+    {
+      "path": "database/models/core.py",
+      "status": "M"
+    },
+    {
+      "path": "recalculate_scores.py",
+      "status": "M"
+    }
+  ],
+  "range": "061362d6..f1553a19",
+  "stat": [
+    "database/models/core.py | 18 ++++++++----",
+    " recalculate_scores.py   | 77 ++++++++++++++++++++++++++++++++++++-------------",
+    " 2 files changed, 70 insertions(+), 25 deletions(-)"
+  ]
+}

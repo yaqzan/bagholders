@@ -1,0 +1,2989 @@
+{
+  "followups": [
+    {
+      "id": "legacy_silo_backfill",
+      "reason": "Resource-intensive; run off-hours in reverse version order.",
+      "status": "deferred"
+    }
+  ],
+  "portfolio_snapshots": {
+    "current-staging-portfolio": {
+      "algorithm_version": {
+        "created_at": "2026-05-13T08:43:39",
+        "git_commit": "3cfc4dc2",
+        "git_message": "Retune continuation echo weights for v57 WR7 utility",
+        "id": 58,
+        "label": "v58",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T15:37:25+00:00",
+      "fingerprint": "7c05698758310da8e1775063e84aa1fe3f9956ef260954b19092322da56594d6",
+      "label": "current-staging-portfolio",
+      "path": "algorithm_versions/portfolio/current-staging-portfolio.json"
+    }
+  },
+  "schema_version": 1,
+  "snapshots": {
+    "candidate-current-working-tree": {
+      "algorithm_version": {
+        "created_at": "2026-05-13T08:43:39",
+        "git_commit": "3cfc4dc2",
+        "git_message": "Retune continuation echo weights for v57 WR7 utility",
+        "id": 58,
+        "label": "v58",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T15:36:56+00:00",
+      "fingerprints": {
+        "manifest_inputs": "d33ccf13181f2f97087bf0e19abadd976834492337874124683204d62cb0bf4c",
+        "portfolio_config": "7e38fec7e176e9d031ee39a4c7e0c00d05327bf7a7d1fc7238718a2244147e29",
+        "portfolio_snapshot": "7c05698758310da8e1775063e84aa1fe3f9956ef260954b19092322da56594d6",
+        "portfolio_source_files": "4e103b842e16818bb715de4889833bc915cd254eebf7c526dd2cb7c14f56a594",
+        "scoring_config": "0678aa17990745676ad52245d97284e600cdba856cf44d3191975e1f82b8e4e8",
+        "scoring_files": "eef5e68a429474a43af5e8f4546e460421ae464930b4096507eb896efb7ae137"
+      },
+      "label": "current-staging-worktree",
+      "path": "algorithm_versions/candidate-current-working-tree",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/candidate-current-working-tree",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/candidate-current-working-tree",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "status": "candidate"
+    },
+    "v1": {
+      "algorithm_version": {
+        "created_at": "0000-00-00 00:00:00",
+        "git_commit": "baseline",
+        "git_message": "Pre-versioning baseline",
+        "id": 1,
+        "label": "v1",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:11:56+00:00",
+      "classification": {
+        "category": "legacy_metadata_only",
+        "reason": "No resolvable git commit is recorded for this version.",
+        "scoring_algorithm_snapshot": false
+      },
+      "fingerprints": {
+        "manifest_inputs": "be2666bcf3b81340a8affd578e569a2ad52d514c8bea8f9db306e2c98678c28e",
+        "portfolio_config": "a395597501dd463ffe8881c693681b5ca0350d9cef8203a6ca09fdfe5d8ac634",
+        "portfolio_snapshot": "84be8ede1893055011d177f3b3ccdc08ad47d13af04cbeb1e71a0317dc04086b",
+        "portfolio_source_files": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+        "scoring_config": "fb9fa7657e411911dccdf20790010e28f08d7f0670000f9cfca676973bcd4416",
+        "scoring_files": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+      },
+      "label": "v1",
+      "path": "algorithm_versions/v1",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v1",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v1",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "mode": "unresolved_git_ref",
+        "reason": "git_commit does not resolve to a commit: baseline",
+        "requested_ref": "baseline"
+      },
+      "status": "legacy_metadata_only"
+    },
+    "v10": {
+      "algorithm_version": {
+        "created_at": "2026-04-07T22:08:33",
+        "git_commit": "07bf8c4",
+        "git_message": "26.04.07 - Dashboard update",
+        "id": 10,
+        "label": "v10",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:11:32+00:00",
+      "classification": {
+        "category": "mixed_or_ui",
+        "reason": "Commit message does not clearly identify a scoring algorithm change.",
+        "scoring_algorithm_snapshot": false
+      },
+      "fingerprints": {
+        "manifest_inputs": "fcc98bc62ca5a58bcb1d94f1a0b426b673f5ac5f3ae589c6fc811fe4e20c8468",
+        "portfolio_config": "be3e04caf9c59c2310689eac73a784e21ad9ee3719b5e3682219681d6cb05797",
+        "portfolio_snapshot": "1980fb44138f406632feec71da8abfa47068cd100aaa500cbb085cb985bec355",
+        "portfolio_source_files": "781710e9de6f5cccc995131ce545fb00d3345a776d500fe87dceb820163ceee2",
+        "scoring_config": "af73a503aa4a694ec2ccf8a54d8e0bc2eea5b05564ac3a02ebd2d2d195c5bf09",
+        "scoring_files": "bf61d0a1ffa6fa47ec37d5b4e78fd40f656676f246e4c17bdbf984c548c37327"
+      },
+      "label": "v10",
+      "path": "algorithm_versions/v10",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v10",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v10",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": null,
+        "commit": "07bf8c430a3ed7d180a86d82c660ebbd9e7a1cc8",
+        "commit_body": "",
+        "commit_short": "07bf8c43",
+        "commit_subject": "26.04.07 - Dashboard update",
+        "mode": "git_ref",
+        "requested_ref": "07bf8c4"
+      },
+      "status": "shipped"
+    },
+    "v11": {
+      "algorithm_version": {
+        "created_at": "2026-04-09T06:57:20",
+        "git_commit": "d93ff2d",
+        "git_message": "26.04.09 - Regime: gradient VIX scoring + dynamic breadth weighting",
+        "id": 11,
+        "label": "v11",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:11:28+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "2c80bbad9efaadd3e581309d2489a1bc30a548663dca2a528fc0efbfc8096a28",
+        "portfolio_config": "33d68ae5c488a00b3f2e3c9b09f1fed23797471fafc9e4794a98189ac48ccac8",
+        "portfolio_snapshot": "1980fb44138f406632feec71da8abfa47068cd100aaa500cbb085cb985bec355",
+        "portfolio_source_files": "8ffc87e74bf3fe7b543ccc820e73b7818eb8a17ff5ebdbef5a2b7dbe325ff90e",
+        "scoring_config": "af73a503aa4a694ec2ccf8a54d8e0bc2eea5b05564ac3a02ebd2d2d195c5bf09",
+        "scoring_files": "a0be51b0e71f2b8f5ee7f9e8bd3014c0d0127b407a710db2c03f23074d74e234"
+      },
+      "label": "v11",
+      "path": "algorithm_versions/v11",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v11",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v11",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "07bf8c4",
+        "commit": "d93ff2d4021421fbe9b19e5aad9aa5ec829d16cc",
+        "commit_body": "- Replace band-based VIX scoring with tanh gradient (pivot=22, inverted: high VIX = amplify)\n- Add dynamic VIX weight via sigmoid: ~5% at VIX 13, ~50% at VIX 22, ~95% at VIX 35\n- Invert breadth component (100-breadth) so weak breadth = high composite = amplify\n- Drop market trend component (Pearson avg -0.003, confirmed noise)\n- Wire vix_close parameter through to compute_and_apply_regime and backfill_regime\n- Fix Unicode crash in market_breadth.py (arrow character in comment)\n- Fix MemoryError in breadth backfill: replace full row load with aggregate MAX/MIN GROUP BY\n\nOOS simulation: avg Pearson +0.067 vs legacy -0.037 (5y window)\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>",
+        "commit_short": "d93ff2d4",
+        "commit_subject": "26.04.09 - Regime: gradient VIX scoring + dynamic breadth weighting",
+        "mode": "git_ref",
+        "requested_ref": "d93ff2d"
+      },
+      "status": "shipped"
+    },
+    "v12": {
+      "algorithm_version": {
+        "created_at": "2026-04-09T18:14:08",
+        "git_commit": "edf6bd1",
+        "git_message": "26.04.09 - Scoring: zero RSI for deeply bearish base signals (put calibration fix)",
+        "id": 12,
+        "label": "v12",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:11:25+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "9852183bf8584fe173cf661a8e29c67d7ce055371f4546abd857e8e8f6f787e3",
+        "portfolio_config": "b9fb94930358b56b1756eea7a41e5cd27d2ceeb987d8361290db2ef9a23e7a5a",
+        "portfolio_snapshot": "1980fb44138f406632feec71da8abfa47068cd100aaa500cbb085cb985bec355",
+        "portfolio_source_files": "204f0fb481549392f58cdee73372887707eda6826e02444d73deee248f91f02a",
+        "scoring_config": "af73a503aa4a694ec2ccf8a54d8e0bc2eea5b05564ac3a02ebd2d2d195c5bf09",
+        "scoring_files": "93c7fd9f8a85d44945542560e153b80e4a786f085ee28fcf497377acfd80d585"
+      },
+      "label": "v12",
+      "path": "algorithm_versions/v12",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v12",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v12",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "d93ff2d",
+        "commit": "edf6bd10389aa0c17198bf0b02e40e67b58bd5f7",
+        "commit_body": "When trend+BB+MACD+Stoch+TA collectively score < 40, oversold RSI contradicts\nthe put thesis (component scores it HIGH as bounce zone, fighting the downtrend).\nNeutralize RSI to 50 in that regime.\n\nAblation-validated on full universe (596 stocks, 365d):\n  put <15 WR: 68.8% \u2192 75.0% (+6.2pp)\n  put <5  WR: 62.9% \u2192 88.9% (+26pp)\n  call 75+ WR: 74.9% \u2192 77.4% (+2.5pp)\n  call 90+ WR: 78.6% \u2192 76.3% (-2.3pp, accepted tradeoff)\n\nAlso: fix Unicode \u2192 in assess_scores print_diff_assessment (Windows cp1252),\nadd ablation + RSI asymmetry variants to experiments/score_variants.py.\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>",
+        "commit_short": "edf6bd10",
+        "commit_subject": "26.04.09 - Scoring: zero RSI for deeply bearish base signals (put calibration fix)",
+        "mode": "git_ref",
+        "requested_ref": "edf6bd1"
+      },
+      "status": "shipped"
+    },
+    "v13": {
+      "algorithm_version": {
+        "created_at": "2026-04-13T14:20:48",
+        "git_commit": "8988474",
+        "git_message": "Some dashboard touch up, bug fix,new algoirthm",
+        "id": 13,
+        "label": "v13",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:11:22+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "00be1ccbd330ccb13f019d4e777d27ae89d145c7b7dd7a393af6c50e69f55385",
+        "portfolio_config": "748823943744981e5aa76bf5a553252b9a1db572f1615fe581c063ad6cdf676a",
+        "portfolio_snapshot": "1980fb44138f406632feec71da8abfa47068cd100aaa500cbb085cb985bec355",
+        "portfolio_source_files": "44360ff87ee23c21e0e51ae4f24e489c2ef3cfc94051c7fbd18baf276b4261bb",
+        "scoring_config": "af73a503aa4a694ec2ccf8a54d8e0bc2eea5b05564ac3a02ebd2d2d195c5bf09",
+        "scoring_files": "f40130fdd3d3a9bf8dbeb986b054df6fcf64cc8a285486eeaa3b17d72fbeac5b"
+      },
+      "label": "v13",
+      "path": "algorithm_versions/v13",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v13",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v13",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "edf6bd1",
+        "commit": "8988474543ead25152a6690b1ff247baa274ef87",
+        "commit_body": "",
+        "commit_short": "89884745",
+        "commit_subject": "Some dashboard touch up, bug fix,new algoirthm",
+        "mode": "git_ref",
+        "requested_ref": "8988474"
+      },
+      "status": "shipped"
+    },
+    "v14": {
+      "algorithm_version": {
+        "created_at": "2026-04-13T17:40:04",
+        "git_commit": "410a055",
+        "git_message": "Revert directional volume fix (83851db) due to bucket-level regression",
+        "id": 14,
+        "label": "v14",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:11:18+00:00",
+      "classification": {
+        "category": "scoring_revert",
+        "reason": "Commit message indicates a scoring revert.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "69227cb60a59f9cd68f847b7b2b7a449a31b5b5d7edf25efcb09e6c4f0e9b6c5",
+        "portfolio_config": "b3a1e0d858f44184e7f6cd689481d68f0f7ce4d81680d263773323524efd3201",
+        "portfolio_snapshot": "1980fb44138f406632feec71da8abfa47068cd100aaa500cbb085cb985bec355",
+        "portfolio_source_files": "ccda5edb281543034fac101b5d49516fc49d218dea5bab22e53cad7ed90d4a29",
+        "scoring_config": "af73a503aa4a694ec2ccf8a54d8e0bc2eea5b05564ac3a02ebd2d2d195c5bf09",
+        "scoring_files": "57c8c4ff68630b608494ee49c23a6b55c27caaf83f0dc21eafbf5f9aaeef2734"
+      },
+      "label": "v14",
+      "path": "algorithm_versions/v14",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v14",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v14",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "83851db",
+        "commit": "410a055a3b2a0e4c573b0f07028d5f36885db9ee",
+        "commit_body": "v15 assess diff vs v14 on 2y showed:\n  75+ WR -2.5pp, 80+ WR -5.8pp, 85+ WR -5.3pp\n  <25 WR -4.8pp, Cap -0.142\n\nThe direction-aware blend cap (0.60) was too aggressive \u2014 it shifted\nmoderate-bearish signals into <25, inflating bucket counts (+19%) with\nlower-quality peaks. Reverting to the prior multiplicative formula; the\nzero-pileup cosmetic issue is tolerable vs the signal-quality regression.\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>",
+        "commit_short": "410a055a",
+        "commit_subject": "Revert directional volume fix (83851db) due to bucket-level regression",
+        "mode": "git_ref",
+        "requested_ref": "410a055"
+      },
+      "status": "shipped"
+    },
+    "v15": {
+      "algorithm_version": {
+        "created_at": "2026-04-14T12:18:37",
+        "git_commit": "83851db",
+        "git_message": "",
+        "id": 15,
+        "label": "v15",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:11:15+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "0747ddec5e350f361917ec793c2e7d14be1c2970cf57bcef18eb8be034d042bb",
+        "portfolio_config": "c146469b3e7a0f21376944824838878d059ffff788762b66331841d0bc9d65e5",
+        "portfolio_snapshot": "1980fb44138f406632feec71da8abfa47068cd100aaa500cbb085cb985bec355",
+        "portfolio_source_files": "ccda5edb281543034fac101b5d49516fc49d218dea5bab22e53cad7ed90d4a29",
+        "scoring_config": "af73a503aa4a694ec2ccf8a54d8e0bc2eea5b05564ac3a02ebd2d2d195c5bf09",
+        "scoring_files": "e00389f7344c8f9d2f3de9b55827ef4947af866e25fe42f9d4e59cc577494181"
+      },
+      "label": "v15",
+      "path": "algorithm_versions/v15",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v15",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v15",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "32a74b5",
+        "commit": "83851dbbe129d30522f2934dd94144e44daa154b",
+        "commit_body": "CONVICTION / REJECTION now blend toward a direction-aware target\n(0 or 100) weighted by magnitude \u00d7 vol_boost (cap 0.60), replacing\nthe asymmetric `50 + (score-50) \u00d7 (1 + deviation)` multiplicative\nformula. The old path amplified distance from 50 regardless of\nvol direction, so a bullish volume signal on a below-50 score\npushed the score FURTHER below 50, pinning many stocks at 0.\n\n47/47 zero-score rows in the active version had bullish volume\n(vol_raw>50); 95% of scores <5 and 83% of scores <10 had\ncontra-directional volume \u2014 a systematic sign-inversion bug.\n\nSimulated v4a (blend cap 0.60) on 150-stock random sample \u00d7 2y:\n  70+ WR 65.7% \u2192 67.5%, Cap30 0.176 \u2192 0.207 (N=2283)\n  75+ WR 64.2% \u2192 67.2%, Cap30 0.199 \u2192 0.240 (N=1072)\n  80+ WR 61.1% \u2192 63.7%, Cap30 0.237 \u2192 0.191 (N=370)\n  85+ WR 65.6% \u2192 69.0%, Cap30 0.391 \u2192 0.412 (N=80)\n  <25 near-neutral (N=1827)\n  Zero clustering eliminated.\n\nTHIN_AIR keeps original multiplicative dampening (vol_mult<1 pulls\ntoward 50 which is correct \"no conviction\").\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>",
+        "commit_short": "83851dbb",
+        "commit_subject": "Fix zero-score clustering from asymmetric volume amplification",
+        "mode": "git_ref",
+        "requested_ref": "83851db"
+      },
+      "status": "shipped"
+    },
+    "v17": {
+      "algorithm_version": {
+        "created_at": "2026-04-15T13:37:23",
+        "git_commit": "ea8b9fe",
+        "git_message": "Remove momentum confirmation gradient; cross-version volume seed fallback",
+        "id": 17,
+        "label": "v17",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:11:12+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "896cdedbe441b08ad98a4923c8d0c8ea35126adc0ea07ee292972353ba7557a1",
+        "portfolio_config": "e39f0b1ce2c8a3a70f7b3c5c61591039a666b6ea248cc5b88597f9c89468b5d6",
+        "portfolio_snapshot": "1980fb44138f406632feec71da8abfa47068cd100aaa500cbb085cb985bec355",
+        "portfolio_source_files": "83ea460ee1ec3da59691271644d41af423181083c125c34e0022377370a45cd4",
+        "scoring_config": "af73a503aa4a694ec2ccf8a54d8e0bc2eea5b05564ac3a02ebd2d2d195c5bf09",
+        "scoring_files": "60bda2fd1b65f11587e968117ef80c316e79cc7543744c5fb7f85b4916099863"
+      },
+      "label": "v17",
+      "path": "algorithm_versions/v17",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v17",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v17",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "410a055",
+        "commit": "ea8b9febe6924b9047df00791321973dd2293361",
+        "commit_body": "Ship variant A from A/B sim: removing the MC gradient improves WR15 by\n+2.9pp @ 85+, +2.6pp @ 90+, +5.0pp @ 95+ on 5y window (the strategy's\nrelevant metric for 30DTE hard-sell-day-15). Gradient was delaying signal\nconviction buildup on high-tier setups without a win-rate payoff.\n\nAlso: recalculate_scores_batched now falls back to the most recent volume\nsignals across ANY version when the current version has no prior rows, so\na newly shipped algorithm version doesn't lose volume decay context at\nthe slice boundary.\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>",
+        "commit_short": "ea8b9feb",
+        "commit_subject": "Remove momentum confirmation gradient; cross-version volume seed fallback",
+        "mode": "git_ref",
+        "requested_ref": "ea8b9fe"
+      },
+      "status": "shipped"
+    },
+    "v18": {
+      "algorithm_version": {
+        "created_at": "2026-04-17T06:02:05",
+        "git_commit": "17caf99",
+        "git_message": "Asymmetric MACD gate for puts",
+        "id": 18,
+        "label": "v18",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:11:09+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "adf845088317aa49c2011443488ee317bcb441d6b29c113fa1f9344f87731b48",
+        "portfolio_config": "c46a38b0c1306e475ab361820ed42c848e52b957c0dbc5e1830648337443e682",
+        "portfolio_snapshot": "1980fb44138f406632feec71da8abfa47068cd100aaa500cbb085cb985bec355",
+        "portfolio_source_files": "cba1c5881810df1ca79379a958a9fe176d1e85941a55285583fa4fce9ea29df6",
+        "scoring_config": "af73a503aa4a694ec2ccf8a54d8e0bc2eea5b05564ac3a02ebd2d2d195c5bf09",
+        "scoring_files": "6e024339652a8e4fb06d5eeaab560ecbaa5a25fe7f465f7fccc1aad8baf6f8f7"
+      },
+      "label": "v18",
+      "path": "algorithm_versions/v18",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v18",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v18",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "ea8b9fe",
+        "commit": "17caf99f6ee1a8b3bd0fd4fe556f571df125ebdb",
+        "commit_body": "When the pre-MACD weighted score is < 45, zero MACD's weight and\nredistribute proportionally to trend/BB/RSI/Stoch/TA. MACD is a lagging\nmomentum indicator that stays positive until breakdown is confirmed,\nsuppressing genuine put signals. The gate removes this drag on bearish\nsetups while preserving MACD's contribution on calls.\n\nValidated 2026-04-17 via experiments/asymmetric_macd_ablation.py (5y\nfull universe, 803k scored pairs, diff-assessed vs v17 DB):\n- <25 WR15: 63.4% -> 67.7% (+4.3pp)\n- <15 WR15: 63.3% -> 69.8% (+6.5pp)\n- Call side entirely preserved (95+/90+/75+/70+ within noise)\n\nMade-with: Cursor",
+        "commit_short": "17caf99f",
+        "commit_subject": "Asymmetric MACD gate for puts",
+        "mode": "git_ref",
+        "requested_ref": "17caf99"
+      },
+      "status": "shipped"
+    },
+    "v19": {
+      "algorithm_version": {
+        "created_at": "2026-04-19T00:48:08",
+        "git_commit": "6656daa",
+        "git_message": "Ship JA4: asymmetric 25% SPY_wk blend for put regime multiplier",
+        "id": 19,
+        "label": "v19",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:11:06+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "0024ecdf0626bde4a607cc50bab7506bb81ffbc26e1c27483a34806d57609ca1",
+        "portfolio_config": "d1074d690096de313a751bc67dcdd709403163f826731173dd49f667db651d26",
+        "portfolio_snapshot": "1980fb44138f406632feec71da8abfa47068cd100aaa500cbb085cb985bec355",
+        "portfolio_source_files": "93590ad5fb90936f0dd61dd9a686f2ae58e88189762aba63f0bfaa119048e957",
+        "scoring_config": "af73a503aa4a694ec2ccf8a54d8e0bc2eea5b05564ac3a02ebd2d2d195c5bf09",
+        "scoring_files": "3a236fbb13cd882bf530f84f51c43208ba2d1ee3f84443851ccd25c55eab2d07"
+      },
+      "label": "v19",
+      "path": "algorithm_versions/v19",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v19",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v19",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "17caf99",
+        "commit": "6656daa41668c1b08db5ed21792889e5c61bd244",
+        "commit_body": "On bearish setups (pre_regime < 50), blend regime multiplier as\n75% composite + 25% SPY weekly composite to suppress false put\nsignals on market recovery days before VIX/breadth fully normalize.\nCalls always use unmodified composite. Validated: put <15 WR15 +0.7pp,\ncall 70+ WR15 unchanged. Applied in scoring, daily update, and\nfull recalculate paths (calculate_scores_batched,\nrecalculate_scores_batched, recalculate_scores_full, reapply_regime_today).\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>",
+        "commit_short": "6656daa4",
+        "commit_subject": "Ship JA4: asymmetric 25% SPY_wk blend for put regime multiplier",
+        "mode": "git_ref",
+        "requested_ref": "6656daa"
+      },
+      "status": "shipped"
+    },
+    "v2": {
+      "algorithm_version": {
+        "created_at": "2026-04-01T14:20:49",
+        "git_commit": "c1f8fcf",
+        "git_message": "added algorithm tracker and score assessment logic",
+        "id": 2,
+        "label": "v2",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:11:56+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "91ad6046688c07e544374e75ad92846d765a76ba455a40297ab361c9e002f1a3",
+        "portfolio_config": "693c9124bc8093abb9af83f489d34922ac77f11b6b30977e754c1046a4f999ee",
+        "portfolio_snapshot": "1980fb44138f406632feec71da8abfa47068cd100aaa500cbb085cb985bec355",
+        "portfolio_source_files": "565b04305427cdfcb14c9ee0e151c0c2354b61631ee5bad1d0a5fb01efc7ca1c",
+        "scoring_config": "af73a503aa4a694ec2ccf8a54d8e0bc2eea5b05564ac3a02ebd2d2d195c5bf09",
+        "scoring_files": "28101e61c206bebd71ea21b807a51b38d2b873e354f28c403917d0a39d38e365"
+      },
+      "label": "v2",
+      "path": "algorithm_versions/v2",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v2",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v2",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": null,
+        "commit": "c1f8fcf9a537edcf25896d8ead4ca17e7027ccc6",
+        "commit_body": "",
+        "commit_short": "c1f8fcf9",
+        "commit_subject": "added algorithm tracker and score assessment logic",
+        "mode": "git_ref",
+        "requested_ref": "c1f8fcf"
+      },
+      "status": "shipped"
+    },
+    "v20": {
+      "algorithm_version": {
+        "created_at": "2026-04-20T12:04:14",
+        "git_commit": "66af13d",
+        "git_message": "Add capitulation gradient dampener to scoring",
+        "id": 20,
+        "label": "v20",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:11:03+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "b155695ed50cccd9bffda9476b05e24d639fb6c62af027c5e031a3355152fc2c",
+        "portfolio_config": "e59206e7e4484d85b046353b43871ae1866a48e8f519be7d8a7f562c3deae904",
+        "portfolio_snapshot": "1980fb44138f406632feec71da8abfa47068cd100aaa500cbb085cb985bec355",
+        "portfolio_source_files": "8a3a61918e05eb7038ab62b793bf39ad785b83d53975286664b4db2b10fab42d",
+        "scoring_config": "af73a503aa4a694ec2ccf8a54d8e0bc2eea5b05564ac3a02ebd2d2d195c5bf09",
+        "scoring_files": "d8f59dc4fd937ea65053e7de0878057d57ee340a8ff7e0d2e847a2645b11be41"
+      },
+      "label": "v20",
+      "path": "algorithm_versions/v20",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v20",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v20",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "6656daa",
+        "commit": "66af13d682984eb9386032c6eda1c61acab152cd",
+        "commit_body": "score=0 + pct_from_ema50 < -10% represents active capitulation, not a fresh\nput setup. Apply gradient lift: ext=10%\u21925, 15%\u219210, 20%+\u219220. Filters deeply\nextended stocks out of <5/<10/<15 buckets where WR was dropping off.\n\nValidated 5y diff-assess vs v19 DB:\n  <5  WR15 65.8%\u219271.2% (N 652\u2192657)\n  <10 WR15 68.1%\u219272.6% (N 1787\u21921813)\n  <15 WR15 67.8%\u219271.0% (N 4449\u21924481)\nMid/upper put buckets and call side unchanged.\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+        "commit_short": "66af13d6",
+        "commit_subject": "Add capitulation gradient dampener to scoring",
+        "mode": "git_ref",
+        "requested_ref": "66af13d"
+      },
+      "status": "shipped"
+    },
+    "v21": {
+      "algorithm_version": {
+        "created_at": "2026-04-20T19:58:11",
+        "git_commit": "aba4f5d",
+        "git_message": "Add ext-focal gradient dampener for puts above EMA50",
+        "id": 21,
+        "label": "v21",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:10:59+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "24f844ca62f923e1b9e7e9a743b7fb4a04341f6fa0acf2ef6a28c2767373a74a",
+        "portfolio_config": "cba30b2df9efa25063e56a7c79200919082ce009b32cb79b552b4edf6a83f831",
+        "portfolio_snapshot": "1980fb44138f406632feec71da8abfa47068cd100aaa500cbb085cb985bec355",
+        "portfolio_source_files": "47f05d24a0551dfbd0f9eecb3f8ab1ae084f127e1e3af47aa281925456df8957",
+        "scoring_config": "af73a503aa4a694ec2ccf8a54d8e0bc2eea5b05564ac3a02ebd2d2d195c5bf09",
+        "scoring_files": "2b52a07364dc4a889410f5a9b50d0e451a1196b25946dc891f3ec0bb141e938a"
+      },
+      "label": "v21",
+      "path": "algorithm_versions/v21",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v21",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v21",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "66af13d",
+        "commit": "aba4f5dade4700322370f84a8d727c8b0e0c7ed6",
+        "commit_body": "Puts (<=25) with price above EMA50 are profit-taking pullbacks in\nuptrends, not breakdown setups. Fine-grained 5y sweep found WR30\ndeclines monotonically from 70.3% at ext=-10..-4 to 60.7% at ext>+10.\nLift proportional to how bearish the score is and how far above EMA50.\n\n5y diff-assess vs v20: <25 WR15 +2.7pp / WR30 +2.7pp; <15 WR15 +2.6pp /\nWR30 +2.3pp; <5 WR15 +5.4pp / WR30 +4.1pp. Ret30 flips positive at\nevery put tier. Cap30 up across all tiers (MAE tightens + MFE expands).\nMonotonic WR gradient restored across put buckets.\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+        "commit_short": "aba4f5da",
+        "commit_subject": "Add ext-focal gradient dampener for puts above EMA50",
+        "mode": "git_ref",
+        "requested_ref": "aba4f5d"
+      },
+      "status": "shipped"
+    },
+    "v22": {
+      "algorithm_version": {
+        "created_at": "2026-04-21T15:23:30",
+        "git_commit": "41784e0",
+        "git_message": "Add v22 X-confidence gate on trend dominance (REVERTED)",
+        "id": 22,
+        "label": "v22",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:10:54+00:00",
+      "classification": {
+        "category": "scoring_revert",
+        "reason": "Commit message indicates a scoring revert.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "67846f7fba75ee6f8827f72bc0b2c2d01f5860da2a1a8c69dd1670e16f04c231",
+        "portfolio_config": "50e0c4715f28dccda0a91098d17f8c8b9868bc60c0c0fedf68b697e86823a36d",
+        "portfolio_snapshot": "1980fb44138f406632feec71da8abfa47068cd100aaa500cbb085cb985bec355",
+        "portfolio_source_files": "47f05d24a0551dfbd0f9eecb3f8ab1ae084f127e1e3af47aa281925456df8957",
+        "scoring_config": "af73a503aa4a694ec2ccf8a54d8e0bc2eea5b05564ac3a02ebd2d2d195c5bf09",
+        "scoring_files": "df2f2c038a2efa48a208ad8f9f6add2826476a4f6df0e056c842cf6da8100ddf"
+      },
+      "label": "v22",
+      "path": "algorithm_versions/v22",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v22",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v22",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "aba4f5d",
+        "commit": "41784e02d46c32eef69141d09bff13260aa9d720",
+        "commit_body": "Repurposes the technical_alignment (X) component as a confidence\ncoefficient gating d (trend_dominance) instead of contributing only\nadditive points. When the 5 base components (TREND, BB, RSI, MACD,\nStoch) cancel each other (the PSKY 3/20 case: TREND extreme bearish\nbut BB/RSI/MACD/Stoch bullish), x_conf collapses toward 0 and trend's\nweight contribution is gated down, restoring sideways-regime weights\nand letting the contradicting components dominate.\n\nFormula: agreement = max(bull,bear)/n; sig_str = |avg_dist|/50;\nx_conf = sig_str * agreement^2; d_eff = d * x_conf^0.5.\n\nValidated 5y diff-assess (experiments/x_conf_counter_trend.py):\nCT-PUT bucket (overall<=25, trend>=70) on 22-now: N 541->934\n(+73%), WR15 79.5%->81.9%. Same direction in every annual window.\nNaturally absorbs the counter-trend amplifier hypothesis (#11).\n\nExposes d_eff and x_conf in weight_info for explain-scores audits.",
+        "commit_short": "41784e02",
+        "commit_subject": "Add v22 X-confidence gate on trend dominance",
+        "mode": "git_ref",
+        "requested_ref": "41784e0"
+      },
+      "status": "shipped"
+    },
+    "v23": {
+      "algorithm_version": {
+        "created_at": "2026-04-23T03:23:59",
+        "git_commit": "be057ce",
+        "git_message": "Ship v23: floored-regime x_conf gate (Priority #8 counter-trend capture)",
+        "id": 23,
+        "label": "v23",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:10:49+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "8c3a03d268f5d4a88267a7cfa4244b1da825dc8b931ff7e1bb14e9efe5fd692d",
+        "portfolio_config": "df5b8cba8b965bb40a3842021e2bbf39cdea2fb8597e6ce64f7306c463709647",
+        "portfolio_snapshot": "1980fb44138f406632feec71da8abfa47068cd100aaa500cbb085cb985bec355",
+        "portfolio_source_files": "958d7b0ff6e2c2a73505700a8745ab1971ac265e4809baa334fb71dcea70cf19",
+        "scoring_config": "af73a503aa4a694ec2ccf8a54d8e0bc2eea5b05564ac3a02ebd2d2d195c5bf09",
+        "scoring_files": "5d50afb487f528ec664ff4e7420993055a33558aaba83ce903a705f77031cb86"
+      },
+      "label": "v23",
+      "path": "algorithm_versions/v23",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v23",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v23",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "aba4f5d",
+        "commit": "be057ce043764c42dcecaa401d44310dfcce9804",
+        "commit_body": "Apply d_eff = d \u00d7 max(x_conf^0.50, 0.50) ONLY when regime is stressed\n(effective regime_mult < 0.92). Bull/neutral regimes pass through with\nd_eff = d, preserving TREND compounding in 2024-type tapes that v22's\nuniform gate destroyed (\u221291% on 2024 Realistic, DD-C floor breach on\n2023 + 5y).\n\nPut/call direction selected via base_sum < 50 ? put_regime_multiplier\n: regime_multiplier \u2014 mirrors the downstream regime-application logic.\n\nValidation evidence (see experiments/ct_phase_*.out):\n\nPhase I per-trade gates (floor sweep, 5y full universe, v21 diff-assess):\n  CT-PUT WR15  : 81.3%  \u2265 81%  \u2713  (gate: Priority #8)\n  AL-PUT WR15  : +0.4pp within \u00b10.5pp \u2713\n  AL-CALL WR15 : 0.0pp within \u00b10.5pp \u2713\n  Total N      : \u221210.8% outside \u00b15% \u2014 structural fingerprint, not risk\n                 signal (Phase F precedent: fl060_rc092 Phase-F-certified\n                 with similar N drop).\n\nPhase J portfolio gates (canonical 3-mode MC, 500 iter \u00d7 3 modes \u00d7\n2 windows, vs v19 baseline):\n  2023 Real    : +822.2% vs +319.6%  (+157%)  \u2713\n  2023 DD-C    : 69.3%   < 80%                \u2713\n  2025 Real    : +22,930.9% vs +18,517.5%  (+24%)  \u2713\n  2025 DD-C    : 58.5%   < 80%                \u2713\n\nv23 parameters: \u03b1=0.50, floor=0.50, regime_cutoff=0.92.\n\nCloses CLAUDE.md Open Optimization Priority #8 follow-up sweep plan\n(Design C regime-conditional + Design B floor, validated as hybrid).\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+        "commit_short": "be057ce0",
+        "commit_subject": "Ship v23: floored-regime x_conf gate (Priority #8 counter-trend capture)",
+        "mode": "git_ref",
+        "requested_ref": "be057ce"
+      },
+      "status": "shipped"
+    },
+    "v24": {
+      "algorithm_version": {
+        "created_at": "2026-04-25T00:25:12",
+        "git_commit": "41fa566",
+        "git_message": "Fix volume amplifier earnings suppression: call_time-aware semantics",
+        "id": 24,
+        "label": "v24",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:10:45+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "d42d59b8a5a719c58d224d68b4ed0f4534e82ce0c1f043f429827104b986f8ae",
+        "portfolio_config": "157537d772b526207bf14adaf1ea9274b8f1707a4dd22886f410d6c38d98af93",
+        "portfolio_snapshot": "1980fb44138f406632feec71da8abfa47068cd100aaa500cbb085cb985bec355",
+        "portfolio_source_files": "5f7fd4bd9d863468bb4728cb2a55f9a9159088ba3813134e69732ee3f6266c9f",
+        "scoring_config": "af73a503aa4a694ec2ccf8a54d8e0bc2eea5b05564ac3a02ebd2d2d195c5bf09",
+        "scoring_files": "f964c879fc90f1920aaa7859d0d5a437448878cf6338c6f71009d7ca0b1887c9"
+      },
+      "label": "v24",
+      "path": "algorithm_versions/v24",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v24",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v24",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "aba4f5d",
+        "commit": "41fa56668e1c92d3fb40379499dc01541a1b0da1",
+        "commit_body": "The previous suppression window incorrectly neutralized volume signal on\n{D-1, D, D+1} for any earnings event on date D, ignoring the existing\nEarningsDate.call_time field. This nuked volume signal on the trading\nday BEFORE earnings (a clean session) and missed AMC events whose impact\nfalls on the next trading session across weekends/holidays.\n\nCorrect semantics, now implemented in compute_earnings_suppressed_dates():\n  BMO   (call_time < 09:30 ET): suppress earnings_date itself\n  AMC   (call_time >= 16:00 ET): suppress next trading day after earnings\n  INTRADAY (09:30-16:00 ET, rare): suppress earnings_date itself\n  UNKNOWN (null/unparseable): conservative {ed, next_trading_day}\n\nTrading-day awareness via PriceHistory dates handles AMC-Friday ->\nMonday correctly, plus weekend/holiday earnings -> first trading day.\n\nSmoke test on AAPL 2024-2025 (8 quarterly AMC earnings on Thursdays):\n  OLD: 24 dates suppressed (Wed+Thu+Fri per event)\n  NEW:  8 dates suppressed (Friday only per event)\n\nOld code was zeroing volume signal on ~16 clean trading days per stock\nper year (the day before + day of earnings). Universe-wide, this was\nsuppressing meaningful volume events on tens of thousands of trading\ndays where there was no actual earnings interference.\n\nFiles:\n  volume_amplifier.py\n    - _classify_call_time(str) -> BMO/AMC/INTRADAY/UNKNOWN\n    - compute_earnings_suppressed_dates(rows, trading_dates) -> Set[date]\n    - _analyze (DB path): inline call_time-aware check using PriceHistory\n      for prev trading day + gap-day detection\n    - _analyze_from_cache: parameter renamed earnings_suppressed_set,\n      single-set membership lookup replaces 3-day window scan\n\n  database/models/core.py (2 callers, calculate_scores_batched +\n  recalculate batched path):\n    - Load (date, call_time) tuples\n    - Pass through compute_earnings_suppressed_dates with PriceHistory\n      dates as trading calendar\n\n  simulator.py:\n    - StockContext now takes earnings_rows (date, call_time) tuples\n    - Bulk load extended to fetch call_time\n    - earnings_set built via compute_earnings_suppressed_dates\n\n  test_volume_amplifier.py:\n    - 17 new unit tests cover BMO/AMC/INTRADAY/UNKNOWN classification,\n      Friday-AMC -> Monday carryover, weekend earnings, conservative\n      UNKNOWN handling, the D-1-must-not-be-suppressed regression, etc.\n\nThis is a scoring change \u2014 volume_signal/volume_magnitude flow into\nScore.overall via the volume amplifier multiplier. Requires\ntrader recalculate --force --full to rescore historical data with\nthe corrected suppression set.\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+        "commit_short": "41fa5666",
+        "commit_subject": "Fix volume amplifier earnings suppression: call_time-aware semantics",
+        "mode": "git_ref",
+        "requested_ref": "41fa566"
+      },
+      "status": "shipped"
+    },
+    "v25": {
+      "algorithm_version": {
+        "created_at": "2026-04-26T00:38:12",
+        "git_commit": "9463f02",
+        "git_message": "Mis-stress call softener: recover compressed call alpha on narrow-bull misclass days",
+        "id": 25,
+        "label": "v25",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:10:41+00:00",
+      "classification": {
+        "category": "db_linked_snapshot",
+        "reason": "AlgorithmVersion row points at this commit; message is not specific.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "7e400a14dc50e83dea69b355c058592029d864a1f06152830fc1521e2cf66685",
+        "portfolio_config": "2594b8cd3bea8ffe459a58dfe5b6d173ee102ab718ab4e5e8f79f623143e07a7",
+        "portfolio_snapshot": "1980fb44138f406632feec71da8abfa47068cd100aaa500cbb085cb985bec355",
+        "portfolio_source_files": "e5e7374ea898d93cfcafe8623a547167f8a6453ff78d1d9494fedae68396b38f",
+        "scoring_config": "af73a503aa4a694ec2ccf8a54d8e0bc2eea5b05564ac3a02ebd2d2d195c5bf09",
+        "scoring_files": "aa60c22718f0599d21201f1e98b12a57722a97d3a62e7a75aae0f5f08747ce1a"
+      },
+      "label": "v25",
+      "path": "algorithm_versions/v25",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v25",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v25",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "aba4f5d",
+        "commit": "9463f028a0aeb865f6ea24741146d4b8e593f40c",
+        "commit_body": "Score-stage fix for Priority #6 (2023 signal density anomaly): on objectively-\nbull-mislabeled-stress days the regime composite mislabels narrow-bull tape as\nSTRESS (mult ~0.7), compressing ~2,689 alpha-rich calls in 2023 (option-TP\n~64.8%) and amplifying ~5,774 zero-EV puts (option-TP ~43.5%). The softener\npulls call-side regime_multiplier toward 1.0 by (mis_stress * 0.25) only when\n(a) (spy_wk_composite - regime_composite) > 0, and (b) objective bull state\nholds (SPY > EMA200, VIX < 20, SPY_10d > 0). Bull-objective gate filters out\nSPY-weekly lag artifacts; per-trade evidence shows put pulled-in cohorts have\nnative-quality WR so the softener is asymmetric (calls only).\n\nValidated 2026-04-25 via Phase-A full-pipeline simulator sweep:\n  22-now CALL75+ N +5.6% (2141->2261)  WR15 +0.2pp (74.9->75.1%)\n  2024 (clean bull) +0.1pp WR (no v22 trap)\n  2022 (real bear) +1 call only (clean no-op via objective-bull gate)\n  ms-cohort newly-admitted WR=76.0% > baseline 74.5%\n\nFiles:\n- database/utils/scoring.py: MIS_STRESS_CALL_DAMPEN=0.25 + softener at regime\n  application step + mis_stress field in weight_info for explain-scores audits\n- database/models/core.py: _load_mis_stress_map() helper, plumbed through both\n  score-write paths and reapply_regime_today\n- simulator.py: builds _mis_stress_map at init, passes mis_stress= per-date\n- experiments/ct_designs.py: 'mis_stress_call_softener' design for sweeps\n- experiments/design_d_regime_link.py + post_hoc + softener_sweep: validation\n  scripts and outputs preserved for forensics\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+        "commit_short": "9463f028",
+        "commit_subject": "Mis-stress call softener: recover compressed call alpha on narrow-bull misclass days",
+        "mode": "git_ref",
+        "requested_ref": "9463f02"
+      },
+      "status": "shipped"
+    },
+    "v26": {
+      "algorithm_version": {
+        "created_at": "2026-04-26T14:46:14",
+        "git_commit": "18c3e70",
+        "git_message": "EARN_SUPP_PUT: drop puts in [16,20] within 5 trd days of earnings",
+        "id": 26,
+        "label": "v26",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:10:38+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "7f14c1f059247c443f4a38fc30ba72a0ea5dc773a882ac843cc74271cb0f0989",
+        "portfolio_config": "0194a1ae932e2e3e2fb0ed18007cce58828657c4e329b64ebc202cccdf8193cc",
+        "portfolio_snapshot": "1980fb44138f406632feec71da8abfa47068cd100aaa500cbb085cb985bec355",
+        "portfolio_source_files": "369721cffa0c4504ae9a29080f106123eb3ed88d57315f7a93967030e375b89a",
+        "scoring_config": "af73a503aa4a694ec2ccf8a54d8e0bc2eea5b05564ac3a02ebd2d2d195c5bf09",
+        "scoring_files": "3ed6c7256571e5234ff7cfbb79dda5c59bf3e8eff44f7d6c6183a20f24967ad4"
+      },
+      "label": "v26",
+      "path": "algorithm_versions/v26",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v26",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v26",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "9463f02",
+        "commit": "18c3e70fba2d139f0b6052b6edde9e7da926bf89",
+        "commit_body": "Portfolio-stage filter validated by N=1000 canonical 3-mode MC\n(experiments/esp_d5_validate_n1000.py): 5y compound +44.7% Realistic\nvs production baseline; all annual windows within +/-7%; all DD-C\nunder 80% (5y DD-C improved 77.1% -> 75.0%); 0% collapse.\n\nPer-trade A/B (experiments/earn_supp_put_pretest.py, 5y): 16-20 puts\nin earnings window regress -3.1pp WR15 at d=3 (N=735); shrinks to\n-0.4pp at d=5 (N=1186). 21-25 neutral; <=15 actually OUTPERFORM.\nMechanism: ~982 puts/year filtered, freeing slot capacity in the\nshared 14-pool. Per-trade signal small but slot-displacement\ncompounds across the cascade (same lesson as F3f knob 2026-04-24).\n\nWired into: monte_carlo.py, backtest_cascade.py, trader.py CLI\nbacktest + day-signals. api.py simulate_trader is calls-only.\n\nAlso documents two null results from the same investigation:\n- Put concentration (PT15/PT20/Design D) - all FAIL canonical gate;\n  same capital-velocity paradox as A050/rollups/v22-v23.\n- Earnings-window call PROMOTION - per-trade WR uplift +16pp on\n  75-79 PRE-ern; ALL meaningful boost variants FAIL by -25 to -38%\n  on 5y. Per-trade-WR != option-TP-rate due to IV crush.\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+        "commit_short": "18c3e70f",
+        "commit_subject": "EARN_SUPP_PUT: drop puts in [16,20] within 5 trd days of earnings",
+        "mode": "git_ref",
+        "requested_ref": "18c3e70"
+      },
+      "status": "shipped"
+    },
+    "v27": {
+      "algorithm_version": {
+        "created_at": "2026-04-27T20:46:45",
+        "git_commit": "ad02704",
+        "git_message": "Weekly-confirmation floor lift on extreme puts (Priority #13)",
+        "id": 27,
+        "label": "v27",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:10:35+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "7608185fbb265c484a4ad2af6bd9d50bc4f1a353b59239943c6702b601d18c6f",
+        "portfolio_config": "a8cb9706097eec0904e8d3457645eec53448fada9b63028aaa7332cfbb50b0b0",
+        "portfolio_snapshot": "1980fb44138f406632feec71da8abfa47068cd100aaa500cbb085cb985bec355",
+        "portfolio_source_files": "d2d63027efc572bcdae829dc30bbfdb051fa338efd09c1ae6b6012f5ce4511a6",
+        "scoring_config": "af73a503aa4a694ec2ccf8a54d8e0bc2eea5b05564ac3a02ebd2d2d195c5bf09",
+        "scoring_files": "5d997a7a344ae36e0ee740666c2558dc37c0200bd8203b423b9f41476b375f12"
+      },
+      "label": "v27",
+      "path": "algorithm_versions/v27",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v27",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v27",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "18c3e70",
+        "commit": "ad02704d1a17d229ee9714988ccb4b4f8bc72801",
+        "commit_body": "Resolves the =5 put dip and the broader weak-weekly underperformance\npattern documented in known-issues.md Priority #13.\n\nMechanism: when overall < 28 AND weekly_adj > -17 (weekly didn't\nstrongly confirm bearish thesis), lift score toward 50 by:\n    weakness = clip((wadj + 17) / 17, 0, 1)\n    overall  = round(overall + 0.95 * weakness * (50 - overall))\n\nCalibration via Phase 4 Bayesian (1300+ variants in fast_variant_runner):\n    K = 0.95            (lift coefficient)\n    wadj_cutoff = -17   (strong-weekly boundary)\n    score_gate  = 28    (only lift puts < 28)\n    lift_target = 50    (push toward neutral)\n    linear-clip weakness (tanh leaks lift into strong-weekly territory)\n\nPer-trade evidence (5y diff-assess vs current production):\n    <10 WR15 +4.0pp (73.4 -> 77.4)\n    <15 WR15 +3.0pp (72.6 -> 75.6)\n    <25 WR15 +5.9pp (68.2 -> 74.1)\n    70+ WR15 +0.0pp (calls untouched)\n    Put N    -75%   (65k -> 16k; put:call ratio 5:1 -> 1.4:1)\n\nDiscriminator validation (experiments/put_wadj_cross_buckets.py):\n    =5 split by wadj quartile: Q1 84.1% / Q4 58.8% (delta -25.2pp on N=69/68)\n    Pattern extends across every put bucket (-7 to -15pp); call-side\n    smaller (-2 to -9pp) \u2014 gate kept put-only.\n\nWeight_info exposes 'wcf_lift' for explain-scores audits when active.\n\nValidated rounds:\n    Phase 1 (tanh weekly amplifier modulation)        -> per-trade null\n    Phase 2 (K-axis floor sweep)                       -> K=1.0 dominant\n    Phase 3 (refined Bayesian K0.85_W-18_T42_G28)      -> +2.55 util\n    Phase 4 (deep 1300-variant sweep)                  -> K0.95_W-17_T50_G28 +0.32\n    Phase 5a (multi-stage / call-mirror / gate ext)    -> all redundant given lift\n    Phase 5b (floor + tanh weekly amp combo)           -> running\n\nCanonical 3-mode MC validation pending recalculate.\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+        "commit_short": "ad02704d",
+        "commit_subject": "Weekly-confirmation floor lift on extreme puts (Priority #13)",
+        "mode": "git_ref",
+        "requested_ref": "ad02704"
+      },
+      "status": "shipped"
+    },
+    "v28": {
+      "algorithm_version": {
+        "created_at": "2026-04-28T12:08:59",
+        "git_commit": "e3c8678",
+        "git_message": "v28: earnings meta-score boost (WR-calibrated, log-smoothed)",
+        "id": 28,
+        "label": "v28",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:10:31+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "069d251e1a9f3f7432a3feabdaf32dd6c8fef630a3ee5f12308ff89fe6ab3d70",
+        "portfolio_config": "49f7c830ec9b3c5a3f2033d1e5746bcdae2778fac15f7c7fee163cc2813459f9",
+        "portfolio_snapshot": "1980fb44138f406632feec71da8abfa47068cd100aaa500cbb085cb985bec355",
+        "portfolio_source_files": "a6ed68b38da2cf7cfca75c6afdb9e9dc69c054cd38f83b80113a3b8713f9522d",
+        "scoring_config": "af73a503aa4a694ec2ccf8a54d8e0bc2eea5b05564ac3a02ebd2d2d195c5bf09",
+        "scoring_files": "ae32bf9d0f49864fce1f16a8360f00a87af508810fb6beb269d116323656b05f"
+      },
+      "label": "v28",
+      "path": "algorithm_versions/v28",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v28",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v28",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "ad02704",
+        "commit": "e3c8678f4ce2212348bc11af1f6d73e739e7e671",
+        "commit_body": "Score-stage multiplier on (overall - 50) when signal is within 5 trading\ndays of upcoming earnings. Calibrated per (cohort \u00d7 bucket) using\nlog-smoothed empirical WR15 lift (Phase 3B calibration table). Calls\nadmit, puts no-admit (Phase 3A.2 finding).\n\nDefaults: WINDOW=5, MAX_BOOST=0.50, LIFT_NORM_CALL=22.3, LIFT_NORM_PUT=16.3.\n\nValidated 2026-04-28 in canonical 3-mode MC (N=200, 8 windows) via\nruntime-wrapper prototype: 22-now Realistic +10,876% over shipped\nbaseline, all DD-C \u2264 80%, 0% collapse, only single-window regression\n-7.9% on 2021 (within \u00b125% gate).\n\nThis commit moves the boost from runtime-wrapper to scoring.py proper\nso DB scores match strategy semantics (API/dashboard/assessment all\nsee consistent values, explain-scores shows boost in weight_info).\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+        "commit_short": "e3c8678f",
+        "commit_subject": "v28: earnings meta-score boost (WR-calibrated, log-smoothed)",
+        "mode": "git_ref",
+        "requested_ref": "e3c8678"
+      },
+      "status": "shipped"
+    },
+    "v29": {
+      "algorithm_version": {
+        "created_at": "2026-04-28T18:54:30",
+        "git_commit": "8473cba",
+        "git_message": null,
+        "id": 29,
+        "label": "v29",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:10:28+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "e224e47565417541cb3d62b41de2e0ffc3e894a3deecdae2b6b92bd4f5d51db5",
+        "portfolio_config": "753b01c7ac36ec744782b7b6ce4111cb5c9c79eab5ebfd7da3becf82cc171a61",
+        "portfolio_snapshot": "1980fb44138f406632feec71da8abfa47068cd100aaa500cbb085cb985bec355",
+        "portfolio_source_files": "a6ed68b38da2cf7cfca75c6afdb9e9dc69c054cd38f83b80113a3b8713f9522d",
+        "scoring_config": "af73a503aa4a694ec2ccf8a54d8e0bc2eea5b05564ac3a02ebd2d2d195c5bf09",
+        "scoring_files": "284f7abc1d25b8f29507bcd58b3e5c9b8d5663fdd7ff9dd7e44ecd000a51a5d2"
+      },
+      "label": "v29",
+      "path": "algorithm_versions/v29",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v29",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v29",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "e3c8678",
+        "commit": "8473cba17de3990edc66d3cbd7a74d874fe1bceb",
+        "commit_body": "Replaces the prior binary \u00b11-day null in volume_amplifier with a smooth\npre-earnings log-gradient blend toward NEUTRAL. Mirrors v28's earnings-boost\nproximity formula log(W+1-d)/log(W+1) so the two stages compose on the\nsame curve.\n\nMechanism:\n    nearest_d = (nearest forward earnings) - today, calendar days\n    if 0 <= nearest_d <= W:\n        strength = M * log(W+1-nearest_d) / log(W+1)\n        result   = blend(amplifier_output, NEUTRAL, strength)\n    where W=2, M=1.0.\n\nPre-only direction (no suppression for nearest_d < 0). V7 (post-only)\nsweep confirmed post-earnings price action carries genuine directional\nsignal \u2014 even mild post-fade collapses 95+ WR by 11pp.\n\nPer-trade evidence (5y diff-assess vs v28 production, full universe):\n- 95+:  N 38 -> 46 (+21%), WR15 92.1% -> 93.5% (+1.4pp)\n- 90+:  N 150 -> 170 (+13%), WR15 80.7% -> 81.8% (+1.1pp)\n- 85+:  N 478 -> 523 (+9%), WR15 80.0% -> 80.6% (+0.6pp)\n- 70+:  WR15 71.3% -> 71.4% (\u2248)\n- <25:  WR15 75.3% -> 75.0% (\u2248, put side indifferent)\n- <5:   WR15 80.5% -> 80.2% (\u2248)\n\nThe pattern is N expansion AT HIGHER WR \u2014 opposite of the V1/V4/V5\ndilution failure mode. The smooth ramp recovers genuinely informative\nsignals that the binary D-1 null was hard-filtering at the boundary.\n\nNote on v24 reversion (2026-04-25): the prior fix attempt removed D-1\nsuppression entirely (binary OFF\u2192ON at boundary), losing \u221240% to \u221259%\non canonical MC. V6 keeps D-1 partially suppressed (s=0.631) so the\nanticipation-noise filter is preserved as a smooth ramp, not eliminated.\n\nValidation gate (canonical 3-mode MC vs v28 baseline) runs after\nrecalculate. If the gate fails, revert via `trader revert v28`.\n\nPatch sites:\n- volume_amplifier.py: removed binary suppression in _analyze and\n  _analyze_from_cache; added _earnings_supp_strength, _apply_earn_supp,\n  _query_earn_nearest_d_db, _earn_nearest_d_from_set helpers; outer\n  wrappers (get_volume_multiplier, get_volume_multiplier_from_cache)\n  apply the gradient at end-of-pipeline.\n- experiments/v28_optimization/phase_evs_per_trade.py \u2014 8-variant\n  per-trade A/B harness (V0/V1/V2..V7) + 2y output.\n- experiments/v28_optimization/phase_evs_per_trade_v6_focus.py \u2014\n  focused 5y run on V6 + neighbors (W=3, M=0.85, hybrid V8) + output.\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+        "commit_short": "8473cba1",
+        "commit_subject": "v29: earnings volume suppression \u2014 V6 log-gradient (pre-only, W=2, M=1.0)",
+        "mode": "git_ref",
+        "requested_ref": "8473cba"
+      },
+      "status": "shipped"
+    },
+    "v3": {
+      "algorithm_version": {
+        "created_at": "2026-04-01T14:41:05",
+        "git_commit": "b1cc55c",
+        "git_message": "Systemic backfill",
+        "id": 3,
+        "label": "v3",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:11:53+00:00",
+      "classification": {
+        "category": "db_linked_snapshot",
+        "reason": "AlgorithmVersion row points at this commit; message is not specific.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "9524830dded46b662718fd41447501cecfd9e227f90350ca9136896bcbbfcf49",
+        "portfolio_config": "df5de3048007d0ff4fce7c2f9cbe871d2635acbc58b9e8dd4ecdf0124a8d233e",
+        "portfolio_snapshot": "1980fb44138f406632feec71da8abfa47068cd100aaa500cbb085cb985bec355",
+        "portfolio_source_files": "c3ff8c00a412f0a890f5ca026e7dc8fcecf51b7eb145a8033ac07e44a0f42aee",
+        "scoring_config": "af73a503aa4a694ec2ccf8a54d8e0bc2eea5b05564ac3a02ebd2d2d195c5bf09",
+        "scoring_files": "823dc7ea6f70dac54bc03bb193a499ca3d46ef108c4733ee05e58be6ca610656"
+      },
+      "label": "v3",
+      "path": "algorithm_versions/v3",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v3",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v3",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": null,
+        "commit": "b1cc55cb1f15d0c2d790187bd67362f3369ff6b3",
+        "commit_body": "",
+        "commit_short": "b1cc55cb",
+        "commit_subject": "Systemic backfill",
+        "mode": "git_ref",
+        "requested_ref": "b1cc55c"
+      },
+      "status": "shipped"
+    },
+    "v30": {
+      "algorithm_version": {
+        "created_at": "2026-04-29T18:48:46",
+        "git_commit": "9a9da33",
+        "git_message": "AMC-aware earnings effective_date + [low,high] sampling refactor",
+        "id": 30,
+        "label": "v30",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:10:24+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "4d39905c870c994d3a66d60b346bd3134d5ad323184b32b62cb0f19b2f3501e5",
+        "portfolio_config": "803a12e4f034d5f30926d2d356b541e7b89ac9b33b8480fc415dfc230708dc76",
+        "portfolio_snapshot": "1980fb44138f406632feec71da8abfa47068cd100aaa500cbb085cb985bec355",
+        "portfolio_source_files": "803412707be4fe50e47adbdf79106298c93b334ea1af0af4e505f22d9b216eb7",
+        "scoring_config": "af73a503aa4a694ec2ccf8a54d8e0bc2eea5b05564ac3a02ebd2d2d195c5bf09",
+        "scoring_files": "1ca12a166de594e223cb0775d5f412e13284322b5db044c4b6e6a89ca521873d"
+      },
+      "label": "v30",
+      "path": "algorithm_versions/v30",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v30",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v30",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "8473cba",
+        "commit": "9a9da33aaf37032baeed97cdd7abcbe3cb01be07",
+        "commit_body": "Earnings AMC fix:\n  EarningsDate.call_time was previously ignored. find_spanning_earnings\n  treated 'announcement_date' as the day price reaction appears, but for\n  AMC events (call_time >= 16:00 ET, ~7,729 of 16,420 events in DB),\n  the gap actually shows up on the NEXT trading day. Trades entered AT\n  THE CLOSE of the announcement day were incorrectly classified as\n  non-spanning, so vega ratio was never sampled and the option-pricing\n  model under-counted IV crush. MDLZ Apr 28 -> Apr 29 case is the\n  poster child: earnings was Apr 28 AMC, reaction Apr 29, but\n  find_spanning_earnings(entry=Apr-28, exit=Apr-29) returned None\n  because the strict 'entry < ed <= exit' check needs Apr 28 < Apr 28.\n\n  New helper iv_crush_model.compute_effective_date(date, call_time,\n  trading_days=None) returns:\n    BMO/intraday: announcement_date\n    AMC: next trading day (uses calendar if provided, else weekday fallback)\n\n  Applied at all earnings-loading sites:\n    - database/models/core.py: 3 sites (live + 2 batched paths) now use\n      _load_effective_earnings_dates(symbol) for EARN_BOOST proximity AND\n      volume-amplifier earnings-window detection (earnings_set)\n    - monte_carlo.py: ern_map_for_iv (always loaded now, no longer gated\n      by IV_CRUSH_ENABLED), _earnings_suppress_filter (EARN_SUPP_PUT),\n      EARN_BOOST_CALL ern_by_sym\n    - backtest_cascade.py: _earnings_suppress_puts ed_map\n\n  This is a SCORE-STAGE change (EARN_BOOST proximity + volume amplifier\n  earnings_dates_set both consume effective_dates) \u2014 recalculate required.\n\nRealized-fill sampling refactor [low,high] (replaces [open,close]):\n  resolve(outcome, rng) now samples U_fire uniform across the bar's full\n  intraday range [low, high] instead of [open, close]. Two benefits:\n    1. Honestly captures the full bar's path uncertainty\n    2. Eliminates the 50/50 coin flip on 'both barriers breached' cases \u2014\n       the sample naturally lands on TP-side, SL-side, or in-between\n       weighted by how much of the bar's range sits on each side\n  Backtest_cascade.py mid-fill switched to (high+low)/2 (deterministic\n  equivalent of uniform mid). Slippage now applied based on realized P&L\n  sign (favorable -> SLIP_TP, adverse -> SLIP_SL).\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+        "commit_short": "9a9da33a",
+        "commit_subject": "AMC-aware earnings effective_date + [low,high] sampling refactor",
+        "mode": "git_ref",
+        "requested_ref": "9a9da33"
+      },
+      "status": "shipped"
+    },
+    "v31": {
+      "algorithm_version": {
+        "created_at": "2026-04-29T22:09:37",
+        "git_commit": "f3ec7c1",
+        "git_message": "Strict-future earnings semantics + precomputed effective_date column",
+        "id": 31,
+        "label": "v31",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:10:21+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "ecf9d4e44aa36bd77e72c776ab2b050376b6dc6f7d24a2aa498fe0c90c4c8418",
+        "portfolio_config": "15ed07584bfd993249f089889e84052ee2b438678ff5353ee75730c49fce0c2c",
+        "portfolio_snapshot": "1980fb44138f406632feec71da8abfa47068cd100aaa500cbb085cb985bec355",
+        "portfolio_source_files": "667ac0d78b8b6e42e8d67cdf7b4ea03ee26d45b0d7c9a87bb093046095993c80",
+        "scoring_config": "af73a503aa4a694ec2ccf8a54d8e0bc2eea5b05564ac3a02ebd2d2d195c5bf09",
+        "scoring_files": "eb036294ef19cbcc8104d3272c38c6f19dcb95565beee8972b14e6c7d0572d55"
+      },
+      "label": "v31",
+      "path": "algorithm_versions/v31",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v31",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v31",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "9a9da33",
+        "commit": "f3ec7c12793b91b661a51e262f9379f2a621332b",
+        "commit_body": "Fixes a same-day-reaction edge case in the EARN_BOOST proximity helper\n(database/models/core.py) and its V6 volume-amplifier counterpart\n(volume_amplifier.py).\n\nThe bug: bisect_left / range(0, W+1) accepted delta=0 as \"earnings\nupcoming\", so a signal computed AT THE CLOSE of an earnings reaction\nday (BMO same-day, or AMC previous-day post-shift) hit cohort 'pre1'\nwith full proximity = 1.0. The score-stage boost and volume-amplifier\nsuppression both fired on prices that already contained the gap.\n\nNBIS Apr 29 BMO at 08:00 was the discovery case: live recompute hit\nthe 75-79 bucket, triggered the +17.7pp pre1 75-79 lift cell on a\npost-reaction signal, and inflated the score. The same arithmetic\napplied to V6 earnings volume suppression.\n\nFix:\n- bisect_left -> bisect_right and 1 <= delta <= W in the three\n  days-to-earn helpers (_days_to_next_earnings,\n  _days_to_earn_from_sorted, _days_to_next_earnings_for inherits).\n- range(0, W+1) -> range(1, W+1) in _earn_nearest_d_from_set.\n- effective_date > today (was >=) in _query_earn_nearest_d_db.\n- _earnings_supp_strength rejects nearest_d < 1 (was nearest_d < 0).\n\nSchema migration (EarningsDate model):\n- New effective_date DateField column (nullable, indexed on\n  (symbol, effective_date)) \u2014 precomputed reaction day. BMO/intraday:\n  matches `date`. AMC (call_time >= 16:00): next trading day.\n- ensure_schema() runs idempotent ALTER TABLE + CREATE INDEX + bulk\n  UPDATE backfill via SQL CASE (DAYOFWEEK arithmetic for AMC weekday\n  shift). Backfill processes 16,420 rows, with 8,588 AMC rows\n  correctly shifted forward.\n- EarningsDate.build() recomputes effective_date on every save via\n  iv_crush_model.compute_effective_date so daily updates stay in\n  sync if call_time is edited later.\n- _load_effective_earnings_dates now reads the column directly\n  (single SELECT, no per-row compute_effective_date Python call) with\n  a fallback path for any rows missing the precomputed value.\n\nValidated edge cases (NBIS BMO Apr 29 + NEO AMC Apr 28):\n- BMO Apr 29, signal Apr 29: d=None (no boost, no suppression) \u2713\n- BMO Apr 29, signal Apr 28: d=1 (pre1 boost + suppression) \u2713\n- AMC Apr 28, signal Apr 29: d=None (post-reaction) \u2713\n- AMC Apr 28, signal Apr 28: d=1 (pre1, gap tonight) \u2713\n\nScore-stage change \u2192 ALGORITHM_VERSION bump + recalculate +\ncanonical seeded MC at N=300+ \u00d7 8 windows required as the ship gate\n(see Score-stage Change Protocol in CLAUDE.md). EVR-1 + EVR-2\nfollow-up sweeps drafted in known-issues.md but not committed in\nthis PR \u2014 they belong with the user's pending Gate B/C doc edits.\n\nWhat is NOT in this PR (deferred):\n- monte_carlo.py / backtest_cascade.py / 15dte variants still call\n  compute_effective_date() inline at their own earnings-loading\n  sites. Functionally correct (same effective dates produced); a\n  pure speed follow-up would migrate them to read effective_date\n  directly.\n- find_spanning_earnings retains its `entry < ed` strict semantics\n  (correct for span detection \u2014 different question than proximity).\n- is_bmo boolean column omitted; (date, effective_date) pair already\n  encodes BMO-vs-AMC.\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+        "commit_short": "f3ec7c12",
+        "commit_subject": "Strict-future earnings semantics + precomputed effective_date column",
+        "mode": "git_ref",
+        "requested_ref": "f3ec7c1"
+      },
+      "status": "shipped"
+    },
+    "v32": {
+      "algorithm_version": {
+        "created_at": "2026-05-01T22:08:54",
+        "git_commit": "43eecea",
+        "git_message": "v32 scoring: call-side WCF-mirror dampener (Priority #4 close)",
+        "id": 32,
+        "label": "v32",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:10:17+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "aab4e87dfdb2fbb52943f4e2bec7084f8e2d5544fc700bb72922887b54ab6488",
+        "portfolio_config": "bee7e8917f1ff37288b2e2220c0654dde9a3a9b5fadffc539c3fb3373054be25",
+        "portfolio_snapshot": "32f053f5bd805698132bdfdaa490f21fa8bc62317ec89b969623334ba4354eae",
+        "portfolio_source_files": "8a3c91db9ff0f9744939fe787aa7f710e604c34a0263e3ce92126f53dd049ea9",
+        "scoring_config": "f07320e9b50eebf13486177104307b4f0bab9d6ef346fe4356c5ffc618f19ef5",
+        "scoring_files": "6947b0a22e66b828bafd1a48095431b4de4d591f2962b1349d07bfb66351a8fa"
+      },
+      "label": "v32",
+      "path": "algorithm_versions/v32",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v32",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v32",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "f3ec7c1",
+        "commit": "43eeceab2f8d4ba6aed417e88d53c7f560a4d925",
+        "commit_body": "Mirrors the v27 put WCF lift on the call side: when overall >= 75 AND weekly\nnon-confirming (wadj < 1), pull score down toward 55 by K=0.95 * weakness *\n(overall - 55). Closes the asymmetric-weekly-amp gap surfaced by miss-ledger.\n\nPer-trade evidence (experiments/miss_ledger/, 5y v31, 30dte_opt barriers w=15d):\n  85+ TP% +0.95pp / 80+ +1.09pp / 75+ +1.14pp ; puts unchanged ; N within H3.\n  Multi-window 75+: 1y +0.32 / 3y +1.49 / 5y +1.14 \u2014 sign-consistent.\n\nDiscriminator validation (experiments/miss_ledger/analyze_ledger.py):\n  wadj < 0 cohort on calls 70+: miss rate 52.5% vs 41.4% baseline (lift 1.27,\n  z=+10.1) \u2014 largest single-feature miss driver. Compounded with vsig=CONVICTION\n  to 56.1% / vmag=mid to 57.5%. Mirror surgically targets that cohort.\n\nCalibration (32 variants, fast_variant_runner):\n  K=0.95, wadj_cutoff=+1, score_gate=75, lift_target=55. Wider cutoffs (5-17)\n  delivered larger per-trade lift but collapsed N by 27-90% (failed H3) \u2014\n  that's a stricter gate, not alpha.\n\nAdds 'cwcf_dampen' to weight_info for explain-scores audits when active.\n\nCloses Priority #4 (Weekly Adj Smooth Scaling) in known-issues.md \u2014 though via\na discrete dampener in the wadj<0 cohort rather than a tanh-saturating amp.\nThe miss-ledger evidence concentrated entirely on wadj<0 (z=+10.1 for cut=0,\ndiluting at wider cuts), so the discrete formulation matches the signal shape.\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+        "commit_short": "43eeceab",
+        "commit_subject": "v32 scoring: call-side WCF-mirror dampener (Priority #4 close)",
+        "mode": "git_ref",
+        "requested_ref": "43eecea"
+      },
+      "status": "shipped"
+    },
+    "v33": {
+      "algorithm_version": {
+        "created_at": "2026-05-04T05:45:29",
+        "git_commit": "28fa522",
+        "git_message": "v33 scoring: continuation boost \u2014 elevate 70-74 calls with prior-winner support to 75",
+        "id": 33,
+        "label": "v33",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:10:14+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "77b542f225ae81a919381d8d86098282707e5aa4a4b60b91328e9c5fdb88942a",
+        "portfolio_config": "4debb89d5e9c4b3b00763a57f92bff215435209a2135c4de6afc7966e8d7eb30",
+        "portfolio_snapshot": "0ac65ee1ccd093a2dc0817d4b42517a7e6234ce3c70c8770fa604830e8639298",
+        "portfolio_source_files": "131c80d86c7276040bd7bdf2e282df07327b10859383cd354ec1819814c1d37a",
+        "scoring_config": "f07320e9b50eebf13486177104307b4f0bab9d6ef346fe4356c5ffc618f19ef5",
+        "scoring_files": "f2fce4da427296967fd3e4bdf6a2aeeb74cd1fa46f3020595d6c2e6a7bd00b95"
+      },
+      "label": "v33",
+      "path": "algorithm_versions/v33",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v33",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v33",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "43eecea",
+        "commit": "28fa5227077a3e1d9fc3cf9bae1ce5f235d230dc",
+        "commit_body": "W60-dominant prior_signal (TAU=40, MAG_EXP=0.70, SIG_NORM=3.0, SIG_MIN=0.20).\n97 promotions over 5y; promoted-cohort TP% 62.2% vs 75+ baseline 61.02%.\nQ1 ship gate PASS (+0.01pp on 75+ TP%). Per-trade gate is the correct ship\ncriterion for scoring changes (not MC, per assessment-backtest.md).\n\nNo-cascade: weight_info['pre_boost'] snapshots score before lift so future\nprior lookups use raw pre-boost values, not the elevated Score.overall.\nBarrier wins loaded from .cache/barrier_outcomes.db (30dte_generic, low side,\nW7/15/30/60). Prior_signal pre-computed per stock/date in batch scoring\nfunctions using v32 DB overalls as no-cascade priors.\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+        "commit_short": "28fa5227",
+        "commit_subject": "v33 scoring: continuation boost \u2014 elevate 70-74 calls with prior-winner support to 75",
+        "mode": "git_ref",
+        "requested_ref": "28fa522"
+      },
+      "status": "shipped"
+    },
+    "v34": {
+      "algorithm_version": {
+        "created_at": "2026-05-04T10:16:41",
+        "git_commit": "232a725",
+        "git_message": "v34 scoring: call stoch-weekly contradiction dampener (CSWC)",
+        "id": 34,
+        "label": "v34",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:10:09+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "0b9dc0807db3653fc21cd339abe74a68200a61682a6528f9e019b3c4e041340f",
+        "portfolio_config": "3e1d9d82ac7d944c4ac2823a831c65a6bb458f9c4e3bccdd378f0c68436d8945",
+        "portfolio_snapshot": "0ac65ee1ccd093a2dc0817d4b42517a7e6234ce3c70c8770fa604830e8639298",
+        "portfolio_source_files": "202432b5168ab1396fdca9eb9a425b9ae7fa95228d4ead5952878131c15a1f41",
+        "scoring_config": "f07320e9b50eebf13486177104307b4f0bab9d6ef346fe4356c5ffc618f19ef5",
+        "scoring_files": "5bf06bc3a43aed2e311d5f51a95a6f0394b2d2dfb0b75cd0a5788008b384e8f6"
+      },
+      "label": "v34",
+      "path": "algorithm_versions/v34",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v34",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v34",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "28fa522",
+        "commit": "232a7255fe883cfc51f18d7c2bdcf697da085421",
+        "commit_body": "Gradient dampener targeting calls (overall>=75) where the stochastic component\nis below neutral AND the weekly adjustment is weakly positive. These signals\nfire on trend/volume dominance while stoch contradicts \u2014 miss at +3.7pp above\nbaseline (z=+4.5, N=3,379, 46% of 75+ calls; 5y v32 ledger).\n\nMechanism (gradient, no hard gate):\n  stoch_w  = clip((35 - stoch) / 35, 0, 1)  -- 0 at neutral=35, 1 at stoch=0\n  wadj_w   = clip((12 - wadj)  / 11, 0, 1)  -- 0 at wadj=12, 1 at wadj=1\n  weakness = stoch_w * wadj_w\n  overall -= 0.30 * weakness * (overall - 55)\n\nCalibrated via 175-variant gradient Bayesian sweep (stoch_wadj_bayes.py v2):\n56/175 pass H1+H3+H4+H5. Winner: sn=35 (COMP_BINS anchor), wg=12, K=0.30.\nPer-tier 5y: 85+ +1.80pp, 80+ +1.17pp, 75+ +0.93pp. N drops -12 to -14%\n(within H3 +-15%). Puts unchanged (H4). Sign-consistent 1y/3y/5y (H5).\n\nComplements CWCF (v32, handles wadj<1); clean handoff at wadj=1.0 -- same\nsignal cannot trigger both. Exposes weight_info['cswc_dampen'] for explain-scores.\n\nAlso: CLAUDE.md -- mandatory order warning for ALGORITHM_VERSION + code commits.\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>",
+        "commit_short": "232a7255",
+        "commit_subject": "v34 scoring: call stoch-weekly contradiction dampener (CSWC)",
+        "mode": "git_ref",
+        "requested_ref": "232a725"
+      },
+      "status": "shipped"
+    },
+    "v35": {
+      "algorithm_version": {
+        "created_at": "2026-05-04T20:13:28",
+        "git_commit": "e77714f",
+        "git_message": "v35 scoring: EARN_BOOST recalibration on v34 pre-boost scores",
+        "id": 35,
+        "label": "v35",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:10:06+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "61e4028df2f6b3a58139946b9b4406136298353439a1381c2c2f5d39b93b0778",
+        "portfolio_config": "f360b39dccc8e711a369d51ac173761bdac8e74ca14a8c9f8ed9e7b4e6cd6152",
+        "portfolio_snapshot": "29339034c7adf7219f0fa39efa7699649d0b8b2ed2ddc992d8ee6c45ef6d8688",
+        "portfolio_source_files": "6c026d3e0b25217a82944685f2962337b761ba525701cd4611dfb74c7ba1c549",
+        "scoring_config": "f07320e9b50eebf13486177104307b4f0bab9d6ef346fe4356c5ffc618f19ef5",
+        "scoring_files": "b85c36f43c9b46e5398858fb32acfb09584144c8dfe1782b1bdbe42810716182"
+      },
+      "label": "v35",
+      "path": "algorithm_versions/v35",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v35",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v35",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "232a725",
+        "commit": "e77714f61b9120459d82766941593fca10dae554",
+        "commit_body": "Lift table rebuilt from v34 production scores (pre_boost extracted from\nweight_info to remove v28-boost contamination). v27 table was based on\nv27 score distribution; v32/v33/v34 changes shifted the distribution\nsubstantially (CWCF dampener pulls 75+ wadj<0 calls down; continuation\nboost elevates 70-74 calls; CSWC dampener filters call stoch-weekly\ncontradictions).\n\nCalibration changes (database/utils/scoring.py):\n  - LIFT_TABLE_PATH: experiments/v27_optimization/phase_tp3b_lift_table.json\n                  \u2192 experiments/v34_calibration/lift_table_v34.json\n  - EARN_BOOST_MAX:        0.50 \u2192 0.55\n  - EARN_BOOST_LIFT_NORM_CALL: 22.3 \u2192 14.0\n  - EARN_BOOST_LIFT_NORM_PUT:  16.3  (unchanged)\n  - EARN_BOOST_WINDOW:      5      (unchanged)\n\nPhase 1 sweep over saturation/window/admit threshold gradients narrowed\nto a 2D MAX \u00d7 NORM_CALL grid. Phase 3 fine-grid winner V34_M55_NC14\nstrictly passes H1-H5 per-trade gate at 1y/3y/5y:\n\n  5y per-trade WR15 vs prior calibration (v27 table, MAX=0.50, NC=22.3):\n    95+   76.42% N=123 \u2192 80.62% N=129  (\u0394WR +4.20pp / \u0394N +4.9%)\n    90+   72.04% N=540 \u2192 76.22% N=534  (\u0394WR +4.18pp / \u0394N -1.1%)\n    85+   74.80% N=1,881 \u2192 75.66% N=2,034  (\u0394WR +0.86pp / \u0394N +8.1%)\n    80+   69.68% N=6,330 \u2192 70.66% N=6,895  (\u0394WR +0.98pp / \u0394N +8.9%)\n    75+   66.47% N=19,062 \u2192 66.47% N=19,128  (flat)\n    <5    61.00% N=1,482 \u2192 63.71% N=1,761  (\u0394WR +2.72pp / \u0394N +18.8%)\n    <15   60.67% N=12,155 \u2192 60.83% N=12,389  (\u0394WR +0.16pp)\n    <25   57.90% (unchanged)\n\nMulti-window sign consistency (1y / 3y / 5y):\n  95+: +3.33 / +4.21 / +4.20  \u2713\n  90+: +8.59 / +4.95 / +4.18  \u2713\n  85+: -0.97 / +0.61 / +0.86  (1y noise on small N=435)\n  80+: +0.68 / +0.86 / +0.98  \u2713\n\nH1-H5 strict gate (5y) PASS \u2014 no per-trade regression beyond -1.0pp;\n4 of 5 call tiers improve \u2265+0.5pp; N stability all within \u00b115%; <5/<15\nputs strictly improve.\n\nNo MC required per assessment-backtest.md \"Why N=300 canonical MC is\nNOT the gate for scoring changes\" \u2014 H1-H5 per-trade gate is sufficient.\n\nCalibration artifacts in experiments/v34_calibration/:\n  - build_lift_table_preboost.py (cleanly rebuilds the lift table)\n  - sweep_boost_params.py        (Phase 1: gradient over thresholds)\n  - sweep_phase2_combined.py     (Phase 2: combined variants + alpha)\n  - sweep_phase3_finegrid.py     (Phase 3: 2D MAX \u00d7 NORM_CALL grid)\n  - verify_winner.py             (final per-tier multi-window detail)\n  - lift_table_v34.json          (production table, ship copy)\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+        "commit_short": "e77714f6",
+        "commit_subject": "v35 scoring: EARN_BOOST recalibration on v34 pre-boost scores",
+        "mode": "git_ref",
+        "requested_ref": "e77714f"
+      },
+      "status": "shipped"
+    },
+    "v36": {
+      "algorithm_version": {
+        "created_at": "2026-05-05T13:36:41",
+        "git_commit": "d5ef1f5",
+        "git_message": "v36 scoring: CSWC re-calibration (K 0.30\u21920.50, wg 12\u219214)",
+        "id": 36,
+        "label": "v36",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:10:02+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "126f1335227f137de71200073626eb163bfa88ca76e853977f2951cf9271f681",
+        "portfolio_config": "715a0d2d289e7247ce8161d43481457e7adc487503ec3df66eae44401d17d4f3",
+        "portfolio_snapshot": "a8dc7ae1b099bca481dc26928dba105eb1f6901c98658b19cbbae5cc36741348",
+        "portfolio_source_files": "0fd1e13114b1409e8fa2a12d7828543b02d65e44e11179485341b222b6cf5aaf",
+        "scoring_config": "f07320e9b50eebf13486177104307b4f0bab9d6ef346fe4356c5ffc618f19ef5",
+        "scoring_files": "9811be1110902e26f5c67dff0a060d3cde41416f4ad6f8ad87643454f63fc2f6"
+      },
+      "label": "v36",
+      "path": "algorithm_versions/v36",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v36",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v36",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "e77714f",
+        "commit": "d5ef1f5265134da281bef53eadf7af84dea2c702",
+        "commit_body": "The v35 miss-ledger (ledger_v35_1825.parquet, 40,693 signals) showed +4.7pp\nresidual miss-lift in the CSWC zone on CALL 75+: wadj\u2208[1,12) \u2227 stoch<35\nmissing at 43.0% vs cohort baseline 38.3% (N=2,082). v34 K=0.30 was\nunder-dampening, and the wadj\u2208[12,14) band remained uncovered.\n\nv35 K-resweep (experiments/stoch_wadj_v35_resweep.py, 144 variants over\nsn\u2208{33,35,37,40} \u00d7 wg\u2208{12,13,14,15} \u00d7 K\u2208{0.30..0.65}): 44 variants pass\nH1+H3+H4+H5. Selected sn=35, wg=14, K=0.50 \u2014 preserves v34's COMP_BINS\nsemantic anchor while widening the gate by +2pp and strengthening K by\n+0.20.\n\nPer-tier 5y TP% deltas vs live v35 K=0.30 baseline:\n  95+: +1.77pp / 90+: +2.19pp / 85+: +0.66pp\n  80+: +1.91pp / 75+: +0.88pp\nN drops within H3 \u00b115% (75+ -9.6%, 80+ -13.8%, 85+ -13.6%).\nSign-consistent 1y/3y/5y on all primary tiers. Puts unchanged.\n\nGradient form preserved \u2014 no cliff thresholds added.\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+        "commit_short": "d5ef1f52",
+        "commit_subject": "v36 scoring: CSWC re-calibration (K 0.30\u21920.50, wg 12\u219214)",
+        "mode": "git_ref",
+        "requested_ref": "d5ef1f5"
+      },
+      "status": "shipped"
+    },
+    "v37": {
+      "algorithm_version": {
+        "created_at": "2026-05-05T20:04:34",
+        "git_commit": "6f9afda",
+        "git_message": "v37 scoring: post-crash put dampener (PCD)",
+        "id": 37,
+        "label": "v37",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:09:58+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "04a9eb70f18cab0ecbb1dda14dab61331ee2fd7795fd5c51851af1659a2a42a4",
+        "portfolio_config": "f9d00109c7974a27179a90a3e004f08a576c198852d7e13875df39fd650eb693",
+        "portfolio_snapshot": "a8dc7ae1b099bca481dc26928dba105eb1f6901c98658b19cbbae5cc36741348",
+        "portfolio_source_files": "0fd1e13114b1409e8fa2a12d7828543b02d65e44e11179485341b222b6cf5aaf",
+        "scoring_config": "f07320e9b50eebf13486177104307b4f0bab9d6ef346fe4356c5ffc618f19ef5",
+        "scoring_files": "e185fc6e764ecb4f786d86a82c82af7de2a7f1c04aa75d9ee5f6261b3522a2a7"
+      },
+      "label": "v37",
+      "path": "algorithm_versions/v37",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v37",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v37",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "d5ef1f5",
+        "commit": "6f9afda93c2b70c8f498ac196f4adc74acfa2589",
+        "commit_body": "Vol-fair score-stage dampener that lifts put scores OUT of any put bucket\n(<=25) when the underlying recently fell more than 1.0 stock-sigmas over\nthe last 10 trading bars. Eliminates the put-cohort regression where puts\nfiring immediately after sharp drops underperform the put baseline by\n-7.15pp WR15 at the option-aligned barrier (z=-6.88, N=2,767 over 5y).\n\nMechanism (in compute_overall_score, applied AFTER continuation boost,\nBEFORE earnings boost so the boost can't re-amplify a displaced peak):\n\n    if overall <= 25 and ret_10d_sigma <= -1.0:\n        overall = max(overall, 30)\n\nret_10d_sigma = ret_10d / (sigma_60 * sqrt(10)), where sigma_60 is the\n60-day realized daily stdev \u2014 same vol definition the strategy's TP/SL\nbarriers use. Sigma-normalization corrects the stock-vol confound: a -10%\nmove is a 3sigma crash for low-vol KO but normal noise for high-vol PLTR;\nthe cohort regression is concentrated in low/mid-vol stocks (z=-5.03 vs\nz=-1.63 for high-vol). Sigma cutoff applies the same crash semantics\nacross all stocks regardless of base volatility.\n\nPer-trade ship gate H1-H5 (5y, option-aligned barrier 30dte_opt at W=15d):\n  H1: <5 +2.95pp / <15 +3.22pp / <25 +1.56pp WR15 lift\n  H2: WR15/WR30 directional consistency\n  H3: ~30% of <=25 peaks displaced (designed; v27 WCF precedent dropped 75%);\n      absolute floor N>>50 on every primary tier\n  H4: puts strictly improved (this is the cohort suppression)\n  H5: sign-consistent across 1y/3y/5y on all three put tiers\n  Calls: 95+/90+/85+/80+/75+/70+ all unchanged (gate is overall<=25)\n\nPlumbing: build_ret10d_sigma_map() joins per-symbol price history to a\n{date: ret_10d_sigma} map at the start of each batch scorer (calculate_,\nrecalculate_scores_batched + simulator). Score.calculate_overall_score\nsingle-row path does a lightweight 80-bar lookback when called outside\nthe batch context.\n\nNo portfolio params changed. No drift-guard impact (PCD lives in\nscoring.py, not strategy_config.py). Investigation artifacts in\nexperiments/post_crash_v2/.\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+        "commit_short": "6f9afda9",
+        "commit_subject": "v37 scoring: post-crash put dampener (PCD)",
+        "mode": "git_ref",
+        "requested_ref": "6f9afda"
+      },
+      "status": "shipped"
+    },
+    "v38": {
+      "algorithm_version": {
+        "created_at": "2026-05-06T07:43:16",
+        "git_commit": "b093e2d",
+        "git_message": "v38 scoring: Call Weak-Weekly Dampener (CWWD) extends CWCF below 75",
+        "id": 38,
+        "label": "v38",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:09:53+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "0ce0296752170a68cfbca2e775c7bc3943bb8a700d72d778b29ea3accbe027a8",
+        "portfolio_config": "bf77b4b0c75c17fc6e5a9b1ae18a65bde202260f5635e7802fbefdff02d5acab",
+        "portfolio_snapshot": "94c05bddc065d5340b0864e3526fd0519b6d1d016b67ecabebfb022b81595e54",
+        "portfolio_source_files": "4f0d78df31ee9fd1a44bcde44250e77bbe1a3d5ce4aa504574b0c819ef567ea7",
+        "scoring_config": "f07320e9b50eebf13486177104307b4f0bab9d6ef346fe4356c5ffc618f19ef5",
+        "scoring_files": "2e3bb8053caa2d9f969d67f658e3f53f76749dbb92d718b2628f34338e1208ef"
+      },
+      "label": "v38",
+      "path": "algorithm_versions/v38",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v38",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v38",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "6f9afda",
+        "commit": "b093e2d1612a6dfc9b359615a3a7b6082760f809",
+        "commit_body": "Score-stage gradient dampener targeting the v36/v37 wadj-neg miss residue\nat 70-74 (z=+9.2, miss 52.7%, N=1537/5y).  CWCF gates on overall>=75 and\nleft this zone untreated; CWWD covers it with a 2D gradient (no hard\nthreshold) on (wadj, stoch).\n\nMechanism:\n  if 70 <= overall < 75 and wadj < 0:\n      stoch_grad = clip((stoch - 25) / 35, 0, 1)\n      wadj_grad  = clip(-wadj / 5, 0, 1)\n      weakness   = stoch_grad * wadj_grad\n      overall   -= 0.95 * weakness * (overall - 55)\n\nCalibration via fast_variant_runner Bayesian sweep\n(experiments/cwwd_v38/sweep.py, 14 variants on v37 5y).  All variants\nsoft-passed the new sub-75 H1 gate; selected variant maximizes 70+\nTP improvement while preserving zero spillover to higher tiers.\n\nPer-trade gate (sub-75 H1 fix per assessment-backtest.md):\n  - 70+ TP%: 58.9% -> 59.5% (+0.62pp)\n  - 70+ N: -4.6% (filtered the bad-quality cohort)\n  - 75+/80+/85+/90+/95+: byte-identical (zero spillover)\n  - Puts: byte-identical (gate is calls-only)\n  - Multi-window: 1y +0.62 / 3y +0.74 / 5y +0.62 (sign-consistent)\n\nRetires WEAK_WEEKLY_CALL_DROP cascade-stage filter (shipped 2026-05-05,\n1 day live).  Score-stage encoding fixes the dashboard divergence\nproblem: a 73 wadj-neg call now drifts below 70 in the score itself,\nso it neither shows on the dashboard as a call signal nor enters the\ncascade.  Single source of truth.\n\nAlso fixes H1-H5 ship gate to handle sub-75 changes \u2014 the original\ngate measured only {95+, 90+, 85+, 80+, 75+} which has a blind spot\nfor changes targeting signals already inside the cascade but below\n75.  New gate adds 70+ as the affected-tier metric for sub-75\nchanges; updated assessment-backtest.md.\n\nFrontend: removed the WEAK_WEEKLY_CALL_DROP SkipBadge (filter retired,\nno API will emit that reason).  EARN_SUPP_PUT badge stays until v39\nships its score-stage replacement (PESS).\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+        "commit_short": "b093e2d1",
+        "commit_subject": "v38 scoring: Call Weak-Weekly Dampener (CWWD) extends CWCF below 75",
+        "mode": "git_ref",
+        "requested_ref": "b093e2d"
+      },
+      "status": "shipped"
+    },
+    "v39": {
+      "algorithm_version": {
+        "created_at": "2026-05-06T07:53:23",
+        "git_commit": "200f33a",
+        "git_message": "v39 scoring: PESS (Put Earnings Score Suppression) + retire EARN_SUPP_PUT",
+        "id": 39,
+        "label": "v39",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:09:49+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "f95e1ba7a52df5316bc62d7a2135cd2d8e57654e626d39a375a3e3f28ff734e5",
+        "portfolio_config": "1dc749efc6bd290a497b60d8c60ead4c28056db47ba992caa53a5fc3b63a135b",
+        "portfolio_snapshot": "1a1d21540b96157a0cba40e8542fa838bae3e62000bdac76c612c9bf2520b7d8",
+        "portfolio_source_files": "f23414450f94c32ffb87e49b84cdad9bc6332f2a2acf38ca1f90b5f0175cb1f3",
+        "scoring_config": "f07320e9b50eebf13486177104307b4f0bab9d6ef346fe4356c5ffc618f19ef5",
+        "scoring_files": "735b02433de0e075a2a1a255edf60ca491de290a3cbdb724ee0f5e40d1df3b42"
+      },
+      "label": "v39",
+      "path": "algorithm_versions/v39",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v39",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v39",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "b093e2d",
+        "commit": "200f33a273a76f77a000f117e5c071c32e179c28",
+        "commit_body": "Score-stage gradient lift for puts in [16,20] near upcoming earnings,\nreplacing the EARN_SUPP_PUT cascade-stage filter (shipped 2026-04-26,\n10 days live).  The score itself now drifts these signals OUT of put-\nqualifying range so the dashboard doesn't show them as red badges\nthe strategy will silently skip.\n\nMechanism (gradient over thresholds, applied BEFORE EARN_BOOST):\n\n    if 16 <= overall <= 20 and 1 <= days_to_earnings <= 7:\n        # Score gradient: peaks at 16-20, fades width 3\n        score_grad = clip((overall-13)/3, 0, 1) for 16-17\n                    OR clip((23-overall)/3, 0, 1) for 18-20\n        # Proximity: 1.0 at d=1-5, fades to 0 at d=8\n        proximity = 1.0 if d <= 5 else (8-d)/3\n        weakness  = score_grad * proximity\n        overall  += 0.95 * weakness * (28 - overall)\n\nTarget=28 places the lifted signal just past the <25 put-qualifying\nthreshold AND past EARN_BOOST's put gate (overall<=25), so subsequent\nEARN_BOOST won't re-amplify on the put side.\n\nCalibration via fast_variant_runner sweep\n(experiments/pess_v39/sweep.py, 11 variants on v37 5y).  Per-trade\n<25 cumulative impact is small (+0.06pp \u0394) because v37 PCD already\nfiltered most of the cohort; the residual (~65 puts/year) is what\nPESS targets.  Portfolio impact comes from cascade slot displacement\n(matching the original EARN_SUPP_PUT N=1000 MC validation: +44.7%\n5y compound Realistic).\n\nPer-trade gate (sub-25 H1 fix per assessment-backtest.md, soft):\n  - <25 TP%: +0.06pp / N -2.3% (cohort dampened out of universe)\n  - <20/<15/<10/<5: within \u00b10.4pp (gradient edges only)\n  - Calls: byte-identical (gate is puts-only)\n  - Multi-window: 3y -0.02 / 1y -0.20 (small cohort, within tolerance)\n\nApplies stoch_grad smoothly so signals on the wadj-mild edge of\nthe cohort get partial dampening (per \"gradient over thresholds\"\nship guidance).\n\nRetires the EARN_SUPP_PUT filter:\n  - strategy_config.py: EARN_SUPP_PUT = False (both DTEs)\n  - trader.py: EARN_SUPP_PUT = False\n  - frontend StockTable.js: EARN_SUPP_PUT skip badge removed\n    (no API will emit this reason now that the filter is off)\n\nBuilds atop v38 CWWD (commit b093e2d) \u2014 both score-stage fixes\nencode their cascade-stage filter ancestors as proper score\nadjustments, eliminating the dashboard divergence problem.\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+        "commit_short": "200f33a2",
+        "commit_subject": "v39 scoring: PESS (Put Earnings Score Suppression) + retire EARN_SUPP_PUT",
+        "mode": "git_ref",
+        "requested_ref": "200f33a"
+      },
+      "status": "shipped"
+    },
+    "v40": {
+      "algorithm_version": {
+        "created_at": "2026-05-06T20:39:56",
+        "git_commit": "917659c",
+        "git_message": "v40 scoring: SVD (Score Velocity Dampener)",
+        "id": 40,
+        "label": "v40",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:09:44+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "856bd25e0f096cbc6de4d3c6b85ac9b6bd79a95e6f31ab5a9805e2e653752c0c",
+        "portfolio_config": "49bc501cd20efc77e379b1440310cf168d8e6f7ceb9a49ea97815806a91487a1",
+        "portfolio_snapshot": "1a1d21540b96157a0cba40e8542fa838bae3e62000bdac76c612c9bf2520b7d8",
+        "portfolio_source_files": "f23414450f94c32ffb87e49b84cdad9bc6332f2a2acf38ca1f90b5f0175cb1f3",
+        "scoring_config": "f07320e9b50eebf13486177104307b4f0bab9d6ef346fe4356c5ffc618f19ef5",
+        "scoring_files": "674c30408c19690da11c71e6f5b5bf0cf381ee2c0b77536e9e60a92c955a1df3"
+      },
+      "label": "v40",
+      "path": "algorithm_versions/v40",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v40",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v40",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "200f33a",
+        "commit": "917659cbbacb17d8022cb92db0f2c5acc31dfa21",
+        "commit_body": "Score-stage saturated dampener for decelerating call signals at 75+. Drifts\noverall toward 72 when velocity_5d < 0; k=1 saturates immediately for any decel.\n\nPer-trade evidence (10y v39 baseline, 30dte_opt @ w15):\n- 75+ decel heavy (vel_5d \u2264 -10): WR15=44.7% (below call BE 45%, EV-negative)\n- 75+ accel heavy (vel_5d > +10): WR15=64.0% (z=+3.35)\n- 19.3pp spread on 75+ cohort\n\nH1 affected-tier passes: 1y+0.36 / 3y+0.51 / 5y+0.37 / 10y+0.36pp on 75+ TP%;\nsign-consistent across all four windows. Worst spillover -0.03pp on 85+;\n95+/90+ untouched. 175 displaced signals over 5y at WR15=51.4% (vs baseline 62.9%).\n\nTwo-stage calibration:\n- Stage 1: 108-variant coarse grid on 5y (sweep.py) \u2192 g0_t65_a95_k3 (composite +0.274)\n- Stage 2: 700-variant Bayesian-style local refinement on 10y (bayes_refine.py)\n  \u2192 g0_t72_a80_k1 (composite +0.337, +0.063 over Stage 1)\n- k=1 dominates k=3 by 0.13pp \u2014 empirical decel cohort underperforms uniformly\n  regardless of magnitude, so saturated form fits the signal shape\n\nConstants in scoring.py:\n  SVD_GATE_SCORE = 75\n  SVD_GATE_VEL   = 0\n  SVD_TARGET     = 72\n  SVD_ALPHA      = 0.80\n  SVD_K          = 1\n\nApply order: AFTER PESS, BEFORE earnings boost (boost can't re-amplify\nvelocity-displaced peak; cohort lookup uses post-SVD score).\n\nWiring:\n- database/utils/scoring.py: SVD constants + build_velocity_5d_map() helper +\n  SVD logic block in compute_overall_score\n- database/models/core.py: velocity_5d wired into calculate_scores_batched,\n  recalculate_scores_batched, and single-row Score.calculate_overall_score\n  (with version-id dedup since multiple versions can exist per (sym,date))\n- simulator.py: velocity_5d wired into StockContext + bulk score load with dedup\n\nweight_info exposes svd_dampen and svd_vel5d for explain-scores audits.\n\nBSD null result also captured in experiments/breadth_score_dampener/ \u2014 breadth-\ndivergence cohort signal is real per-trade (-23pp opt vs gen WR at brd<=33)\nbut cumulative tier metric is too small to pass H1 alone (best +0.10pp on 75+).\nF3F portfolio-stage retains the breadth role.\n\nCloses Priority #12 (Score Velocity Cohort Discriminator).\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+        "commit_short": "917659cb",
+        "commit_subject": "v40 scoring: SVD (Score Velocity Dampener)",
+        "mode": "git_ref",
+        "requested_ref": "917659c"
+      },
+      "status": "shipped"
+    },
+    "v41": {
+      "algorithm_version": {
+        "created_at": "2026-05-06T20:39:56",
+        "git_commit": "917659c",
+        "git_message": "v40 scoring: SVD (Score Velocity Dampener)",
+        "id": 41,
+        "label": "v41",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:09:40+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "36625cafe6798ca1044a3df82b5d309f6bf22179bb91bcad9cb5285157972001",
+        "portfolio_config": "248742171185e7f363a22a90512261dd11220aaa1a6beb01a90f4f319bec76da",
+        "portfolio_snapshot": "1a1d21540b96157a0cba40e8542fa838bae3e62000bdac76c612c9bf2520b7d8",
+        "portfolio_source_files": "f23414450f94c32ffb87e49b84cdad9bc6332f2a2acf38ca1f90b5f0175cb1f3",
+        "scoring_config": "f07320e9b50eebf13486177104307b4f0bab9d6ef346fe4356c5ffc618f19ef5",
+        "scoring_files": "674c30408c19690da11c71e6f5b5bf0cf381ee2c0b77536e9e60a92c955a1df3"
+      },
+      "label": "v41",
+      "path": "algorithm_versions/v41",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v41",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v41",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "200f33a",
+        "commit": "917659cbbacb17d8022cb92db0f2c5acc31dfa21",
+        "commit_body": "Score-stage saturated dampener for decelerating call signals at 75+. Drifts\noverall toward 72 when velocity_5d < 0; k=1 saturates immediately for any decel.\n\nPer-trade evidence (10y v39 baseline, 30dte_opt @ w15):\n- 75+ decel heavy (vel_5d \u2264 -10): WR15=44.7% (below call BE 45%, EV-negative)\n- 75+ accel heavy (vel_5d > +10): WR15=64.0% (z=+3.35)\n- 19.3pp spread on 75+ cohort\n\nH1 affected-tier passes: 1y+0.36 / 3y+0.51 / 5y+0.37 / 10y+0.36pp on 75+ TP%;\nsign-consistent across all four windows. Worst spillover -0.03pp on 85+;\n95+/90+ untouched. 175 displaced signals over 5y at WR15=51.4% (vs baseline 62.9%).\n\nTwo-stage calibration:\n- Stage 1: 108-variant coarse grid on 5y (sweep.py) \u2192 g0_t65_a95_k3 (composite +0.274)\n- Stage 2: 700-variant Bayesian-style local refinement on 10y (bayes_refine.py)\n  \u2192 g0_t72_a80_k1 (composite +0.337, +0.063 over Stage 1)\n- k=1 dominates k=3 by 0.13pp \u2014 empirical decel cohort underperforms uniformly\n  regardless of magnitude, so saturated form fits the signal shape\n\nConstants in scoring.py:\n  SVD_GATE_SCORE = 75\n  SVD_GATE_VEL   = 0\n  SVD_TARGET     = 72\n  SVD_ALPHA      = 0.80\n  SVD_K          = 1\n\nApply order: AFTER PESS, BEFORE earnings boost (boost can't re-amplify\nvelocity-displaced peak; cohort lookup uses post-SVD score).\n\nWiring:\n- database/utils/scoring.py: SVD constants + build_velocity_5d_map() helper +\n  SVD logic block in compute_overall_score\n- database/models/core.py: velocity_5d wired into calculate_scores_batched,\n  recalculate_scores_batched, and single-row Score.calculate_overall_score\n  (with version-id dedup since multiple versions can exist per (sym,date))\n- simulator.py: velocity_5d wired into StockContext + bulk score load with dedup\n\nweight_info exposes svd_dampen and svd_vel5d for explain-scores audits.\n\nBSD null result also captured in experiments/breadth_score_dampener/ \u2014 breadth-\ndivergence cohort signal is real per-trade (-23pp opt vs gen WR at brd<=33)\nbut cumulative tier metric is too small to pass H1 alone (best +0.10pp on 75+).\nF3F portfolio-stage retains the breadth role.\n\nCloses Priority #12 (Score Velocity Cohort Discriminator).\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+        "commit_short": "917659cb",
+        "commit_subject": "v40 scoring: SVD (Score Velocity Dampener)",
+        "mode": "git_ref",
+        "requested_ref": "917659c"
+      },
+      "status": "shipped"
+    },
+    "v42": {
+      "algorithm_version": {
+        "created_at": "2026-05-07T07:33:53",
+        "git_commit": "5e6e3d3",
+        "git_message": "P5: flip WEEKLY_MODE default to 'rolling' \u2014 rolling weekly composite is now active",
+        "id": 42,
+        "label": "v42",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:09:37+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "b708c102d242f4eb8aa9a2ba2c0c5e325ed1ec06105f402dd8cf427cb5e17c7c",
+        "portfolio_config": "e5055a7b444140808fd9a8e374dc50474af936c0bad1cbc5510c87df5a10839e",
+        "portfolio_snapshot": "1a1d21540b96157a0cba40e8542fa838bae3e62000bdac76c612c9bf2520b7d8",
+        "portfolio_source_files": "efe5d02ef8d250a0adef92cb81354ad19767caa5acc795636e988d21d4690c91",
+        "scoring_config": "f07320e9b50eebf13486177104307b4f0bab9d6ef346fe4356c5ffc618f19ef5",
+        "scoring_files": "af8c4c8f862315b63ec80b7eaa68d6f007e3db95089de7437b5cde7c09ca12da"
+      },
+      "label": "v42",
+      "path": "algorithm_versions/v42",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v42",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v42",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "917659c",
+        "commit": "5e6e3d310e5dab47eccc6276828d56f46a8b9c14",
+        "commit_body": "Score.calculate_overall_score, calculate_scores_batched, recalculate_scores_batched,\nand simulator.py now route weekly inputs through RollingWeeklyIndicator (daily-keyed\n14-bar 5-day ladder ending T-1) by default. Calendar weekly path remains accessible\nvia WEEKLY_MODE='calendar' env var override for revert.\n\nValidation pre-ship (experiments/rolling_weekly/FINDINGS.md):\n- P0 faithful per-trade WR15 (10% sample): 80+ +4.51pp, 85+ +3.14pp, 75+ +1.87pp\n- Stability: Mon |\u0394overall| 6.245 \u2192 4.384 (-30% raw / -15% proper)\n- Distribution: rolling vs calendar raw RSI/MACD correlate +0.96-0.99\n- COHR-class intra-day swing: eliminated by construction (ladder excludes today's bar)\n\nTest updates:\n- test_rolling_weekly.py: assertions flipped to expect rolling default; calendar mode\n  now tested via env override path\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+        "commit_short": "5e6e3d31",
+        "commit_subject": "P5: flip WEEKLY_MODE default to 'rolling' \u2014 rolling weekly composite is now active",
+        "mode": "git_ref",
+        "requested_ref": "5e6e3d3"
+      },
+      "status": "shipped"
+    },
+    "v43": {
+      "algorithm_version": {
+        "created_at": "2026-05-07T16:30:55",
+        "git_commit": "e083032",
+        "git_message": "feat: MCD score-stage mcap dampener (mcap-aware call confidence weight)",
+        "id": 43,
+        "label": "v43",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:09:33+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "59a29192461df2048aeb74c1f821fca5c449009e655cdb08098c6f922f92ac65",
+        "portfolio_config": "907fdffba23c21c8f78ea757f948f0e49cae876121d6f84f6f4f362a0bcf136c",
+        "portfolio_snapshot": "1a1d21540b96157a0cba40e8542fa838bae3e62000bdac76c612c9bf2520b7d8",
+        "portfolio_source_files": "ade026f032e900df71ae6a83f07be587a8a7003065dc7031a43082f0a767bbd7",
+        "scoring_config": "1ffb9616affc4529b4389eea735970ffa759a61ba81b539846a8ff8ffcac2501",
+        "scoring_files": "34b31f2994b619062681c703fecc95c7577f57b0670522c1b033e86d4e2a962a"
+      },
+      "label": "v43",
+      "path": "algorithm_versions/v43",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v43",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v43",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "200f33a",
+        "commit": "e0830320b55a4491832adb64738f562b70b93d82",
+        "commit_body": "Continuous, asymmetric (calls-only) score-stage dampener that drifts mid/\nsmall-cap calls in [70, 84] toward TARGET=61 using log10(mcap_b) as a\nsmooth confidence shifter. Empirical cohort signal (5y v39, option-aligned\nbarrier 30dte_opt at W=15d): at fixed score, call TP rate scales monotonically\nwith mcap_b \u2014 large_50-200B 75+ TP=65.8% vs micro_lt2B 75+ TP=57.6% (8.2pp\nspread, year-stable across 2022-2025).\n\nMechanism (dual power-law weakness, log-mcap input):\n  weakness     = mcap_factor^MCAP_POWER * score_factor^SCORE_POWER\n  mcap_factor  = clip((LOG_HI - log10(mcap_b)) / (LOG_HI - LOG_LO), 0, 1)\n  score_factor = clip((overall - GATE_LO) / (GATE_HI - GATE_LO), 0, 1)\n  overall     -= ALPHA * weakness * (overall - TARGET)\n\nShip params (calibrated via 15,195 variants, v3 stage-A + stage-B Bayesian\nrefinement around the basin):\n  GATE_LO=70, GATE_HI=84\n  LOG_LO=0.50 ($3.16B at full strength)\n  LOG_HI=1.90 ($79.43B at zero strength)\n  ALPHA=0.80, TARGET=61\n  MCAP_POWER=0.70 (slightly concave mcap ramp)\n  SCORE_POWER=1.50 (mild quadratic concentration at high scores)\n\nH1-H5 ship gate (5y v39 baseline, option-aligned barrier 30dte_opt @ W=15d):\n  75+ cumulative: 5y +2.73pp / 10y +2.96pp (sign-consistent both windows)\n  Per-bucket: 70-74 +0.06pp (CALIBRATED), 75-79 +3.66pp (favorable\n  over-correction), 80-84 -0.24pp (CALIBRATED), 85-89/90+ untouched\n  (gate <= 84 leaves top tiers preserved by construction)\n  Gradient gaps: [5.09, 2.41, 2.83, 6.09] \u2014 all >= 2.41pp (natural-wave\n  gradient preserved)\n  N drop on 75+: -44.9% (within v27 WCF precedent ~75% drop)\n  Spillover on 80+/85+/90+: 0.00pp\n\nApply order: AFTER PCD (puts-only), BEFORE PESS (puts-only) and EARN_BOOST.\nCalls-only mechanism (gate 70-84 \u2227 mcap_b not None) so order vs PESS\ndoesn't matter mechanically; placement before EARN_BOOST ensures dampened\nscores aren't re-amplified by earnings boost.\n\nPlumbing: mcap_b loaded once per symbol from Stock.market_cap (structural,\nnot per-date). Wired through Score.calculate_overall_score (single-row),\nStock.calculate_scores_batched (batch), Stock.recalculate_scores_batched\n(recalc), and simulator.StockContext (in-memory).\n\n`weight_info` exposes `mcd_dampen` and `mcd_mcap_b` when active for\nexplain-scores audits.\n\nCalibration trail: experiments/sector_mcap_cohort/ (cohort z-mining that\nsurfaced the signal) \u2192 experiments/mcap_dampener/ (3-generation sweep:\nv1 linear 3,429 variants \u2192 v2 power-law 3,456 variants \u2192 v3 dense\nBayesian 8,310 variants).\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+        "commit_short": "e0830320",
+        "commit_subject": "feat: MCD score-stage mcap dampener (mcap-aware call confidence weight)",
+        "mode": "git_ref",
+        "requested_ref": "e083032"
+      },
+      "status": "shipped"
+    },
+    "v44": {
+      "algorithm_version": {
+        "created_at": "2026-05-07T21:19:56",
+        "git_commit": "d8024b9",
+        "git_message": "v44 scoring: ICH Ichimoku Kijun-sen state dampener (Phase H Rank #3)",
+        "id": 44,
+        "label": "v44",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:09:28+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "3a9998a310f4df93d9b2a1c8ada8d34d7441f073f69873db545b83e9d5ca03d2",
+        "portfolio_config": "efef2b17459fdad3b3e7706f1756e2dd2fe537d00522d8d2496b3351d724d1be",
+        "portfolio_snapshot": "1a1d21540b96157a0cba40e8542fa838bae3e62000bdac76c612c9bf2520b7d8",
+        "portfolio_source_files": "ade026f032e900df71ae6a83f07be587a8a7003065dc7031a43082f0a767bbd7",
+        "scoring_config": "1ffb9616affc4529b4389eea735970ffa759a61ba81b539846a8ff8ffcac2501",
+        "scoring_files": "4e5bfdef837e27727fde11cbfdef0de815e0153dc9741322aed66cce716c7485"
+      },
+      "label": "v44",
+      "path": "algorithm_versions/v44",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v44",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v44",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "e083032",
+        "commit": "d8024b9b6e313a797b46cd7d66c577363e96a867",
+        "commit_body": "Score-stage continuous dampener using bearish weekly Kijun-sen state\n(kijun_pct < 0 = price below 26w midpoint) as the indicator. Captures\npeaks orthogonal to v43 MCD: 35% cohort overlap but produces +4.60pp\nWR15 marginal lift on the MCD-not-fired sub-cohort at 75+.\n\nMechanism (Phase H asymmetric-K, calls + puts):\n  CALL: K_eff = K_BASE * score_norm^K_POWER  (concentrates dampening at\n        top tiers where signal is strongest; 95+ \u0394WR +5.77 vs 85+ +0.89)\n  PUT:  symmetric log ramp on score zone \u00d7 indicator distance\n        (Phase C Rank #1 architecture)\n\nApply order: AFTER MCD (calls) and PCD (puts), BEFORE PESS and EARN_BOOST.\n\nPer-trade evidence (5y v43 baseline, option-aligned barrier 30dte_opt @ w=15d):\n  CALL 95+: +5.77pp / -7.7% N\n  CALL 90+: +1.45pp / -14.4% N\n  CALL 85+: +0.89pp / -8.3% N\n  CALL 70+: +0.14pp / -3.0% N (affected tier)\n  PUT  <25: +0.72pp / -14.9% N (affected tier)\n\nH1-H5 strict ship gate:\n  H1 strict (>=+0.5pp on >=3 call tiers): PASS (95+/90+/85+)\n  H1 affected-tier (Put <25 >=+0.3pp):    PASS (+0.72)\n  H2 directional (WR15 vs WR30):          PASS on 95+/90+/85+\n  H3 N stability (+/-15%):                PASS (max -14.9%)\n  H4 puts neutral or better:              PASS\n  H5 multi-window 1y/3y/5y:               sign-flips on 95+/90+/85+ are\n                                          small-N noise (1y N=5-26)\n                                          consistent with PCD/MCD/CWWD pattern\n  Smoothness: PASS (asymmetric power-law monotonic by construction)\n\nStability validation (Phase D + COHR test):\n  - Ichimoku features 3x more stable than wadj (normalized churn)\n  - Within affected cohort (1.58% of day-pairs): Monday whiplash\n    reduced -1.36pp; Tue-Fri reduced -0.70pp\n\nRobustness: same Phase H Rank #3 config wins on both v39 and v43 baselines.\nThe v43 MCD reshape doesn't degrade Ichimoku alpha \u2014 the two mechanisms\ntarget overlapping but distinct cohorts (Phase F cross-tab analysis).\n\nCalibration trail: experiments/weekly_avwap/\n  Phase A-D: feature build + cohort profiling + stability validation\n  Phase C-multi: substitutive sweeps proved v27 cannot be replaced\n  Phase E: constrained refinement (Rank #3 winner under Phase E framework)\n  Phase F: scorched-earth substitution analysis\n  Phase G: asymmetric-K introduction (200 variants, K_POWER 1.58)\n  Phase H: refined Phase G with multi-tier alpha objective (250 variants,\n           Rank #3 winner with K_POWER=2.68)\n  470+ total variants tested across 7 sweeps.\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+        "commit_short": "d8024b9b",
+        "commit_subject": "v44 scoring: ICH Ichimoku Kijun-sen state dampener (Phase H Rank #3)",
+        "mode": "git_ref",
+        "requested_ref": "d8024b9"
+      },
+      "status": "shipped"
+    },
+    "v45": {
+      "algorithm_version": {
+        "created_at": "2026-05-08T04:00:31",
+        "git_commit": "56eb1f8",
+        "git_message": "Filter ETFs from production breadth universe",
+        "id": 45,
+        "label": "v45",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:09:24+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "63875e3a5ad9a4123222e88981716b53e69e18e9f5ab883f2b0e52efbe0a1091",
+        "portfolio_config": "717b3cd7ebaa5bd92538f580a514f06fbf88755ae8516baaff2dba564471b344",
+        "portfolio_snapshot": "1a1d21540b96157a0cba40e8542fa838bae3e62000bdac76c612c9bf2520b7d8",
+        "portfolio_source_files": "a4c8a972b4c52fd9ee62bfbe51ecdcb240bb979a9ada7310c2559dd1549ab74d",
+        "scoring_config": "1ffb9616affc4529b4389eea735970ffa759a61ba81b539846a8ff8ffcac2501",
+        "scoring_files": "afc5c9d631289c32e1272ea98106b526f3cee135aacf8992f9505e4fc2e916a6"
+      },
+      "label": "v45",
+      "path": "algorithm_versions/v45",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v45",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v45",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "d8024b9",
+        "commit": "56eb1f83a3c5a6422cf54cdb0c58d16395934ab3",
+        "commit_body": "market_breadth._get_daily_breadth now restricts the breadth universe to\nStock entries with non-null sector. ETFs in the DB (~45 entries) had been\ncontaminating breadth signals \u2014 leveraged 3x (TQQQ, SOXL, LABD, BOIL) in\nparticular were distorting advancing/declining counts and TRIN volume by\nmoving 3x the underlying index in either direction.\n\nAffects breadth_score \u2192 regime composite (35% weight) \u2192 Score.overall.\nRequires breadth-backfill + recalculate to propagate. ALGORITHM_VERSION\nbump in follow-up commit.\n\nAlso bundles infrastructure additions from this session:\n- monte_carlo.py: SAW Put U-curve env-overridable mechanism (default OFF;\n  Phase B/C Bayesian sweep tested it, FAILED P3+P4 portfolio gate, kept\n  in code as research apparatus). Production behavior unchanged when\n  SAW_PUT_UCURVE_ENABLED=0 (default).\n- trader.py: ETF_SYMBOLS extended with XLK/XLV/XLY/XLI/XLB/XLRE/SOXX\n  (six SPDR sector ETFs were missing from the skip-fundamentals set;\n  backfilled 2026-05-07 for sector-ETF screen analysis).\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+        "commit_short": "56eb1f83",
+        "commit_subject": "Filter ETFs from production breadth universe",
+        "mode": "git_ref",
+        "requested_ref": "56eb1f8"
+      },
+      "status": "shipped"
+    },
+    "v46": {
+      "algorithm_version": {
+        "created_at": "2026-05-08T13:31:17",
+        "git_commit": "f274eb6",
+        "git_message": "v46 scoring: WVD-Wave score-stage inverted-U modulator on weekly volume force1",
+        "id": 46,
+        "label": "v46",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:09:21+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "c512a461e684a79364af3ae122e0a080b057bab472178a29caf143aa24927771",
+        "portfolio_config": "f8fba20aeb2f48d1ee51ee4ff1679345ffaa69d104d86eeccbc23c83e0771736",
+        "portfolio_snapshot": "e6bac892d01d9b22a564738fe0b5068f5e6a113ddd72a5fda1e382ebf0e44d31",
+        "portfolio_source_files": "ac9c287b39a5fd7b7e6af6eea96131495353669f145de2b49d94b723518f0160",
+        "scoring_config": "1ffb9616affc4529b4389eea735970ffa759a61ba81b539846a8ff8ffcac2501",
+        "scoring_files": "66f566a41e185c4d0a17611b967153bdba00f83d735f49bc5c5fcb674f454546"
+      },
+      "label": "v46",
+      "path": "algorithm_versions/v46",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v46",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v46",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "56eb1f8",
+        "commit": "f274eb6550258f7dc39de7e5cc3de4d539caaa32",
+        "commit_body": "Captures the full Q1/Q3/Q5 inverted-U cohort signal in weekly-volume features:\nLIFT moderate-positive force (Q3 anti-climax accumulation, +8.96pp WR15 peak)\nplus DAMPEN extreme-positive force (Q5 climax exhaustion). CLIMAX_THRESH=0.05\nshields the high-quality Q3 sweet spot from dampening \u2014 only Q5 climax\n(force1 > 0.05) gets dampened. Pure score-stage gradient, no labels, no tier\noverrides. Architecturally consistent with v37 PCD / v38 CWWD / v39 PESS /\nv43 MCD / v44 ICH.\n\nApply order in compute_overall_score: AFTER ICH, BEFORE PESS / EARN_BOOST.\n\nPer-trade gate (5y v45 baseline, 30dte_opt @ w=15 AND w=30):\n  Call 75+: +1.11pp WR15 / +1.18pp WR30 (-7.1% N) \u2014 6/6 cells positive\n  Call 80+: +0.56pp / +0.53pp (-7.8% N) \u2014 5/6 positive\n  Call 85+: +1.27pp / +2.54pp (-18.5% N) \u2014 5/6 positive\n  Call 90+: +7.45pp / +9.41pp (-21.6% N) \u2014 6/6 positive\n\nPortfolio MC N=300 \u00d7 22-now+5y vs v45 baseline (apples-to-apples):\n  22-now Worst DD: 72.0% \u2192 68.4% (-3.6pp)\n  22-now Median compound: +25%\n  5y Mean compound: +1.40e24% \u2192 +5.27e24% (3.77\u00d7, +277%)\n  5y Median compound: +25%\n  P(coll) = 0% all cells.\n\nCalibration: experiments/weekly_volume/wave_sweep.py (4608 variants, top-1).\nSee REPORT_v45_wave.md for full investigation writeup.\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+        "commit_short": "f274eb65",
+        "commit_subject": "v46 scoring: WVD-Wave score-stage inverted-U modulator on weekly volume force1",
+        "mode": "git_ref",
+        "requested_ref": "f274eb6"
+      },
+      "status": "shipped"
+    },
+    "v48": {
+      "algorithm_version": {
+        "created_at": "2026-05-11T11:59:52",
+        "git_commit": "61561ee",
+        "git_message": "v48 scoring: add stoch conviction wave",
+        "id": 48,
+        "label": "v48",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:09:17+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "336b9c450eccad2725c7da026409a1813b2a02c91f142d79390f67a943d343da",
+        "portfolio_config": "fa80e661576c79c8ea662e44ac116bf04ca294923d9e69a7f6ef697308a894e7",
+        "portfolio_snapshot": "e46db44869115d0bec2df03a136a81dbc7d44aec0ddddfe9dfc71c14aac4f112",
+        "portfolio_source_files": "ce1042e3c9d71f6d1f263ef199b0fc484020e90f07d7d4db6db76c6af0f1e412",
+        "scoring_config": "806142b8b0414afb54f68a96fb2a9130728c029cc33861d0e245312d47becc69",
+        "scoring_files": "6d17d06ba81776b829f4ba0d3bf39269d12808c65ba273c3023539d438fb23ad"
+      },
+      "label": "v48",
+      "path": "algorithm_versions/v48",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v48",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v48",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "f274eb6",
+        "commit": "61561eedf1f62413dd2521fc50941e85608503d7",
+        "commit_body": "",
+        "commit_short": "61561eed",
+        "commit_subject": "v47 scoring: add stoch conviction wave",
+        "mode": "git_ref",
+        "requested_ref": "61561ee"
+      },
+      "status": "shipped"
+    },
+    "v5": {
+      "algorithm_version": {
+        "created_at": "2026-04-06T15:24:28",
+        "git_commit": "a8cfc75",
+        "git_message": "26.04.06 - Lower max w_trend - Cap trend weight at 28 isntead of 35",
+        "id": 5,
+        "label": "v5",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:11:49+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "fd795d28c157be3da75275420cf626962f35fc27c3c74b0e3fff7b8947127886",
+        "portfolio_config": "f6094b4b2fc0aa777fb987a0d21f379b32de0f2f02bdc406532a0966bc5d3e3a",
+        "portfolio_snapshot": "1980fb44138f406632feec71da8abfa47068cd100aaa500cbb085cb985bec355",
+        "portfolio_source_files": "526cb489874d6808a713df950b08f7c959557c057e4f63eb20b0d2730db7d89e",
+        "scoring_config": "af73a503aa4a694ec2ccf8a54d8e0bc2eea5b05564ac3a02ebd2d2d195c5bf09",
+        "scoring_files": "e9b58627f5ffba983e4d2eadda232f5211dc1ed6d4041e2f5e98db1aa4327d7a"
+      },
+      "label": "v5",
+      "path": "algorithm_versions/v5",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v5",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v5",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": null,
+        "commit": "a8cfc7502f3aa0ae2da4a7a35af4faffad06724a",
+        "commit_body": "",
+        "commit_short": "a8cfc750",
+        "commit_subject": "26.04.06 - Lower max w_trend - Cap trend weight at 28 isntead of 35",
+        "mode": "git_ref",
+        "requested_ref": "a8cfc75"
+      },
+      "status": "shipped"
+    },
+    "v50": {
+      "algorithm_version": {
+        "created_at": "2026-05-11T18:03:11",
+        "git_commit": "b0c1954",
+        "git_message": "v50 scoring: conservative stoch conviction wave",
+        "id": 50,
+        "label": "v50",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:09:14+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "314fc282c98fefc6ea083fdcc16a28084f7d16378ea3bfd0190cac9ff09684b5",
+        "portfolio_config": "ce9b353be15489384550b70fc978edaedd6fbffbe0d5d578f83726f9a0a02430",
+        "portfolio_snapshot": "e46db44869115d0bec2df03a136a81dbc7d44aec0ddddfe9dfc71c14aac4f112",
+        "portfolio_source_files": "e4970df5e4191d00936c59870da66b284562ca47bb2aadf18d9dfbc790b8c571",
+        "scoring_config": "3b6d18476b36407815c945d68cb71faeecd1fd8a6e75a10ae923f2ba25b8c76a",
+        "scoring_files": "b8b6aeb20fa01ec4a99a209f7ef17ff0e44bea666b9a8065f5bd77264b242ea3"
+      },
+      "label": "v50",
+      "path": "algorithm_versions/v50",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v50",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v50",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "61561ee",
+        "commit": "b0c19549026bfbe35790fb3acec4d4afa34323a0",
+        "commit_body": "",
+        "commit_short": "b0c19549",
+        "commit_subject": "v48 scoring: conservative stoch conviction wave",
+        "mode": "git_ref",
+        "requested_ref": "b0c1954"
+      },
+      "status": "shipped"
+    },
+    "v52": {
+      "algorithm_version": {
+        "created_at": "2026-05-12T00:03:45",
+        "git_commit": "f66bf9b",
+        "git_message": "v52 scoring: temporal echo wave scoring",
+        "id": 52,
+        "label": "v52",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:09:10+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "df3e112375956c54febbc9fed4ee1295448ed980f06996052844de2e4d03126b",
+        "portfolio_config": "6ab2a148ce7f56f5d3040462a6f6150c7844f1f49968b36f390022363601f803",
+        "portfolio_snapshot": "7c05698758310da8e1775063e84aa1fe3f9956ef260954b19092322da56594d6",
+        "portfolio_source_files": "3677f5fc0395943736c909eaa14bd4d7a4d723b80a74dddc19925d4e6b780dde",
+        "scoring_config": "a5d698756bdf98290b0870148c61fad51e53851f066ce99d935ce286765498d5",
+        "scoring_files": "a1c16c9e4e45fc051fe1a58f1ab4373f28e44be8fcb6961f71b4342829a64707"
+      },
+      "label": "v52",
+      "path": "algorithm_versions/v52",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v52",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v52",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "b0c1954",
+        "commit": "f66bf9b962ddfcd76a725a224013684d9c69a48e",
+        "commit_body": "",
+        "commit_short": "f66bf9b9",
+        "commit_subject": "Ship temporal echo wave scoring",
+        "mode": "git_ref",
+        "requested_ref": "f66bf9b"
+      },
+      "status": "shipped"
+    },
+    "v53": {
+      "algorithm_version": {
+        "created_at": "2026-05-12T02:16:56",
+        "git_commit": "e3ed806",
+        "git_message": "v53: Fix temporal echo recalc priors",
+        "id": 53,
+        "label": "v53",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:09:07+00:00",
+      "classification": {
+        "category": "scoring_context",
+        "reason": "Commit message names score inputs or temporal score context.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "590a56e6e5eb71d4437035a159609df80bd62e9e9ecfc4837b33c8ad2c1d3726",
+        "portfolio_config": "c07234753fb2a5e6f02075ebfb23ca8c53cd4145db616af8119fd297820619e0",
+        "portfolio_snapshot": "7c05698758310da8e1775063e84aa1fe3f9956ef260954b19092322da56594d6",
+        "portfolio_source_files": "3677f5fc0395943736c909eaa14bd4d7a4d723b80a74dddc19925d4e6b780dde",
+        "scoring_config": "a5d698756bdf98290b0870148c61fad51e53851f066ce99d935ce286765498d5",
+        "scoring_files": "987c9e5f84fca2223697c8a3fcc75a39b72af2c6bd74e7b0800a2984550f0b7c"
+      },
+      "label": "v53",
+      "path": "algorithm_versions/v53",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v53",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v53",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "f66bf9b",
+        "commit": "e3ed806012b06eb544b0e79e24a6a07caf368644",
+        "commit_body": "",
+        "commit_short": "e3ed8060",
+        "commit_subject": "Fix temporal echo recalc priors",
+        "mode": "git_ref",
+        "requested_ref": "e3ed806"
+      },
+      "status": "shipped"
+    },
+    "v54": {
+      "algorithm_version": {
+        "created_at": "2026-05-12T11:54:56",
+        "git_commit": "8af574b",
+        "git_message": "v54 scoring: Sector ETF breadth crash/recovery dampener",
+        "id": 54,
+        "label": "v54",
+        "notes": "Human-facing label corrected from POET shorthand. Internal constants remain POET_* for now; shipped behavior is the sector ETF breadth crash/recovery score dampener."
+      },
+      "captured_at": "2026-05-13T16:09:03+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "87ac6c7bc45e488718d640417e56cb9a01661e059c53de70ee2a9c7e3730c2f8",
+        "portfolio_config": "88444e71f0bc17e4b32c8ce9f2587c8a432bc0d887a3c8071cd033e0702c7dbd",
+        "portfolio_snapshot": "7c05698758310da8e1775063e84aa1fe3f9956ef260954b19092322da56594d6",
+        "portfolio_source_files": "94a6e2bbb63a398c9480bcbd5ca56590a3f6c90b8564b4b7b81d52cf208ac802",
+        "scoring_config": "228eada724108bb6e936669769c71bb5273f39774d2ad75a843a5dcb54f64bd2",
+        "scoring_files": "981dd2600706f50d930bc6da3ea95ffaa461877ebce8387b1dcf0c2c37ac5d0c"
+      },
+      "label": "v54",
+      "path": "algorithm_versions/v54",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v54",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v54",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "461bbbe",
+        "commit": "8af574bd53efe0724432137a8436dcf370527b8b",
+        "commit_body": "This reverts commit 3f4bcee7f780f8af16ebfcb56686d645e0ad36b5.",
+        "commit_short": "8af574bd",
+        "commit_subject": "Revert \"Revert sector breadth score dampener\"",
+        "mode": "git_ref",
+        "requested_ref": "8af574b"
+      },
+      "status": "shipped"
+    },
+    "v55": {
+      "algorithm_version": {
+        "created_at": "2026-05-12T16:46:42",
+        "git_commit": "bfad76a",
+        "git_message": "Ship sector breadth seed099 score dampener",
+        "id": 55,
+        "label": "v55",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:08:59+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "1e64bdb3469ead1054030ef85a262818f8f8e0e1762266c54d6b2f077e0e313a",
+        "portfolio_config": "f68ad8c6625d16febe9216b14c21e51069455d5f989f637f8ad6637a533813c0",
+        "portfolio_snapshot": "7c05698758310da8e1775063e84aa1fe3f9956ef260954b19092322da56594d6",
+        "portfolio_source_files": "7d5a2b45233e322d0db894aa35649a64a940f1cfc411d3403946b487577afff1",
+        "scoring_config": "9564424e2c6a0d9663deb339cac7dc9f195f0e0f5062214b8fcbfe243dbad883",
+        "scoring_files": "0eff5105208990ffa5d8bb41813f290c3396be44fea4647ffdd9da53e0654d0c"
+      },
+      "label": "v55",
+      "path": "algorithm_versions/v55",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v55",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v55",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "8af574b",
+        "commit": "bfad76abbba9c6f58a0cd59026fa59ede1546741",
+        "commit_body": "",
+        "commit_short": "bfad76ab",
+        "commit_subject": "Ship sector breadth seed099 score dampener",
+        "mode": "git_ref",
+        "requested_ref": "bfad76a"
+      },
+      "status": "shipped"
+    },
+    "v56": {
+      "algorithm_version": {
+        "created_at": "2026-05-12T21:03:54",
+        "git_commit": "c6f384ab",
+        "git_message": "Ship Market Wave dual-wave score dampener",
+        "id": 56,
+        "label": "v56",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:08:56+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "ce2db1c051253b3d0563b85b47e942269b018d374d8ef21e2db9f9b263ecea60",
+        "portfolio_config": "a9e4dde6118d07bf8d6dfa5c9d126b454330e3216d77ee8ba01495bed5db6292",
+        "portfolio_snapshot": "7c05698758310da8e1775063e84aa1fe3f9956ef260954b19092322da56594d6",
+        "portfolio_source_files": "04af5acc39fd566da466b2a8c4222702c13cd22e66cfbdc8f3c785bd7d154bf3",
+        "scoring_config": "b4d0bcd27c2843440e28ee22d79792c5adb0dd3de8109c40552c613784af3f19",
+        "scoring_files": "8fa72d4feb39f26d6e301b9dc27172a86d1c5f90b347876f530c3e3268a038ba"
+      },
+      "label": "v56",
+      "path": "algorithm_versions/v56",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v56",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v56",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "bfad76a",
+        "commit": "c6f384ab3288c32d864bfb71d7f89fc40e46906a",
+        "commit_body": "",
+        "commit_short": "c6f384ab",
+        "commit_subject": "Ship Market Wave dual-wave score dampener",
+        "mode": "git_ref",
+        "requested_ref": "c6f384ab"
+      },
+      "status": "shipped"
+    },
+    "v57": {
+      "algorithm_version": {
+        "created_at": "2026-05-13T01:12:58",
+        "git_commit": "e568b2f4",
+        "git_message": "Ship direct Market Wave score transform",
+        "id": 57,
+        "label": "v57",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:08:52+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "bae5b99fb60cd82c5cfe2b6664cd850251279774e1dd35339ec9b5664cddc9d2",
+        "portfolio_config": "50513691d90c9559b93a09a55cd3e24960aea5182f04b4c18d16f17d77bff1ab",
+        "portfolio_snapshot": "7c05698758310da8e1775063e84aa1fe3f9956ef260954b19092322da56594d6",
+        "portfolio_source_files": "9f73c81254eb263191061e48756978f231b6fa1ad1c6a1b7840aafc2c6d4ebfb",
+        "scoring_config": "03654f8566e891e307426a43c7727955aec11d4cd704846481abb3742ead6d3e",
+        "scoring_files": "81def1c71b0f96677a7bef3d55c99b757e1fe50d5f11e6bbdbc10ea27eb1f9e4"
+      },
+      "label": "v57",
+      "path": "algorithm_versions/v57",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v57",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v57",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "c6f384ab",
+        "commit": "e568b2f4d8b646b296c1eff693462df9dfa98805",
+        "commit_body": "",
+        "commit_short": "e568b2f4",
+        "commit_subject": "Ship direct Market Wave score transform",
+        "mode": "git_ref",
+        "requested_ref": "e568b2f4"
+      },
+      "status": "shipped"
+    },
+    "v58": {
+      "algorithm_version": {
+        "created_at": "2026-05-13T08:43:39",
+        "git_commit": "3cfc4dc2",
+        "git_message": "Retune continuation echo weights for v57 WR7 utility",
+        "id": 58,
+        "label": "v58",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:08:48+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "231e374d91ed51cbcd1c910b1208bf3dcedb0089fd0b4d0f53850a96b64e743a",
+        "portfolio_config": "39cc1ee75bb1ec9a40a608d55c6025e6d637693e97cbc7602dd95099b14fdf02",
+        "portfolio_snapshot": "7c05698758310da8e1775063e84aa1fe3f9956ef260954b19092322da56594d6",
+        "portfolio_source_files": "ba72858d9a6f7185b27b3d76981d45d87cee2c02d95fa1627184556a581545c2",
+        "scoring_config": "0678aa17990745676ad52245d97284e600cdba856cf44d3191975e1f82b8e4e8",
+        "scoring_files": "94641d1f0d6f3b586930298f013537ce9aa07afba826832456652bf265229a63"
+      },
+      "label": "v58",
+      "path": "algorithm_versions/v58",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v58",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v58",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": "e568b2f4",
+        "commit": "3cfc4dc2fd9061556a07e16098ed3e1784023bcb",
+        "commit_body": "",
+        "commit_short": "3cfc4dc2",
+        "commit_subject": "Retune continuation echo weights for v57 WR7 utility",
+        "mode": "git_ref",
+        "requested_ref": "3cfc4dc2"
+      },
+      "status": "shipped"
+    },
+    "v59": {
+      "algorithm_version": {
+        "created_at": "2026-05-15T11:25:00",
+        "git_commit": "4fd7ffa9",
+        "git_message": "v59 scoring: daily volume authority wave",
+        "id": 59,
+        "label": "v59",
+        "notes": null
+      },
+      "captured_at": "2026-05-15T15:25:57+00:00",
+      "fingerprints": {
+        "manifest_inputs": "101b350252f41d75c67e6631a4762390870fd662bedad40f3746901b40ed0fc9",
+        "portfolio_config": "5ec9bcb150daa418566c18d67b68c00fbded87cd480d08716487a96c7568cae1",
+        "portfolio_snapshot": "7c05698758310da8e1775063e84aa1fe3f9956ef260954b19092322da56594d6",
+        "portfolio_source_files": "1591889b8666b20d7176f7f97f8d43c1f873766ef8c9991b3aead70ec23e0d10",
+        "scoring_config": "4c5cb465c1962831e36ee5418630229eed4ef4cf88ae1e88ac733384acbcdfe3",
+        "scoring_files": "71a3c7cbcada8f766d4851d1b7538e5d8d18035810411bdff0cd826b87385787"
+      },
+      "label": null,
+      "path": "algorithm_versions/v59",
+      "source": {
+        "algorithm_version_file": "3cfc4dc2",
+        "commit": "4fd7ffa919da01c236893e24cbe0cd03c1900eac",
+        "commit_body": "",
+        "commit_short": "4fd7ffa9",
+        "commit_subject": "v59 scoring: daily volume authority wave",
+        "mode": "git_ref",
+        "requested_ref": "4fd7ffa9"
+      },
+      "status": "shipped"
+    },
+    "v6": {
+      "algorithm_version": {
+        "created_at": "2026-04-06T16:10:02",
+        "git_commit": "061362d",
+        "git_message": "merge conflict",
+        "id": 6,
+        "label": "v6",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:11:46+00:00",
+      "classification": {
+        "category": "db_linked_snapshot",
+        "reason": "AlgorithmVersion row points at this commit; message is not specific.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "5f673348b5f2b7d35fa1f906b69763b4f73af2ebc60408ca99f38018a7cf6d3b",
+        "portfolio_config": "7b31b417846987ac357e28fc44807e33bea3bf3327c76e7d089d64d9e338545a",
+        "portfolio_snapshot": "1980fb44138f406632feec71da8abfa47068cd100aaa500cbb085cb985bec355",
+        "portfolio_source_files": "20b3381c044f6e37bd10896df2e171a683e0e77acbed7ad519b58f776eb90b0e",
+        "scoring_config": "af73a503aa4a694ec2ccf8a54d8e0bc2eea5b05564ac3a02ebd2d2d195c5bf09",
+        "scoring_files": "4842032e3582de8feefe6d5c2071575c7d6054f2a7045a6bd3d09542e3b67793"
+      },
+      "label": "v6",
+      "path": "algorithm_versions/v6",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v6",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v6",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": null,
+        "commit": "061362d62db5f9310aa1fee618dd331a65cc3b94",
+        "commit_body": "",
+        "commit_short": "061362d6",
+        "commit_subject": "merge conflict",
+        "mode": "git_ref",
+        "requested_ref": "061362d"
+      },
+      "status": "shipped"
+    },
+    "v60": {
+      "algorithm_version": {
+        "created_at": "2026-05-18T19:13:41",
+        "git_commit": "d4a3e9fec",
+        "git_message": "Ship v60 r054 SCW and DD call cap candidate",
+        "id": 60,
+        "label": "v60",
+        "notes": null
+      },
+      "captured_at": "2026-05-19T09:24:45+00:00",
+      "fingerprints": {
+        "manifest_inputs": "af07a78dfd74d29d5c1d831b618eac91680f8eb13bf61ca4de6adb149e68a952",
+        "portfolio_config": "706ba0ced0d2be76a829c769861610ec4492e57e7f931ff585dda2f3e8144570",
+        "portfolio_snapshot": "3cecdceee353c8b076795269d94cab4e7e6a0d263234e0249d26900ebefea575",
+        "portfolio_source_files": "5ed4d0cbacbacddce4bdb482641a3019e4d8e8d9a9fb9545e0703f17050fc77e",
+        "scoring_config": "2166150e4ae9d94cac2ce4d8d230d82ab2d12fbf7ac675971831e6f84d96bd12",
+        "scoring_files": "87049fdc0c9cafb8618a494929bb3f2f969a708d7b6510878cc767947ded4f40"
+      },
+      "label": null,
+      "path": "algorithm_versions/v60",
+      "status": "shipped"
+    },
+    "v61": {
+      "algorithm_version": {
+        "created_at": "2026-05-20T15:15:23",
+        "git_commit": "e6fbdbde1",
+        "git_message": "v61 scoring: add weekly mature call guard",
+        "id": 61,
+        "label": "v61",
+        "notes": null
+      },
+      "captured_at": "2026-05-26T18:14:56+00:00",
+      "fingerprints": {
+        "manifest_inputs": "0633c17796ea83bda8ee8e05c9dc706f671d44d9a57d8199d8adea1c57594455",
+        "portfolio_config": "9e69b16e2592dadf0547098518076cf3f278af76b12f6e349ca5bbcd54f387c0",
+        "portfolio_snapshot": "3cecdceee353c8b076795269d94cab4e7e6a0d263234e0249d26900ebefea575",
+        "portfolio_source_files": "b555ee99cd1b57b2487e9f8ebfa0ec05c83d34ba2e7d95b8bc7e636d5001d8d2",
+        "scoring_config": "86e23af4196a0ff04b6edfb8e2022bbbe77626b5c43217ca4bd8b3d6da55ee3a",
+        "scoring_files": "3c20dfab2e8c4b1b2ce61276c42c4b9e45fc1266f7ec3adb3546a7b7e7c7e50c"
+      },
+      "label": null,
+      "path": "algorithm_versions/v61",
+      "source": {
+        "algorithm_version_file": "d4a3e9fec",
+        "commit": "e6fbdbde10ee66784d3ab4fc2eee9237e97cfc94",
+        "commit_body": "",
+        "commit_short": "e6fbdbde1",
+        "commit_subject": "v61 scoring: add weekly mature call guard",
+        "mode": "git_ref",
+        "requested_ref": "e6fbdbde1"
+      },
+      "status": "shipped"
+    },
+    "v62": {
+      "algorithm_version": {
+        "created_at": "2026-05-23T07:53:42",
+        "git_commit": "d4d63798e",
+        "git_message": "Snapshot v62 MACD put wave candidate",
+        "id": 62,
+        "label": "v62",
+        "notes": null
+      },
+      "captured_at": "2026-05-26T18:15:12+00:00",
+      "fingerprints": {
+        "manifest_inputs": "ecf8b19bc035d6f337a45b4bfb973217aec60406bb355e0c4795860d5f15a581",
+        "portfolio_config": "188912932bf97858645d87eed7b1e8c40df0b94efb224f8f86b02d8eed79dd0a",
+        "portfolio_snapshot": "97ea3d6536621f57ad8c4b1f6ca8b69afd43cb9d34c02fde36388fa7130c618c",
+        "portfolio_source_files": "c6158845bcb00e4163480a7791e889abf5bc4b9b957da00a456bd77ee4dacc6b",
+        "scoring_config": "0b2ebf2183af50e68e17e14435027593238ffc6b76b87fbd5044edc8fe2059fb",
+        "scoring_files": "d5b68a56a67c7b42707d92c450426a0c93263138e2af3e27af8c21816ce1d383"
+      },
+      "label": null,
+      "path": "algorithm_versions/v62",
+      "source": {
+        "algorithm_version_file": "d4a3e9fec",
+        "commit": "d4d63798eaea34609f076025ea78cf251cd179c1",
+        "commit_body": "",
+        "commit_short": "d4d63798e",
+        "commit_subject": "Snapshot v62 MACD put wave candidate",
+        "mode": "git_ref",
+        "requested_ref": "d4d63798e"
+      },
+      "status": "shipped"
+    },
+    "v63": {
+      "algorithm_version": {
+        "created_at": "2026-05-25T00:44:18",
+        "git_commit": "7b263922f",
+        "git_message": "v63 scoring: add BB location taper candidate",
+        "id": 63,
+        "label": "v63",
+        "notes": "v63 BBLT sidecar candidate; active ALGORITHM_VERSION intentionally unchanged."
+      },
+      "captured_at": "2026-05-25T05:00:32+00:00",
+      "fingerprints": {
+        "manifest_inputs": "91e6fa9d0a17eae2a9a1b59054f14996a0b076e5ea750f205712327a4540e701",
+        "portfolio_config": "712ac1e7d3edac880ce5c66cc1e22ab75e92335bde4b2d115710b950b220a072",
+        "portfolio_snapshot": "97ea3d6536621f57ad8c4b1f6ca8b69afd43cb9d34c02fde36388fa7130c618c",
+        "portfolio_source_files": "334809c586f4556fa4ac6bd56a6f1753abf4cc17949d5638f8e20728d1dbba46",
+        "scoring_config": "74ecf16be0cd5e39acb4468812e24032ec26d9a370f06cf229fb52420b129557",
+        "scoring_files": "6eb37af45ddf1282fc223d22de21f2472d2f2084a501711f0a8019b62f80cb73"
+      },
+      "label": "v63-bblt-sidecar-rc",
+      "path": "algorithm_versions/v63",
+      "source": {
+        "algorithm_version_file": "d4a3e9fec",
+        "commit": "7b263922fd8524b439d2ceb97868be2a32fb5669",
+        "commit_body": "",
+        "commit_short": "7b263922f",
+        "commit_subject": "v63 scoring: add BB location taper candidate",
+        "mode": "git_ref",
+        "requested_ref": "7b263922fd8524b439d2ceb97868be2a32fb5669"
+      },
+      "status": "ship_candidate"
+    },
+    "v63-bb-location-taper-rc": {
+      "algorithm_version": {
+        "created_at": "2026-05-18T19:13:41",
+        "git_commit": "d4a3e9fec",
+        "git_message": "Ship v60 r054 SCW and DD call cap candidate",
+        "id": 60,
+        "label": "v60",
+        "notes": null
+      },
+      "captured_at": "2026-05-24T08:29:27+00:00",
+      "fingerprints": {
+        "manifest_inputs": "519256fed063bef3c71321375fec5afeb69706f221ead22c935b9b076f709cd3",
+        "portfolio_config": "f9c2e46bc15b09d05fa2f3dfaba8ec9785032b2db97318079d50584db2ece5d0",
+        "portfolio_snapshot": "97ea3d6536621f57ad8c4b1f6ca8b69afd43cb9d34c02fde36388fa7130c618c",
+        "portfolio_source_files": "31b693e3d1e942285a306b2fde307ee2b9c6ed53c02e589942a5775139b39d21",
+        "scoring_config": "74ecf16be0cd5e39acb4468812e24032ec26d9a370f06cf229fb52420b129557",
+        "scoring_files": "db9116101ccb48b8c63a2c90c55d0745edd1918a3e2e7bdbd1527684ac25c35e"
+      },
+      "label": "v63-bblt-rc",
+      "path": "algorithm_versions/v63-bb-location-taper-rc",
+      "status": "candidate"
+    },
+    "v64": {
+      "algorithm_version": {
+        "created_at": "2026-05-26T19:17:58",
+        "git_commit": "1bba5f965",
+        "git_message": "Fix v64 recalc signal sigma map",
+        "id": 64,
+        "label": "v64",
+        "notes": null
+      },
+      "captured_at": "2026-05-26T23:28:05+00:00",
+      "fingerprints": {
+        "manifest_inputs": "762fc79698a59b6743097765253c49e23b25fef4d5fcd9631db57fbe260e65b3",
+        "portfolio_config": "7f2290062a19994e72227e159f40e60d7e283d0334b90a06e9987e9b769a453a",
+        "portfolio_snapshot": "97ea3d6536621f57ad8c4b1f6ca8b69afd43cb9d34c02fde36388fa7130c618c",
+        "portfolio_source_files": "41c9cf358b2bcd6a1ccc7d7d61aeed64f0e0e66cce3bac535a77d4b04167132a",
+        "scoring_config": "7cfb4aff794127a4bea1c95fed7837d435997f68ca8a46ba6972f20028c07b05",
+        "scoring_files": "bd3f5793105f10c1d32c67ca11d73d2986c76bd19d24898161b44e1725513aa9"
+      },
+      "label": "v64-boundary-freshness-ship-candidate",
+      "notes": [
+        "Candidate silo only; production active remains v60 unless ALGORITHM_VERSION changes."
+      ],
+      "path": "algorithm_versions/v64",
+      "source": {
+        "algorithm_version_file": "6f4bbe2c4",
+        "commit": "1bba5f965e8ed625675527e15ce6df01aa137a2b",
+        "commit_body": "",
+        "commit_short": "1bba5f965",
+        "commit_subject": "Fix v64 recalc signal sigma map",
+        "mode": "git_ref",
+        "requested_ref": "1bba5f965"
+      },
+      "status": "ship_candidate"
+    },
+    "v64-stage1005": {
+      "algorithm_version": {
+        "created_at": "2026-05-18T19:13:41",
+        "git_commit": "d4a3e9fec",
+        "git_message": "Ship v60 r054 SCW and DD call cap candidate",
+        "id": 60,
+        "label": "v60",
+        "notes": null
+      },
+      "captured_at": "2026-05-26T23:16:35+00:00",
+      "fingerprints": {
+        "manifest_inputs": "8d6c3cad704a3043ec24d7331c91096b5b403a6d58260d4cd19b5fafe943544a",
+        "portfolio_config": "6960100e4c828fa6417dfd6759a08a87eb9d7ed6977689699d8545c6f85ae237",
+        "portfolio_snapshot": "97ea3d6536621f57ad8c4b1f6ca8b69afd43cb9d34c02fde36388fa7130c618c",
+        "portfolio_source_files": "201bdcb30d3dbc90ebc74bba4ff51d0ff643d04da3efd073b0cc5428335e3c9d",
+        "scoring_config": "7cfb4aff794127a4bea1c95fed7837d435997f68ca8a46ba6972f20028c07b05",
+        "scoring_files": "7e791b4b55a5d2a4af63a2e8f9bbb04eaff2325783f36eb6c26681f8110918bc"
+      },
+      "label": "v64-stage1005-boundary-freshness",
+      "path": "algorithm_versions/v64-stage1005",
+      "status": "candidate"
+    },
+    "v65": {
+      "algorithm_version": {
+        "created_at": "2026-05-27T22:42:35",
+        "git_commit": "14a5981cb",
+        "git_message": "v65 scoring: unify weekly partial context",
+        "id": 65,
+        "label": "v65",
+        "notes": null
+      },
+      "captured_at": "2026-05-29T04:36:19+00:00",
+      "fingerprints": {
+        "manifest_inputs": "03e6d7d70aa06df42ec52c0569487603b39631ac9f3569f0cff0a9f994aa91c1",
+        "portfolio_config": "52ee91275ce4ebeb1d7e995c9240851656f7f1437cc68395981234672118c717",
+        "portfolio_snapshot": "ce8324fd0ae01127ba9275684c57b0a84b5d780f8f355e0656bf626209872c55",
+        "portfolio_source_files": "45668281f7e2a259a0ddc0993f5edb1dafc76b0b3c033f090d8d97083cf45acb",
+        "scoring_config": "2166150e4ae9d94cac2ce4d8d230d82ab2d12fbf7ac675971831e6f84d96bd12",
+        "scoring_files": "049ad4e748b568d3300c34a1035e6f9b3366a06c513320963fd266721b84a6ca"
+      },
+      "label": "v65-weekly-partial-comparison",
+      "path": "algorithm_versions/v65",
+      "source": {
+        "algorithm_version_file": "d4a3e9fec",
+        "commit": "14a5981cb3b986af401f134d30e374867e856334",
+        "commit_body": "",
+        "commit_short": "14a5981cb",
+        "commit_subject": "v65 scoring: unify weekly partial context",
+        "mode": "git_ref",
+        "requested_ref": "14a5981cb"
+      },
+      "status": "shipped"
+    },
+    "v66": {
+      "algorithm_version": {
+        "created_at": "2026-05-28T06:26:23",
+        "git_commit": "05d75b4ae",
+        "git_message": "v66 scoring: apply weekly momentum envelope to v60",
+        "id": 66,
+        "label": "v66",
+        "notes": null
+      },
+      "captured_at": "2026-05-29T13:11:49+00:00",
+      "fingerprints": {
+        "manifest_inputs": "a032b29531f41bf7af644b518466a1748355e31124e73860d9dd6ea96f74f3e3",
+        "portfolio_config": "2e5e7c351b79ab60f7baf16809099027ab53f3b5c34686c8f6840292dedae28c",
+        "portfolio_snapshot": "7c05698758310da8e1775063e84aa1fe3f9956ef260954b19092322da56594d6",
+        "portfolio_source_files": "49e9d9e4aadd848f564e4d9fd38223cf93e6c3d6f485dcc4a3ddea8b56c1249f",
+        "scoring_config": "680ea135495738b62418c362843620731b6fc42d1c2401a8d3d09d0a735fadf3",
+        "scoring_files": "1905a99ac06058546a0d3e6810d27c583da00b9eb4e226af44c3ba5b1884e553"
+      },
+      "label": "v66-weekly-momentum-envelope",
+      "path": "algorithm_versions/v66",
+      "source": {
+        "algorithm_version_file": "4fd7ffa9",
+        "commit": "05d75b4aef0cc7409bbec4b764132bd1265d3ef1",
+        "commit_body": "",
+        "commit_short": "05d75b4ae",
+        "commit_subject": "v66 scoring: apply weekly momentum envelope to v60",
+        "mode": "git_ref",
+        "requested_ref": "05d75b4ae"
+      },
+      "status": "ship_candidate"
+    },
+    "v69": {
+      "algorithm_version": {
+        "created_at": "2026-05-31T13:03:39",
+        "git_commit": "8b59206c3e4778f0eea1d240c34a48522ee64d1d",
+        "git_message": "scoring: weekly transition blend (point-in-time honest weekly, removes recalc look-ahead + smooths fakeout)",
+        "id": 69,
+        "label": "v69",
+        "notes": null
+      },
+      "captured_at": "2026-06-12T10:10:19+00:00",
+      "fingerprints": {
+        "manifest_inputs": "c429309d13ebf98010b6430a5f6a395f43b96387551c1e1235f3f9ad1d5355c1",
+        "portfolio_config": "15f77bf27f825813520c9e20a93c077cf7b33eb7aeee0da1357d37f0d406ffd1",
+        "portfolio_snapshot": "f4b1ffa4479d7791ab89dbbbb7d4e472f4f4c47aa6d64a02eeb10ec7b58170ac",
+        "portfolio_source_files": "f40952bdc04434ab71bff81bef84f190b691e38b2613c35634efa1ffa860318c",
+        "scoring_config": "2166150e4ae9d94cac2ce4d8d230d82ab2d12fbf7ac675971831e6f84d96bd12",
+        "scoring_files": "06b0b4d984a6437476b1d8975940c47bcd646e2e44593b6e9ffc81506a55af51"
+      },
+      "label": "v69-weekly-transition-blend-silo-backfill",
+      "path": "algorithm_versions/v69",
+      "source": {
+        "algorithm_version_file": "d4a3e9fec",
+        "commit": "8b59206c3e4778f0eea1d240c34a48522ee64d1d",
+        "commit_body": "Replaces the single current-week weekly adjustment with a point-in-time blend of\ntwo honest weekly states, weighted by trading-bars-elapsed this week\n(t = bars/5, Mon~0.2 -> Fri=1.0):\n  comp_adj = calculate_weekly_adjustment(last-completed W-1, two-weeks-ago W-2)\n             (state 1 = what live trader update already used; honest, ~1wk stale)\n  pit_adj  = calculate_weekly_adjustment(partial current week W [reconstructed\n             from daily bars Mon->date, NO future], last-completed W-1)\n             (state 2 = freshest point-in-time, no future bars)\n  w_adj    = (1-t)*comp_adj + t*pit_adj\n\nWhy: the batch/recalc path keyed the weekly on the CURRENT week and read the\nstored COMPLETE Mon-Fri WeeklyScore for a mid-week historical signal = LOOK-AHEAD,\nwhich inflated the backtest (live trader update was always honest via the\nlast-completed-week property). New production helper database/utils/weekly_pit.py\nreconstructs the partial current week point-in-time (validated bit-identical to\nlive score_intraday_logs, mean|delta|=0.28, 97.5% within +/-2).\n\nValidated (ScoreSimulator, no DB writes): look-ahead REMOVED -- 75+ cohort\noptTP15 Mon-vs-Fri gap +8.4pp (state-3 look-ahead) -> -0.0pp (blend); honest 75+\noptTP15 = 53.3% (Wilson-LB 49.6%, clears 45% call BE) vs the inflated 63.6%;\nfakeout SMOOTHED -- Monday-boundary mean |delta overall| 5.99 -> 3.47 (-42%).\n75+ supply -38.6% (the removed entries were look-ahead false positives).\n\nCo-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>",
+        "commit_short": "8b59206c3",
+        "commit_subject": "scoring: weekly transition blend (point-in-time honest weekly, removes recalc look-ahead + smooths fakeout)",
+        "mode": "git_ref",
+        "requested_ref": "8b59206c3e4778f0eea1d240c34a48522ee64d1d"
+      },
+      "status": "shipped"
+    },
+    "v7": {
+      "algorithm_version": {
+        "created_at": "2026-04-06T17:30:20",
+        "git_commit": "f1553a1",
+        "git_message": "recalculate cleanup",
+        "id": 7,
+        "label": "v7",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:11:42+00:00",
+      "classification": {
+        "category": "db_linked_snapshot",
+        "reason": "AlgorithmVersion row points at this commit; message is not specific.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "c624729a47519293e3ff72908a34672dfbb94f2193ce5ccee8980d7dd4ff3cf2",
+        "portfolio_config": "6a869760d805f58904d0408c0b8e465a2fae7a2bc554680147174387c12940b6",
+        "portfolio_snapshot": "1980fb44138f406632feec71da8abfa47068cd100aaa500cbb085cb985bec355",
+        "portfolio_source_files": "20b3381c044f6e37bd10896df2e171a683e0e77acbed7ad519b58f776eb90b0e",
+        "scoring_config": "af73a503aa4a694ec2ccf8a54d8e0bc2eea5b05564ac3a02ebd2d2d195c5bf09",
+        "scoring_files": "18ae10f9811daf500c0e939626ac51da2c449f61b1caf0bbb5dbaf4762f97130"
+      },
+      "label": "v7",
+      "path": "algorithm_versions/v7",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v7",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v7",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": null,
+        "commit": "f1553a19a3ec5edb3c5f48bdf99ba8fff06562e6",
+        "commit_body": "",
+        "commit_short": "f1553a19",
+        "commit_subject": "recalculate cleanup",
+        "mode": "git_ref",
+        "requested_ref": "f1553a1"
+      },
+      "status": "shipped"
+    },
+    "v70": {
+      "algorithm_version": {
+        "created_at": "2026-06-01T17:56:30",
+        "git_commit": "c70d16d22dc8ad900d19f7014907774edaa3ae26",
+        "git_message": "v70 scoring: honest EARN_BOOST recalibration (pre7-weighted, both-barrier-gated)",
+        "id": 70,
+        "label": "v70",
+        "notes": null
+      },
+      "captured_at": "2026-06-01T23:17:26+00:00",
+      "fingerprints": {
+        "manifest_inputs": "96f6647faf297112228ca4932f898c831f9abc0e53769ad81a1842ebd030ada3",
+        "portfolio_config": "bde22c77ed9105425c15412c4b54c4aeb35ef39e445ca9cbabb00d7fd3ad98e2",
+        "portfolio_snapshot": "d4d84ef89ae65588c7de6ef4dd15ee71e34875eb8ec213974f8f266898ecc53d",
+        "portfolio_source_files": "79b841aeeeed8bff3bd162ba4dd30f903c94535a0d7d4ce850751a7d37283d86",
+        "scoring_config": "a268c8a1e9ce311baeb296806eb42ef676ae5328d749563177aa982e3da55e52",
+        "scoring_files": "7f99a56f9fbf92a3650f963b5d5e6c491087a85f8e1b5d6fe3a25f3c8dfd4824"
+      },
+      "label": null,
+      "path": "algorithm_versions/v70",
+      "source": {
+        "algorithm_version_file": "8b59206c3e4778f0eea1d240c34a48522ee64d1d",
+        "commit": "c70d16d22dc8ad900d19f7014907774edaa3ae26",
+        "commit_body": "Rebuilt EARN_BOOST's lift table on look-ahead-free v69 pre_boost scores,\nholdout-locked (<=2026-05-15). The earnings premium survives look-ahead\nremoval as a RELATIVE effect, but lives in the pre7 run-up (4-7 cal days\nbefore earnings), NOT pre1 (the v34 pre1-heavy cells were a weekly-look-ahead\nartifact). New table is both-barrier-gated (generic AND option-aligned WR15\nlift > 0): 5 call cells (pre7-dominant), puts effectively off (no honest edge).\n\nChanges:\n- database/utils/scoring.py: lift table -> experiments/earnboost_honest/lift_table_v70.json\n- strategy_config.py: EARN_BOOST_WINDOW 5->7 (see the pre7 run-up); PESS_DAYS_MAX\n  7->5 (behavior-preserving: PESS was already capped at 5 by the shared window;\n  decouples PESS from the boost so widening the window has no PESS side effect)\n\nValidated (holdout-locked, tradable/opt WR15): affected cohort 48.7->52.8%,\n85+ tier 47.6->49.7% (+2.1pp), 75+ +0.2pp, boundary admits 51.4% (accretive).\nDay-to-day whiplash REDUCED vs v34 (82-stock max swing 16->12). Calibration\ntrail + FINDINGS in experiments/earnboost_honest/.\n\nCo-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>",
+        "commit_short": "c70d16d22",
+        "commit_subject": "v70 scoring: honest EARN_BOOST recalibration (pre7-weighted, both-barrier-gated)",
+        "mode": "git_ref",
+        "requested_ref": "c70d16d22dc8ad900d19f7014907774edaa3ae26"
+      },
+      "status": "shipped"
+    },
+    "v71": {
+      "algorithm_version": {
+        "created_at": "2026-06-10T04:17:24.958740",
+        "git_commit": "04044b21b",
+        "git_message": "v71 scoring: integrity-audit honest fixes (F1-F4) + 4 mechanism retirements",
+        "id": 71,
+        "label": "v71",
+        "notes": null
+      },
+      "captured_at": "2026-06-10T08:17:34+00:00",
+      "fingerprints": {
+        "manifest_inputs": "3e3259dd9bc1cf2c7328dcec8a2edeff7449ebe25b790767d75bcd448ab59cca",
+        "portfolio_config": "46b50be8046b28a43fbe0419281d4b3fabaaebcfc08b7642972af5c72c831b54",
+        "portfolio_snapshot": "7f93ec5a43784fa70b4a980184a1c925ed1050f401f58360bd65409a48ce430b",
+        "portfolio_source_files": "ad98bbb58dbc0af0a35708a915fade8266e65bfa4b0dc9842a6d1967e3f61cb2",
+        "scoring_config": "f381e1f057cd3666a2b0090311b5dd1129bfc3d3f336279aa36e2b1c14d254cd",
+        "scoring_files": "9bbf41217df458d40aa680b380e5a42f07db011e5c24b73167f32df01ff4e06e"
+      },
+      "label": null,
+      "path": "algorithm_versions/v71",
+      "source": {
+        "algorithm_version_file": "c70d16d22dc8ad900d19f7014907774edaa3ae26",
+        "commit": "04044b21b374bd955456395b8ec38764c340f7bb",
+        "commit_body": "F2: SPY weekly composite look-ahead removed \u00e2\u20ac\u201d _spy_wk_last_completed() (-7d,\n    last-completed-week) at ALL per-date sites (single-row, mis-stress map,\n    reapply_regime_today, batched, recalc) + simulator map. v69 leak class.\nF4: point-in-time mcap proxy (mcap_t = mcap_latest * close_t / latest_close)\n    in all scoring paths \u00e2\u20ac\u201d kills the grown-into-large-cap survivorship leak.\nF1: sector Market Wave loud inert/stale guards + self-contained source\n    rebuilder (the v57 source CSV silently vanished; wave was inert in all\n    v60/v69/v70 row sets).\nF3: continuation-echo barrier-cache coverage guard (cache was truncated to\n    117 days; rebuilt to 2016-04-26..2026-06-09 via queue #101).\n\nRetirements (honest 5y full-universe A/B, option barrier, bias-to-retire):\n- mis_stress (MIS_STRESS_CALL_DAMPEN=0): 75+ admits below baseline\n  (50.7 vs 55.2, z=-1.03); original evidence was leak-measured.\n- JA4 put-regime blend (_JA4_SPY_WK_WEIGHT=0): wash at <=25, mildly negative\n  at <=30 (z=-2.48); puts OFF portfolio-wide; removes sim/prod divergence.\n- MCD (MCD_ENABLED=False): PIT ladder collapses 8.2pp->2.6pp z=+2.61 (<W1 3),\n  non-monotonic; removals near-baseline (53.0 vs 55.0); ~42% of 75+ N freed.\n- Sector Market Wave (SECTOR_BREADTH_WAVE_ENABLED=False): formal retirement \u00e2\u20ac\u201d\n  inert all era; rebuilt-source A/B removes ABOVE-baseline winners (-28% 75+ N).\n\nBundle (= this ship state) vs stored v70: 75+ supply +49% at FLAT honest WR,\nputs unchanged, gradient intact. Validation: legacy arm reproduces stored v70\nat 98.43% exact (936,580 rows). Evidence: experiments/integrity_audit_2026_06/\n(FINDINGS.md, ab_eval.py, analyze_ab.py); regression tests\ntests/test_integrity_guards.py (24 green). Adversarial review: 0 blockers.\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>",
+        "commit_short": "04044b21b",
+        "commit_subject": "v71 scoring: integrity-audit honest fixes (F1-F4) + 4 mechanism retirements",
+        "mode": "git_ref",
+        "requested_ref": "04044b21b"
+      },
+      "status": "shipped"
+    },
+    "v72": {
+      "algorithm_version": {
+        "created_at": "2026-06-11T15:58:33.597239",
+        "git_commit": "fc5671200",
+        "git_message": "Merge algo-exp/wcf-score-ramp: WCF score-gate ramp (27/28 cliff smooth)",
+        "id": 72,
+        "label": "v72",
+        "notes": null
+      },
+      "captured_at": "2026-06-11T19:58:40+00:00",
+      "fingerprints": {
+        "manifest_inputs": "f9e5faa812c7653909ca2d6531c166737fb646438d126520eec53a0ea57fca43",
+        "portfolio_config": "a67940b9f5a9e0e2e7ebef90070db87546cfdd9b7be477b487342664b09004de",
+        "portfolio_snapshot": "b96ccae1a15999e00bda839297096f9e3b76abdb9e08f9d203a6e257a2c3db76",
+        "portfolio_source_files": "28c672de64d2b22ac3f8cdc75d39d7cbbd3242b7783228765ee7bd180919afb9",
+        "scoring_config": "390f9a3e32c8bc0a9e8bf48c1b39cabd2b3302de185d9e456c1b3c3276e6fe7b",
+        "scoring_files": "1dde82e0e6068d3c58e2d70006f2a42f43b0b0b23776788012b4f03155feafb0"
+      },
+      "label": null,
+      "path": "algorithm_versions/v72",
+      "source": {
+        "algorithm_version_file": "04044b21b",
+        "commit": "fc5671200b8fbdb39a287147f9f21321fa13796c",
+        "commit_body": "Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>",
+        "commit_short": "fc5671200",
+        "commit_subject": "Merge algo-exp/wcf-score-ramp: WCF score-gate ramp (27/28 cliff smooth)",
+        "mode": "git_ref",
+        "requested_ref": "fc5671200"
+      },
+      "status": "shipped"
+    },
+    "v73": {
+      "algorithm_version": {
+        "created_at": "2026-06-12T11:10:22.376318",
+        "git_commit": "07e9722b5",
+        "git_message": "Merge algo-exp/v73-dampener-retire: retire WCF+ICH+CWCF+CSWC+SCW (honest ablation)",
+        "id": 73,
+        "label": "v73",
+        "notes": null
+      },
+      "captured_at": "2026-06-12T15:10:34+00:00",
+      "fingerprints": {
+        "manifest_inputs": "a06e153546655c8631750ea166810dae0a998fe72c7d68e3f40cae740f3f9345",
+        "portfolio_config": "5412b0d98aed5d10ca16c944098b85f6bea42968b1c60c57994df5f180c69d7a",
+        "portfolio_snapshot": "b96ccae1a15999e00bda839297096f9e3b76abdb9e08f9d203a6e257a2c3db76",
+        "portfolio_source_files": "f11158c01d488243b0eee6d3de538413bd992b086fb89948d1c92e3c951c76ed",
+        "scoring_config": "d498ab07e62fd7e5606c35fbe2cb1032c9d802519d05662749b3c019a1615e6e",
+        "scoring_files": "12d43b6a35150e6b175457836385429be3c8cd115c0a99c3a99e205e33f84a26"
+      },
+      "label": null,
+      "path": "algorithm_versions/v73",
+      "source": {
+        "algorithm_version_file": "fc5671200",
+        "commit": "07e9722b5a53080af91ee9fe3be1118fb4c857fc",
+        "commit_body": "v73 scoring ship \u00e2\u20ac\u201d five pre-v69-calibrated score-stage dampeners retired by\nconfig on honest v72 ReSim A/B evidence; CWWD + WVD keep their seats.\n75+ supply +77% at blended -1.6pp optWR15 (every restored signal above call\nBE); put assessment band restored (~8x N at flat WR; puts OFF portfolio-wide).\nGrowth gate dG +19.6% option / +36.3% generic; MC smoke collapse=0 every cell.\nEvidence: experiments/dampener_ablation_v72/{FINDINGS,SHIP_HANDOFF}.md\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>",
+        "commit_short": "07e9722b5",
+        "commit_subject": "Merge algo-exp/v73-dampener-retire: retire WCF+ICH+CWCF+CSWC+SCW (honest ablation)",
+        "mode": "git_ref",
+        "requested_ref": "07e9722b5"
+      },
+      "status": "shipped"
+    },
+    "v74": {
+      "algorithm_version": {
+        "created_at": "2026-06-15T01:11:30",
+        "git_commit": "f9fb7b934",
+        "git_message": "v74 lean scoring: retire post-pre_boost dampener tail (cont-echo, WVD, daily-volume, EARN_BOOST)",
+        "id": 74,
+        "label": "v74",
+        "notes": null
+      },
+      "captured_at": "2026-06-15T06:26:33+00:00",
+      "fingerprints": {
+        "manifest_inputs": "c47878fbdd05e1c6b6fb3db4767d7a5cd0d5717b817ac5844b24a9835c1b5851",
+        "portfolio_config": "bf48ae5539431e67cd11282997bb24e13339812c43b237861b50a75c28ccdcb1",
+        "portfolio_snapshot": "63537a38a451010ae587cc52b5108080389ed9a7ff310913b36b065dbdca0611",
+        "portfolio_source_files": "02f33c7918dc136c3c22b3b04307e0546472a878df00a882e2fc84b396ac6b73",
+        "scoring_config": "ee6ca5a92c4f964a6b84fcdf302f1c581a39a3a5116faf4d1d0ab94bac220ae2",
+        "scoring_files": "cea1c15d9264a4d48f81adea067d5efa3409ec57819f5f98ff807be6db609911"
+      },
+      "label": null,
+      "path": "algorithm_versions/v74",
+      "source": {
+        "algorithm_version_file": "07e9722b5",
+        "commit": "f9fb7b9343cafeccb18fd4b9966d19441add00c6",
+        "commit_body": "Phase 3d parsimony ablation on the Verification Substrate: the post-pre_boost score-stage tail is net-dilutive on the funded Apex book. Per-member apex-EV attribution (30dte_apex payoff): cont-echo + EARN_BOOST = neutral-EV supply that hurts via over-deployment DD; daily-volume = negative-EV adds; WVD = dampens out the highest-EV signals. Whole-tail ablation MC N=300x8: lean 5y +1,143%/51.3%DD vs full +1,097%/62.1%DD, collapse=0. EARN_BOOST's apparent +7% apex-EV was N=77 sample noise (regressed to +0.2pp at N=179; matches v70 honest-recal 'thin/hygiene-not-alpha'). Keeps lean core (components+weekly+regime+ext-focal+CWWD/CSWC). Reversible via /revert. Evidence: experiments/skill_vs_baseline/OVERNIGHT_FINDINGS.md\n\nCo-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>",
+        "commit_short": "f9fb7b934",
+        "commit_subject": "v74 lean scoring: retire post-pre_boost dampener tail (cont-echo, WVD, daily-volume, EARN_BOOST)",
+        "mode": "git_ref",
+        "requested_ref": "f9fb7b934"
+      },
+      "status": "shipped"
+    },
+    "v8": {
+      "algorithm_version": {
+        "created_at": "2026-04-07T00:13:44",
+        "git_commit": "a1a32a2",
+        "git_message": "26.04.07 - entry_filter v1: OOS-validated LOW (+20%) and HIGH (+6.5%) gates",
+        "id": 8,
+        "label": "v8",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:11:39+00:00",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "b5de29d101601a4febc1e6cdac9301d8cde6aa95da89baa745823dea9d491b3a",
+        "portfolio_config": "9d9845ef08b80708324ca6f160fcf2f4015043db317d82cdf50ee9c6c55c336f",
+        "portfolio_snapshot": "1980fb44138f406632feec71da8abfa47068cd100aaa500cbb085cb985bec355",
+        "portfolio_source_files": "20b3381c044f6e37bd10896df2e171a683e0e77acbed7ad519b58f776eb90b0e",
+        "scoring_config": "af73a503aa4a694ec2ccf8a54d8e0bc2eea5b05564ac3a02ebd2d2d195c5bf09",
+        "scoring_files": "18ae10f9811daf500c0e939626ac51da2c449f61b1caf0bbb5dbaf4762f97130"
+      },
+      "label": "v8",
+      "path": "algorithm_versions/v8",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v8",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v8",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": null,
+        "commit": "a1a32a274f93fe4776dd8424a85a2ef87e890b5f",
+        "commit_body": "",
+        "commit_short": "a1a32a27",
+        "commit_subject": "26.04.07 - entry_filter v1: OOS-validated LOW (+20%) and HIGH (+6.5%) gates",
+        "mode": "git_ref",
+        "requested_ref": "a1a32a2"
+      },
+      "status": "shipped"
+    },
+    "v9": {
+      "algorithm_version": {
+        "created_at": "2026-04-07T21:08:42",
+        "git_commit": "9c8cb86",
+        "git_message": "26.04.07 - Fix vol amplification over-firing in three scenarios",
+        "id": 9,
+        "label": "v9",
+        "notes": null
+      },
+      "captured_at": "2026-05-13T16:11:36+00:00",
+      "classification": {
+        "category": "db_linked_snapshot",
+        "reason": "AlgorithmVersion row points at this commit; message is not specific.",
+        "scoring_algorithm_snapshot": true
+      },
+      "fingerprints": {
+        "manifest_inputs": "77bcc66106418fffb6f773018f7a644d53c7710a69ddde0cda4d913fe2100c51",
+        "portfolio_config": "a7df2efdb8ea80b0d162cb6455ba9264e9933d019c548e0082ad9869ad7e0a92",
+        "portfolio_snapshot": "1980fb44138f406632feec71da8abfa47068cd100aaa500cbb085cb985bec355",
+        "portfolio_source_files": "781710e9de6f5cccc995131ce545fb00d3345a776d500fe87dceb820163ceee2",
+        "scoring_config": "af73a503aa4a694ec2ccf8a54d8e0bc2eea5b05564ac3a02ebd2d2d195c5bf09",
+        "scoring_files": "bf61d0a1ffa6fa47ec37d5b4e78fd40f656676f246e4c17bdbf984c548c37327"
+      },
+      "label": "v9",
+      "path": "algorithm_versions/v9",
+      "paths": {
+        "cache_root": ".cache/algorithm_versions/v9",
+        "evidence_manifest": "evidence_manifest.json",
+        "portfolio_config": "portfolio_config.json",
+        "portfolio_snapshot": "portfolio_snapshot.json",
+        "portfolio_sources": "portfolio_sources",
+        "root": "algorithm_versions/v9",
+        "scoring": "scoring",
+        "scoring_config": "scoring_config.json"
+      },
+      "source": {
+        "algorithm_version_file": null,
+        "commit": "9c8cb86a1ac96f0fe8101b93f2b7fa017db476ec",
+        "commit_body": "",
+        "commit_short": "9c8cb86a",
+        "commit_subject": "26.04.07 - Fix vol amplification over-firing in three scenarios",
+        "mode": "git_ref",
+        "requested_ref": "9c8cb86"
+      },
+      "status": "shipped"
+    },
+    "wcf-score-ramp": {
+      "algorithm_version": {
+        "created_at": "2026-06-10T04:17:25",
+        "git_commit": "04044b21b",
+        "git_message": "v71 scoring: integrity-audit honest fixes (F1-F4) + 4 mechanism retirements",
+        "id": 71,
+        "label": "v71",
+        "notes": null
+      },
+      "captured_at": "2026-06-11T19:47:29+00:00",
+      "fingerprints": {
+        "manifest_inputs": "32cd6df74e90815b0ca7934304e5eda0bdc32d8166c8f2524c5d0ddeea95f3e1",
+        "portfolio_config": "dc98ddb69f8059956ec3062fa0de562b66f362e4ae6e7e1f2c53e8ae4f112501",
+        "portfolio_snapshot": "b04d619f4f0d6d0d8f1a3cc2e8a8011c3d3abd9ef0a05672ce8055dd870d918a",
+        "portfolio_source_files": "29cc3ec365ef6e4bbe73ea4bce0d4696978d455030917ee6f9d1c01b7369aa5c",
+        "scoring_config": "390f9a3e32c8bc0a9e8bf48c1b39cabd2b3302de185d9e456c1b3c3276e6fe7b",
+        "scoring_files": "cfaee4cba02f035ad9c79593e80b2df269c886aeaae59c5f5e88500d8ed34fd4"
+      },
+      "label": "wcf-score-gate-ramp-top33",
+      "path": "algorithm_versions/wcf-score-ramp",
+      "status": "candidate"
+    }
+  },
+  "updated_at": "2026-06-15T06:26:33+00:00"
+}

@@ -1,0 +1,34 @@
+{
+  "changed_paths": [
+    "ALGORITHM_VERSION",
+    "database/utils/scoring.py",
+    "monte_carlo.py",
+    "strategy_config.py"
+  ],
+  "name_status": [
+    {
+      "path": "ALGORITHM_VERSION",
+      "status": "M"
+    },
+    {
+      "path": "database/utils/scoring.py",
+      "status": "M"
+    },
+    {
+      "path": "monte_carlo.py",
+      "status": "M"
+    },
+    {
+      "path": "strategy_config.py",
+      "status": "M"
+    }
+  ],
+  "range": "8b59206c..c70d16d2",
+  "stat": [
+    "ALGORITHM_VERSION         |  2 +-",
+    " database/utils/scoring.py | 12 +++++++----",
+    " monte_carlo.py            | 30 +++++++++++++++------------",
+    " strategy_config.py        | 52 +++++++++++++++++++++++++++++++----------------",
+    " 4 files changed, 60 insertions(+), 36 deletions(-)"
+  ]
+}

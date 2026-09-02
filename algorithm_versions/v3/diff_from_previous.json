@@ -1,0 +1,28 @@
+{
+  "changed_paths": [
+    "database/models/core.py",
+    "recalculate_scores.py",
+    "trader.py"
+  ],
+  "name_status": [
+    {
+      "path": "database/models/core.py",
+      "status": "M"
+    },
+    {
+      "path": "recalculate_scores.py",
+      "status": "M"
+    },
+    {
+      "path": "trader.py",
+      "status": "M"
+    }
+  ],
+  "range": "c1f8fcf9..b1cc55cb",
+  "stat": [
+    "database/models/core.py | 185 +++++++++++++++++++++++++++++++++++++++++++++---",
+    " recalculate_scores.py   | 103 +--------------------------",
+    " trader.py               |  35 ++++++++-",
+    " 3 files changed, 213 insertions(+), 110 deletions(-)"
+  ]
+}

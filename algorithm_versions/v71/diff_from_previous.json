@@ -1,0 +1,94 @@
+{
+  "changed_paths": [
+    "ALGORITHM_VERSION",
+    "api.py",
+    "backtest_cascade.py",
+    "backtest_cascade_15dte.py",
+    "database/models/core.py",
+    "database/utils/scoring.py",
+    "database/utils/sector_breadth_wave.py",
+    "mechanism_registry.py",
+    "monte_carlo.py",
+    "monte_carlo_15dte.py",
+    "simulator.py",
+    "strategy_config.py",
+    "trader.py",
+    "volume_amplifier.py"
+  ],
+  "name_status": [
+    {
+      "path": "ALGORITHM_VERSION",
+      "status": "M"
+    },
+    {
+      "path": "api.py",
+      "status": "M"
+    },
+    {
+      "path": "backtest_cascade.py",
+      "status": "M"
+    },
+    {
+      "path": "backtest_cascade_15dte.py",
+      "status": "M"
+    },
+    {
+      "path": "database/models/core.py",
+      "status": "M"
+    },
+    {
+      "path": "database/utils/scoring.py",
+      "status": "M"
+    },
+    {
+      "path": "database/utils/sector_breadth_wave.py",
+      "status": "M"
+    },
+    {
+      "path": "mechanism_registry.py",
+      "status": "M"
+    },
+    {
+      "path": "monte_carlo.py",
+      "status": "M"
+    },
+    {
+      "path": "monte_carlo_15dte.py",
+      "status": "M"
+    },
+    {
+      "path": "simulator.py",
+      "status": "M"
+    },
+    {
+      "path": "strategy_config.py",
+      "status": "M"
+    },
+    {
+      "path": "trader.py",
+      "status": "M"
+    },
+    {
+      "path": "volume_amplifier.py",
+      "status": "M"
+    }
+  ],
+  "range": "c70d16d2..04044b21",
+  "stat": [
+    "ALGORITHM_VERSION                     |   2 +-",
+    " api.py                                | 494 +++++++++++++++++++++-",
+    " backtest_cascade.py                   | 445 ++++++++++++++++++--",
+    " backtest_cascade_15dte.py             |   8 +-",
+    " database/models/core.py               | 142 ++++++-",
+    " database/utils/scoring.py             |  40 ++",
+    " database/utils/sector_breadth_wave.py |  34 ++",
+    " mechanism_registry.py                 | 132 ++++++",
+    " monte_carlo.py                        | 744 +++++++++++++++++++++++++++++++---",
+    " monte_carlo_15dte.py                  |   9 +-",
+    " simulator.py                          |  73 +++-",
+    " strategy_config.py                    | 322 ++++++++++++---",
+    " trader.py                             | 335 ++++++++++++---",
+    " volume_amplifier.py                   |  53 ++-",
+    " 14 files changed, 2590 insertions(+), 243 deletions(-)"
+  ]
+}

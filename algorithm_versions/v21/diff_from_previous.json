@@ -1,0 +1,40 @@
+{
+  "changed_paths": [
+    "ALGORITHM_VERSION",
+    "api.py",
+    "database/models/core.py",
+    "database/utils/scoring.py",
+    "trader.py"
+  ],
+  "name_status": [
+    {
+      "path": "ALGORITHM_VERSION",
+      "status": "M"
+    },
+    {
+      "path": "api.py",
+      "status": "M"
+    },
+    {
+      "path": "database/models/core.py",
+      "status": "M"
+    },
+    {
+      "path": "database/utils/scoring.py",
+      "status": "M"
+    },
+    {
+      "path": "trader.py",
+      "status": "M"
+    }
+  ],
+  "range": "66af13d6..aba4f5da",
+  "stat": [
+    "ALGORITHM_VERSION         |   2 +-",
+    " api.py                    | 131 +++++++++++++++++++++++++++-------------------",
+    " database/models/core.py   |   7 +++",
+    " database/utils/scoring.py |  32 +++++++++++",
+    " trader.py                 |   6 ++-",
+    " 5 files changed, 122 insertions(+), 56 deletions(-)"
+  ]
+}

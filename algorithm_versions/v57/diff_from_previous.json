@@ -1,0 +1,34 @@
+{
+  "changed_paths": [
+    "ALGORITHM_VERSION",
+    "database/utils/sector_breadth_wave.py",
+    "market_breadth.py",
+    "strategy_config.py"
+  ],
+  "name_status": [
+    {
+      "path": "ALGORITHM_VERSION",
+      "status": "M"
+    },
+    {
+      "path": "database/utils/sector_breadth_wave.py",
+      "status": "M"
+    },
+    {
+      "path": "market_breadth.py",
+      "status": "M"
+    },
+    {
+      "path": "strategy_config.py",
+      "status": "M"
+    }
+  ],
+  "range": "c6f384ab..e568b2f4",
+  "stat": [
+    "ALGORITHM_VERSION                     |  2 +-",
+    " database/utils/sector_breadth_wave.py | 73 +++++++++++++++++++++++++++++++++--",
+    " market_breadth.py                     | 55 +++++++++++++++++++++++++-",
+    " strategy_config.py                    | 51 ++++++++----------------",
+    " 4 files changed, 141 insertions(+), 40 deletions(-)"
+  ]
+}

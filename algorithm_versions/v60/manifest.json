@@ -1,0 +1,184 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-05-18T19:13:41",
+    "git_commit": "d4a3e9fec",
+    "git_message": "Ship v60 r054 SCW and DD call cap candidate",
+    "id": 60,
+    "label": "v60",
+    "notes": null
+  },
+  "captured_at": "2026-05-19T09:24:45+00:00",
+  "classification": {
+    "category": "db_linked_snapshot",
+    "reason": "AlgorithmVersion row points at this commit; message is not specific.",
+    "scoring_algorithm_snapshot": true
+  },
+  "files": {
+    "portfolio_sources": [
+      {
+        "bytes": 62595,
+        "path": "strategy_config.py",
+        "sha256": "050cc3da71ae14aeb7c7172e131e03cc2cb23ff532f2e3347aa22f75444e18ba",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 21899,
+        "path": "mechanism_registry.py",
+        "sha256": "e4810a038786fcaa6fe87a90be50c4d1f8256d777d82eab1df9ff07ace86b0c4",
+        "source": "mechanism_registry.py"
+      },
+      {
+        "bytes": 119875,
+        "path": "monte_carlo.py",
+        "sha256": "624ee0f447b5c492073df9446dae1fd1c18ed43c625bfcfe34c93a4b0cb3d377",
+        "source": "monte_carlo.py"
+      },
+      {
+        "bytes": 92331,
+        "path": "monte_carlo_15dte.py",
+        "sha256": "aa55edb6961083fb59242893d755b7a5638a28ca299a2b4ce6d1ceaec3fdaf9e",
+        "source": "monte_carlo_15dte.py"
+      },
+      {
+        "bytes": 98582,
+        "path": "backtest_cascade.py",
+        "sha256": "a7b5bd00594026c6276ad3ee7ab393c1ba1d83659cf2e6111420456215fb1509",
+        "source": "backtest_cascade.py"
+      },
+      {
+        "bytes": 87282,
+        "path": "backtest_cascade_15dte.py",
+        "sha256": "6bf12444c15bc9f6eeee8a562ae056e301bbd197110ce0fc7c0e71737581fc2e",
+        "source": "backtest_cascade_15dte.py"
+      },
+      {
+        "bytes": 208066,
+        "path": "api.py",
+        "sha256": "f36b0f8263c9bf4d0bc3a88ea8605ff144bc4971d1a49bf653ac9bb989db4cac",
+        "source": "api.py"
+      },
+      {
+        "bytes": 234096,
+        "path": "trader.py",
+        "sha256": "c8ba993aa1ba6337f12e5b22e47ef2d3563e9cdece7ff9c62029e1be92cdb662",
+        "source": "trader.py"
+      }
+    ],
+    "scoring": [
+      {
+        "bytes": 9,
+        "path": "ALGORITHM_VERSION",
+        "sha256": "238ff82d0a678c3bd8956b971bcfa4b4a14020db7c3b4ea3862a5bcc67043e4f",
+        "source": "ALGORITHM_VERSION"
+      },
+      {
+        "bytes": 62595,
+        "path": "strategy_config.py",
+        "sha256": "050cc3da71ae14aeb7c7172e131e03cc2cb23ff532f2e3347aa22f75444e18ba",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 88050,
+        "path": "database/utils/scoring.py",
+        "sha256": "b0c7bb03a937584f5547eb30814ea6ef3798470632c9121e1db34ee3c7647c56",
+        "source": "database/utils/scoring.py"
+      },
+      {
+        "bytes": 12783,
+        "path": "database/utils/sector_breadth_wave.py",
+        "sha256": "450a063a3a14240e0ac1556a8badb4f014ad93aebb9a5500ddac8dbe5c82f55a",
+        "source": "database/utils/sector_breadth_wave.py"
+      },
+      {
+        "bytes": 271459,
+        "path": "database/models/core.py",
+        "sha256": "6e4e091483f46ec35fad333bcdfd51403dd906559f1364e4b0362556a1bd4e21",
+        "source": "database/models/core.py"
+      },
+      {
+        "bytes": 24417,
+        "path": "database/models/technical.py",
+        "sha256": "aa267949307463164561744e895afea43746a467e6f918d0f7fc2603c62372f9",
+        "source": "database/models/technical.py"
+      },
+      {
+        "bytes": 1000,
+        "path": "database/project_root.py",
+        "sha256": "3648a2fd02fa8f7ca54b577878fb2973272f55fa23bd6e9b9917a00b0fb108e1",
+        "source": "database/project_root.py"
+      },
+      {
+        "bytes": 41918,
+        "path": "market_breadth.py",
+        "sha256": "0cb078545ce8a2d492ae36f1fd449dfb81ce3e2cbd53c8606e8b49f287482e6b",
+        "source": "market_breadth.py"
+      },
+      {
+        "bytes": 31763,
+        "path": "market_regime.py",
+        "sha256": "ebe3d5c61865ff51f84e3f19cbfe965093ecc62ae04624b3e4306dd18ece0960",
+        "source": "market_regime.py"
+      },
+      {
+        "bytes": 37926,
+        "path": "volume_amplifier.py",
+        "sha256": "734637c49dca08a43d7b633c0ccf71724e137ec0740b0aa90c927a4b01ff5c0b",
+        "source": "volume_amplifier.py"
+      },
+      {
+        "bytes": 42218,
+        "path": "simulator.py",
+        "sha256": "7a7d1c46e21cb7ed61cfca9e6c6a0c597761be1f60a32b7f4335aeb2b1bd81a4",
+        "source": "simulator.py"
+      },
+      {
+        "bytes": 20036,
+        "path": "recalculate_scores.py",
+        "sha256": "1f0798d851e2178cf75d6185580a37424c57e86772f657a4047f3e4ab81957da",
+        "source": "recalculate_scores.py"
+      }
+    ]
+  },
+  "fingerprints": {
+    "manifest_inputs": "af07a78dfd74d29d5c1d831b618eac91680f8eb13bf61ca4de6adb149e68a952",
+    "portfolio_config": "706ba0ced0d2be76a829c769861610ec4492e57e7f931ff585dda2f3e8144570",
+    "portfolio_snapshot": "3cecdceee353c8b076795269d94cab4e7e6a0d263234e0249d26900ebefea575",
+    "portfolio_source_files": "5ed4d0cbacbacddce4bdb482641a3019e4d8e8d9a9fb9545e0703f17050fc77e",
+    "scoring_config": "2166150e4ae9d94cac2ce4d8d230d82ab2d12fbf7ac675971831e6f84d96bd12",
+    "scoring_files": "87049fdc0c9cafb8618a494929bb3f2f969a708d7b6510878cc767947ded4f40"
+  },
+  "label": null,
+  "notes": [
+    "This snapshot is additive infrastructure. Runtime scoring still imports the checkout code until the injected loader phase lands.",
+    "Historical backfill is intentionally deferred because reconstructing old silos is resource-intensive during trading hours."
+  ],
+  "paths": {
+    "cache_root": ".cache/algorithm_versions/v60",
+    "evidence_manifest": "evidence_manifest.json",
+    "portfolio_config": "portfolio_config.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_sources": "portfolio_sources",
+    "root": "algorithm_versions/v60",
+    "scoring": "scoring",
+    "scoring_config": "scoring_config.json"
+  },
+  "previous_resolved_key": "v59",
+  "schema_version": 1,
+  "silo_key": "v60",
+  "source": {
+    "algorithm_version_file": "d4a3e9fec",
+    "branch": "main",
+    "dirty": true,
+    "dirty_status": [
+      "M algorithm_versions/registry.json",
+      " M mechanism_registry.py",
+      " M strategy_config.py",
+      "?? algorithm_versions/v60/",
+      "?? experiments/daily_opportunity_allocation/"
+    ],
+    "head": "eaf7184d2c7d8e53adc1186791cccc0a755d3523",
+    "head_short": "eaf7184d2",
+    "mode": "working_tree"
+  },
+  "status": "shipped"
+}

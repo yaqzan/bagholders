@@ -1,0 +1,166 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-04-27T20:46:45",
+    "git_commit": "ad02704",
+    "git_message": "Weekly-confirmation floor lift on extreme puts (Priority #13)",
+    "id": 27,
+    "label": "v27",
+    "notes": null
+  },
+  "captured_at": "2026-05-13T16:10:35+00:00",
+  "classification": {
+    "category": "scoring_algorithm",
+    "reason": "Commit message names score-stage or score-context behavior.",
+    "scoring_algorithm_snapshot": true
+  },
+  "files": {
+    "portfolio_sources": [
+      {
+        "missing": true,
+        "source": "strategy_config.py"
+      },
+      {
+        "missing": true,
+        "source": "mechanism_registry.py"
+      },
+      {
+        "bytes": 56441,
+        "path": "monte_carlo.py",
+        "sha256": "15833fcfd56cc6faf005ca1f943f6f91ff673c939dd29a8074904b2be91b9c6e",
+        "source": "monte_carlo.py"
+      },
+      {
+        "missing": true,
+        "source": "monte_carlo_15dte.py"
+      },
+      {
+        "bytes": 56144,
+        "path": "backtest_cascade.py",
+        "sha256": "467cc707ac2ec7b67afa80df6ef5adc51da04ed3f921eb1c1b4ca064c279b869",
+        "source": "backtest_cascade.py"
+      },
+      {
+        "missing": true,
+        "source": "backtest_cascade_15dte.py"
+      },
+      {
+        "bytes": 126585,
+        "path": "api.py",
+        "sha256": "447c965885c3e6e5da655632c7e341be6aa7c359080c6d8c9abd4db4c6ed4e6f",
+        "source": "api.py"
+      },
+      {
+        "bytes": 144690,
+        "path": "trader.py",
+        "sha256": "a48727a4f4f29918543e186417ed3c7fae7e8fd8ef3912df03e6c129f673672d",
+        "source": "trader.py"
+      }
+    ],
+    "scoring": [
+      {
+        "bytes": 7,
+        "path": "ALGORITHM_VERSION",
+        "sha256": "321837f681c373d469d7d95b298dee372673786807ec260dde47d8dfe38dd198",
+        "source": "ALGORITHM_VERSION"
+      },
+      {
+        "missing": true,
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 18459,
+        "path": "database/utils/scoring.py",
+        "sha256": "43a31a7380a6c0a374f9eebc0839fa66e2d89d21c519690f5388c8efb79a4434",
+        "source": "database/utils/scoring.py"
+      },
+      {
+        "missing": true,
+        "source": "database/utils/sector_breadth_wave.py"
+      },
+      {
+        "bytes": 189118,
+        "path": "database/models/core.py",
+        "sha256": "262229fcd13561a1b33fb9f63f56bcf8f830ced0a2da3f3f3d1ef492b2c98881",
+        "source": "database/models/core.py"
+      },
+      {
+        "bytes": 23553,
+        "path": "database/models/technical.py",
+        "sha256": "2752501ca5f3171ca2368ef5357fb66e2a468242b03a55381916273001762fc3",
+        "source": "database/models/technical.py"
+      },
+      {
+        "bytes": 961,
+        "path": "database/project_root.py",
+        "sha256": "7fae4a33e2321f0a2098aeb9be4f976655d060552f7b09d08fcf15cf9ba39c3c",
+        "source": "database/project_root.py"
+      },
+      {
+        "bytes": 24055,
+        "path": "market_breadth.py",
+        "sha256": "ee48a20f94b622941f1e4760c70d18cab82efd170835e606e8488eb3ee16043b",
+        "source": "market_breadth.py"
+      },
+      {
+        "bytes": 31003,
+        "path": "market_regime.py",
+        "sha256": "d1a81d7ba5fdc22d0e19d6528f9f2af437556161cc101a97c87e4edbdbbe3c16",
+        "source": "market_regime.py"
+      },
+      {
+        "bytes": 32288,
+        "path": "volume_amplifier.py",
+        "sha256": "255c7f7006b5e9e26ffe8e2c9a6d56b855d9304ce299a61b1c4ed19528ca9822",
+        "source": "volume_amplifier.py"
+      },
+      {
+        "bytes": 31342,
+        "path": "simulator.py",
+        "sha256": "c62be1ca963e61b3e41b3e612d8a284c7a03a6b97aad0914b3cf6329eb6e7db9",
+        "source": "simulator.py"
+      },
+      {
+        "bytes": 9763,
+        "path": "recalculate_scores.py",
+        "sha256": "1a08dfd87bb07fb12e33ea02581a0941ba17309937c32dab02a3cef1191d5434",
+        "source": "recalculate_scores.py"
+      }
+    ]
+  },
+  "fingerprints": {
+    "manifest_inputs": "7608185fbb265c484a4ad2af6bd9d50bc4f1a353b59239943c6702b601d18c6f",
+    "portfolio_config": "a8cb9706097eec0904e8d3457645eec53448fada9b63028aaa7332cfbb50b0b0",
+    "portfolio_snapshot": "1980fb44138f406632feec71da8abfa47068cd100aaa500cbb085cb985bec355",
+    "portfolio_source_files": "d2d63027efc572bcdae829dc30bbfdb051fa338efd09c1ae6b6012f5ce4511a6",
+    "scoring_config": "af73a503aa4a694ec2ccf8a54d8e0bc2eea5b05564ac3a02ebd2d2d195c5bf09",
+    "scoring_files": "5d997a7a344ae36e0ee740666c2558dc37c0200bd8203b423b9f41476b375f12"
+  },
+  "label": "v27",
+  "notes": [
+    "This snapshot was copied from the git commit recorded by AlgorithmVersion rather than from the current worktree.",
+    "Runtime scoring still imports the checkout code until the injected loader phase lands."
+  ],
+  "paths": {
+    "cache_root": ".cache/algorithm_versions/v27",
+    "evidence_manifest": "evidence_manifest.json",
+    "portfolio_config": "portfolio_config.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_sources": "portfolio_sources",
+    "root": "algorithm_versions/v27",
+    "scoring": "scoring",
+    "scoring_config": "scoring_config.json"
+  },
+  "previous_resolved_key": "v26",
+  "schema_version": 1,
+  "silo_key": "v27",
+  "source": {
+    "algorithm_version_file": "18c3e70",
+    "commit": "ad02704d1a17d229ee9714988ccb4b4f8bc72801",
+    "commit_body": "Resolves the =5 put dip and the broader weak-weekly underperformance\npattern documented in known-issues.md Priority #13.\n\nMechanism: when overall < 28 AND weekly_adj > -17 (weekly didn't\nstrongly confirm bearish thesis), lift score toward 50 by:\n    weakness = clip((wadj + 17) / 17, 0, 1)\n    overall  = round(overall + 0.95 * weakness * (50 - overall))\n\nCalibration via Phase 4 Bayesian (1300+ variants in fast_variant_runner):\n    K = 0.95            (lift coefficient)\n    wadj_cutoff = -17   (strong-weekly boundary)\n    score_gate  = 28    (only lift puts < 28)\n    lift_target = 50    (push toward neutral)\n    linear-clip weakness (tanh leaks lift into strong-weekly territory)\n\nPer-trade evidence (5y diff-assess vs current production):\n    <10 WR15 +4.0pp (73.4 -> 77.4)\n    <15 WR15 +3.0pp (72.6 -> 75.6)\n    <25 WR15 +5.9pp (68.2 -> 74.1)\n    70+ WR15 +0.0pp (calls untouched)\n    Put N    -75%   (65k -> 16k; put:call ratio 5:1 -> 1.4:1)\n\nDiscriminator validation (experiments/put_wadj_cross_buckets.py):\n    =5 split by wadj quartile: Q1 84.1% / Q4 58.8% (delta -25.2pp on N=69/68)\n    Pattern extends across every put bucket (-7 to -15pp); call-side\n    smaller (-2 to -9pp) \u2014 gate kept put-only.\n\nWeight_info exposes 'wcf_lift' for explain-scores audits when active.\n\nValidated rounds:\n    Phase 1 (tanh weekly amplifier modulation)        -> per-trade null\n    Phase 2 (K-axis floor sweep)                       -> K=1.0 dominant\n    Phase 3 (refined Bayesian K0.85_W-18_T42_G28)      -> +2.55 util\n    Phase 4 (deep 1300-variant sweep)                  -> K0.95_W-17_T50_G28 +0.32\n    Phase 5a (multi-stage / call-mirror / gate ext)    -> all redundant given lift\n    Phase 5b (floor + tanh weekly amp combo)           -> running\n\nCanonical 3-mode MC validation pending recalculate.\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+    "commit_short": "ad02704d",
+    "commit_subject": "Weekly-confirmation floor lift on extreme puts (Priority #13)",
+    "mode": "git_ref",
+    "requested_ref": "ad02704"
+  },
+  "status": "shipped"
+}

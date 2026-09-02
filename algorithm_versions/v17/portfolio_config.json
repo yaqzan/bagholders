@@ -1,0 +1,50 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-04-15T13:37:23",
+    "git_commit": "ea8b9fe",
+    "git_message": "Remove momentum confirmation gradient; cross-version volume seed fallback",
+    "id": 17,
+    "label": "v17",
+    "notes": null
+  },
+  "assess_combos": null,
+  "mechanism_registry": [],
+  "portfolio_snapshot_extraction_error": "strategy_config.py is not present at this git ref",
+  "schema_version": 1,
+  "silo_key": "v17",
+  "source": {
+    "manifest": "manifest.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_snapshot_sha256": "96248d37d740627cc38f0c0463200bb5ddbfa3dcdd9f4be95d44d755a839cffb",
+    "portfolio_source_files_fingerprint": "83ea460ee1ec3da59691271644d41af423181083c125c34e0022377370a45cd4"
+  },
+  "strategies": {
+    "15dte": {
+      "conflicts": [],
+      "field_count": 0,
+      "field_sources": {},
+      "fields": {},
+      "reason": "No statically evaluable legacy portfolio constants found for this strategy.",
+      "source_files": [],
+      "source_mode": "legacy_source_constants",
+      "status": "unavailable",
+      "strategy_key": "15dte",
+      "unsupported": []
+    },
+    "30dte": {
+      "conflicts": [],
+      "field_count": 0,
+      "field_sources": {},
+      "fields": {},
+      "reason": "No statically evaluable legacy portfolio constants found for this strategy.",
+      "source_files": [
+        "portfolio_sources/trader.py",
+        "portfolio_sources/api.py"
+      ],
+      "source_mode": "legacy_source_constants",
+      "status": "unavailable",
+      "strategy_key": "30dte",
+      "unsupported": []
+    }
+  }
+}

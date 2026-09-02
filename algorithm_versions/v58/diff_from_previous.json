@@ -1,0 +1,22 @@
+{
+  "changed_paths": [
+    "ALGORITHM_VERSION",
+    "strategy_config.py"
+  ],
+  "name_status": [
+    {
+      "path": "ALGORITHM_VERSION",
+      "status": "M"
+    },
+    {
+      "path": "strategy_config.py",
+      "status": "M"
+    }
+  ],
+  "range": "e568b2f4..3cfc4dc2",
+  "stat": [
+    "ALGORITHM_VERSION  |  2 +-",
+    " strategy_config.py | 38 +++++++++++++++++++-------------------",
+    " 2 files changed, 20 insertions(+), 20 deletions(-)"
+  ]
+}

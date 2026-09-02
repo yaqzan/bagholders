@@ -1,0 +1,5 @@
+{
+  "CALIBRATION_CUTOFF_DATE": null,
+  "SCORING": null,
+  "extraction_error": "strategy_config.py is not present at this git ref"
+}

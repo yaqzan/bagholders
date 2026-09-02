@@ -1,0 +1,6 @@
+# task_queue subsystem dependencies (in addition to the project's base env).
+# psutil is used for process identity (pid + create_time), Windows priority
+# classes, CPU affinity, and process-tree suspend/resume (Phase 2 preemption).
+# Phase 1 uses only pid liveness + create_time. A ctypes/ntdll fallback exists
+# in task_queue/winproc.py if psutil is ever unavailable.
+psutil>=5.9,<6

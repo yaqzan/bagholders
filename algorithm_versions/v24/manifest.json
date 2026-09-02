@@ -1,0 +1,166 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-04-25T00:25:12",
+    "git_commit": "41fa566",
+    "git_message": "Fix volume amplifier earnings suppression: call_time-aware semantics",
+    "id": 24,
+    "label": "v24",
+    "notes": null
+  },
+  "captured_at": "2026-05-13T16:10:45+00:00",
+  "classification": {
+    "category": "scoring_algorithm",
+    "reason": "Commit message names score-stage or score-context behavior.",
+    "scoring_algorithm_snapshot": true
+  },
+  "files": {
+    "portfolio_sources": [
+      {
+        "missing": true,
+        "source": "strategy_config.py"
+      },
+      {
+        "missing": true,
+        "source": "mechanism_registry.py"
+      },
+      {
+        "bytes": 39416,
+        "path": "monte_carlo.py",
+        "sha256": "c4ff4774392aaf06fba9103fbe6dfe3df63029e463e668b535de01b5a94ba587",
+        "source": "monte_carlo.py"
+      },
+      {
+        "missing": true,
+        "source": "monte_carlo_15dte.py"
+      },
+      {
+        "bytes": 51210,
+        "path": "backtest_cascade.py",
+        "sha256": "69a67709e2e28576656c7d39536ae73e86340e94dddb0d83b8fd7a6f6b85dad6",
+        "source": "backtest_cascade.py"
+      },
+      {
+        "missing": true,
+        "source": "backtest_cascade_15dte.py"
+      },
+      {
+        "bytes": 119242,
+        "path": "api.py",
+        "sha256": "c51b0fef0c6c38da1beccd81b9f8e1e284f463d0c9c87cfcb63a4dae0f6894bf",
+        "source": "api.py"
+      },
+      {
+        "bytes": 138636,
+        "path": "trader.py",
+        "sha256": "fca4d6077a7a950d5eb26041ab2998c1fbdb40529cb1ed0bc882e551efb11b18",
+        "source": "trader.py"
+      }
+    ],
+    "scoring": [
+      {
+        "bytes": 8,
+        "path": "ALGORITHM_VERSION",
+        "sha256": "3d2af9d4051b5d20aadac3d1ba5bdf44b23f856463c6128b52b89bb159ef03f8",
+        "source": "ALGORITHM_VERSION"
+      },
+      {
+        "missing": true,
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 15481,
+        "path": "database/utils/scoring.py",
+        "sha256": "317e014a63fca257865916926d187b299a99293b2eb9b1ffc58c673eeca3dc30",
+        "source": "database/utils/scoring.py"
+      },
+      {
+        "missing": true,
+        "source": "database/utils/sector_breadth_wave.py"
+      },
+      {
+        "bytes": 183899,
+        "path": "database/models/core.py",
+        "sha256": "9547a678a36ddd7c5489a02140f185b44b44a4827e97ec338b3332eb8eafa33d",
+        "source": "database/models/core.py"
+      },
+      {
+        "bytes": 17689,
+        "path": "database/models/technical.py",
+        "sha256": "3f44c93f24cce14284787a5732ea0b8e471371fd27f4837041e24e47ee01b24d",
+        "source": "database/models/technical.py"
+      },
+      {
+        "bytes": 961,
+        "path": "database/project_root.py",
+        "sha256": "7fae4a33e2321f0a2098aeb9be4f976655d060552f7b09d08fcf15cf9ba39c3c",
+        "source": "database/project_root.py"
+      },
+      {
+        "bytes": 24055,
+        "path": "market_breadth.py",
+        "sha256": "ee48a20f94b622941f1e4760c70d18cab82efd170835e606e8488eb3ee16043b",
+        "source": "market_breadth.py"
+      },
+      {
+        "bytes": 31003,
+        "path": "market_regime.py",
+        "sha256": "d1a81d7ba5fdc22d0e19d6528f9f2af437556161cc101a97c87e4edbdbbe3c16",
+        "source": "market_regime.py"
+      },
+      {
+        "bytes": 39327,
+        "path": "volume_amplifier.py",
+        "sha256": "1dc202d939f0889f5e07aff8a0b9640020ac5b7f115f666d228e3703474295ed",
+        "source": "volume_amplifier.py"
+      },
+      {
+        "bytes": 26844,
+        "path": "simulator.py",
+        "sha256": "21e38774c5fa2d9fb673162c9c531bb4670ebe2fb81884f39655f9b9f7be8e96",
+        "source": "simulator.py"
+      },
+      {
+        "bytes": 8904,
+        "path": "recalculate_scores.py",
+        "sha256": "bfae7e0629bfda0ab96b1f815d729e2ba297606dc4d32eeacc82d4808858c490",
+        "source": "recalculate_scores.py"
+      }
+    ]
+  },
+  "fingerprints": {
+    "manifest_inputs": "d42d59b8a5a719c58d224d68b4ed0f4534e82ce0c1f043f429827104b986f8ae",
+    "portfolio_config": "157537d772b526207bf14adaf1ea9274b8f1707a4dd22886f410d6c38d98af93",
+    "portfolio_snapshot": "1980fb44138f406632feec71da8abfa47068cd100aaa500cbb085cb985bec355",
+    "portfolio_source_files": "5f7fd4bd9d863468bb4728cb2a55f9a9159088ba3813134e69732ee3f6266c9f",
+    "scoring_config": "af73a503aa4a694ec2ccf8a54d8e0bc2eea5b05564ac3a02ebd2d2d195c5bf09",
+    "scoring_files": "f964c879fc90f1920aaa7859d0d5a437448878cf6338c6f71009d7ca0b1887c9"
+  },
+  "label": "v24",
+  "notes": [
+    "This snapshot was copied from the git commit recorded by AlgorithmVersion rather than from the current worktree.",
+    "Runtime scoring still imports the checkout code until the injected loader phase lands."
+  ],
+  "paths": {
+    "cache_root": ".cache/algorithm_versions/v24",
+    "evidence_manifest": "evidence_manifest.json",
+    "portfolio_config": "portfolio_config.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_sources": "portfolio_sources",
+    "root": "algorithm_versions/v24",
+    "scoring": "scoring",
+    "scoring_config": "scoring_config.json"
+  },
+  "previous_resolved_key": "v23",
+  "schema_version": 1,
+  "silo_key": "v24",
+  "source": {
+    "algorithm_version_file": "aba4f5d",
+    "commit": "41fa56668e1c92d3fb40379499dc01541a1b0da1",
+    "commit_body": "The previous suppression window incorrectly neutralized volume signal on\n{D-1, D, D+1} for any earnings event on date D, ignoring the existing\nEarningsDate.call_time field. This nuked volume signal on the trading\nday BEFORE earnings (a clean session) and missed AMC events whose impact\nfalls on the next trading session across weekends/holidays.\n\nCorrect semantics, now implemented in compute_earnings_suppressed_dates():\n  BMO   (call_time < 09:30 ET): suppress earnings_date itself\n  AMC   (call_time >= 16:00 ET): suppress next trading day after earnings\n  INTRADAY (09:30-16:00 ET, rare): suppress earnings_date itself\n  UNKNOWN (null/unparseable): conservative {ed, next_trading_day}\n\nTrading-day awareness via PriceHistory dates handles AMC-Friday ->\nMonday correctly, plus weekend/holiday earnings -> first trading day.\n\nSmoke test on AAPL 2024-2025 (8 quarterly AMC earnings on Thursdays):\n  OLD: 24 dates suppressed (Wed+Thu+Fri per event)\n  NEW:  8 dates suppressed (Friday only per event)\n\nOld code was zeroing volume signal on ~16 clean trading days per stock\nper year (the day before + day of earnings). Universe-wide, this was\nsuppressing meaningful volume events on tens of thousands of trading\ndays where there was no actual earnings interference.\n\nFiles:\n  volume_amplifier.py\n    - _classify_call_time(str) -> BMO/AMC/INTRADAY/UNKNOWN\n    - compute_earnings_suppressed_dates(rows, trading_dates) -> Set[date]\n    - _analyze (DB path): inline call_time-aware check using PriceHistory\n      for prev trading day + gap-day detection\n    - _analyze_from_cache: parameter renamed earnings_suppressed_set,\n      single-set membership lookup replaces 3-day window scan\n\n  database/models/core.py (2 callers, calculate_scores_batched +\n  recalculate batched path):\n    - Load (date, call_time) tuples\n    - Pass through compute_earnings_suppressed_dates with PriceHistory\n      dates as trading calendar\n\n  simulator.py:\n    - StockContext now takes earnings_rows (date, call_time) tuples\n    - Bulk load extended to fetch call_time\n    - earnings_set built via compute_earnings_suppressed_dates\n\n  test_volume_amplifier.py:\n    - 17 new unit tests cover BMO/AMC/INTRADAY/UNKNOWN classification,\n      Friday-AMC -> Monday carryover, weekend earnings, conservative\n      UNKNOWN handling, the D-1-must-not-be-suppressed regression, etc.\n\nThis is a scoring change \u2014 volume_signal/volume_magnitude flow into\nScore.overall via the volume amplifier multiplier. Requires\ntrader recalculate --force --full to rescore historical data with\nthe corrected suppression set.\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+    "commit_short": "41fa5666",
+    "commit_subject": "Fix volume amplifier earnings suppression: call_time-aware semantics",
+    "mode": "git_ref",
+    "requested_ref": "41fa566"
+  },
+  "status": "shipped"
+}

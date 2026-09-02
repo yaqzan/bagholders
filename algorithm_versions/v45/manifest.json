@@ -1,0 +1,174 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-05-08T04:00:31",
+    "git_commit": "56eb1f8",
+    "git_message": "Filter ETFs from production breadth universe",
+    "id": 45,
+    "label": "v45",
+    "notes": null
+  },
+  "captured_at": "2026-05-13T16:09:24+00:00",
+  "classification": {
+    "category": "scoring_algorithm",
+    "reason": "Commit message names score-stage or score-context behavior.",
+    "scoring_algorithm_snapshot": true
+  },
+  "files": {
+    "portfolio_sources": [
+      {
+        "bytes": 28822,
+        "path": "strategy_config.py",
+        "sha256": "ef1e04dcf524196da59bd71b58ffecc6d915de05d5afd586d083dcb9c9c0728a",
+        "source": "strategy_config.py"
+      },
+      {
+        "missing": true,
+        "source": "mechanism_registry.py"
+      },
+      {
+        "bytes": 109050,
+        "path": "monte_carlo.py",
+        "sha256": "da901fd9af31072b6dc1b6b4c0da72bb443413de971bb2abdca8f92763047226",
+        "source": "monte_carlo.py"
+      },
+      {
+        "bytes": 84907,
+        "path": "monte_carlo_15dte.py",
+        "sha256": "4fdebafd2d8131df41e14fca7603b69c5cf32fd902e7e1d207cae2c1bc9578fc",
+        "source": "monte_carlo_15dte.py"
+      },
+      {
+        "bytes": 89905,
+        "path": "backtest_cascade.py",
+        "sha256": "e635136e2c5c67f00a64ba66668ee3ccee14a4d76aa63a39fb445f2064acaeea",
+        "source": "backtest_cascade.py"
+      },
+      {
+        "bytes": 83169,
+        "path": "backtest_cascade_15dte.py",
+        "sha256": "717650e5bc52d176ba0981d154ce1b42b892d8c725903b083ac9ae328d206225",
+        "source": "backtest_cascade_15dte.py"
+      },
+      {
+        "bytes": 159518,
+        "path": "api.py",
+        "sha256": "afd0e9c5a18c03f9ff681a963dab85f2ce1af33cead57ade0fb3aebf496907b0",
+        "source": "api.py"
+      },
+      {
+        "bytes": 186544,
+        "path": "trader.py",
+        "sha256": "f49e073554b7a6698c8c96e33e37d0dee413fe65ac5413127da7a8189943dd06",
+        "source": "trader.py"
+      }
+    ],
+    "scoring": [
+      {
+        "bytes": 8,
+        "path": "ALGORITHM_VERSION",
+        "sha256": "dc6a5405d8b6d4d6b57e4e489354ec49169c1246ba57226cdcaa02559c7d01a2",
+        "source": "ALGORITHM_VERSION"
+      },
+      {
+        "bytes": 28822,
+        "path": "strategy_config.py",
+        "sha256": "ef1e04dcf524196da59bd71b58ffecc6d915de05d5afd586d083dcb9c9c0728a",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 58038,
+        "path": "database/utils/scoring.py",
+        "sha256": "e3f4ba723379c9e08bc6cf946d131f065220adf9af6cd82574af109200b78b8d",
+        "source": "database/utils/scoring.py"
+      },
+      {
+        "missing": true,
+        "source": "database/utils/sector_breadth_wave.py"
+      },
+      {
+        "bytes": 222458,
+        "path": "database/models/core.py",
+        "sha256": "1abed0efb4d3c218577ac214ee383fc2d71e5662c5031b31675cdb1b006e140b",
+        "source": "database/models/core.py"
+      },
+      {
+        "bytes": 23552,
+        "path": "database/models/technical.py",
+        "sha256": "22648938cd5a14bb2d38b926252cde14ca6d0bbd3dfc0133c367cc7b6dc0dcb4",
+        "source": "database/models/technical.py"
+      },
+      {
+        "bytes": 961,
+        "path": "database/project_root.py",
+        "sha256": "7fae4a33e2321f0a2098aeb9be4f976655d060552f7b09d08fcf15cf9ba39c3c",
+        "source": "database/project_root.py"
+      },
+      {
+        "bytes": 24834,
+        "path": "market_breadth.py",
+        "sha256": "9e9237dbd075c5fe56304b08464d9db2b8c97e6ddfa508343ab81977338c76a7",
+        "source": "market_breadth.py"
+      },
+      {
+        "bytes": 31003,
+        "path": "market_regime.py",
+        "sha256": "d1a81d7ba5fdc22d0e19d6528f9f2af437556161cc101a97c87e4edbdbbe3c16",
+        "source": "market_regime.py"
+      },
+      {
+        "bytes": 36724,
+        "path": "volume_amplifier.py",
+        "sha256": "2dc87a230b98a5bba4b179751c6649d2bcb0f3f9a52f4260e580ff68610320ac",
+        "source": "volume_amplifier.py"
+      },
+      {
+        "bytes": 39888,
+        "path": "simulator.py",
+        "sha256": "6677a88ea1eff6a6c0c84657b1b103bed6a9008b45685007e1cb3cfbe0337457",
+        "source": "simulator.py"
+      },
+      {
+        "bytes": 9763,
+        "path": "recalculate_scores.py",
+        "sha256": "1a08dfd87bb07fb12e33ea02581a0941ba17309937c32dab02a3cef1191d5434",
+        "source": "recalculate_scores.py"
+      }
+    ]
+  },
+  "fingerprints": {
+    "manifest_inputs": "63875e3a5ad9a4123222e88981716b53e69e18e9f5ab883f2b0e52efbe0a1091",
+    "portfolio_config": "717b3cd7ebaa5bd92538f580a514f06fbf88755ae8516baaff2dba564471b344",
+    "portfolio_snapshot": "1a1d21540b96157a0cba40e8542fa838bae3e62000bdac76c612c9bf2520b7d8",
+    "portfolio_source_files": "a4c8a972b4c52fd9ee62bfbe51ecdcb240bb979a9ada7310c2559dd1549ab74d",
+    "scoring_config": "1ffb9616affc4529b4389eea735970ffa759a61ba81b539846a8ff8ffcac2501",
+    "scoring_files": "afc5c9d631289c32e1272ea98106b526f3cee135aacf8992f9505e4fc2e916a6"
+  },
+  "label": "v45",
+  "notes": [
+    "This snapshot was copied from the git commit recorded by AlgorithmVersion rather than from the current worktree.",
+    "Runtime scoring still imports the checkout code until the injected loader phase lands."
+  ],
+  "paths": {
+    "cache_root": ".cache/algorithm_versions/v45",
+    "evidence_manifest": "evidence_manifest.json",
+    "portfolio_config": "portfolio_config.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_sources": "portfolio_sources",
+    "root": "algorithm_versions/v45",
+    "scoring": "scoring",
+    "scoring_config": "scoring_config.json"
+  },
+  "previous_resolved_key": "v44",
+  "schema_version": 1,
+  "silo_key": "v45",
+  "source": {
+    "algorithm_version_file": "d8024b9",
+    "commit": "56eb1f83a3c5a6422cf54cdb0c58d16395934ab3",
+    "commit_body": "market_breadth._get_daily_breadth now restricts the breadth universe to\nStock entries with non-null sector. ETFs in the DB (~45 entries) had been\ncontaminating breadth signals \u2014 leveraged 3x (TQQQ, SOXL, LABD, BOIL) in\nparticular were distorting advancing/declining counts and TRIN volume by\nmoving 3x the underlying index in either direction.\n\nAffects breadth_score \u2192 regime composite (35% weight) \u2192 Score.overall.\nRequires breadth-backfill + recalculate to propagate. ALGORITHM_VERSION\nbump in follow-up commit.\n\nAlso bundles infrastructure additions from this session:\n- monte_carlo.py: SAW Put U-curve env-overridable mechanism (default OFF;\n  Phase B/C Bayesian sweep tested it, FAILED P3+P4 portfolio gate, kept\n  in code as research apparatus). Production behavior unchanged when\n  SAW_PUT_UCURVE_ENABLED=0 (default).\n- trader.py: ETF_SYMBOLS extended with XLK/XLV/XLY/XLI/XLB/XLRE/SOXX\n  (six SPDR sector ETFs were missing from the skip-fundamentals set;\n  backfilled 2026-05-07 for sector-ETF screen analysis).\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+    "commit_short": "56eb1f83",
+    "commit_subject": "Filter ETFs from production breadth universe",
+    "mode": "git_ref",
+    "requested_ref": "56eb1f8"
+  },
+  "status": "shipped"
+}

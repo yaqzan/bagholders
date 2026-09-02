@@ -1,0 +1,64 @@
+{
+  "changed_paths": [
+    "ALGORITHM_VERSION",
+    "api.py",
+    "database/models/core.py",
+    "database/models/technical.py",
+    "database/utils/scoring.py",
+    "monte_carlo.py",
+    "recalculate_scores.py",
+    "simulator.py",
+    "trader.py"
+  ],
+  "name_status": [
+    {
+      "path": "ALGORITHM_VERSION",
+      "status": "M"
+    },
+    {
+      "path": "api.py",
+      "status": "M"
+    },
+    {
+      "path": "database/models/core.py",
+      "status": "M"
+    },
+    {
+      "path": "database/models/technical.py",
+      "status": "M"
+    },
+    {
+      "path": "database/utils/scoring.py",
+      "status": "M"
+    },
+    {
+      "path": "monte_carlo.py",
+      "status": "M"
+    },
+    {
+      "path": "recalculate_scores.py",
+      "status": "M"
+    },
+    {
+      "path": "simulator.py",
+      "status": "M"
+    },
+    {
+      "path": "trader.py",
+      "status": "M"
+    }
+  ],
+  "range": "18c3e70f..ad02704d",
+  "stat": [
+    "ALGORITHM_VERSION            |   2 +-",
+    " api.py                       | 160 +++++++++++++++++++++++++++++++++++++++-",
+    " database/models/core.py      |  53 +++++++++-----",
+    " database/models/technical.py | 163 ++++++++++++++++++++++++++++++++++++++++-",
+    " database/utils/scoring.py    |  35 +++++++++",
+    " monte_carlo.py               | 171 +++++++++++++++++++++++++++++++++++++++++--",
+    " recalculate_scores.py        |  34 ++++++---",
+    " simulator.py                 |  19 ++++-",
+    " trader.py                    |  19 ++++-",
+    " 9 files changed, 614 insertions(+), 42 deletions(-)"
+  ]
+}

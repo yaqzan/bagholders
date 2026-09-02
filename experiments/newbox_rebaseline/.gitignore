@@ -1,0 +1,23 @@
+# Per-cell raw JSON/log output from every runner in this package -- large,
+# regenerable, and machine-specific (the whole point of run_parity_gate.py is
+# that these are NOT portable across boxes without a parity verdict). The
+# summary/verdict artifacts each runner distills them into ARE committed
+# (see the negations below) -- those are the human/agent-facing evidence.
+results_*/
+*.log
+
+# Summary / verdict artifacts stay committed -- do NOT ignore these.
+!PARITY_VERDICT.json
+!PARITY_VERDICT.md
+!ECERT_SUMMARY.json
+!ECERT_SUMMARY.md
+!NOISE_FLOOR_TABLE.json
+!NOISE_FLOOR_TABLE.md
+!RUNTIME_TABLE.json
+!RUNTIME_TABLE.md
+!PESSIMISM_N1000_SUMMARY.json
+!PESSIMISM_N1000_SUMMARY.md
+!DEEP_N1000_SUMMARY.json
+!DEEP_N1000_SUMMARY.md
+!TAIL_N1000_SUMMARY.json
+!TAIL_N1000_SUMMARY.md

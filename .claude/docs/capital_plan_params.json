@@ -1,0 +1,73 @@
+{
+  "as_of": "2026-08-10",
+  "debt_balance_cad": 50000,
+  "debt_apr": 0.108,
+  "monthly_surplus_cad": 5000,
+  "portfolio_cash_cad": 300,
+  "seed_target_cad": 25000,
+  "scenario_c_deploy_threshold_cad": 20000,
+  "hisa_apr": 0.04,
+  "fx_cad_per_usd": 1.39,
+  "g_tiers_annual": [0.0, 0.15, 0.30, 0.68],
+  "horizon_months": 60,
+  "gate_dates": {
+    "G1_holdout_oos": "2026-12-15",
+    "payoff_eval": "2027-06-30",
+    "phase3_vehicle": "2027-11-01"
+  },
+  "evidence_sources": {
+    "calibrated_csvs": [
+      {
+        "path": "experiments/tpsl_refine_2026_08/out/phaseD_core_calib.csv",
+        "profile": "core",
+        "kind": "calibrated",
+        "match_by": "tp_sl"
+      },
+      {
+        "path": "experiments/tpsl_refine_2026_08/out/phaseD_apex_calib.csv",
+        "profile": "apex",
+        "kind": "calibrated_barrier_only",
+        "match_by": "tp_sl"
+      },
+      {
+        "path": "experiments/alloc_retune_2026_08/out/allocC_calibrated_apex.csv",
+        "profile": "apex",
+        "kind": "calibrated_sizing",
+        "match_by": "cell_name"
+      },
+      {
+        "path": "experiments/tpsl_refine_2026_08/out/phaseD_core_buf20.csv",
+        "profile": "core",
+        "kind": "buf20",
+        "match_by": "tp_sl"
+      },
+      {
+        "path": "experiments/tpsl_refine_2026_08/out/phaseD_apex_buf20.csv",
+        "profile": "apex",
+        "kind": "buf20_barrier_only",
+        "match_by": "tp_sl"
+      },
+      {
+        "path": "experiments/realism_default_flip_2026_08/out/flipR_r1.csv",
+        "profile": "sentinel",
+        "kind": "calibrated",
+        "match_by": "profile_lens",
+        "lens": "calibrated"
+      },
+      {
+        "path": "experiments/realism_default_flip_2026_08/out/flipR_r1.csv",
+        "profile": "sentinel",
+        "kind": "canon_only",
+        "match_by": "profile_lens",
+        "lens": "canon"
+      }
+    ],
+    "paired2x_summary": "experiments/alloc_retune_2026_08/out/allocC_apex2x_apex_confirm_n12f006_summary.md",
+    "ctsl_status": {
+      "findings_path": "experiments/ctsl_vehicle_2026_08/FINDINGS.md",
+      "missp_path": "experiments/ctsl_vehicle_2026_08/out/ctsl_v2_missp.csv",
+      "capacity_path": "experiments/ctsl_vehicle_2026_08/out/ctsl_v4_capacity.csv",
+      "window": "22-now"
+    }
+  }
+}

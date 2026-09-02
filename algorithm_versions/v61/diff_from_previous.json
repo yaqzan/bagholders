@@ -1,0 +1,52 @@
+{
+  "changed_paths": [
+    "ALGORITHM_VERSION",
+    "api.py",
+    "database/models/core.py",
+    "database/utils/scoring.py",
+    "mechanism_registry.py",
+    "simulator.py",
+    "strategy_config.py"
+  ],
+  "name_status": [
+    {
+      "path": "ALGORITHM_VERSION",
+      "status": "M"
+    },
+    {
+      "path": "api.py",
+      "status": "M"
+    },
+    {
+      "path": "database/models/core.py",
+      "status": "M"
+    },
+    {
+      "path": "database/utils/scoring.py",
+      "status": "M"
+    },
+    {
+      "path": "mechanism_registry.py",
+      "status": "M"
+    },
+    {
+      "path": "simulator.py",
+      "status": "M"
+    },
+    {
+      "path": "strategy_config.py",
+      "status": "M"
+    }
+  ],
+  "range": "d4a3e9fe..e6fbdbde",
+  "stat": [
+    "ALGORITHM_VERSION         |   2 +-",
+    " api.py                    |  15 +++++",
+    " database/models/core.py   |  12 ++++",
+    " database/utils/scoring.py | 165 ++++++++++++++++++++++++++++++++++++++++++++++",
+    " mechanism_registry.py     |   8 ++-",
+    " simulator.py              |  29 ++++++--",
+    " strategy_config.py        |  54 ++++++++++++---",
+    " 7 files changed, 269 insertions(+), 16 deletions(-)"
+  ]
+}

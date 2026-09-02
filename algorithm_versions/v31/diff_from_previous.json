@@ -1,0 +1,34 @@
+{
+  "changed_paths": [
+    "ALGORITHM_VERSION",
+    "database/models/core.py",
+    "monte_carlo.py",
+    "volume_amplifier.py"
+  ],
+  "name_status": [
+    {
+      "path": "ALGORITHM_VERSION",
+      "status": "M"
+    },
+    {
+      "path": "database/models/core.py",
+      "status": "M"
+    },
+    {
+      "path": "monte_carlo.py",
+      "status": "M"
+    },
+    {
+      "path": "volume_amplifier.py",
+      "status": "M"
+    }
+  ],
+  "range": "9a9da33a..f3ec7c12",
+  "stat": [
+    "ALGORITHM_VERSION       |   2 +-",
+    " database/models/core.py | 108 +++++++++++++++++++++++++++++++++++++++++-------",
+    " monte_carlo.py          | 104 ++++++++++++++++++++++++++++------------------",
+    " volume_amplifier.py     |  43 ++++++++++++-------",
+    " 4 files changed, 187 insertions(+), 70 deletions(-)"
+  ]
+}

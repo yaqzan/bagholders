@@ -1,0 +1,178 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-05-12T11:54:56",
+    "git_commit": "8af574b",
+    "git_message": "v54 scoring: Sector ETF breadth crash/recovery dampener",
+    "id": 54,
+    "label": "v54",
+    "notes": "Human-facing label corrected from POET shorthand. Internal constants remain POET_* for now; shipped behavior is the sector ETF breadth crash/recovery score dampener."
+  },
+  "captured_at": "2026-05-13T16:09:03+00:00",
+  "classification": {
+    "category": "scoring_algorithm",
+    "reason": "Commit message names score-stage or score-context behavior.",
+    "scoring_algorithm_snapshot": true
+  },
+  "files": {
+    "portfolio_sources": [
+      {
+        "bytes": 58572,
+        "path": "strategy_config.py",
+        "sha256": "f7a237129bfbeb23b0e851dc8e31ace0040d8040b31400a8575b1aeecc55c566",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 21184,
+        "path": "mechanism_registry.py",
+        "sha256": "250179801418e46188d0dfe9f2782843f1c21a6dd190f1118d8cc432f14e1d56",
+        "source": "mechanism_registry.py"
+      },
+      {
+        "bytes": 117417,
+        "path": "monte_carlo.py",
+        "sha256": "9ff1ca22fbc992ced199027990c764526effcff1a8b416df76250b8c9f44e5ad",
+        "source": "monte_carlo.py"
+      },
+      {
+        "bytes": 90354,
+        "path": "monte_carlo_15dte.py",
+        "sha256": "71e893ea7abf52595587c7d1ec343fcd9ff2a240b50a548e1f8d813a22c24d1d",
+        "source": "monte_carlo_15dte.py"
+      },
+      {
+        "bytes": 96554,
+        "path": "backtest_cascade.py",
+        "sha256": "e9aff8f7ef1bb46834c36d82375e3372cc6c4d90b078193dcedb3337b7d6de16",
+        "source": "backtest_cascade.py"
+      },
+      {
+        "bytes": 85451,
+        "path": "backtest_cascade_15dte.py",
+        "sha256": "cef55c5f0f0fe2b31b65e145ba283228e182ed2baa050364d62acef09e4f18d8",
+        "source": "backtest_cascade_15dte.py"
+      },
+      {
+        "bytes": 173222,
+        "path": "api.py",
+        "sha256": "74c849f95793ab905359c05ac12409b090dcc969088ace4d879d7659a9bdbaf1",
+        "source": "api.py"
+      },
+      {
+        "bytes": 210410,
+        "path": "trader.py",
+        "sha256": "a72b79b5b5fa3d75ce1e6d7476b362209a664e59c9dfa9bb004ed9fb7aa111db",
+        "source": "trader.py"
+      }
+    ],
+    "scoring": [
+      {
+        "bytes": 8,
+        "path": "ALGORITHM_VERSION",
+        "sha256": "e889361feb68f9a68f18200bdcf4a94234c86574540d34bc1b8c9842cd13cc23",
+        "source": "ALGORITHM_VERSION"
+      },
+      {
+        "bytes": 58572,
+        "path": "strategy_config.py",
+        "sha256": "f7a237129bfbeb23b0e851dc8e31ace0040d8040b31400a8575b1aeecc55c566",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 72407,
+        "path": "database/utils/scoring.py",
+        "sha256": "fceee630db7e377e589ee4134239aa5e1e050653337c43e85d59a96b62ea0744",
+        "source": "database/utils/scoring.py"
+      },
+      {
+        "bytes": 7162,
+        "path": "database/utils/sector_breadth_wave.py",
+        "sha256": "80ce1b69721153d9372500ddc667fe28f7db8a038478ad43a892e4082e8237f4",
+        "source": "database/utils/sector_breadth_wave.py"
+      },
+      {
+        "bytes": 249050,
+        "path": "database/models/core.py",
+        "sha256": "3682457642b67328f59650bb1c4d1658fae8d439d3ca8552f80c37eda81f6f96",
+        "source": "database/models/core.py"
+      },
+      {
+        "bytes": 23552,
+        "path": "database/models/technical.py",
+        "sha256": "22648938cd5a14bb2d38b926252cde14ca6d0bbd3dfc0133c367cc7b6dc0dcb4",
+        "source": "database/models/technical.py"
+      },
+      {
+        "bytes": 961,
+        "path": "database/project_root.py",
+        "sha256": "7fae4a33e2321f0a2098aeb9be4f976655d060552f7b09d08fcf15cf9ba39c3c",
+        "source": "database/project_root.py"
+      },
+      {
+        "bytes": 34402,
+        "path": "market_breadth.py",
+        "sha256": "9ea7d70dec55d0a3253ea8d75a098d85cd74de388bd1996a8532dc27a0aa9648",
+        "source": "market_breadth.py"
+      },
+      {
+        "bytes": 31003,
+        "path": "market_regime.py",
+        "sha256": "d1a81d7ba5fdc22d0e19d6528f9f2af437556161cc101a97c87e4edbdbbe3c16",
+        "source": "market_regime.py"
+      },
+      {
+        "bytes": 36724,
+        "path": "volume_amplifier.py",
+        "sha256": "2dc87a230b98a5bba4b179751c6649d2bcb0f3f9a52f4260e580ff68610320ac",
+        "source": "volume_amplifier.py"
+      },
+      {
+        "bytes": 40449,
+        "path": "simulator.py",
+        "sha256": "aed28e424ac26dc63690902267facdd63e98121e0eada0379e64d7bab5a1e1cd",
+        "source": "simulator.py"
+      },
+      {
+        "bytes": 9763,
+        "path": "recalculate_scores.py",
+        "sha256": "1a08dfd87bb07fb12e33ea02581a0941ba17309937c32dab02a3cef1191d5434",
+        "source": "recalculate_scores.py"
+      }
+    ]
+  },
+  "fingerprints": {
+    "manifest_inputs": "87ac6c7bc45e488718d640417e56cb9a01661e059c53de70ee2a9c7e3730c2f8",
+    "portfolio_config": "88444e71f0bc17e4b32c8ce9f2587c8a432bc0d887a3c8071cd033e0702c7dbd",
+    "portfolio_snapshot": "7c05698758310da8e1775063e84aa1fe3f9956ef260954b19092322da56594d6",
+    "portfolio_source_files": "94a6e2bbb63a398c9480bcbd5ca56590a3f6c90b8564b4b7b81d52cf208ac802",
+    "scoring_config": "228eada724108bb6e936669769c71bb5273f39774d2ad75a843a5dcb54f64bd2",
+    "scoring_files": "981dd2600706f50d930bc6da3ea95ffaa461877ebce8387b1dcf0c2c37ac5d0c"
+  },
+  "label": "v54",
+  "notes": [
+    "This snapshot was copied from the git commit recorded by AlgorithmVersion rather than from the current worktree.",
+    "Runtime scoring still imports the checkout code until the injected loader phase lands."
+  ],
+  "paths": {
+    "cache_root": ".cache/algorithm_versions/v54",
+    "evidence_manifest": "evidence_manifest.json",
+    "portfolio_config": "portfolio_config.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_sources": "portfolio_sources",
+    "root": "algorithm_versions/v54",
+    "scoring": "scoring",
+    "scoring_config": "scoring_config.json"
+  },
+  "previous_resolved_key": "v53",
+  "schema_version": 1,
+  "silo_key": "v54",
+  "source": {
+    "algorithm_version_file": "461bbbe",
+    "commit": "8af574bd53efe0724432137a8436dcf370527b8b",
+    "commit_body": "This reverts commit 3f4bcee7f780f8af16ebfcb56686d645e0ad36b5.",
+    "commit_short": "8af574bd",
+    "commit_subject": "Revert \"Revert sector breadth score dampener\"",
+    "mode": "git_ref",
+    "requested_ref": "8af574b"
+  },
+  "status": "shipped"
+}

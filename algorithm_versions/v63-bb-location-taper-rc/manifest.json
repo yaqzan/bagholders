@@ -1,0 +1,178 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-05-18T19:13:41",
+    "git_commit": "d4a3e9fec",
+    "git_message": "Ship v60 r054 SCW and DD call cap candidate",
+    "id": 60,
+    "label": "v60",
+    "notes": null
+  },
+  "captured_at": "2026-05-24T08:29:27+00:00",
+  "files": {
+    "portfolio_sources": [
+      {
+        "bytes": 65048,
+        "path": "strategy_config.py",
+        "sha256": "a22faf175e3a237b3f6e92d61adb82e82c00cce8081a16b7e59ac4c717fb3ead",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 23489,
+        "path": "mechanism_registry.py",
+        "sha256": "b315bc486966de3c31ba0b76b21dbe1c271f45136f9e8147a2b20d10e6435385",
+        "source": "mechanism_registry.py"
+      },
+      {
+        "bytes": 134172,
+        "path": "monte_carlo.py",
+        "sha256": "cabb325b4c3be3fa4a2427da1a72498d9a427428c8e7c06d4d344765602ab60b",
+        "source": "monte_carlo.py"
+      },
+      {
+        "bytes": 92331,
+        "path": "monte_carlo_15dte.py",
+        "sha256": "aa55edb6961083fb59242893d755b7a5638a28ca299a2b4ce6d1ceaec3fdaf9e",
+        "source": "monte_carlo_15dte.py"
+      },
+      {
+        "bytes": 112417,
+        "path": "backtest_cascade.py",
+        "sha256": "e7248014610c752d28abf8d3c3070ca9a02abbc686889fc786a4079043321283",
+        "source": "backtest_cascade.py"
+      },
+      {
+        "bytes": 87282,
+        "path": "backtest_cascade_15dte.py",
+        "sha256": "6bf12444c15bc9f6eeee8a562ae056e301bbd197110ce0fc7c0e71737581fc2e",
+        "source": "backtest_cascade_15dte.py"
+      },
+      {
+        "bytes": 220761,
+        "path": "api.py",
+        "sha256": "e4a3428add0e15a37cb867bfb0c15697095b132a1b85a84de759f8c3094ed863",
+        "source": "api.py"
+      },
+      {
+        "bytes": 237985,
+        "path": "trader.py",
+        "sha256": "ae693d5a7e3d67e90fc0f875b22a1f34a0e78073814a7689cbba207f00970c5e",
+        "source": "trader.py"
+      }
+    ],
+    "scoring": [
+      {
+        "bytes": 9,
+        "path": "ALGORITHM_VERSION",
+        "sha256": "238ff82d0a678c3bd8956b971bcfa4b4a14020db7c3b4ea3862a5bcc67043e4f",
+        "source": "ALGORITHM_VERSION"
+      },
+      {
+        "bytes": 65048,
+        "path": "strategy_config.py",
+        "sha256": "a22faf175e3a237b3f6e92d61adb82e82c00cce8081a16b7e59ac4c717fb3ead",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 90074,
+        "path": "database/utils/scoring.py",
+        "sha256": "7d2a816c375a4fd0799be8ddfed4c9e94b2ce2587fbf35dd6510217ed46b8401",
+        "source": "database/utils/scoring.py"
+      },
+      {
+        "bytes": 12988,
+        "path": "database/utils/sector_breadth_wave.py",
+        "sha256": "91e616822e0a36405fd25503139255a23efd3ec281ba92e9f9e70c664e99464d",
+        "source": "database/utils/sector_breadth_wave.py"
+      },
+      {
+        "bytes": 271459,
+        "path": "database/models/core.py",
+        "sha256": "6e4e091483f46ec35fad333bcdfd51403dd906559f1364e4b0362556a1bd4e21",
+        "source": "database/models/core.py"
+      },
+      {
+        "bytes": 24922,
+        "path": "database/models/technical.py",
+        "sha256": "4e99ccddfc2181b26dc9ec044594d6ed27eec43bf557135a6831e1976b30d134",
+        "source": "database/models/technical.py"
+      },
+      {
+        "bytes": 1000,
+        "path": "database/project_root.py",
+        "sha256": "3648a2fd02fa8f7ca54b577878fb2973272f55fa23bd6e9b9917a00b0fb108e1",
+        "source": "database/project_root.py"
+      },
+      {
+        "bytes": 42144,
+        "path": "market_breadth.py",
+        "sha256": "c83cd032015270d3ef99c19a2c7bd520b5b3fe759f1ee9d06867c92032855290",
+        "source": "market_breadth.py"
+      },
+      {
+        "bytes": 31763,
+        "path": "market_regime.py",
+        "sha256": "ebe3d5c61865ff51f84e3f19cbfe965093ecc62ae04624b3e4306dd18ece0960",
+        "source": "market_regime.py"
+      },
+      {
+        "bytes": 37931,
+        "path": "volume_amplifier.py",
+        "sha256": "d50a6f30559ea4a6cd7ceb141173765c45c1ab94633e43441667f9fec7c93db9",
+        "source": "volume_amplifier.py"
+      },
+      {
+        "bytes": 42217,
+        "path": "simulator.py",
+        "sha256": "c78eb818228eb93147bc826409e5ad51199242e3b9bc028c8ac3e892011c42f3",
+        "source": "simulator.py"
+      },
+      {
+        "bytes": 20118,
+        "path": "recalculate_scores.py",
+        "sha256": "73536992a2adf32de6ee919d812fccadb28bc40744dea8aab5172aea24a5337f",
+        "source": "recalculate_scores.py"
+      }
+    ]
+  },
+  "fingerprints": {
+    "manifest_inputs": "519256fed063bef3c71321375fec5afeb69706f221ead22c935b9b076f709cd3",
+    "portfolio_config": "f9c2e46bc15b09d05fa2f3dfaba8ec9785032b2db97318079d50584db2ece5d0",
+    "portfolio_snapshot": "97ea3d6536621f57ad8c4b1f6ca8b69afd43cb9d34c02fde36388fa7130c618c",
+    "portfolio_source_files": "31b693e3d1e942285a306b2fde307ee2b9c6ed53c02e589942a5775139b39d21",
+    "scoring_config": "74ecf16be0cd5e39acb4468812e24032ec26d9a370f06cf229fb52420b129557",
+    "scoring_files": "db9116101ccb48b8c63a2c90c55d0745edd1918a3e2e7bdbd1527684ac25c35e"
+  },
+  "label": "v63-bblt-rc",
+  "notes": [
+    "This snapshot is additive infrastructure. Runtime scoring still imports the checkout code until the injected loader phase lands.",
+    "Historical backfill is intentionally deferred because reconstructing old silos is resource-intensive during trading hours."
+  ],
+  "paths": {
+    "cache_root": ".cache/algorithm_versions/v63-bb-location-taper-rc",
+    "evidence_manifest": "evidence_manifest.json",
+    "portfolio_config": "portfolio_config.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_sources": "portfolio_sources",
+    "root": "algorithm_versions/v63-bb-location-taper-rc",
+    "scoring": "scoring",
+    "scoring_config": "scoring_config.json"
+  },
+  "schema_version": 1,
+  "silo_key": "v63-bb-location-taper-rc",
+  "source": {
+    "algorithm_version_file": "d4a3e9fec",
+    "branch": "codex/v63-score-research-20260524",
+    "dirty": true,
+    "dirty_status": [
+      "M database/utils/scoring.py",
+      " M simulator.py",
+      " M strategy_config.py",
+      "?? algorithm_versions/v63-bb-location-taper-rc/",
+      "?? experiments/v63_score_research/"
+    ],
+    "head": "0c7165819f9ab5b0974b048451270fc4f130460c",
+    "head_short": "0c7165819",
+    "mode": "working_tree"
+  },
+  "status": "candidate"
+}

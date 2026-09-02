@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+# Pre-commit hook for the Trader repo.
+#
+# Runs drift-guard + mechanism-registry validation. Both run in <2 seconds
+# combined. Refuses the commit if either fails.
+#
+# To install (one-time):
+#     bash tools/git-hooks/install.sh
+# or manually:
+#     cp tools/git-hooks/pre-commit .git/hooks/pre-commit
+#     chmod +x .git/hooks/pre-commit
+#
+# To bypass for a genuine emergency (e.g., reverting a bad commit):
+#     git commit --no-verify
+# Do NOT bypass to ship a config / engine change. Either fix the drift or
+# update the registry.
+set -e
+
+# Resolve repo root (works whether the hook is in .git/hooks or invoked manually)
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+cd "$REPO_ROOT"
+
+# Pick a Python executable. Prefer .venv if present, else system python.
+if [ -x ".venv/Scripts/python.exe" ]; then
+  PY=".venv/Scripts/python.exe"
+elif [ -x ".venv/bin/python" ]; then
+  PY=".venv/bin/python"
+elif command -v python >/dev/null 2>&1; then
+  PY="python"
+elif command -v python3 >/dev/null 2>&1; then
+  PY="python3"
+else
+  echo "pre-commit: no Python executable found. Skipping drift checks."
+  exit 0
+fi
+
+echo "pre-commit: drift-guard..."
+"$PY" tests/test_strategy_config_drift.py || {
+  echo ""
+  echo "----------------------------------------------------------------"
+  echo "DRIFT-GUARD FAILED — commit refused."
+  echo ""
+  echo "strategy_config.py and one or more engine constants disagree."
+  echo "Fix the divergence before committing. If you genuinely need to"
+  echo "bypass for an emergency revert: git commit --no-verify"
+  echo "----------------------------------------------------------------"
+  exit 1
+}
+
+echo "pre-commit: mechanism-registry..."
+"$PY" tests/test_mechanism_registry.py || {
+  echo ""
+  echo "----------------------------------------------------------------"
+  echo "MECHANISM REGISTRY VALIDATION FAILED — commit refused."
+  echo ""
+  echo "mechanism_registry.REGISTRY does not match the engine state, or"
+  echo "a new portfolio mechanism is missing from the registry. See"
+  echo ".claude/docs/deploy.md \"Adding a NEW Portfolio Mechanism\""
+  echo "Step 0 for the registry-update procedure."
+  echo "----------------------------------------------------------------"
+  exit 1
+}

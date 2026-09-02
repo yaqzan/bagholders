@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Variable fonts — Inter + JetBrains Mono (via rsms.me / jsDelivr) */
+@import url('https://rsms.me/inter/inter.css');
+@import url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/css/jetbrains-mono.css');
+
+@supports (font-variation-settings: normal) {
+  :root { font-family: 'Inter var', ui-sans-serif, system-ui, sans-serif; }
+}
+
+/* Expose safe-area-inset-bottom to JS via CSS custom property */
+:root {
+  --sab: env(safe-area-inset-bottom, 0px);
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-trading-dark-950 text-gray-200 font-sans antialiased;
+    font-feature-settings: 'cv11', 'ss01', 'ss03', 'cv02';
+  }
+
+  /* Tabular numerics by default on anything mono — prevents jitter in tables */
+  .font-mono, code, kbd, samp, pre {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum', 'zero';
+  }
+
+  /* Hairline default border color — near-invisible on dark surfaces */
+  * {
+    border-color: rgba(255, 255, 255, 0.06);
+  }
+
+  /* Focus — thin outline instead of chunky ring */
+  :focus-visible {
+    outline: 1px solid rgba(167, 196, 160, 0.55);
+    outline-offset: 1px;
+  }
+
+  /* Remove Chrome's autofill background wash */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #E4E4E7;
+    -webkit-box-shadow: 0 0 0px 1000px #111113 inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+}
+
+/* Ghost scrollbars — thin, low-contrast */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.08) transparent;
+}
+
+/* Mobile-specific fixes */
+@media (max-width: 640px) {
+  html, body, #root {
+    height: 100%;
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+  .overflow-auto { -webkit-overflow-scrolling: touch; }
+  .overflow-y-auto {
+    -webkit-overflow-scrolling: touch;
+    overflow-y: auto !important;
+  }
+  .flex-1 { min-height: 0; }
+}
+
+/* Legacy table column width helpers — preserved so existing layout doesn't shift */
+@media (min-width: 640px) {
+  table { table-layout: fixed; }
+  .table-cell.w-16 {
+    width: 4rem !important;
+    min-width: 4rem !important;
+    max-width: 4rem !important;
+  }
+  .table-cell.w-36 {
+    width: 9rem !important;
+    min-width: 9rem !important;
+    max-width: 9rem !important;
+  }
+}

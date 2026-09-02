@@ -1,0 +1,70 @@
+{
+  "changed_paths": [
+    "api.py",
+    "database/models/core.py",
+    "database/project_root.py",
+    "database/utils/scoring.py",
+    "market_breadth.py",
+    "market_regime.py",
+    "recalculate_scores.py",
+    "simulator.py",
+    "trader.py",
+    "volume_amplifier.py"
+  ],
+  "name_status": [
+    {
+      "path": "api.py",
+      "status": "M"
+    },
+    {
+      "path": "database/models/core.py",
+      "status": "M"
+    },
+    {
+      "path": "database/project_root.py",
+      "status": "A"
+    },
+    {
+      "path": "database/utils/scoring.py",
+      "status": "M"
+    },
+    {
+      "path": "market_breadth.py",
+      "status": "A"
+    },
+    {
+      "path": "market_regime.py",
+      "status": "A"
+    },
+    {
+      "path": "recalculate_scores.py",
+      "status": "M"
+    },
+    {
+      "path": "simulator.py",
+      "status": "A"
+    },
+    {
+      "path": "trader.py",
+      "status": "M"
+    },
+    {
+      "path": "volume_amplifier.py",
+      "status": "M"
+    }
+  ],
+  "range": "b1cc55cb..a8cfc750",
+  "stat": [
+    "api.py                    |  533 +++++++++++++---",
+    " database/models/core.py   | 1529 +++++++++++++++++++++++++++++++--------------",
+    " database/project_root.py  |   39 ++",
+    " database/utils/scoring.py |   97 +++",
+    " market_breadth.py         |  644 +++++++++++++++++++",
+    " market_regime.py          |  411 ++++++++++++",
+    " recalculate_scores.py     |   71 ++-",
+    " simulator.py              |  551 ++++++++++++++++",
+    " trader.py                 |  629 +++++++++++++++++--",
+    " volume_amplifier.py       |  297 ++++++++-",
+    " 10 files changed, 4139 insertions(+), 662 deletions(-)"
+  ]
+}

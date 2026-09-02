@@ -1,0 +1,34 @@
+{
+  "changed_paths": [
+    "ALGORITHM_VERSION",
+    "database/models/core.py",
+    "database/utils/scoring.py",
+    "simulator.py"
+  ],
+  "name_status": [
+    {
+      "path": "ALGORITHM_VERSION",
+      "status": "M"
+    },
+    {
+      "path": "database/models/core.py",
+      "status": "M"
+    },
+    {
+      "path": "database/utils/scoring.py",
+      "status": "M"
+    },
+    {
+      "path": "simulator.py",
+      "status": "M"
+    }
+  ],
+  "range": "d5ef1f52..6f9afda9",
+  "stat": [
+    "ALGORITHM_VERSION         |   2 +-",
+    " database/models/core.py   |  27 ++++++++++++",
+    " database/utils/scoring.py | 110 ++++++++++++++++++++++++++++++++++++++++++++++",
+    " simulator.py              |   6 +++",
+    " 4 files changed, 144 insertions(+), 1 deletion(-)"
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "changed_paths": [
+    "ALGORITHM_VERSION",
+    "api.py",
+    "database/models/core.py",
+    "database/models/technical.py",
+    "database/utils/scoring.py",
+    "market_breadth.py",
+    "recalculate_scores.py",
+    "simulator.py",
+    "strategy_config.py",
+    "trader.py"
+  ],
+  "name_status": [
+    {
+      "path": "ALGORITHM_VERSION",
+      "status": "M"
+    },
+    {
+      "path": "api.py",
+      "status": "M"
+    },
+    {
+      "path": "database/models/core.py",
+      "status": "M"
+    },
+    {
+      "path": "database/models/technical.py",
+      "status": "M"
+    },
+    {
+      "path": "database/utils/scoring.py",
+      "status": "M"
+    },
+    {
+      "path": "market_breadth.py",
+      "status": "M"
+    },
+    {
+      "path": "recalculate_scores.py",
+      "status": "M"
+    },
+    {
+      "path": "simulator.py",
+      "status": "M"
+    },
+    {
+      "path": "strategy_config.py",
+      "status": "M"
+    },
+    {
+      "path": "trader.py",
+      "status": "M"
+    }
+  ],
+  "range": "4fd7ffa9..d4a3e9fe",
+  "stat": [
+    "ALGORITHM_VERSION            |   2 +-",
+    " api.py                       | 269 ++++++++++++++++++++++--",
+    " database/models/core.py      | 149 +++++++++++++-",
+    " database/models/technical.py |  38 +++-",
+    " database/utils/scoring.py    | 182 +++++++++++++++-",
+    " market_breadth.py            |   5 +-",
+    " recalculate_scores.py        |  55 ++++-",
+    " simulator.py                 |  12 ++",
+    " strategy_config.py           |  38 +++-",
+    " trader.py                    | 481 ++++++++++++++++++++++++++++++++++++-------",
+    " 10 files changed, 1108 insertions(+), 123 deletions(-)"
+  ]
+}

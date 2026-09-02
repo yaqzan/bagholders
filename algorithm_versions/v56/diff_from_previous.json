@@ -1,0 +1,40 @@
+{
+  "changed_paths": [
+    "ALGORITHM_VERSION",
+    "database/utils/scoring.py",
+    "database/utils/sector_breadth_wave.py",
+    "market_breadth.py",
+    "strategy_config.py"
+  ],
+  "name_status": [
+    {
+      "path": "ALGORITHM_VERSION",
+      "status": "M"
+    },
+    {
+      "path": "database/utils/scoring.py",
+      "status": "M"
+    },
+    {
+      "path": "database/utils/sector_breadth_wave.py",
+      "status": "M"
+    },
+    {
+      "path": "market_breadth.py",
+      "status": "M"
+    },
+    {
+      "path": "strategy_config.py",
+      "status": "M"
+    }
+  ],
+  "range": "bfad76ab..c6f384ab",
+  "stat": [
+    "ALGORITHM_VERSION                     |  2 +-",
+    " database/utils/scoring.py             |  8 +++-",
+    " database/utils/sector_breadth_wave.py | 84 +++++++++++++++++++++++++++++++++--",
+    " market_breadth.py                     | 46 ++++++++++++-------",
+    " strategy_config.py                    | 62 +++++++++++++++-----------",
+    " 5 files changed, 154 insertions(+), 48 deletions(-)"
+  ]
+}

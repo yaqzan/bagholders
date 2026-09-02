@@ -1,0 +1,50 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-04-01T14:41:05",
+    "git_commit": "b1cc55c",
+    "git_message": "Systemic backfill",
+    "id": 3,
+    "label": "v3",
+    "notes": null
+  },
+  "assess_combos": null,
+  "mechanism_registry": [],
+  "portfolio_snapshot_extraction_error": "strategy_config.py is not present at this git ref",
+  "schema_version": 1,
+  "silo_key": "v3",
+  "source": {
+    "manifest": "manifest.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_snapshot_sha256": "96248d37d740627cc38f0c0463200bb5ddbfa3dcdd9f4be95d44d755a839cffb",
+    "portfolio_source_files_fingerprint": "c3ff8c00a412f0a890f5ca026e7dc8fcecf51b7eb145a8033ac07e44a0f42aee"
+  },
+  "strategies": {
+    "15dte": {
+      "conflicts": [],
+      "field_count": 0,
+      "field_sources": {},
+      "fields": {},
+      "reason": "No statically evaluable legacy portfolio constants found for this strategy.",
+      "source_files": [],
+      "source_mode": "legacy_source_constants",
+      "status": "unavailable",
+      "strategy_key": "15dte",
+      "unsupported": []
+    },
+    "30dte": {
+      "conflicts": [],
+      "field_count": 0,
+      "field_sources": {},
+      "fields": {},
+      "reason": "No statically evaluable legacy portfolio constants found for this strategy.",
+      "source_files": [
+        "portfolio_sources/trader.py",
+        "portfolio_sources/api.py"
+      ],
+      "source_mode": "legacy_source_constants",
+      "status": "unavailable",
+      "strategy_key": "30dte",
+      "unsupported": []
+    }
+  }
+}

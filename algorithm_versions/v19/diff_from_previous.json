@@ -1,0 +1,52 @@
+{
+  "changed_paths": [
+    "ALGORITHM_VERSION",
+    "api.py",
+    "backtest_cascade.py",
+    "database/models/core.py",
+    "database/utils/scoring.py",
+    "monte_carlo.py",
+    "trader.py"
+  ],
+  "name_status": [
+    {
+      "path": "ALGORITHM_VERSION",
+      "status": "M"
+    },
+    {
+      "path": "api.py",
+      "status": "M"
+    },
+    {
+      "path": "backtest_cascade.py",
+      "status": "M"
+    },
+    {
+      "path": "database/models/core.py",
+      "status": "M"
+    },
+    {
+      "path": "database/utils/scoring.py",
+      "status": "M"
+    },
+    {
+      "path": "monte_carlo.py",
+      "status": "M"
+    },
+    {
+      "path": "trader.py",
+      "status": "M"
+    }
+  ],
+  "range": "17caf99f..6656daa4",
+  "stat": [
+    "ALGORITHM_VERSION         |   2 +-",
+    " api.py                    |  86 ++++++++--",
+    " backtest_cascade.py       | 100 +++++++++++-",
+    " database/models/core.py   |  90 +++++++++-",
+    " database/utils/scoring.py |  17 +-",
+    " monte_carlo.py            | 178 ++++++++++++++++++--",
+    " trader.py                 | 408 ++++++++++++++++++++++++++++++++++------------",
+    " 7 files changed, 728 insertions(+), 153 deletions(-)"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "changed_paths": [
+    "ALGORITHM_VERSION",
+    "volume_amplifier.py"
+  ],
+  "name_status": [
+    {
+      "path": "ALGORITHM_VERSION",
+      "status": "M"
+    },
+    {
+      "path": "volume_amplifier.py",
+      "status": "M"
+    }
+  ],
+  "range": "e3c8678f..8473cba1",
+  "stat": [
+    "ALGORITHM_VERSION   |   2 +-",
+    " volume_amplifier.py | 200 ++++++++++++++++++++++++++++++++++++----------------",
+    " 2 files changed, 140 insertions(+), 62 deletions(-)"
+  ]
+}

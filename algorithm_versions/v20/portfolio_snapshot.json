@@ -1,0 +1,9 @@
+{
+  "assess_combos": null,
+  "extraction_error": "strategy_config.py is not present at this git ref",
+  "mechanism_registry": [],
+  "strategies": {
+    "15dte": null,
+    "30dte": null
+  }
+}

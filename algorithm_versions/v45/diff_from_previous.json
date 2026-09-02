@@ -1,0 +1,40 @@
+{
+  "changed_paths": [
+    "ALGORITHM_VERSION",
+    "api.py",
+    "market_breadth.py",
+    "monte_carlo.py",
+    "trader.py"
+  ],
+  "name_status": [
+    {
+      "path": "ALGORITHM_VERSION",
+      "status": "M"
+    },
+    {
+      "path": "api.py",
+      "status": "M"
+    },
+    {
+      "path": "market_breadth.py",
+      "status": "M"
+    },
+    {
+      "path": "monte_carlo.py",
+      "status": "M"
+    },
+    {
+      "path": "trader.py",
+      "status": "M"
+    }
+  ],
+  "range": "d8024b9b..56eb1f83",
+  "stat": [
+    "ALGORITHM_VERSION |  2 +-",
+    " api.py            | 50 +++++++++++++++++++++++++++++++-----",
+    " market_breadth.py | 20 ++++++++++++++-",
+    " monte_carlo.py    | 77 ++++++++++++++++++++++++++++++++++++++++++++++++++++++-",
+    " trader.py         |  6 ++---",
+    " 5 files changed, 143 insertions(+), 12 deletions(-)"
+  ]
+}

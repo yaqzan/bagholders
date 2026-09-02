@@ -1,0 +1,22 @@
+{
+  "changed_paths": [
+    "ALGORITHM_VERSION",
+    "database/models/core.py"
+  ],
+  "name_status": [
+    {
+      "path": "ALGORITHM_VERSION",
+      "status": "M"
+    },
+    {
+      "path": "database/models/core.py",
+      "status": "M"
+    }
+  ],
+  "range": "f66bf9b9..e3ed8060",
+  "stat": [
+    "ALGORITHM_VERSION       |  2 +-",
+    " database/models/core.py | 61 +++++++++++++++++++++++++++++++++++--------------",
+    " 2 files changed, 45 insertions(+), 18 deletions(-)"
+  ]
+}

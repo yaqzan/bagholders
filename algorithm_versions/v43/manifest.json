@@ -1,0 +1,174 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-05-07T16:30:55",
+    "git_commit": "e083032",
+    "git_message": "feat: MCD score-stage mcap dampener (mcap-aware call confidence weight)",
+    "id": 43,
+    "label": "v43",
+    "notes": null
+  },
+  "captured_at": "2026-05-13T16:09:33+00:00",
+  "classification": {
+    "category": "scoring_algorithm",
+    "reason": "Commit message names score-stage or score-context behavior.",
+    "scoring_algorithm_snapshot": true
+  },
+  "files": {
+    "portfolio_sources": [
+      {
+        "bytes": 28822,
+        "path": "strategy_config.py",
+        "sha256": "ef1e04dcf524196da59bd71b58ffecc6d915de05d5afd586d083dcb9c9c0728a",
+        "source": "strategy_config.py"
+      },
+      {
+        "missing": true,
+        "source": "mechanism_registry.py"
+      },
+      {
+        "bytes": 105700,
+        "path": "monte_carlo.py",
+        "sha256": "662eec7780949406198cb73f86888db3c35ff5428e8feedffccbde0f95a23a43",
+        "source": "monte_carlo.py"
+      },
+      {
+        "bytes": 84907,
+        "path": "monte_carlo_15dte.py",
+        "sha256": "4fdebafd2d8131df41e14fca7603b69c5cf32fd902e7e1d207cae2c1bc9578fc",
+        "source": "monte_carlo_15dte.py"
+      },
+      {
+        "bytes": 89905,
+        "path": "backtest_cascade.py",
+        "sha256": "e635136e2c5c67f00a64ba66668ee3ccee14a4d76aa63a39fb445f2064acaeea",
+        "source": "backtest_cascade.py"
+      },
+      {
+        "bytes": 83169,
+        "path": "backtest_cascade_15dte.py",
+        "sha256": "717650e5bc52d176ba0981d154ce1b42b892d8c725903b083ac9ae328d206225",
+        "source": "backtest_cascade_15dte.py"
+      },
+      {
+        "bytes": 157578,
+        "path": "api.py",
+        "sha256": "b05c9c3e49f6a50ab37757985dd4ff980ee8c104b062361998e816b081ee0ff2",
+        "source": "api.py"
+      },
+      {
+        "bytes": 186493,
+        "path": "trader.py",
+        "sha256": "481920a12f6ceb1973748d567f2f656bcde81978ec3e5b877ee4d7248d2baa94",
+        "source": "trader.py"
+      }
+    ],
+    "scoring": [
+      {
+        "bytes": 8,
+        "path": "ALGORITHM_VERSION",
+        "sha256": "a74ab2476ddd4055d6cf0b097eab70711988a481b11f08c8d1b9613ccc7444ab",
+        "source": "ALGORITHM_VERSION"
+      },
+      {
+        "bytes": 28822,
+        "path": "strategy_config.py",
+        "sha256": "ef1e04dcf524196da59bd71b58ffecc6d915de05d5afd586d083dcb9c9c0728a",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 47921,
+        "path": "database/utils/scoring.py",
+        "sha256": "71446c4d4735c8c69660b29ee9a2663cb2f27564b5244ca39551d6ea2c8a597c",
+        "source": "database/utils/scoring.py"
+      },
+      {
+        "missing": true,
+        "source": "database/utils/sector_breadth_wave.py"
+      },
+      {
+        "bytes": 219937,
+        "path": "database/models/core.py",
+        "sha256": "d284a7dc1d78ef0a995aae928299d74f1cda917823e35dd4a2e675ef77f20675",
+        "source": "database/models/core.py"
+      },
+      {
+        "bytes": 23552,
+        "path": "database/models/technical.py",
+        "sha256": "22648938cd5a14bb2d38b926252cde14ca6d0bbd3dfc0133c367cc7b6dc0dcb4",
+        "source": "database/models/technical.py"
+      },
+      {
+        "bytes": 961,
+        "path": "database/project_root.py",
+        "sha256": "7fae4a33e2321f0a2098aeb9be4f976655d060552f7b09d08fcf15cf9ba39c3c",
+        "source": "database/project_root.py"
+      },
+      {
+        "bytes": 24055,
+        "path": "market_breadth.py",
+        "sha256": "ee48a20f94b622941f1e4760c70d18cab82efd170835e606e8488eb3ee16043b",
+        "source": "market_breadth.py"
+      },
+      {
+        "bytes": 31003,
+        "path": "market_regime.py",
+        "sha256": "d1a81d7ba5fdc22d0e19d6528f9f2af437556161cc101a97c87e4edbdbbe3c16",
+        "source": "market_regime.py"
+      },
+      {
+        "bytes": 36724,
+        "path": "volume_amplifier.py",
+        "sha256": "2dc87a230b98a5bba4b179751c6649d2bcb0f3f9a52f4260e580ff68610320ac",
+        "source": "volume_amplifier.py"
+      },
+      {
+        "bytes": 38522,
+        "path": "simulator.py",
+        "sha256": "0c6dc1483d2d58b3031bc90c479f511b3164b4951093aef1d7e1f73f2c144d5f",
+        "source": "simulator.py"
+      },
+      {
+        "bytes": 9763,
+        "path": "recalculate_scores.py",
+        "sha256": "1a08dfd87bb07fb12e33ea02581a0941ba17309937c32dab02a3cef1191d5434",
+        "source": "recalculate_scores.py"
+      }
+    ]
+  },
+  "fingerprints": {
+    "manifest_inputs": "59a29192461df2048aeb74c1f821fca5c449009e655cdb08098c6f922f92ac65",
+    "portfolio_config": "907fdffba23c21c8f78ea757f948f0e49cae876121d6f84f6f4f362a0bcf136c",
+    "portfolio_snapshot": "1a1d21540b96157a0cba40e8542fa838bae3e62000bdac76c612c9bf2520b7d8",
+    "portfolio_source_files": "ade026f032e900df71ae6a83f07be587a8a7003065dc7031a43082f0a767bbd7",
+    "scoring_config": "1ffb9616affc4529b4389eea735970ffa759a61ba81b539846a8ff8ffcac2501",
+    "scoring_files": "34b31f2994b619062681c703fecc95c7577f57b0670522c1b033e86d4e2a962a"
+  },
+  "label": "v43",
+  "notes": [
+    "This snapshot was copied from the git commit recorded by AlgorithmVersion rather than from the current worktree.",
+    "Runtime scoring still imports the checkout code until the injected loader phase lands."
+  ],
+  "paths": {
+    "cache_root": ".cache/algorithm_versions/v43",
+    "evidence_manifest": "evidence_manifest.json",
+    "portfolio_config": "portfolio_config.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_sources": "portfolio_sources",
+    "root": "algorithm_versions/v43",
+    "scoring": "scoring",
+    "scoring_config": "scoring_config.json"
+  },
+  "previous_resolved_key": "v42",
+  "schema_version": 1,
+  "silo_key": "v43",
+  "source": {
+    "algorithm_version_file": "200f33a",
+    "commit": "e0830320b55a4491832adb64738f562b70b93d82",
+    "commit_body": "Continuous, asymmetric (calls-only) score-stage dampener that drifts mid/\nsmall-cap calls in [70, 84] toward TARGET=61 using log10(mcap_b) as a\nsmooth confidence shifter. Empirical cohort signal (5y v39, option-aligned\nbarrier 30dte_opt at W=15d): at fixed score, call TP rate scales monotonically\nwith mcap_b \u2014 large_50-200B 75+ TP=65.8% vs micro_lt2B 75+ TP=57.6% (8.2pp\nspread, year-stable across 2022-2025).\n\nMechanism (dual power-law weakness, log-mcap input):\n  weakness     = mcap_factor^MCAP_POWER * score_factor^SCORE_POWER\n  mcap_factor  = clip((LOG_HI - log10(mcap_b)) / (LOG_HI - LOG_LO), 0, 1)\n  score_factor = clip((overall - GATE_LO) / (GATE_HI - GATE_LO), 0, 1)\n  overall     -= ALPHA * weakness * (overall - TARGET)\n\nShip params (calibrated via 15,195 variants, v3 stage-A + stage-B Bayesian\nrefinement around the basin):\n  GATE_LO=70, GATE_HI=84\n  LOG_LO=0.50 ($3.16B at full strength)\n  LOG_HI=1.90 ($79.43B at zero strength)\n  ALPHA=0.80, TARGET=61\n  MCAP_POWER=0.70 (slightly concave mcap ramp)\n  SCORE_POWER=1.50 (mild quadratic concentration at high scores)\n\nH1-H5 ship gate (5y v39 baseline, option-aligned barrier 30dte_opt @ W=15d):\n  75+ cumulative: 5y +2.73pp / 10y +2.96pp (sign-consistent both windows)\n  Per-bucket: 70-74 +0.06pp (CALIBRATED), 75-79 +3.66pp (favorable\n  over-correction), 80-84 -0.24pp (CALIBRATED), 85-89/90+ untouched\n  (gate <= 84 leaves top tiers preserved by construction)\n  Gradient gaps: [5.09, 2.41, 2.83, 6.09] \u2014 all >= 2.41pp (natural-wave\n  gradient preserved)\n  N drop on 75+: -44.9% (within v27 WCF precedent ~75% drop)\n  Spillover on 80+/85+/90+: 0.00pp\n\nApply order: AFTER PCD (puts-only), BEFORE PESS (puts-only) and EARN_BOOST.\nCalls-only mechanism (gate 70-84 \u2227 mcap_b not None) so order vs PESS\ndoesn't matter mechanically; placement before EARN_BOOST ensures dampened\nscores aren't re-amplified by earnings boost.\n\nPlumbing: mcap_b loaded once per symbol from Stock.market_cap (structural,\nnot per-date). Wired through Score.calculate_overall_score (single-row),\nStock.calculate_scores_batched (batch), Stock.recalculate_scores_batched\n(recalc), and simulator.StockContext (in-memory).\n\n`weight_info` exposes `mcd_dampen` and `mcd_mcap_b` when active for\nexplain-scores audits.\n\nCalibration trail: experiments/sector_mcap_cohort/ (cohort z-mining that\nsurfaced the signal) \u2192 experiments/mcap_dampener/ (3-generation sweep:\nv1 linear 3,429 variants \u2192 v2 power-law 3,456 variants \u2192 v3 dense\nBayesian 8,310 variants).\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+    "commit_short": "e0830320",
+    "commit_subject": "feat: MCD score-stage mcap dampener (mcap-aware call confidence weight)",
+    "mode": "git_ref",
+    "requested_ref": "e083032"
+  },
+  "status": "shipped"
+}

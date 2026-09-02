@@ -1,0 +1,181 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-06-01T17:56:30",
+    "git_commit": "c70d16d22dc8ad900d19f7014907774edaa3ae26",
+    "git_message": "v70 scoring: honest EARN_BOOST recalibration (pre7-weighted, both-barrier-gated)",
+    "id": 70,
+    "label": "v70",
+    "notes": null
+  },
+  "captured_at": "2026-06-10T08:12:30+00:00",
+  "files": {
+    "portfolio_sources": [
+      {
+        "bytes": 80040,
+        "path": "strategy_config.py",
+        "sha256": "80090a03ae5bdd7ee61205f033ba4e1492d5d49533c71cca5631b92e7ff22c2e",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 31678,
+        "path": "mechanism_registry.py",
+        "sha256": "d27e2a20ea4d730c7d627600b16c3bf2eb77066476c22c3db8eb0dca2f52a8d9",
+        "source": "mechanism_registry.py"
+      },
+      {
+        "bytes": 181419,
+        "path": "monte_carlo.py",
+        "sha256": "7319b1f0de705e41c05f0d0e4f2691254287d2dda991f4c3194b6ad3b0cac814",
+        "source": "monte_carlo.py"
+      },
+      {
+        "bytes": 92973,
+        "path": "monte_carlo_15dte.py",
+        "sha256": "38d379eafeacda3fcb70196a7998388572e1b3f6ba328d3fa1a9aa49aeee8a51",
+        "source": "monte_carlo_15dte.py"
+      },
+      {
+        "bytes": 146339,
+        "path": "backtest_cascade.py",
+        "sha256": "af2b117ce011e35891c37f6482687568d2adc74e0ca648b44ea1769c31fac762",
+        "source": "backtest_cascade.py"
+      },
+      {
+        "bytes": 88884,
+        "path": "backtest_cascade_15dte.py",
+        "sha256": "b6418b0b1413de8730d6a0b747eb20a9bbfd9338622b16864fea215a00051d28",
+        "source": "backtest_cascade_15dte.py"
+      },
+      {
+        "bytes": 264521,
+        "path": "api.py",
+        "sha256": "56ca7ab8deafbd44c7d1f3d1cbbca667a87951c0ac7f2320a0f1f5b4ac17662a",
+        "source": "api.py"
+      },
+      {
+        "bytes": 272199,
+        "path": "trader.py",
+        "sha256": "1dbb04b6b68fd3ae4ff5ebbc9abed8c9eed786857ce9a6c234798fc0588c5121",
+        "source": "trader.py"
+      }
+    ],
+    "scoring": [
+      {
+        "bytes": 42,
+        "path": "ALGORITHM_VERSION",
+        "sha256": "cdae28c1ad052d4c17333dc03baea2c53dbec6deaef254bd5a9c74ab74c6a268",
+        "source": "ALGORITHM_VERSION"
+      },
+      {
+        "bytes": 80040,
+        "path": "strategy_config.py",
+        "sha256": "80090a03ae5bdd7ee61205f033ba4e1492d5d49533c71cca5631b92e7ff22c2e",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 92728,
+        "path": "database/utils/scoring.py",
+        "sha256": "4cadb7c1f261a5f33d591c72adfbd52edc0d07c40df4b6ac8ed6c91e8b49b90d",
+        "source": "database/utils/scoring.py"
+      },
+      {
+        "bytes": 14618,
+        "path": "database/utils/sector_breadth_wave.py",
+        "sha256": "09321b804d71b6a0b4060f940bc0c94eb87eaefc9a46c65638ebf79d08fcb6ee",
+        "source": "database/utils/sector_breadth_wave.py"
+      },
+      {
+        "bytes": 298152,
+        "path": "database/models/core.py",
+        "sha256": "9dce89c33a656855eabf4ab13f109e327a763ca4f91ea4aa6252613680f1928c",
+        "source": "database/models/core.py"
+      },
+      {
+        "bytes": 24922,
+        "path": "database/models/technical.py",
+        "sha256": "4e99ccddfc2181b26dc9ec044594d6ed27eec43bf557135a6831e1976b30d134",
+        "source": "database/models/technical.py"
+      },
+      {
+        "bytes": 1000,
+        "path": "database/project_root.py",
+        "sha256": "3648a2fd02fa8f7ca54b577878fb2973272f55fa23bd6e9b9917a00b0fb108e1",
+        "source": "database/project_root.py"
+      },
+      {
+        "bytes": 42144,
+        "path": "market_breadth.py",
+        "sha256": "c83cd032015270d3ef99c19a2c7bd520b5b3fe759f1ee9d06867c92032855290",
+        "source": "market_breadth.py"
+      },
+      {
+        "bytes": 31763,
+        "path": "market_regime.py",
+        "sha256": "ebe3d5c61865ff51f84e3f19cbfe965093ecc62ae04624b3e4306dd18ece0960",
+        "source": "market_regime.py"
+      },
+      {
+        "bytes": 40462,
+        "path": "volume_amplifier.py",
+        "sha256": "f2e9d9ae6c7ee883666ee95d224dae2050e7dcd04ad9ca2c975795789ce351fc",
+        "source": "volume_amplifier.py"
+      },
+      {
+        "bytes": 49197,
+        "path": "simulator.py",
+        "sha256": "8f663a33df19c358bde964a4a54a0080ab9ba41031ce0fafa4b43583811af16b",
+        "source": "simulator.py"
+      },
+      {
+        "bytes": 20118,
+        "path": "recalculate_scores.py",
+        "sha256": "73536992a2adf32de6ee919d812fccadb28bc40744dea8aab5172aea24a5337f",
+        "source": "recalculate_scores.py"
+      }
+    ]
+  },
+  "fingerprints": {
+    "manifest_inputs": "23decc293cd35e4ed579be8a83853066369a589ebc641439b144ab2ae2dbb184",
+    "portfolio_config": "a04997f4390f9f1ee5175cb94c063543af9384d585646412a5018b054d5b5409",
+    "portfolio_snapshot": "ea23f25e65d6c0472206cad6415edd5587f2662f87fd06094dba731c4962cf8d",
+    "portfolio_source_files": "7f6c16137805879698098fd34453b86f9738c4a8e86c34286315d56a0354736d",
+    "scoring_config": "f381e1f057cd3666a2b0090311b5dd1129bfc3d3f336279aa36e2b1c14d254cd",
+    "scoring_files": "f7791eccbac0483cd9ccd1eeb3914b8e01814bdf8766f0608059d88c11af2c63"
+  },
+  "label": "integrity-F1-F4-honest-fixes",
+  "notes": [
+    "This snapshot is additive infrastructure. Runtime scoring still imports the checkout code until the injected loader phase lands.",
+    "Historical backfill is intentionally deferred because reconstructing old silos is resource-intensive during trading hours."
+  ],
+  "paths": {
+    "cache_root": ".cache/algorithm_versions/integrity-audit",
+    "evidence_manifest": "evidence_manifest.json",
+    "portfolio_config": "portfolio_config.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_sources": "portfolio_sources",
+    "root": "algorithm_versions/integrity-audit",
+    "scoring": "scoring",
+    "scoring_config": "scoring_config.json"
+  },
+  "schema_version": 1,
+  "silo_key": "integrity-audit",
+  "source": {
+    "algorithm_version_file": "c70d16d22dc8ad900d19f7014907774edaa3ae26",
+    "branch": "algo-exp/integrity-audit",
+    "dirty": true,
+    "dirty_status": [
+      "M database/models/core.py",
+      " M database/utils/scoring.py",
+      " M database/utils/sector_breadth_wave.py",
+      " M simulator.py",
+      " M strategy_config.py",
+      "?? algorithm_versions/integrity-audit/",
+      "?? experiments/integrity_audit_2026_06/",
+      "?? tests/test_integrity_guards.py"
+    ],
+    "head": "d21cea14d04d69ed121f3f9b5cbe9ed50ad7464c",
+    "head_short": "d21cea14d",
+    "mode": "working_tree"
+  },
+  "status": "candidate"
+}

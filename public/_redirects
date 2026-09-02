@@ -1,0 +1,3 @@
+/stock/:sym/flag    https://api.bagholders.ai/api/stock/:sym/flag    302
+/stock/:sym/unflag  https://api.bagholders.ai/api/stock/:sym/unflag  302
+/*    /index.html   200

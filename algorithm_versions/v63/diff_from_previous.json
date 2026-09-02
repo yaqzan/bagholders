@@ -1,0 +1,22 @@
+{
+  "changed_paths": [
+    "database/utils/scoring.py",
+    "strategy_config.py"
+  ],
+  "name_status": [
+    {
+      "path": "database/utils/scoring.py",
+      "status": "M"
+    },
+    {
+      "path": "strategy_config.py",
+      "status": "M"
+    }
+  ],
+  "range": "d4d63798..7b263922",
+  "stat": [
+    "database/utils/scoring.py | 144 +++++++++++++++++-----------------------------",
+    " strategy_config.py        |  40 +++++++------",
+    " 2 files changed, 75 insertions(+), 109 deletions(-)"
+  ]
+}

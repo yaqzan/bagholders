@@ -1,0 +1,40 @@
+{
+  "changed_paths": [
+    "api.py",
+    "backtest_cascade.py",
+    "database/utils/scoring.py",
+    "monte_carlo.py",
+    "trader.py"
+  ],
+  "name_status": [
+    {
+      "path": "api.py",
+      "status": "M"
+    },
+    {
+      "path": "backtest_cascade.py",
+      "status": "M"
+    },
+    {
+      "path": "database/utils/scoring.py",
+      "status": "M"
+    },
+    {
+      "path": "monte_carlo.py",
+      "status": "M"
+    },
+    {
+      "path": "trader.py",
+      "status": "M"
+    }
+  ],
+  "range": "41784e02..be057ce0",
+  "stat": [
+    "api.py                    |  51 ++++++++++++++---",
+    " backtest_cascade.py       |  69 ++++++++++++++++++-----",
+    " database/utils/scoring.py |  84 ++++++++++++++++++---------",
+    " monte_carlo.py            |  74 +++++++++++++++++++-----",
+    " trader.py                 | 141 ++++++++++++++++++++++++++++++++++++----------",
+    " 5 files changed, 325 insertions(+), 94 deletions(-)"
+  ]
+}

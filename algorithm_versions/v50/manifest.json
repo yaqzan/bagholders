@@ -1,0 +1,176 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-05-11T18:03:11",
+    "git_commit": "b0c1954",
+    "git_message": "v50 scoring: conservative stoch conviction wave",
+    "id": 50,
+    "label": "v50",
+    "notes": null
+  },
+  "captured_at": "2026-05-13T16:09:14+00:00",
+  "classification": {
+    "category": "scoring_algorithm",
+    "reason": "Commit message names score-stage or score-context behavior.",
+    "scoring_algorithm_snapshot": true
+  },
+  "files": {
+    "portfolio_sources": [
+      {
+        "bytes": 55408,
+        "path": "strategy_config.py",
+        "sha256": "99a82ac41d247a0141f6edb41325f48bef8fd61dc81bd6ab767e01d3f71113c6",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 22000,
+        "path": "mechanism_registry.py",
+        "sha256": "701b58f5efe719dac036b46883cfd50a4679478a302b2636c49685b5e77134d7",
+        "source": "mechanism_registry.py"
+      },
+      {
+        "bytes": 116842,
+        "path": "monte_carlo.py",
+        "sha256": "88869912ba02e66bfc7d64caff2f0fcba945a673e35ec569606da1cc3dcce62e",
+        "source": "monte_carlo.py"
+      },
+      {
+        "bytes": 90828,
+        "path": "monte_carlo_15dte.py",
+        "sha256": "399f5fb35332b366ff8a64717bde52a871aa68c75f2a2597e43b996962957e6f",
+        "source": "monte_carlo_15dte.py"
+      },
+      {
+        "bytes": 97826,
+        "path": "backtest_cascade.py",
+        "sha256": "97ef6754b69c44bc12a7fb1205a8d20b966780d46583e95022f73f2f46648791",
+        "source": "backtest_cascade.py"
+      },
+      {
+        "bytes": 86811,
+        "path": "backtest_cascade_15dte.py",
+        "sha256": "d3c42573eb769d6360f81698a731fe2eda634b7542e02708b7a40be2cb3addc3",
+        "source": "backtest_cascade_15dte.py"
+      },
+      {
+        "bytes": 172039,
+        "path": "api.py",
+        "sha256": "a860abd523a0f0ab07c343a3bec23e0ec4cc00473dde5c6e349976d9118fdf2a",
+        "source": "api.py"
+      },
+      {
+        "bytes": 203284,
+        "path": "trader.py",
+        "sha256": "86566c8a2622190a1ae3fa39d2fced3ee69aed2821265c90f69e018ea7d0fb8b",
+        "source": "trader.py"
+      }
+    ],
+    "scoring": [
+      {
+        "bytes": 8,
+        "path": "ALGORITHM_VERSION",
+        "sha256": "6253a5b83edd41cc487ac641190def6bc93fb46fa9f574a75453d633e5b86cd2",
+        "source": "ALGORITHM_VERSION"
+      },
+      {
+        "bytes": 55408,
+        "path": "strategy_config.py",
+        "sha256": "99a82ac41d247a0141f6edb41325f48bef8fd61dc81bd6ab767e01d3f71113c6",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 66837,
+        "path": "database/utils/scoring.py",
+        "sha256": "3fb903b716f410324dbb81dab2adc2c2e3ccf4644b14df5c3848557d864e2398",
+        "source": "database/utils/scoring.py"
+      },
+      {
+        "missing": true,
+        "source": "database/utils/sector_breadth_wave.py"
+      },
+      {
+        "bytes": 234290,
+        "path": "database/models/core.py",
+        "sha256": "77b0bd20382b6fd9de6b1056058cca05e95bf7b74f6060e336ad9221f21ae8ce",
+        "source": "database/models/core.py"
+      },
+      {
+        "bytes": 23552,
+        "path": "database/models/technical.py",
+        "sha256": "22648938cd5a14bb2d38b926252cde14ca6d0bbd3dfc0133c367cc7b6dc0dcb4",
+        "source": "database/models/technical.py"
+      },
+      {
+        "bytes": 961,
+        "path": "database/project_root.py",
+        "sha256": "7fae4a33e2321f0a2098aeb9be4f976655d060552f7b09d08fcf15cf9ba39c3c",
+        "source": "database/project_root.py"
+      },
+      {
+        "bytes": 24834,
+        "path": "market_breadth.py",
+        "sha256": "9e9237dbd075c5fe56304b08464d9db2b8c97e6ddfa508343ab81977338c76a7",
+        "source": "market_breadth.py"
+      },
+      {
+        "bytes": 31003,
+        "path": "market_regime.py",
+        "sha256": "d1a81d7ba5fdc22d0e19d6528f9f2af437556161cc101a97c87e4edbdbbe3c16",
+        "source": "market_regime.py"
+      },
+      {
+        "bytes": 36724,
+        "path": "volume_amplifier.py",
+        "sha256": "2dc87a230b98a5bba4b179751c6649d2bcb0f3f9a52f4260e580ff68610320ac",
+        "source": "volume_amplifier.py"
+      },
+      {
+        "bytes": 40377,
+        "path": "simulator.py",
+        "sha256": "02671a4489135e09e4a2ad7c8440b0675f8ee2fdc6e50dfc4fe9a090a8c74aa2",
+        "source": "simulator.py"
+      },
+      {
+        "bytes": 9763,
+        "path": "recalculate_scores.py",
+        "sha256": "1a08dfd87bb07fb12e33ea02581a0941ba17309937c32dab02a3cef1191d5434",
+        "source": "recalculate_scores.py"
+      }
+    ]
+  },
+  "fingerprints": {
+    "manifest_inputs": "314fc282c98fefc6ea083fdcc16a28084f7d16378ea3bfd0190cac9ff09684b5",
+    "portfolio_config": "ce9b353be15489384550b70fc978edaedd6fbffbe0d5d578f83726f9a0a02430",
+    "portfolio_snapshot": "e46db44869115d0bec2df03a136a81dbc7d44aec0ddddfe9dfc71c14aac4f112",
+    "portfolio_source_files": "e4970df5e4191d00936c59870da66b284562ca47bb2aadf18d9dfbc790b8c571",
+    "scoring_config": "3b6d18476b36407815c945d68cb71faeecd1fd8a6e75a10ae923f2ba25b8c76a",
+    "scoring_files": "b8b6aeb20fa01ec4a99a209f7ef17ff0e44bea666b9a8065f5bd77264b242ea3"
+  },
+  "label": "v50",
+  "notes": [
+    "This snapshot was copied from the git commit recorded by AlgorithmVersion rather than from the current worktree.",
+    "Runtime scoring still imports the checkout code until the injected loader phase lands."
+  ],
+  "paths": {
+    "cache_root": ".cache/algorithm_versions/v50",
+    "evidence_manifest": "evidence_manifest.json",
+    "portfolio_config": "portfolio_config.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_sources": "portfolio_sources",
+    "root": "algorithm_versions/v50",
+    "scoring": "scoring",
+    "scoring_config": "scoring_config.json"
+  },
+  "previous_resolved_key": "v48",
+  "schema_version": 1,
+  "silo_key": "v50",
+  "source": {
+    "algorithm_version_file": "61561ee",
+    "commit": "b0c19549026bfbe35790fb3acec4d4afa34323a0",
+    "commit_body": "",
+    "commit_short": "b0c19549",
+    "commit_subject": "v48 scoring: conservative stoch conviction wave",
+    "mode": "git_ref",
+    "requested_ref": "b0c1954"
+  },
+  "status": "shipped"
+}

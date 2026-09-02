@@ -1,0 +1,174 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-05-08T13:31:17",
+    "git_commit": "f274eb6",
+    "git_message": "v46 scoring: WVD-Wave score-stage inverted-U modulator on weekly volume force1",
+    "id": 46,
+    "label": "v46",
+    "notes": null
+  },
+  "captured_at": "2026-05-13T16:09:21+00:00",
+  "classification": {
+    "category": "scoring_algorithm",
+    "reason": "Commit message names score-stage or score-context behavior.",
+    "scoring_algorithm_snapshot": true
+  },
+  "files": {
+    "portfolio_sources": [
+      {
+        "bytes": 32038,
+        "path": "strategy_config.py",
+        "sha256": "2ca7b963446822b977cb6b99b0fde2e86176ce23171c1dfea24be58b1536fcfc",
+        "source": "strategy_config.py"
+      },
+      {
+        "missing": true,
+        "source": "mechanism_registry.py"
+      },
+      {
+        "bytes": 109257,
+        "path": "monte_carlo.py",
+        "sha256": "d998de381635ddd871daf6ae79077ba0e0071bcaa2411f477317af38955419b2",
+        "source": "monte_carlo.py"
+      },
+      {
+        "bytes": 84907,
+        "path": "monte_carlo_15dte.py",
+        "sha256": "4fdebafd2d8131df41e14fca7603b69c5cf32fd902e7e1d207cae2c1bc9578fc",
+        "source": "monte_carlo_15dte.py"
+      },
+      {
+        "bytes": 93181,
+        "path": "backtest_cascade.py",
+        "sha256": "8ae43e2f97b5ec40d5466529bdec6c317bca00ddf9000ea2ad5df5e45e3d584f",
+        "source": "backtest_cascade.py"
+      },
+      {
+        "bytes": 83169,
+        "path": "backtest_cascade_15dte.py",
+        "sha256": "717650e5bc52d176ba0981d154ce1b42b892d8c725903b083ac9ae328d206225",
+        "source": "backtest_cascade_15dte.py"
+      },
+      {
+        "bytes": 159518,
+        "path": "api.py",
+        "sha256": "afd0e9c5a18c03f9ff681a963dab85f2ce1af33cead57ade0fb3aebf496907b0",
+        "source": "api.py"
+      },
+      {
+        "bytes": 189444,
+        "path": "trader.py",
+        "sha256": "eb72889d08db4d2e215040bc21b24393e9567b09548aa942329e90604c65d935",
+        "source": "trader.py"
+      }
+    ],
+    "scoring": [
+      {
+        "bytes": 8,
+        "path": "ALGORITHM_VERSION",
+        "sha256": "04871f8ba9a69ad85ab835867362a91dad1cb8176dcb8c7b7c9452a8336b2c35",
+        "source": "ALGORITHM_VERSION"
+      },
+      {
+        "bytes": 32038,
+        "path": "strategy_config.py",
+        "sha256": "2ca7b963446822b977cb6b99b0fde2e86176ce23171c1dfea24be58b1536fcfc",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 65238,
+        "path": "database/utils/scoring.py",
+        "sha256": "fd2f45eecb6210da3267841ec1e4129442d3870b6b2441d5d80970eeeb19d787",
+        "source": "database/utils/scoring.py"
+      },
+      {
+        "missing": true,
+        "source": "database/utils/sector_breadth_wave.py"
+      },
+      {
+        "bytes": 224885,
+        "path": "database/models/core.py",
+        "sha256": "fdf4ea8e9ed19d176c7bfb496abbb8fcf21c8b963841eb6f0fe8c7affec4ddce",
+        "source": "database/models/core.py"
+      },
+      {
+        "bytes": 23552,
+        "path": "database/models/technical.py",
+        "sha256": "22648938cd5a14bb2d38b926252cde14ca6d0bbd3dfc0133c367cc7b6dc0dcb4",
+        "source": "database/models/technical.py"
+      },
+      {
+        "bytes": 961,
+        "path": "database/project_root.py",
+        "sha256": "7fae4a33e2321f0a2098aeb9be4f976655d060552f7b09d08fcf15cf9ba39c3c",
+        "source": "database/project_root.py"
+      },
+      {
+        "bytes": 24834,
+        "path": "market_breadth.py",
+        "sha256": "9e9237dbd075c5fe56304b08464d9db2b8c97e6ddfa508343ab81977338c76a7",
+        "source": "market_breadth.py"
+      },
+      {
+        "bytes": 31003,
+        "path": "market_regime.py",
+        "sha256": "d1a81d7ba5fdc22d0e19d6528f9f2af437556161cc101a97c87e4edbdbbe3c16",
+        "source": "market_regime.py"
+      },
+      {
+        "bytes": 36724,
+        "path": "volume_amplifier.py",
+        "sha256": "2dc87a230b98a5bba4b179751c6649d2bcb0f3f9a52f4260e580ff68610320ac",
+        "source": "volume_amplifier.py"
+      },
+      {
+        "bytes": 40377,
+        "path": "simulator.py",
+        "sha256": "02671a4489135e09e4a2ad7c8440b0675f8ee2fdc6e50dfc4fe9a090a8c74aa2",
+        "source": "simulator.py"
+      },
+      {
+        "bytes": 9763,
+        "path": "recalculate_scores.py",
+        "sha256": "1a08dfd87bb07fb12e33ea02581a0941ba17309937c32dab02a3cef1191d5434",
+        "source": "recalculate_scores.py"
+      }
+    ]
+  },
+  "fingerprints": {
+    "manifest_inputs": "c512a461e684a79364af3ae122e0a080b057bab472178a29caf143aa24927771",
+    "portfolio_config": "f8fba20aeb2f48d1ee51ee4ff1679345ffaa69d104d86eeccbc23c83e0771736",
+    "portfolio_snapshot": "e6bac892d01d9b22a564738fe0b5068f5e6a113ddd72a5fda1e382ebf0e44d31",
+    "portfolio_source_files": "ac9c287b39a5fd7b7e6af6eea96131495353669f145de2b49d94b723518f0160",
+    "scoring_config": "1ffb9616affc4529b4389eea735970ffa759a61ba81b539846a8ff8ffcac2501",
+    "scoring_files": "66f566a41e185c4d0a17611b967153bdba00f83d735f49bc5c5fcb674f454546"
+  },
+  "label": "v46",
+  "notes": [
+    "This snapshot was copied from the git commit recorded by AlgorithmVersion rather than from the current worktree.",
+    "Runtime scoring still imports the checkout code until the injected loader phase lands."
+  ],
+  "paths": {
+    "cache_root": ".cache/algorithm_versions/v46",
+    "evidence_manifest": "evidence_manifest.json",
+    "portfolio_config": "portfolio_config.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_sources": "portfolio_sources",
+    "root": "algorithm_versions/v46",
+    "scoring": "scoring",
+    "scoring_config": "scoring_config.json"
+  },
+  "previous_resolved_key": "v45",
+  "schema_version": 1,
+  "silo_key": "v46",
+  "source": {
+    "algorithm_version_file": "56eb1f8",
+    "commit": "f274eb6550258f7dc39de7e5cc3de4d539caaa32",
+    "commit_body": "Captures the full Q1/Q3/Q5 inverted-U cohort signal in weekly-volume features:\nLIFT moderate-positive force (Q3 anti-climax accumulation, +8.96pp WR15 peak)\nplus DAMPEN extreme-positive force (Q5 climax exhaustion). CLIMAX_THRESH=0.05\nshields the high-quality Q3 sweet spot from dampening \u2014 only Q5 climax\n(force1 > 0.05) gets dampened. Pure score-stage gradient, no labels, no tier\noverrides. Architecturally consistent with v37 PCD / v38 CWWD / v39 PESS /\nv43 MCD / v44 ICH.\n\nApply order in compute_overall_score: AFTER ICH, BEFORE PESS / EARN_BOOST.\n\nPer-trade gate (5y v45 baseline, 30dte_opt @ w=15 AND w=30):\n  Call 75+: +1.11pp WR15 / +1.18pp WR30 (-7.1% N) \u2014 6/6 cells positive\n  Call 80+: +0.56pp / +0.53pp (-7.8% N) \u2014 5/6 positive\n  Call 85+: +1.27pp / +2.54pp (-18.5% N) \u2014 5/6 positive\n  Call 90+: +7.45pp / +9.41pp (-21.6% N) \u2014 6/6 positive\n\nPortfolio MC N=300 \u00d7 22-now+5y vs v45 baseline (apples-to-apples):\n  22-now Worst DD: 72.0% \u2192 68.4% (-3.6pp)\n  22-now Median compound: +25%\n  5y Mean compound: +1.40e24% \u2192 +5.27e24% (3.77\u00d7, +277%)\n  5y Median compound: +25%\n  P(coll) = 0% all cells.\n\nCalibration: experiments/weekly_volume/wave_sweep.py (4608 variants, top-1).\nSee REPORT_v45_wave.md for full investigation writeup.\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+    "commit_short": "f274eb65",
+    "commit_subject": "v46 scoring: WVD-Wave score-stage inverted-U modulator on weekly volume force1",
+    "mode": "git_ref",
+    "requested_ref": "f274eb6"
+  },
+  "status": "shipped"
+}

@@ -1,0 +1,36 @@
+{
+  "artifacts": [
+    {
+      "id": "hydrated_miss_hypothesis_sweep",
+      "kind": "candidate_sweep",
+      "path": ".codex/runs/v63_score_research_hydrated_20260524_033200/REPORT.md",
+      "command": "python experiments/v63_score_research/sweep_miss_hypotheses.py --out-dir .codex/runs/v63_score_research_hydrated_20260524_033200",
+      "summary": "Hydrated WR15 utility screen over the v60 miss-analysis artifact. Best production-input candidate family was BB location taper; no future/barrier sigma input required."
+    },
+    {
+      "id": "postscore_bblt_full_window_validation",
+      "kind": "stage1_validation",
+      "path": ".codex/runs/v63_postscore_bblt_20260524_044400/REPORT.md",
+      "command": "python -u experiments/v63_score_research/validate_postscore_bblt.py --out-dir .codex/runs/v63_postscore_bblt_20260524_044400 --start 2020-01-01 --end 2026-05-15",
+      "summary": "Exact helper replay over active v60 75+/<=25 rows. PASS: tradeable WR15 77.0233% vs 75.8755%, WR30 76.8266% vs 75.5886%, N/day 5.5496 vs 6.7537."
+    },
+    {
+      "id": "strategy_config_drift_guard",
+      "kind": "test",
+      "path": "tests/test_strategy_config_drift.py",
+      "command": "python tests/test_strategy_config_drift.py",
+      "summary": "PASS after adding BB_LOCATION_TAPER_* scoring constants."
+    },
+    {
+      "id": "read_only_in_memory_assessment",
+      "kind": "assessment",
+      "path": ".codex/runs/v63_assessment_bblt_20260524_152000/REPORT.md",
+      "command": "python -u experiments/v63_score_research/assess_postscore_bblt.py --out-dir .codex/runs/v63_assessment_bblt_20260524_152000 --start 2020-01-01 --end 2026-05-15",
+      "summary": "Standard assessment tables without promotion or score-row writes. Candidate tradeable WR15 77.0316% vs v60 75.8757%; WR30 76.8421% vs 75.5922%; flow 5.5778/day."
+    }
+  ],
+  "backfill_status": "not_started",
+  "cache_root": ".cache/algorithm_versions/v63-bb-location-taper-rc",
+  "policy": "Large experiment datasets stay in .cache/algorithm_versions/<key>; tracked manifests store paths, commands, and checksums.",
+  "schema_version": 1
+}

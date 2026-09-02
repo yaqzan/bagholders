@@ -1,0 +1,174 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-05-01T22:08:54",
+    "git_commit": "43eecea",
+    "git_message": "v32 scoring: call-side WCF-mirror dampener (Priority #4 close)",
+    "id": 32,
+    "label": "v32",
+    "notes": null
+  },
+  "captured_at": "2026-05-13T16:10:17+00:00",
+  "classification": {
+    "category": "scoring_algorithm",
+    "reason": "Commit message names score-stage or score-context behavior.",
+    "scoring_algorithm_snapshot": true
+  },
+  "files": {
+    "portfolio_sources": [
+      {
+        "bytes": 19615,
+        "path": "strategy_config.py",
+        "sha256": "a9ebf41ecbf0ddf9cb1edc3fab4789874abd89100b13e6a72e58c351620ab684",
+        "source": "strategy_config.py"
+      },
+      {
+        "missing": true,
+        "source": "mechanism_registry.py"
+      },
+      {
+        "bytes": 80936,
+        "path": "monte_carlo.py",
+        "sha256": "eaa121eb0ffb56d02a3b5dfad35aca48b9f879087eb9df5d8a5039ea48ddc8b6",
+        "source": "monte_carlo.py"
+      },
+      {
+        "bytes": 79969,
+        "path": "monte_carlo_15dte.py",
+        "sha256": "14a0d18e834195d8c7d154418caaea3995da85fcd93db49c4b46325cd2b26227",
+        "source": "monte_carlo_15dte.py"
+      },
+      {
+        "bytes": 85692,
+        "path": "backtest_cascade.py",
+        "sha256": "1061c4fe1b6fd6766143d792f6ff4b68e42d6b302937d0979eb985c7a42a34b2",
+        "source": "backtest_cascade.py"
+      },
+      {
+        "bytes": 79966,
+        "path": "backtest_cascade_15dte.py",
+        "sha256": "3cfaabcd8096095e1f6c478faa45c18c44be31f365281bc4c03a686b19e91b24",
+        "source": "backtest_cascade_15dte.py"
+      },
+      {
+        "bytes": 138113,
+        "path": "api.py",
+        "sha256": "3b91480b51588cd0154c7fe01931f9c3b9915919b0031af1c5e8c8825a3f6d51",
+        "source": "api.py"
+      },
+      {
+        "bytes": 162108,
+        "path": "trader.py",
+        "sha256": "7931bf5e485f6efd510c81e529e0fb4ca87c56a78e22900b9278c6e78751b12c",
+        "source": "trader.py"
+      }
+    ],
+    "scoring": [
+      {
+        "bytes": 8,
+        "path": "ALGORITHM_VERSION",
+        "sha256": "ba152ac58aa666183f16d26d5f268b65edd98444a602d2ae852d7453b3e0d500",
+        "source": "ALGORITHM_VERSION"
+      },
+      {
+        "bytes": 19615,
+        "path": "strategy_config.py",
+        "sha256": "a9ebf41ecbf0ddf9cb1edc3fab4789874abd89100b13e6a72e58c351620ab684",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 26197,
+        "path": "database/utils/scoring.py",
+        "sha256": "8719562fe15b7a3552ce65e5986e030aca3547e1dcdf17cf47be38adadc9e344",
+        "source": "database/utils/scoring.py"
+      },
+      {
+        "missing": true,
+        "source": "database/utils/sector_breadth_wave.py"
+      },
+      {
+        "bytes": 205878,
+        "path": "database/models/core.py",
+        "sha256": "cd7f6230a36d6fe8a0038e068294fb44c3ab291eaa2107138df65013ba68a2fd",
+        "source": "database/models/core.py"
+      },
+      {
+        "bytes": 23553,
+        "path": "database/models/technical.py",
+        "sha256": "2752501ca5f3171ca2368ef5357fb66e2a468242b03a55381916273001762fc3",
+        "source": "database/models/technical.py"
+      },
+      {
+        "bytes": 961,
+        "path": "database/project_root.py",
+        "sha256": "7fae4a33e2321f0a2098aeb9be4f976655d060552f7b09d08fcf15cf9ba39c3c",
+        "source": "database/project_root.py"
+      },
+      {
+        "bytes": 24055,
+        "path": "market_breadth.py",
+        "sha256": "ee48a20f94b622941f1e4760c70d18cab82efd170835e606e8488eb3ee16043b",
+        "source": "market_breadth.py"
+      },
+      {
+        "bytes": 31003,
+        "path": "market_regime.py",
+        "sha256": "d1a81d7ba5fdc22d0e19d6528f9f2af437556161cc101a97c87e4edbdbbe3c16",
+        "source": "market_regime.py"
+      },
+      {
+        "bytes": 36724,
+        "path": "volume_amplifier.py",
+        "sha256": "2dc87a230b98a5bba4b179751c6649d2bcb0f3f9a52f4260e580ff68610320ac",
+        "source": "volume_amplifier.py"
+      },
+      {
+        "bytes": 31815,
+        "path": "simulator.py",
+        "sha256": "a22e8a9cbed923ee485dfdac744452aa7032118c10eca9a3104651ee8de4b7bf",
+        "source": "simulator.py"
+      },
+      {
+        "bytes": 9763,
+        "path": "recalculate_scores.py",
+        "sha256": "1a08dfd87bb07fb12e33ea02581a0941ba17309937c32dab02a3cef1191d5434",
+        "source": "recalculate_scores.py"
+      }
+    ]
+  },
+  "fingerprints": {
+    "manifest_inputs": "aab4e87dfdb2fbb52943f4e2bec7084f8e2d5544fc700bb72922887b54ab6488",
+    "portfolio_config": "bee7e8917f1ff37288b2e2220c0654dde9a3a9b5fadffc539c3fb3373054be25",
+    "portfolio_snapshot": "32f053f5bd805698132bdfdaa490f21fa8bc62317ec89b969623334ba4354eae",
+    "portfolio_source_files": "8a3c91db9ff0f9744939fe787aa7f710e604c34a0263e3ce92126f53dd049ea9",
+    "scoring_config": "f07320e9b50eebf13486177104307b4f0bab9d6ef346fe4356c5ffc618f19ef5",
+    "scoring_files": "6947b0a22e66b828bafd1a48095431b4de4d591f2962b1349d07bfb66351a8fa"
+  },
+  "label": "v32",
+  "notes": [
+    "This snapshot was copied from the git commit recorded by AlgorithmVersion rather than from the current worktree.",
+    "Runtime scoring still imports the checkout code until the injected loader phase lands."
+  ],
+  "paths": {
+    "cache_root": ".cache/algorithm_versions/v32",
+    "evidence_manifest": "evidence_manifest.json",
+    "portfolio_config": "portfolio_config.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_sources": "portfolio_sources",
+    "root": "algorithm_versions/v32",
+    "scoring": "scoring",
+    "scoring_config": "scoring_config.json"
+  },
+  "previous_resolved_key": "v31",
+  "schema_version": 1,
+  "silo_key": "v32",
+  "source": {
+    "algorithm_version_file": "f3ec7c1",
+    "commit": "43eeceab2f8d4ba6aed417e88d53c7f560a4d925",
+    "commit_body": "Mirrors the v27 put WCF lift on the call side: when overall >= 75 AND weekly\nnon-confirming (wadj < 1), pull score down toward 55 by K=0.95 * weakness *\n(overall - 55). Closes the asymmetric-weekly-amp gap surfaced by miss-ledger.\n\nPer-trade evidence (experiments/miss_ledger/, 5y v31, 30dte_opt barriers w=15d):\n  85+ TP% +0.95pp / 80+ +1.09pp / 75+ +1.14pp ; puts unchanged ; N within H3.\n  Multi-window 75+: 1y +0.32 / 3y +1.49 / 5y +1.14 \u2014 sign-consistent.\n\nDiscriminator validation (experiments/miss_ledger/analyze_ledger.py):\n  wadj < 0 cohort on calls 70+: miss rate 52.5% vs 41.4% baseline (lift 1.27,\n  z=+10.1) \u2014 largest single-feature miss driver. Compounded with vsig=CONVICTION\n  to 56.1% / vmag=mid to 57.5%. Mirror surgically targets that cohort.\n\nCalibration (32 variants, fast_variant_runner):\n  K=0.95, wadj_cutoff=+1, score_gate=75, lift_target=55. Wider cutoffs (5-17)\n  delivered larger per-trade lift but collapsed N by 27-90% (failed H3) \u2014\n  that's a stricter gate, not alpha.\n\nAdds 'cwcf_dampen' to weight_info for explain-scores audits when active.\n\nCloses Priority #4 (Weekly Adj Smooth Scaling) in known-issues.md \u2014 though via\na discrete dampener in the wadj<0 cohort rather than a tanh-saturating amp.\nThe miss-ledger evidence concentrated entirely on wadj<0 (z=+10.1 for cut=0,\ndiluting at wider cuts), so the discrete formulation matches the signal shape.\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+    "commit_short": "43eeceab",
+    "commit_subject": "v32 scoring: call-side WCF-mirror dampener (Priority #4 close)",
+    "mode": "git_ref",
+    "requested_ref": "43eecea"
+  },
+  "status": "shipped"
+}

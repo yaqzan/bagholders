@@ -1,0 +1,70 @@
+{
+  "changed_paths": [
+    "ALGORITHM_VERSION",
+    "api.py",
+    "backtest_cascade.py",
+    "backtest_cascade_15dte.py",
+    "database/models/core.py",
+    "database/utils/scoring.py",
+    "monte_carlo.py",
+    "monte_carlo_15dte.py",
+    "strategy_config.py",
+    "trader.py"
+  ],
+  "name_status": [
+    {
+      "path": "ALGORITHM_VERSION",
+      "status": "M"
+    },
+    {
+      "path": "api.py",
+      "status": "M"
+    },
+    {
+      "path": "backtest_cascade.py",
+      "status": "M"
+    },
+    {
+      "path": "backtest_cascade_15dte.py",
+      "status": "M"
+    },
+    {
+      "path": "database/models/core.py",
+      "status": "M"
+    },
+    {
+      "path": "database/utils/scoring.py",
+      "status": "M"
+    },
+    {
+      "path": "monte_carlo.py",
+      "status": "M"
+    },
+    {
+      "path": "monte_carlo_15dte.py",
+      "status": "M"
+    },
+    {
+      "path": "strategy_config.py",
+      "status": "A"
+    },
+    {
+      "path": "trader.py",
+      "status": "M"
+    }
+  ],
+  "range": "f3ec7c12..43eeceab",
+  "stat": [
+    "ALGORITHM_VERSION         |   2 +-",
+    " api.py                    | 206 ++++++++-----",
+    " backtest_cascade.py       | 603 +++++++++++++++++++++++++++---------",
+    " backtest_cascade_15dte.py | 554 +++++++++++++++++++++++++--------",
+    " database/models/core.py   |  77 +++++",
+    " database/utils/scoring.py |  33 ++",
+    " monte_carlo.py            | 439 ++++++++++++++++----------",
+    " monte_carlo_15dte.py      | 761 ++++++++++++++++++++++++++++++++--------------",
+    " strategy_config.py        | 499 ++++++++++++++++++++++++++++++",
+    " trader.py                 | 262 +++++++++-------",
+    " 10 files changed, 2596 insertions(+), 840 deletions(-)"
+  ]
+}

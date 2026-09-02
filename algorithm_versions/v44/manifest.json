@@ -1,0 +1,174 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-05-07T21:19:56",
+    "git_commit": "d8024b9",
+    "git_message": "v44 scoring: ICH Ichimoku Kijun-sen state dampener (Phase H Rank #3)",
+    "id": 44,
+    "label": "v44",
+    "notes": null
+  },
+  "captured_at": "2026-05-13T16:09:28+00:00",
+  "classification": {
+    "category": "scoring_algorithm",
+    "reason": "Commit message names score-stage or score-context behavior.",
+    "scoring_algorithm_snapshot": true
+  },
+  "files": {
+    "portfolio_sources": [
+      {
+        "bytes": 28822,
+        "path": "strategy_config.py",
+        "sha256": "ef1e04dcf524196da59bd71b58ffecc6d915de05d5afd586d083dcb9c9c0728a",
+        "source": "strategy_config.py"
+      },
+      {
+        "missing": true,
+        "source": "mechanism_registry.py"
+      },
+      {
+        "bytes": 105700,
+        "path": "monte_carlo.py",
+        "sha256": "662eec7780949406198cb73f86888db3c35ff5428e8feedffccbde0f95a23a43",
+        "source": "monte_carlo.py"
+      },
+      {
+        "bytes": 84907,
+        "path": "monte_carlo_15dte.py",
+        "sha256": "4fdebafd2d8131df41e14fca7603b69c5cf32fd902e7e1d207cae2c1bc9578fc",
+        "source": "monte_carlo_15dte.py"
+      },
+      {
+        "bytes": 89905,
+        "path": "backtest_cascade.py",
+        "sha256": "e635136e2c5c67f00a64ba66668ee3ccee14a4d76aa63a39fb445f2064acaeea",
+        "source": "backtest_cascade.py"
+      },
+      {
+        "bytes": 83169,
+        "path": "backtest_cascade_15dte.py",
+        "sha256": "717650e5bc52d176ba0981d154ce1b42b892d8c725903b083ac9ae328d206225",
+        "source": "backtest_cascade_15dte.py"
+      },
+      {
+        "bytes": 157578,
+        "path": "api.py",
+        "sha256": "b05c9c3e49f6a50ab37757985dd4ff980ee8c104b062361998e816b081ee0ff2",
+        "source": "api.py"
+      },
+      {
+        "bytes": 186493,
+        "path": "trader.py",
+        "sha256": "481920a12f6ceb1973748d567f2f656bcde81978ec3e5b877ee4d7248d2baa94",
+        "source": "trader.py"
+      }
+    ],
+    "scoring": [
+      {
+        "bytes": 8,
+        "path": "ALGORITHM_VERSION",
+        "sha256": "2600d7aa162bdd5382b5fc3f36cb421db65ce5f56a4904cfdaf25a85e2963198",
+        "source": "ALGORITHM_VERSION"
+      },
+      {
+        "bytes": 28822,
+        "path": "strategy_config.py",
+        "sha256": "ef1e04dcf524196da59bd71b58ffecc6d915de05d5afd586d083dcb9c9c0728a",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 58038,
+        "path": "database/utils/scoring.py",
+        "sha256": "e3f4ba723379c9e08bc6cf946d131f065220adf9af6cd82574af109200b78b8d",
+        "source": "database/utils/scoring.py"
+      },
+      {
+        "missing": true,
+        "source": "database/utils/sector_breadth_wave.py"
+      },
+      {
+        "bytes": 222458,
+        "path": "database/models/core.py",
+        "sha256": "1abed0efb4d3c218577ac214ee383fc2d71e5662c5031b31675cdb1b006e140b",
+        "source": "database/models/core.py"
+      },
+      {
+        "bytes": 23552,
+        "path": "database/models/technical.py",
+        "sha256": "22648938cd5a14bb2d38b926252cde14ca6d0bbd3dfc0133c367cc7b6dc0dcb4",
+        "source": "database/models/technical.py"
+      },
+      {
+        "bytes": 961,
+        "path": "database/project_root.py",
+        "sha256": "7fae4a33e2321f0a2098aeb9be4f976655d060552f7b09d08fcf15cf9ba39c3c",
+        "source": "database/project_root.py"
+      },
+      {
+        "bytes": 24055,
+        "path": "market_breadth.py",
+        "sha256": "ee48a20f94b622941f1e4760c70d18cab82efd170835e606e8488eb3ee16043b",
+        "source": "market_breadth.py"
+      },
+      {
+        "bytes": 31003,
+        "path": "market_regime.py",
+        "sha256": "d1a81d7ba5fdc22d0e19d6528f9f2af437556161cc101a97c87e4edbdbbe3c16",
+        "source": "market_regime.py"
+      },
+      {
+        "bytes": 36724,
+        "path": "volume_amplifier.py",
+        "sha256": "2dc87a230b98a5bba4b179751c6649d2bcb0f3f9a52f4260e580ff68610320ac",
+        "source": "volume_amplifier.py"
+      },
+      {
+        "bytes": 39888,
+        "path": "simulator.py",
+        "sha256": "6677a88ea1eff6a6c0c84657b1b103bed6a9008b45685007e1cb3cfbe0337457",
+        "source": "simulator.py"
+      },
+      {
+        "bytes": 9763,
+        "path": "recalculate_scores.py",
+        "sha256": "1a08dfd87bb07fb12e33ea02581a0941ba17309937c32dab02a3cef1191d5434",
+        "source": "recalculate_scores.py"
+      }
+    ]
+  },
+  "fingerprints": {
+    "manifest_inputs": "3a9998a310f4df93d9b2a1c8ada8d34d7441f073f69873db545b83e9d5ca03d2",
+    "portfolio_config": "efef2b17459fdad3b3e7706f1756e2dd2fe537d00522d8d2496b3351d724d1be",
+    "portfolio_snapshot": "1a1d21540b96157a0cba40e8542fa838bae3e62000bdac76c612c9bf2520b7d8",
+    "portfolio_source_files": "ade026f032e900df71ae6a83f07be587a8a7003065dc7031a43082f0a767bbd7",
+    "scoring_config": "1ffb9616affc4529b4389eea735970ffa759a61ba81b539846a8ff8ffcac2501",
+    "scoring_files": "4e5bfdef837e27727fde11cbfdef0de815e0153dc9741322aed66cce716c7485"
+  },
+  "label": "v44",
+  "notes": [
+    "This snapshot was copied from the git commit recorded by AlgorithmVersion rather than from the current worktree.",
+    "Runtime scoring still imports the checkout code until the injected loader phase lands."
+  ],
+  "paths": {
+    "cache_root": ".cache/algorithm_versions/v44",
+    "evidence_manifest": "evidence_manifest.json",
+    "portfolio_config": "portfolio_config.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_sources": "portfolio_sources",
+    "root": "algorithm_versions/v44",
+    "scoring": "scoring",
+    "scoring_config": "scoring_config.json"
+  },
+  "previous_resolved_key": "v43",
+  "schema_version": 1,
+  "silo_key": "v44",
+  "source": {
+    "algorithm_version_file": "e083032",
+    "commit": "d8024b9b6e313a797b46cd7d66c577363e96a867",
+    "commit_body": "Score-stage continuous dampener using bearish weekly Kijun-sen state\n(kijun_pct < 0 = price below 26w midpoint) as the indicator. Captures\npeaks orthogonal to v43 MCD: 35% cohort overlap but produces +4.60pp\nWR15 marginal lift on the MCD-not-fired sub-cohort at 75+.\n\nMechanism (Phase H asymmetric-K, calls + puts):\n  CALL: K_eff = K_BASE * score_norm^K_POWER  (concentrates dampening at\n        top tiers where signal is strongest; 95+ \u0394WR +5.77 vs 85+ +0.89)\n  PUT:  symmetric log ramp on score zone \u00d7 indicator distance\n        (Phase C Rank #1 architecture)\n\nApply order: AFTER MCD (calls) and PCD (puts), BEFORE PESS and EARN_BOOST.\n\nPer-trade evidence (5y v43 baseline, option-aligned barrier 30dte_opt @ w=15d):\n  CALL 95+: +5.77pp / -7.7% N\n  CALL 90+: +1.45pp / -14.4% N\n  CALL 85+: +0.89pp / -8.3% N\n  CALL 70+: +0.14pp / -3.0% N (affected tier)\n  PUT  <25: +0.72pp / -14.9% N (affected tier)\n\nH1-H5 strict ship gate:\n  H1 strict (>=+0.5pp on >=3 call tiers): PASS (95+/90+/85+)\n  H1 affected-tier (Put <25 >=+0.3pp):    PASS (+0.72)\n  H2 directional (WR15 vs WR30):          PASS on 95+/90+/85+\n  H3 N stability (+/-15%):                PASS (max -14.9%)\n  H4 puts neutral or better:              PASS\n  H5 multi-window 1y/3y/5y:               sign-flips on 95+/90+/85+ are\n                                          small-N noise (1y N=5-26)\n                                          consistent with PCD/MCD/CWWD pattern\n  Smoothness: PASS (asymmetric power-law monotonic by construction)\n\nStability validation (Phase D + COHR test):\n  - Ichimoku features 3x more stable than wadj (normalized churn)\n  - Within affected cohort (1.58% of day-pairs): Monday whiplash\n    reduced -1.36pp; Tue-Fri reduced -0.70pp\n\nRobustness: same Phase H Rank #3 config wins on both v39 and v43 baselines.\nThe v43 MCD reshape doesn't degrade Ichimoku alpha \u2014 the two mechanisms\ntarget overlapping but distinct cohorts (Phase F cross-tab analysis).\n\nCalibration trail: experiments/weekly_avwap/\n  Phase A-D: feature build + cohort profiling + stability validation\n  Phase C-multi: substitutive sweeps proved v27 cannot be replaced\n  Phase E: constrained refinement (Rank #3 winner under Phase E framework)\n  Phase F: scorched-earth substitution analysis\n  Phase G: asymmetric-K introduction (200 variants, K_POWER 1.58)\n  Phase H: refined Phase G with multi-tier alpha objective (250 variants,\n           Rank #3 winner with K_POWER=2.68)\n  470+ total variants tested across 7 sweeps.\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+    "commit_short": "d8024b9b",
+    "commit_subject": "v44 scoring: ICH Ichimoku Kijun-sen state dampener (Phase H Rank #3)",
+    "mode": "git_ref",
+    "requested_ref": "d8024b9"
+  },
+  "status": "shipped"
+}

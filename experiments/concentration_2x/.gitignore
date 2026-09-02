@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+# bulk regeneratable sweep output (keep results/sweep_smoke.json)
+results/coarse_partial/
+*.parquet

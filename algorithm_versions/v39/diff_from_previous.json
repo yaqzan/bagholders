@@ -1,0 +1,34 @@
+{
+  "changed_paths": [
+    "ALGORITHM_VERSION",
+    "database/utils/scoring.py",
+    "strategy_config.py",
+    "trader.py"
+  ],
+  "name_status": [
+    {
+      "path": "ALGORITHM_VERSION",
+      "status": "M"
+    },
+    {
+      "path": "database/utils/scoring.py",
+      "status": "M"
+    },
+    {
+      "path": "strategy_config.py",
+      "status": "M"
+    },
+    {
+      "path": "trader.py",
+      "status": "M"
+    }
+  ],
+  "range": "b093e2d1..200f33a2",
+  "stat": [
+    "ALGORITHM_VERSION         |  2 +-",
+    " database/utils/scoring.py | 43 +++++++++++++++++++++++++++++++++++++++++++",
+    " strategy_config.py        | 12 ++++++++++--",
+    " trader.py                 | 10 ++++------",
+    " 4 files changed, 58 insertions(+), 9 deletions(-)"
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "changed_paths": [
+    "ALGORITHM_VERSION",
+    "api.py",
+    "backtest_cascade.py",
+    "backtest_cascade_15dte.py",
+    "database/models/core.py",
+    "monte_carlo.py",
+    "monte_carlo_15dte.py",
+    "trader.py"
+  ],
+  "name_status": [
+    {
+      "path": "ALGORITHM_VERSION",
+      "status": "M"
+    },
+    {
+      "path": "api.py",
+      "status": "M"
+    },
+    {
+      "path": "backtest_cascade.py",
+      "status": "M"
+    },
+    {
+      "path": "backtest_cascade_15dte.py",
+      "status": "A"
+    },
+    {
+      "path": "database/models/core.py",
+      "status": "M"
+    },
+    {
+      "path": "monte_carlo.py",
+      "status": "M"
+    },
+    {
+      "path": "monte_carlo_15dte.py",
+      "status": "A"
+    },
+    {
+      "path": "trader.py",
+      "status": "M"
+    }
+  ],
+  "range": "8473cba1..9a9da33a",
+  "stat": [
+    "ALGORITHM_VERSION         |    2 +-",
+    " api.py                    |  221 +++++--",
+    " backtest_cascade.py       |  177 ++++--",
+    " backtest_cascade_15dte.py | 1409 ++++++++++++++++++++++++++++++++++++++++++",
+    " database/models/core.py   |  178 ++++--",
+    " monte_carlo.py            |  577 +++++++++++------",
+    " monte_carlo_15dte.py      | 1496 +++++++++++++++++++++++++++++++++++++++++++++",
+    " trader.py                 |  368 +++++++++--",
+    " 8 files changed, 4055 insertions(+), 373 deletions(-)"
+  ]
+}

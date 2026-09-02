@@ -1,0 +1,178 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-05-31T13:03:39",
+    "git_commit": "8b59206c3e4778f0eea1d240c34a48522ee64d1d",
+    "git_message": "scoring: weekly transition blend (point-in-time honest weekly, removes recalc look-ahead + smooths fakeout)",
+    "id": 69,
+    "label": "v69",
+    "notes": null
+  },
+  "captured_at": "2026-06-12T10:10:19+00:00",
+  "classification": {
+    "category": "scoring_algorithm",
+    "reason": "Commit message names score-stage or score-context behavior.",
+    "scoring_algorithm_snapshot": true
+  },
+  "files": {
+    "portfolio_sources": [
+      {
+        "bytes": 64566,
+        "path": "strategy_config.py",
+        "sha256": "0d0799b4582105ded8fcc94dd03a5da72f77e696a61211b387acbd2997a0880e",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 24986,
+        "path": "mechanism_registry.py",
+        "sha256": "7c19b653f81a1780b82d0c986011bb013e08fe59c5dd4f9da8767da30b996d69",
+        "source": "mechanism_registry.py"
+      },
+      {
+        "bytes": 138566,
+        "path": "monte_carlo.py",
+        "sha256": "ac1f5c53d2890f1b2fc75b53eff4d52c8551be772f04fcc1f2c581410e584ad6",
+        "source": "monte_carlo.py"
+      },
+      {
+        "bytes": 90354,
+        "path": "monte_carlo_15dte.py",
+        "sha256": "71e893ea7abf52595587c7d1ec343fcd9ff2a240b50a548e1f8d813a22c24d1d",
+        "source": "monte_carlo_15dte.py"
+      },
+      {
+        "bytes": 119288,
+        "path": "backtest_cascade.py",
+        "sha256": "d8d0b1378b8c8fc36c576ebaf1dc2e154b539d4df86d4e7f794130b5215a3333",
+        "source": "backtest_cascade.py"
+      },
+      {
+        "bytes": 86823,
+        "path": "backtest_cascade_15dte.py",
+        "sha256": "cd3820f1dea7f382bee9f6d2402de4786c718d9e228d61eaef4a2133a508b588",
+        "source": "backtest_cascade_15dte.py"
+      },
+      {
+        "bytes": 234355,
+        "path": "api.py",
+        "sha256": "84f90988539052d8ac743638c6d3ce541da55e977d1831f45e766343062e45fd",
+        "source": "api.py"
+      },
+      {
+        "bytes": 251869,
+        "path": "trader.py",
+        "sha256": "5e2124c4326de910157fc1bdd587f37842f1f25bb948a75551db834c08eae629",
+        "source": "trader.py"
+      }
+    ],
+    "scoring": [
+      {
+        "bytes": 9,
+        "path": "ALGORITHM_VERSION",
+        "sha256": "238ff82d0a678c3bd8956b971bcfa4b4a14020db7c3b4ea3862a5bcc67043e4f",
+        "source": "ALGORITHM_VERSION"
+      },
+      {
+        "bytes": 64566,
+        "path": "strategy_config.py",
+        "sha256": "0d0799b4582105ded8fcc94dd03a5da72f77e696a61211b387acbd2997a0880e",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 88874,
+        "path": "database/utils/scoring.py",
+        "sha256": "6c024d0fe32b02672a3c37a90391db63fd2d775cbf07497de708afa7b0c13add",
+        "source": "database/utils/scoring.py"
+      },
+      {
+        "bytes": 12659,
+        "path": "database/utils/sector_breadth_wave.py",
+        "sha256": "02548d3dacecfbce0f92469068797933711d8ccf61c7ebe0d990a68b73ef61a2",
+        "source": "database/utils/sector_breadth_wave.py"
+      },
+      {
+        "bytes": 285784,
+        "path": "database/models/core.py",
+        "sha256": "a5afb91031d978b48bd2fc582255ae150e9a0f62616395181d7a84d16e3fe4fd",
+        "source": "database/models/core.py"
+      },
+      {
+        "bytes": 24417,
+        "path": "database/models/technical.py",
+        "sha256": "aa267949307463164561744e895afea43746a467e6f918d0f7fc2603c62372f9",
+        "source": "database/models/technical.py"
+      },
+      {
+        "bytes": 961,
+        "path": "database/project_root.py",
+        "sha256": "7fae4a33e2321f0a2098aeb9be4f976655d060552f7b09d08fcf15cf9ba39c3c",
+        "source": "database/project_root.py"
+      },
+      {
+        "bytes": 41126,
+        "path": "market_breadth.py",
+        "sha256": "e9bc8d559261731032af7c7d19f263209645ff3511d82e15360d491a86c73c5c",
+        "source": "market_breadth.py"
+      },
+      {
+        "bytes": 31003,
+        "path": "market_regime.py",
+        "sha256": "d1a81d7ba5fdc22d0e19d6528f9f2af437556161cc101a97c87e4edbdbbe3c16",
+        "source": "market_regime.py"
+      },
+      {
+        "bytes": 37033,
+        "path": "volume_amplifier.py",
+        "sha256": "c40b9b979c6306d24b7e4ba55f40d69f6bae1757c01d1a69ba1358aeaf9d2224",
+        "source": "volume_amplifier.py"
+      },
+      {
+        "bytes": 43711,
+        "path": "simulator.py",
+        "sha256": "c80e0ebaf988379a2a97819c8ad03d11b2dc5758e6d7f18689d3c671661072f2",
+        "source": "simulator.py"
+      },
+      {
+        "bytes": 19620,
+        "path": "recalculate_scores.py",
+        "sha256": "b54195b8bac40540488ea272269ad61d31031a936daa08c366633a0ae194b5e9",
+        "source": "recalculate_scores.py"
+      }
+    ]
+  },
+  "fingerprints": {
+    "manifest_inputs": "c429309d13ebf98010b6430a5f6a395f43b96387551c1e1235f3f9ad1d5355c1",
+    "portfolio_config": "15f77bf27f825813520c9e20a93c077cf7b33eb7aeee0da1357d37f0d406ffd1",
+    "portfolio_snapshot": "f4b1ffa4479d7791ab89dbbbb7d4e472f4f4c47aa6d64a02eeb10ec7b58170ac",
+    "portfolio_source_files": "f40952bdc04434ab71bff81bef84f190b691e38b2613c35634efa1ffa860318c",
+    "scoring_config": "2166150e4ae9d94cac2ce4d8d230d82ab2d12fbf7ac675971831e6f84d96bd12",
+    "scoring_files": "06b0b4d984a6437476b1d8975940c47bcd646e2e44593b6e9ffc81506a55af51"
+  },
+  "label": "v69-weekly-transition-blend-silo-backfill",
+  "notes": [
+    "This snapshot was copied from the git commit recorded by AlgorithmVersion rather than from the current worktree.",
+    "Runtime scoring still imports the checkout code until the injected loader phase lands."
+  ],
+  "paths": {
+    "cache_root": ".cache/algorithm_versions/v69",
+    "evidence_manifest": "evidence_manifest.json",
+    "portfolio_config": "portfolio_config.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_sources": "portfolio_sources",
+    "root": "algorithm_versions/v69",
+    "scoring": "scoring",
+    "scoring_config": "scoring_config.json"
+  },
+  "previous_resolved_key": "v68",
+  "schema_version": 1,
+  "silo_key": "v69",
+  "source": {
+    "algorithm_version_file": "d4a3e9fec",
+    "commit": "8b59206c3e4778f0eea1d240c34a48522ee64d1d",
+    "commit_body": "Replaces the single current-week weekly adjustment with a point-in-time blend of\ntwo honest weekly states, weighted by trading-bars-elapsed this week\n(t = bars/5, Mon~0.2 -> Fri=1.0):\n  comp_adj = calculate_weekly_adjustment(last-completed W-1, two-weeks-ago W-2)\n             (state 1 = what live trader update already used; honest, ~1wk stale)\n  pit_adj  = calculate_weekly_adjustment(partial current week W [reconstructed\n             from daily bars Mon->date, NO future], last-completed W-1)\n             (state 2 = freshest point-in-time, no future bars)\n  w_adj    = (1-t)*comp_adj + t*pit_adj\n\nWhy: the batch/recalc path keyed the weekly on the CURRENT week and read the\nstored COMPLETE Mon-Fri WeeklyScore for a mid-week historical signal = LOOK-AHEAD,\nwhich inflated the backtest (live trader update was always honest via the\nlast-completed-week property). New production helper database/utils/weekly_pit.py\nreconstructs the partial current week point-in-time (validated bit-identical to\nlive score_intraday_logs, mean|delta|=0.28, 97.5% within +/-2).\n\nValidated (ScoreSimulator, no DB writes): look-ahead REMOVED -- 75+ cohort\noptTP15 Mon-vs-Fri gap +8.4pp (state-3 look-ahead) -> -0.0pp (blend); honest 75+\noptTP15 = 53.3% (Wilson-LB 49.6%, clears 45% call BE) vs the inflated 63.6%;\nfakeout SMOOTHED -- Monday-boundary mean |delta overall| 5.99 -> 3.47 (-42%).\n75+ supply -38.6% (the removed entries were look-ahead false positives).\n\nCo-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>",
+    "commit_short": "8b59206c3",
+    "commit_subject": "scoring: weekly transition blend (point-in-time honest weekly, removes recalc look-ahead + smooths fakeout)",
+    "mode": "git_ref",
+    "requested_ref": "8b59206c3e4778f0eea1d240c34a48522ee64d1d"
+  },
+  "status": "shipped"
+}

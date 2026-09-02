@@ -1,0 +1,160 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-04-07T00:13:44",
+    "git_commit": "a1a32a2",
+    "git_message": "26.04.07 - entry_filter v1: OOS-validated LOW (+20%) and HIGH (+6.5%) gates",
+    "id": 8,
+    "label": "v8",
+    "notes": null
+  },
+  "captured_at": "2026-05-13T16:11:39+00:00",
+  "classification": {
+    "category": "scoring_algorithm",
+    "reason": "Commit message names score-stage or score-context behavior.",
+    "scoring_algorithm_snapshot": true
+  },
+  "files": {
+    "portfolio_sources": [
+      {
+        "missing": true,
+        "source": "strategy_config.py"
+      },
+      {
+        "missing": true,
+        "source": "mechanism_registry.py"
+      },
+      {
+        "missing": true,
+        "source": "monte_carlo.py"
+      },
+      {
+        "missing": true,
+        "source": "monte_carlo_15dte.py"
+      },
+      {
+        "missing": true,
+        "source": "backtest_cascade.py"
+      },
+      {
+        "missing": true,
+        "source": "backtest_cascade_15dte.py"
+      },
+      {
+        "bytes": 58390,
+        "path": "api.py",
+        "sha256": "533e0410c4f751333dcbbaed3b315332ebd73b230875dd6d06bf45669200d87d",
+        "source": "api.py"
+      },
+      {
+        "bytes": 63979,
+        "path": "trader.py",
+        "sha256": "04bdb8919812df62df4a02251791782dbcbd776f6474822cdf6481853fbd28b8",
+        "source": "trader.py"
+      }
+    ],
+    "scoring": [
+      {
+        "missing": true,
+        "source": "ALGORITHM_VERSION"
+      },
+      {
+        "missing": true,
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 7610,
+        "path": "database/utils/scoring.py",
+        "sha256": "5a982667b2dae61fcc512baee5c49c3b98c49de8fdff45055bf4595da7ea15af",
+        "source": "database/utils/scoring.py"
+      },
+      {
+        "missing": true,
+        "source": "database/utils/sector_breadth_wave.py"
+      },
+      {
+        "bytes": 130016,
+        "path": "database/models/core.py",
+        "sha256": "f3ab537b3335046921141de4e6bd5c0ac2fd512f580f77816880d74077cce21f",
+        "source": "database/models/core.py"
+      },
+      {
+        "bytes": 17689,
+        "path": "database/models/technical.py",
+        "sha256": "3f44c93f24cce14284787a5732ea0b8e471371fd27f4837041e24e47ee01b24d",
+        "source": "database/models/technical.py"
+      },
+      {
+        "bytes": 961,
+        "path": "database/project_root.py",
+        "sha256": "7fae4a33e2321f0a2098aeb9be4f976655d060552f7b09d08fcf15cf9ba39c3c",
+        "source": "database/project_root.py"
+      },
+      {
+        "bytes": 23943,
+        "path": "market_breadth.py",
+        "sha256": "0d8781833668eafc74bb5ea5a604c207bd6219ebf7b36266530c3579cfa168f8",
+        "source": "market_breadth.py"
+      },
+      {
+        "bytes": 14483,
+        "path": "market_regime.py",
+        "sha256": "fb3dcc48010f55bc3b5470ce67162e84fab39e5a8ffc0e0fdbf587ed5a2a53a9",
+        "source": "market_regime.py"
+      },
+      {
+        "bytes": 31853,
+        "path": "volume_amplifier.py",
+        "sha256": "2a48390bd07ca193bc6766bb905fd88499d2625c5c989abd3a86457f6fd9a57c",
+        "source": "volume_amplifier.py"
+      },
+      {
+        "bytes": 24994,
+        "path": "simulator.py",
+        "sha256": "9a6333e9a3093db63d2a7311380f8f68744b77959a33f47b87f98b8de8039199",
+        "source": "simulator.py"
+      },
+      {
+        "bytes": 6703,
+        "path": "recalculate_scores.py",
+        "sha256": "0875e17cb56ea4a9873411f443412e0bf384fd254b74f5f9a945e62839beaf7c",
+        "source": "recalculate_scores.py"
+      }
+    ]
+  },
+  "fingerprints": {
+    "manifest_inputs": "b5de29d101601a4febc1e6cdac9301d8cde6aa95da89baa745823dea9d491b3a",
+    "portfolio_config": "9d9845ef08b80708324ca6f160fcf2f4015043db317d82cdf50ee9c6c55c336f",
+    "portfolio_snapshot": "1980fb44138f406632feec71da8abfa47068cd100aaa500cbb085cb985bec355",
+    "portfolio_source_files": "20b3381c044f6e37bd10896df2e171a683e0e77acbed7ad519b58f776eb90b0e",
+    "scoring_config": "af73a503aa4a694ec2ccf8a54d8e0bc2eea5b05564ac3a02ebd2d2d195c5bf09",
+    "scoring_files": "18ae10f9811daf500c0e939626ac51da2c449f61b1caf0bbb5dbaf4762f97130"
+  },
+  "label": "v8",
+  "notes": [
+    "This snapshot was copied from the git commit recorded by AlgorithmVersion rather than from the current worktree.",
+    "Runtime scoring still imports the checkout code until the injected loader phase lands."
+  ],
+  "paths": {
+    "cache_root": ".cache/algorithm_versions/v8",
+    "evidence_manifest": "evidence_manifest.json",
+    "portfolio_config": "portfolio_config.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_sources": "portfolio_sources",
+    "root": "algorithm_versions/v8",
+    "scoring": "scoring",
+    "scoring_config": "scoring_config.json"
+  },
+  "previous_resolved_key": "v7",
+  "schema_version": 1,
+  "silo_key": "v8",
+  "source": {
+    "algorithm_version_file": null,
+    "commit": "a1a32a274f93fe4776dd8424a85a2ef87e890b5f",
+    "commit_body": "",
+    "commit_short": "a1a32a27",
+    "commit_subject": "26.04.07 - entry_filter v1: OOS-validated LOW (+20%) and HIGH (+6.5%) gates",
+    "mode": "git_ref",
+    "requested_ref": "a1a32a2"
+  },
+  "status": "shipped"
+}

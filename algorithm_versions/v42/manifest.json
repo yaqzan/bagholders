@@ -1,0 +1,174 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-05-07T07:33:53",
+    "git_commit": "5e6e3d3",
+    "git_message": "P5: flip WEEKLY_MODE default to 'rolling' \u2014 rolling weekly composite is now active",
+    "id": 42,
+    "label": "v42",
+    "notes": null
+  },
+  "captured_at": "2026-05-13T16:09:37+00:00",
+  "classification": {
+    "category": "scoring_algorithm",
+    "reason": "Commit message names score-stage or score-context behavior.",
+    "scoring_algorithm_snapshot": true
+  },
+  "files": {
+    "portfolio_sources": [
+      {
+        "bytes": 29374,
+        "path": "strategy_config.py",
+        "sha256": "f5e13e7e7baa37e89413b39145e44f2233dc1dabe5588c0fa3ab0bd5f802f5ea",
+        "source": "strategy_config.py"
+      },
+      {
+        "missing": true,
+        "source": "mechanism_registry.py"
+      },
+      {
+        "bytes": 105700,
+        "path": "monte_carlo.py",
+        "sha256": "662eec7780949406198cb73f86888db3c35ff5428e8feedffccbde0f95a23a43",
+        "source": "monte_carlo.py"
+      },
+      {
+        "bytes": 84907,
+        "path": "monte_carlo_15dte.py",
+        "sha256": "4fdebafd2d8131df41e14fca7603b69c5cf32fd902e7e1d207cae2c1bc9578fc",
+        "source": "monte_carlo_15dte.py"
+      },
+      {
+        "bytes": 89905,
+        "path": "backtest_cascade.py",
+        "sha256": "e635136e2c5c67f00a64ba66668ee3ccee14a4d76aa63a39fb445f2064acaeea",
+        "source": "backtest_cascade.py"
+      },
+      {
+        "bytes": 83169,
+        "path": "backtest_cascade_15dte.py",
+        "sha256": "717650e5bc52d176ba0981d154ce1b42b892d8c725903b083ac9ae328d206225",
+        "source": "backtest_cascade_15dte.py"
+      },
+      {
+        "bytes": 159619,
+        "path": "api.py",
+        "sha256": "16aba600792bd0dc90ecc243cac2b2e3143856d34157b4b9ffcbeb6254b340cf",
+        "source": "api.py"
+      },
+      {
+        "bytes": 182193,
+        "path": "trader.py",
+        "sha256": "86f70ab7a4f274a970355e39a3c29c951ce1955e7dde7c0e133c44d83663755d",
+        "source": "trader.py"
+      }
+    ],
+    "scoring": [
+      {
+        "bytes": 8,
+        "path": "ALGORITHM_VERSION",
+        "sha256": "052e371e9dd08fd48450224e24527fb34eb6cb0b4db1bd153fbebf9334a5f7db",
+        "source": "ALGORITHM_VERSION"
+      },
+      {
+        "bytes": 29374,
+        "path": "strategy_config.py",
+        "sha256": "f5e13e7e7baa37e89413b39145e44f2233dc1dabe5588c0fa3ab0bd5f802f5ea",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 47237,
+        "path": "database/utils/scoring.py",
+        "sha256": "5a8328c3185bf20bbbe12daad2699282345eb2a07c9cd28ee2315ee457f08d50",
+        "source": "database/utils/scoring.py"
+      },
+      {
+        "missing": true,
+        "source": "database/utils/sector_breadth_wave.py"
+      },
+      {
+        "bytes": 226366,
+        "path": "database/models/core.py",
+        "sha256": "73314d976cbf35a2ca57aa445a3d6d0980e888c4cd28352d2b41b9a47953294c",
+        "source": "database/models/core.py"
+      },
+      {
+        "bytes": 27408,
+        "path": "database/models/technical.py",
+        "sha256": "7e5acc109bc028c1bdb51cecc4cbfdb98aff8a420827599c268a2d0408ac5128",
+        "source": "database/models/technical.py"
+      },
+      {
+        "bytes": 961,
+        "path": "database/project_root.py",
+        "sha256": "7fae4a33e2321f0a2098aeb9be4f976655d060552f7b09d08fcf15cf9ba39c3c",
+        "source": "database/project_root.py"
+      },
+      {
+        "bytes": 24055,
+        "path": "market_breadth.py",
+        "sha256": "ee48a20f94b622941f1e4760c70d18cab82efd170835e606e8488eb3ee16043b",
+        "source": "market_breadth.py"
+      },
+      {
+        "bytes": 31003,
+        "path": "market_regime.py",
+        "sha256": "d1a81d7ba5fdc22d0e19d6528f9f2af437556161cc101a97c87e4edbdbbe3c16",
+        "source": "market_regime.py"
+      },
+      {
+        "bytes": 36724,
+        "path": "volume_amplifier.py",
+        "sha256": "2dc87a230b98a5bba4b179751c6649d2bcb0f3f9a52f4260e580ff68610320ac",
+        "source": "volume_amplifier.py"
+      },
+      {
+        "bytes": 41796,
+        "path": "simulator.py",
+        "sha256": "fbedb9f2fc75f31176ba92d7fc19efa352158ee0eb9cdf674b1527d070a2262b",
+        "source": "simulator.py"
+      },
+      {
+        "bytes": 9763,
+        "path": "recalculate_scores.py",
+        "sha256": "1a08dfd87bb07fb12e33ea02581a0941ba17309937c32dab02a3cef1191d5434",
+        "source": "recalculate_scores.py"
+      }
+    ]
+  },
+  "fingerprints": {
+    "manifest_inputs": "b708c102d242f4eb8aa9a2ba2c0c5e325ed1ec06105f402dd8cf427cb5e17c7c",
+    "portfolio_config": "e5055a7b444140808fd9a8e374dc50474af936c0bad1cbc5510c87df5a10839e",
+    "portfolio_snapshot": "1a1d21540b96157a0cba40e8542fa838bae3e62000bdac76c612c9bf2520b7d8",
+    "portfolio_source_files": "efe5d02ef8d250a0adef92cb81354ad19767caa5acc795636e988d21d4690c91",
+    "scoring_config": "f07320e9b50eebf13486177104307b4f0bab9d6ef346fe4356c5ffc618f19ef5",
+    "scoring_files": "af8c4c8f862315b63ec80b7eaa68d6f007e3db95089de7437b5cde7c09ca12da"
+  },
+  "label": "v42",
+  "notes": [
+    "This snapshot was copied from the git commit recorded by AlgorithmVersion rather than from the current worktree.",
+    "Runtime scoring still imports the checkout code until the injected loader phase lands."
+  ],
+  "paths": {
+    "cache_root": ".cache/algorithm_versions/v42",
+    "evidence_manifest": "evidence_manifest.json",
+    "portfolio_config": "portfolio_config.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_sources": "portfolio_sources",
+    "root": "algorithm_versions/v42",
+    "scoring": "scoring",
+    "scoring_config": "scoring_config.json"
+  },
+  "previous_resolved_key": "v41",
+  "schema_version": 1,
+  "silo_key": "v42",
+  "source": {
+    "algorithm_version_file": "917659c",
+    "commit": "5e6e3d310e5dab47eccc6276828d56f46a8b9c14",
+    "commit_body": "Score.calculate_overall_score, calculate_scores_batched, recalculate_scores_batched,\nand simulator.py now route weekly inputs through RollingWeeklyIndicator (daily-keyed\n14-bar 5-day ladder ending T-1) by default. Calendar weekly path remains accessible\nvia WEEKLY_MODE='calendar' env var override for revert.\n\nValidation pre-ship (experiments/rolling_weekly/FINDINGS.md):\n- P0 faithful per-trade WR15 (10% sample): 80+ +4.51pp, 85+ +3.14pp, 75+ +1.87pp\n- Stability: Mon |\u0394overall| 6.245 \u2192 4.384 (-30% raw / -15% proper)\n- Distribution: rolling vs calendar raw RSI/MACD correlate +0.96-0.99\n- COHR-class intra-day swing: eliminated by construction (ladder excludes today's bar)\n\nTest updates:\n- test_rolling_weekly.py: assertions flipped to expect rolling default; calendar mode\n  now tested via env override path\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+    "commit_short": "5e6e3d31",
+    "commit_subject": "P5: flip WEEKLY_MODE default to 'rolling' \u2014 rolling weekly composite is now active",
+    "mode": "git_ref",
+    "requested_ref": "5e6e3d3"
+  },
+  "status": "shipped"
+}

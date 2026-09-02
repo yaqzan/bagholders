@@ -1,0 +1,174 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-05-05T13:36:41",
+    "git_commit": "d5ef1f5",
+    "git_message": "v36 scoring: CSWC re-calibration (K 0.30\u21920.50, wg 12\u219214)",
+    "id": 36,
+    "label": "v36",
+    "notes": null
+  },
+  "captured_at": "2026-05-13T16:10:02+00:00",
+  "classification": {
+    "category": "scoring_algorithm",
+    "reason": "Commit message names score-stage or score-context behavior.",
+    "scoring_algorithm_snapshot": true
+  },
+  "files": {
+    "portfolio_sources": [
+      {
+        "bytes": 25565,
+        "path": "strategy_config.py",
+        "sha256": "066e96c9249ff6dff8a2f2cf99041d2dcbadee287dfbce52e7575dec6c016e39",
+        "source": "strategy_config.py"
+      },
+      {
+        "missing": true,
+        "source": "mechanism_registry.py"
+      },
+      {
+        "bytes": 95253,
+        "path": "monte_carlo.py",
+        "sha256": "273fd8d063823889e376ed77d8b022d06cc5c9659d23e2bad91f68105d53d248",
+        "source": "monte_carlo.py"
+      },
+      {
+        "bytes": 82468,
+        "path": "monte_carlo_15dte.py",
+        "sha256": "8b79aa8a59885227ce2f3a8e11bb0475f22b75ce97485b885ad418f3ae865caf",
+        "source": "monte_carlo_15dte.py"
+      },
+      {
+        "bytes": 88055,
+        "path": "backtest_cascade.py",
+        "sha256": "b64c4a5063f4a37f48eff8339be02afbc96f6166c26211e8235b883f853809cf",
+        "source": "backtest_cascade.py"
+      },
+      {
+        "bytes": 81306,
+        "path": "backtest_cascade_15dte.py",
+        "sha256": "832d6d59b67a757e4dae4d9e76e8779b6b34640dd1ac7d8e2ee6028aed4ae7ae",
+        "source": "backtest_cascade_15dte.py"
+      },
+      {
+        "bytes": 149561,
+        "path": "api.py",
+        "sha256": "03661ff53ec9144e35c65f0c20b16e1b2d33284c30cb5a38ef36511f1b1bc409",
+        "source": "api.py"
+      },
+      {
+        "bytes": 177335,
+        "path": "trader.py",
+        "sha256": "2b2f5f1341aa810da4cd0fd3b39a903c07812d01b34e79fefb6249257b774bb0",
+        "source": "trader.py"
+      }
+    ],
+    "scoring": [
+      {
+        "bytes": 8,
+        "path": "ALGORITHM_VERSION",
+        "sha256": "d7f339d86a9aabdb31f70eb949f22f7429ccf3169695dfd175b42d15860bcb40",
+        "source": "ALGORITHM_VERSION"
+      },
+      {
+        "bytes": 25565,
+        "path": "strategy_config.py",
+        "sha256": "066e96c9249ff6dff8a2f2cf99041d2dcbadee287dfbce52e7575dec6c016e39",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 32805,
+        "path": "database/utils/scoring.py",
+        "sha256": "e6d4825179067081f5e6ebea207a51621d04d12ccfaef0666cdceac989640771",
+        "source": "database/utils/scoring.py"
+      },
+      {
+        "missing": true,
+        "source": "database/utils/sector_breadth_wave.py"
+      },
+      {
+        "bytes": 215934,
+        "path": "database/models/core.py",
+        "sha256": "40730a604fbfd86ff3dc7bdd47422a5db64766d3b31f21143e12a13a35428b7e",
+        "source": "database/models/core.py"
+      },
+      {
+        "bytes": 23553,
+        "path": "database/models/technical.py",
+        "sha256": "2752501ca5f3171ca2368ef5357fb66e2a468242b03a55381916273001762fc3",
+        "source": "database/models/technical.py"
+      },
+      {
+        "bytes": 961,
+        "path": "database/project_root.py",
+        "sha256": "7fae4a33e2321f0a2098aeb9be4f976655d060552f7b09d08fcf15cf9ba39c3c",
+        "source": "database/project_root.py"
+      },
+      {
+        "bytes": 24055,
+        "path": "market_breadth.py",
+        "sha256": "ee48a20f94b622941f1e4760c70d18cab82efd170835e606e8488eb3ee16043b",
+        "source": "market_breadth.py"
+      },
+      {
+        "bytes": 31003,
+        "path": "market_regime.py",
+        "sha256": "d1a81d7ba5fdc22d0e19d6528f9f2af437556161cc101a97c87e4edbdbbe3c16",
+        "source": "market_regime.py"
+      },
+      {
+        "bytes": 36724,
+        "path": "volume_amplifier.py",
+        "sha256": "2dc87a230b98a5bba4b179751c6649d2bcb0f3f9a52f4260e580ff68610320ac",
+        "source": "volume_amplifier.py"
+      },
+      {
+        "bytes": 37875,
+        "path": "simulator.py",
+        "sha256": "24cf1b9f0f0ba2023ca56ab2c38e6577b66517043b6a46ee5edc11e3b21547a2",
+        "source": "simulator.py"
+      },
+      {
+        "bytes": 9763,
+        "path": "recalculate_scores.py",
+        "sha256": "1a08dfd87bb07fb12e33ea02581a0941ba17309937c32dab02a3cef1191d5434",
+        "source": "recalculate_scores.py"
+      }
+    ]
+  },
+  "fingerprints": {
+    "manifest_inputs": "126f1335227f137de71200073626eb163bfa88ca76e853977f2951cf9271f681",
+    "portfolio_config": "715a0d2d289e7247ce8161d43481457e7adc487503ec3df66eae44401d17d4f3",
+    "portfolio_snapshot": "a8dc7ae1b099bca481dc26928dba105eb1f6901c98658b19cbbae5cc36741348",
+    "portfolio_source_files": "0fd1e13114b1409e8fa2a12d7828543b02d65e44e11179485341b222b6cf5aaf",
+    "scoring_config": "f07320e9b50eebf13486177104307b4f0bab9d6ef346fe4356c5ffc618f19ef5",
+    "scoring_files": "9811be1110902e26f5c67dff0a060d3cde41416f4ad6f8ad87643454f63fc2f6"
+  },
+  "label": "v36",
+  "notes": [
+    "This snapshot was copied from the git commit recorded by AlgorithmVersion rather than from the current worktree.",
+    "Runtime scoring still imports the checkout code until the injected loader phase lands."
+  ],
+  "paths": {
+    "cache_root": ".cache/algorithm_versions/v36",
+    "evidence_manifest": "evidence_manifest.json",
+    "portfolio_config": "portfolio_config.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_sources": "portfolio_sources",
+    "root": "algorithm_versions/v36",
+    "scoring": "scoring",
+    "scoring_config": "scoring_config.json"
+  },
+  "previous_resolved_key": "v35",
+  "schema_version": 1,
+  "silo_key": "v36",
+  "source": {
+    "algorithm_version_file": "e77714f",
+    "commit": "d5ef1f5265134da281bef53eadf7af84dea2c702",
+    "commit_body": "The v35 miss-ledger (ledger_v35_1825.parquet, 40,693 signals) showed +4.7pp\nresidual miss-lift in the CSWC zone on CALL 75+: wadj\u2208[1,12) \u2227 stoch<35\nmissing at 43.0% vs cohort baseline 38.3% (N=2,082). v34 K=0.30 was\nunder-dampening, and the wadj\u2208[12,14) band remained uncovered.\n\nv35 K-resweep (experiments/stoch_wadj_v35_resweep.py, 144 variants over\nsn\u2208{33,35,37,40} \u00d7 wg\u2208{12,13,14,15} \u00d7 K\u2208{0.30..0.65}): 44 variants pass\nH1+H3+H4+H5. Selected sn=35, wg=14, K=0.50 \u2014 preserves v34's COMP_BINS\nsemantic anchor while widening the gate by +2pp and strengthening K by\n+0.20.\n\nPer-tier 5y TP% deltas vs live v35 K=0.30 baseline:\n  95+: +1.77pp / 90+: +2.19pp / 85+: +0.66pp\n  80+: +1.91pp / 75+: +0.88pp\nN drops within H3 \u00b115% (75+ -9.6%, 80+ -13.8%, 85+ -13.6%).\nSign-consistent 1y/3y/5y on all primary tiers. Puts unchanged.\n\nGradient form preserved \u2014 no cliff thresholds added.\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+    "commit_short": "d5ef1f52",
+    "commit_subject": "v36 scoring: CSWC re-calibration (K 0.30\u21920.50, wg 12\u219214)",
+    "mode": "git_ref",
+    "requested_ref": "d5ef1f5"
+  },
+  "status": "shipped"
+}

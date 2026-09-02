@@ -1,0 +1,64 @@
+{
+  "changed_paths": [
+    "ALGORITHM_VERSION",
+    "api.py",
+    "database/models/core.py",
+    "database/utils/scoring.py",
+    "market_regime.py",
+    "recalculate_scores.py",
+    "simulator.py",
+    "trader.py",
+    "volume_amplifier.py"
+  ],
+  "name_status": [
+    {
+      "path": "ALGORITHM_VERSION",
+      "status": "M"
+    },
+    {
+      "path": "api.py",
+      "status": "M"
+    },
+    {
+      "path": "database/models/core.py",
+      "status": "M"
+    },
+    {
+      "path": "database/utils/scoring.py",
+      "status": "M"
+    },
+    {
+      "path": "market_regime.py",
+      "status": "M"
+    },
+    {
+      "path": "recalculate_scores.py",
+      "status": "M"
+    },
+    {
+      "path": "simulator.py",
+      "status": "M"
+    },
+    {
+      "path": "trader.py",
+      "status": "M"
+    },
+    {
+      "path": "volume_amplifier.py",
+      "status": "M"
+    }
+  ],
+  "range": "89884745..410a055a",
+  "stat": [
+    "ALGORITHM_VERSION         |   2 +-",
+    " api.py                    | 100 ++++++++++++++++++++++++++++++++------",
+    " database/models/core.py   | 121 +++++++++++++++++++++++++++++++++++++++++-----",
+    " database/utils/scoring.py |  24 ++++++++-",
+    " market_regime.py          |  72 +++++++++++----------------",
+    " recalculate_scores.py     |  60 ++++++++++++++++++++---",
+    " simulator.py              |  15 +++++-",
+    " trader.py                 |  82 +++++++++++++++++--------------",
+    " volume_amplifier.py       |   2 +-",
+    " 9 files changed, 360 insertions(+), 118 deletions(-)"
+  ]
+}

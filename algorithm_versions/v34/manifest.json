@@ -1,0 +1,174 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-05-04T10:16:41",
+    "git_commit": "232a725",
+    "git_message": "v34 scoring: call stoch-weekly contradiction dampener (CSWC)",
+    "id": 34,
+    "label": "v34",
+    "notes": null
+  },
+  "captured_at": "2026-05-13T16:10:09+00:00",
+  "classification": {
+    "category": "scoring_algorithm",
+    "reason": "Commit message names score-stage or score-context behavior.",
+    "scoring_algorithm_snapshot": true
+  },
+  "files": {
+    "portfolio_sources": [
+      {
+        "bytes": 21865,
+        "path": "strategy_config.py",
+        "sha256": "6766e54e57c661c06409512e28e211c3c5240048667e48d74f4205ce74e2bce4",
+        "source": "strategy_config.py"
+      },
+      {
+        "missing": true,
+        "source": "mechanism_registry.py"
+      },
+      {
+        "bytes": 93654,
+        "path": "monte_carlo.py",
+        "sha256": "9d237651ad7b5d93560bbd9eb2c05c7748959b6025399ac276b13674d9a98417",
+        "source": "monte_carlo.py"
+      },
+      {
+        "bytes": 80899,
+        "path": "monte_carlo_15dte.py",
+        "sha256": "9908a7c485af8629d15cfca27502449335ba1c4d646d3af1aa76cf365d9b9a6f",
+        "source": "monte_carlo_15dte.py"
+      },
+      {
+        "bytes": 86570,
+        "path": "backtest_cascade.py",
+        "sha256": "aef2b85fdae376fa451c3309d77b9ef6fe0c287387c2cb50523f77415948de21",
+        "source": "backtest_cascade.py"
+      },
+      {
+        "bytes": 80913,
+        "path": "backtest_cascade_15dte.py",
+        "sha256": "2962f08c7d2a8f3e08fd8f167d2c9cef923ef4318799a705c7cdc433559c0aa6",
+        "source": "backtest_cascade_15dte.py"
+      },
+      {
+        "bytes": 139302,
+        "path": "api.py",
+        "sha256": "446b6fe23cb0aa681628cc298a45d13ccd1b4f230c21aa330fa21ce96be1c9b3",
+        "source": "api.py"
+      },
+      {
+        "bytes": 164658,
+        "path": "trader.py",
+        "sha256": "38b4615ca74d36bd34f2fe77eb28a9f8ab479db6be20381871d37180eb31712f",
+        "source": "trader.py"
+      }
+    ],
+    "scoring": [
+      {
+        "bytes": 8,
+        "path": "ALGORITHM_VERSION",
+        "sha256": "b2718bc35c351a916c1ac36268720f6ca75dac200f1ea00e1dfbf0c2ca8b4ea9",
+        "source": "ALGORITHM_VERSION"
+      },
+      {
+        "bytes": 21865,
+        "path": "strategy_config.py",
+        "sha256": "6766e54e57c661c06409512e28e211c3c5240048667e48d74f4205ce74e2bce4",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 32419,
+        "path": "database/utils/scoring.py",
+        "sha256": "b5d4cabd0faab54ee32563a6a125ee371658670471bb5f730ba232a94391c556",
+        "source": "database/utils/scoring.py"
+      },
+      {
+        "missing": true,
+        "source": "database/utils/sector_breadth_wave.py"
+      },
+      {
+        "bytes": 209956,
+        "path": "database/models/core.py",
+        "sha256": "8219d80f36fe97801f1766cbf29378c1c80ed50e5e66102bf24c8999bb9ba681",
+        "source": "database/models/core.py"
+      },
+      {
+        "bytes": 23553,
+        "path": "database/models/technical.py",
+        "sha256": "2752501ca5f3171ca2368ef5357fb66e2a468242b03a55381916273001762fc3",
+        "source": "database/models/technical.py"
+      },
+      {
+        "bytes": 961,
+        "path": "database/project_root.py",
+        "sha256": "7fae4a33e2321f0a2098aeb9be4f976655d060552f7b09d08fcf15cf9ba39c3c",
+        "source": "database/project_root.py"
+      },
+      {
+        "bytes": 24055,
+        "path": "market_breadth.py",
+        "sha256": "ee48a20f94b622941f1e4760c70d18cab82efd170835e606e8488eb3ee16043b",
+        "source": "market_breadth.py"
+      },
+      {
+        "bytes": 31003,
+        "path": "market_regime.py",
+        "sha256": "d1a81d7ba5fdc22d0e19d6528f9f2af437556161cc101a97c87e4edbdbbe3c16",
+        "source": "market_regime.py"
+      },
+      {
+        "bytes": 36724,
+        "path": "volume_amplifier.py",
+        "sha256": "2dc87a230b98a5bba4b179751c6649d2bcb0f3f9a52f4260e580ff68610320ac",
+        "source": "volume_amplifier.py"
+      },
+      {
+        "bytes": 31815,
+        "path": "simulator.py",
+        "sha256": "a22e8a9cbed923ee485dfdac744452aa7032118c10eca9a3104651ee8de4b7bf",
+        "source": "simulator.py"
+      },
+      {
+        "bytes": 9763,
+        "path": "recalculate_scores.py",
+        "sha256": "1a08dfd87bb07fb12e33ea02581a0941ba17309937c32dab02a3cef1191d5434",
+        "source": "recalculate_scores.py"
+      }
+    ]
+  },
+  "fingerprints": {
+    "manifest_inputs": "0b9dc0807db3653fc21cd339abe74a68200a61682a6528f9e019b3c4e041340f",
+    "portfolio_config": "3e1d9d82ac7d944c4ac2823a831c65a6bb458f9c4e3bccdd378f0c68436d8945",
+    "portfolio_snapshot": "0ac65ee1ccd093a2dc0817d4b42517a7e6234ce3c70c8770fa604830e8639298",
+    "portfolio_source_files": "202432b5168ab1396fdca9eb9a425b9ae7fa95228d4ead5952878131c15a1f41",
+    "scoring_config": "f07320e9b50eebf13486177104307b4f0bab9d6ef346fe4356c5ffc618f19ef5",
+    "scoring_files": "5bf06bc3a43aed2e311d5f51a95a6f0394b2d2dfb0b75cd0a5788008b384e8f6"
+  },
+  "label": "v34",
+  "notes": [
+    "This snapshot was copied from the git commit recorded by AlgorithmVersion rather than from the current worktree.",
+    "Runtime scoring still imports the checkout code until the injected loader phase lands."
+  ],
+  "paths": {
+    "cache_root": ".cache/algorithm_versions/v34",
+    "evidence_manifest": "evidence_manifest.json",
+    "portfolio_config": "portfolio_config.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_sources": "portfolio_sources",
+    "root": "algorithm_versions/v34",
+    "scoring": "scoring",
+    "scoring_config": "scoring_config.json"
+  },
+  "previous_resolved_key": "v33",
+  "schema_version": 1,
+  "silo_key": "v34",
+  "source": {
+    "algorithm_version_file": "28fa522",
+    "commit": "232a7255fe883cfc51f18d7c2bdcf697da085421",
+    "commit_body": "Gradient dampener targeting calls (overall>=75) where the stochastic component\nis below neutral AND the weekly adjustment is weakly positive. These signals\nfire on trend/volume dominance while stoch contradicts \u2014 miss at +3.7pp above\nbaseline (z=+4.5, N=3,379, 46% of 75+ calls; 5y v32 ledger).\n\nMechanism (gradient, no hard gate):\n  stoch_w  = clip((35 - stoch) / 35, 0, 1)  -- 0 at neutral=35, 1 at stoch=0\n  wadj_w   = clip((12 - wadj)  / 11, 0, 1)  -- 0 at wadj=12, 1 at wadj=1\n  weakness = stoch_w * wadj_w\n  overall -= 0.30 * weakness * (overall - 55)\n\nCalibrated via 175-variant gradient Bayesian sweep (stoch_wadj_bayes.py v2):\n56/175 pass H1+H3+H4+H5. Winner: sn=35 (COMP_BINS anchor), wg=12, K=0.30.\nPer-tier 5y: 85+ +1.80pp, 80+ +1.17pp, 75+ +0.93pp. N drops -12 to -14%\n(within H3 +-15%). Puts unchanged (H4). Sign-consistent 1y/3y/5y (H5).\n\nComplements CWCF (v32, handles wadj<1); clean handoff at wadj=1.0 -- same\nsignal cannot trigger both. Exposes weight_info['cswc_dampen'] for explain-scores.\n\nAlso: CLAUDE.md -- mandatory order warning for ALGORITHM_VERSION + code commits.\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>",
+    "commit_short": "232a7255",
+    "commit_subject": "v34 scoring: call stoch-weekly contradiction dampener (CSWC)",
+    "mode": "git_ref",
+    "requested_ref": "232a725"
+  },
+  "status": "shipped"
+}

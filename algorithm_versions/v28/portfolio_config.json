@@ -1,0 +1,583 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-04-28T12:08:59",
+    "git_commit": "e3c8678",
+    "git_message": "v28: earnings meta-score boost (WR-calibrated, log-smoothed)",
+    "id": 28,
+    "label": "v28",
+    "notes": null
+  },
+  "assess_combos": null,
+  "mechanism_registry": [],
+  "portfolio_snapshot_extraction_error": "strategy_config.py is not present at this git ref",
+  "schema_version": 1,
+  "silo_key": "v28",
+  "source": {
+    "manifest": "manifest.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_snapshot_sha256": "96248d37d740627cc38f0c0463200bb5ddbfa3dcdd9f4be95d44d755a839cffb",
+    "portfolio_source_files_fingerprint": "a6ed68b38da2cf7cfca75c6afdb9e9dc69c054cd38f83b80113a3b8713f9522d"
+  },
+  "strategies": {
+    "15dte": {
+      "conflicts": [],
+      "field_count": 0,
+      "field_sources": {},
+      "fields": {},
+      "reason": "No statically evaluable legacy portfolio constants found for this strategy.",
+      "source_files": [],
+      "source_mode": "legacy_source_constants",
+      "status": "unavailable",
+      "strategy_key": "15dte",
+      "unsupported": []
+    },
+    "30dte": {
+      "conflicts": [
+        {
+          "chosen": 1.274,
+          "chosen_source": "portfolio_sources/monte_carlo.py",
+          "ignored": 1.092,
+          "ignored_source": "portfolio_sources/backtest_cascade.py",
+          "name": "TP_SIGMA_BASE"
+        },
+        {
+          "chosen": 1.456,
+          "chosen_source": "portfolio_sources/monte_carlo.py",
+          "ignored": 1.274,
+          "ignored_source": "portfolio_sources/backtest_cascade.py",
+          "name": "TP_SIGMA_STRESS"
+        },
+        {
+          "chosen": {
+            "low": 0.15,
+            "mid": 0.15,
+            "overflow": 0.0,
+            "top": 0.12,
+            "ultra": 0.18
+          },
+          "chosen_source": "portfolio_sources/monte_carlo.py",
+          "ignored": {
+            "70-74": 0.0,
+            "75-79": 0.15,
+            "80-84": 0.15,
+            "85-94": 0.12,
+            "95+": 0.18,
+            "p16-20": 0.12,
+            "p21-25": 0.12,
+            "p<=15": 0.1
+          },
+          "ignored_source": "portfolio_sources/backtest_cascade.py",
+          "name": "TIER_ALLOC"
+        }
+      ],
+      "field_count": 76,
+      "field_sources": {
+        "ALLOC_SCALE_CEIL": "portfolio_sources/monte_carlo.py",
+        "ALLOC_SCALE_FLOOR": "portfolio_sources/monte_carlo.py",
+        "BREADTH_ALLOC_ENABLED": "portfolio_sources/monte_carlo.py",
+        "BREADTH_THRESHOLD": "portfolio_sources/monte_carlo.py",
+        "COLLAPSE_THRESHOLD": "portfolio_sources/monte_carlo.py",
+        "CT_CALL_TIER": "portfolio_sources/backtest_cascade.py",
+        "CT_CALL_TREND_MAX": "portfolio_sources/backtest_cascade.py",
+        "CT_PROMOTE": "portfolio_sources/backtest_cascade.py",
+        "CT_PUT_TIER": "portfolio_sources/backtest_cascade.py",
+        "CT_PUT_TREND_MIN": "portfolio_sources/backtest_cascade.py",
+        "DELTA": "portfolio_sources/monte_carlo.py",
+        "EARN_SUPP_PUT": "portfolio_sources/backtest_cascade.py",
+        "EARN_SUPP_PUT_DAYS": "portfolio_sources/backtest_cascade.py",
+        "EARN_SUPP_PUT_MAX_OV": "portfolio_sources/backtest_cascade.py",
+        "EARN_SUPP_PUT_MIN_OV": "portfolio_sources/backtest_cascade.py",
+        "F3F_CALL_FLOOR": "portfolio_sources/monte_carlo.py",
+        "F3F_CALL_LOW": "portfolio_sources/monte_carlo.py",
+        "F3F_CALL_THRESH": "portfolio_sources/monte_carlo.py",
+        "F3F_PUT_FLOOR": "portfolio_sources/monte_carlo.py",
+        "F3F_PUT_HIGH": "portfolio_sources/monte_carlo.py",
+        "F3F_PUT_THRESH": "portfolio_sources/monte_carlo.py",
+        "HARD_SELL_LOSS": "portfolio_sources/monte_carlo.py",
+        "HOLD_CALENDAR_DAYS": "portfolio_sources/backtest_cascade.py",
+        "HOLD_DAYS": "portfolio_sources/monte_carlo.py",
+        "INITIAL_CAPITAL": "portfolio_sources/backtest_cascade.py",
+        "MAX_POSITIONS": "portfolio_sources/monte_carlo.py",
+        "MAX_POSITIONS_CALL": "portfolio_sources/monte_carlo.py",
+        "MAX_POSITIONS_PUT": "portfolio_sources/monte_carlo.py",
+        "MIN_VOL_BARS": "portfolio_sources/backtest_cascade.py",
+        "NET_HARD": "portfolio_sources/backtest_cascade.py",
+        "NET_HARD_SELL": "portfolio_sources/monte_carlo.py",
+        "NET_SL_BASE": "portfolio_sources/monte_carlo.py",
+        "NET_SL_STRESS": "portfolio_sources/monte_carlo.py",
+        "NET_TP_BASE": "portfolio_sources/monte_carlo.py",
+        "NET_TP_STRESS": "portfolio_sources/monte_carlo.py",
+        "N_ITER": "portfolio_sources/monte_carlo.py",
+        "OVERFLOW_THRESHOLD": "portfolio_sources/monte_carlo.py",
+        "PREMIUM_MULT": "portfolio_sources/monte_carlo.py",
+        "PRIMARY_THRESHOLD": "portfolio_sources/monte_carlo.py",
+        "PUT_BREADTH_MODE": "portfolio_sources/monte_carlo.py",
+        "PUT_BREADTH_THRESHOLD": "portfolio_sources/monte_carlo.py",
+        "PUT_NET_SL": "portfolio_sources/monte_carlo.py",
+        "PUT_NET_TP": "portfolio_sources/monte_carlo.py",
+        "PUT_SL": "portfolio_sources/monte_carlo.py",
+        "PUT_SL_HOLD_BARS_DEFAULT": "portfolio_sources/monte_carlo.py",
+        "PUT_SL_HOLD_BARS_MONDAY": "portfolio_sources/monte_carlo.py",
+        "PUT_SL_SIGMA": "portfolio_sources/backtest_cascade.py",
+        "PUT_SL_STEPPED": "portfolio_sources/monte_carlo.py",
+        "PUT_SL_STRESS": "portfolio_sources/monte_carlo.py",
+        "PUT_THRESHOLD": "portfolio_sources/backtest_cascade.py",
+        "PUT_TIER_ALLOC": "portfolio_sources/monte_carlo.py",
+        "PUT_TP": "portfolio_sources/monte_carlo.py",
+        "PUT_TP_SIGMA": "portfolio_sources/monte_carlo.py",
+        "PUT_TP_STRESS": "portfolio_sources/monte_carlo.py",
+        "REGIME_SLOPE": "portfolio_sources/monte_carlo.py",
+        "REGIME_SLOPE_DOWN": "portfolio_sources/monte_carlo.py",
+        "REGIME_SLOPE_PUT": "portfolio_sources/monte_carlo.py",
+        "REGIME_SLOPE_PUT_DOWN": "portfolio_sources/monte_carlo.py",
+        "REGIME_SLOPE_PUT_UP": "portfolio_sources/monte_carlo.py",
+        "REGIME_SLOPE_UP": "portfolio_sources/monte_carlo.py",
+        "SLIP_ENTRY": "portfolio_sources/monte_carlo.py",
+        "SLIP_HARD": "portfolio_sources/monte_carlo.py",
+        "SLIP_SL": "portfolio_sources/monte_carlo.py",
+        "SLIP_TP": "portfolio_sources/monte_carlo.py",
+        "SL_BASE": "portfolio_sources/monte_carlo.py",
+        "SL_SIGMA_BASE": "portfolio_sources/backtest_cascade.py",
+        "SL_SIGMA_STRESS": "portfolio_sources/backtest_cascade.py",
+        "SL_STRESS": "portfolio_sources/monte_carlo.py",
+        "STARTING_CASH": "portfolio_sources/monte_carlo.py",
+        "TIER_ALLOC": "portfolio_sources/monte_carlo.py",
+        "TP_BASE": "portfolio_sources/monte_carlo.py",
+        "TP_SIGMA_BASE": "portfolio_sources/monte_carlo.py",
+        "TP_SIGMA_STRESS": "portfolio_sources/monte_carlo.py",
+        "TP_STRESS": "portfolio_sources/monte_carlo.py",
+        "VOL_BARS": "portfolio_sources/backtest_cascade.py",
+        "VOL_LOOKBACK": "portfolio_sources/monte_carlo.py"
+      },
+      "fields": {
+        "ALLOC_SCALE_CEIL": 1.75,
+        "ALLOC_SCALE_FLOOR": 0.25,
+        "BREADTH_ALLOC_ENABLED": true,
+        "BREADTH_THRESHOLD": 50,
+        "COLLAPSE_THRESHOLD": 0.2,
+        "CT_CALL_TIER": "95+",
+        "CT_CALL_TREND_MAX": 20,
+        "CT_PROMOTE": true,
+        "CT_PUT_TIER": "p<=15",
+        "CT_PUT_TREND_MIN": 80,
+        "DELTA": 0.5,
+        "EARN_SUPP_PUT": true,
+        "EARN_SUPP_PUT_DAYS": 5,
+        "EARN_SUPP_PUT_MAX_OV": 20,
+        "EARN_SUPP_PUT_MIN_OV": 16,
+        "F3F_CALL_FLOOR": 0.5,
+        "F3F_CALL_LOW": 20.0,
+        "F3F_CALL_THRESH": 50.0,
+        "F3F_PUT_FLOOR": 0.5,
+        "F3F_PUT_HIGH": 95.0,
+        "F3F_PUT_THRESH": 75.0,
+        "HARD_SELL_LOSS": -0.4,
+        "HOLD_CALENDAR_DAYS": 15,
+        "HOLD_DAYS": 15,
+        "INITIAL_CAPITAL": 50000.0,
+        "MAX_POSITIONS": 14,
+        "MAX_POSITIONS_CALL": null,
+        "MAX_POSITIONS_PUT": null,
+        "MIN_VOL_BARS": 20,
+        "NET_HARD": -0.415,
+        "NET_HARD_SELL": -0.415,
+        "NET_SL_BASE": -0.323,
+        "NET_SL_STRESS": -0.373,
+        "NET_TP_BASE": 0.34,
+        "NET_TP_STRESS": 0.39,
+        "N_ITER": 500,
+        "OVERFLOW_THRESHOLD": 70,
+        "PREMIUM_MULT": 1.82,
+        "PRIMARY_THRESHOLD": 75,
+        "PUT_BREADTH_MODE": "none",
+        "PUT_BREADTH_THRESHOLD": 50,
+        "PUT_NET_SL": -0.223,
+        "PUT_NET_TP": 0.34,
+        "PUT_SL": -0.2,
+        "PUT_SL_HOLD_BARS_DEFAULT": 0,
+        "PUT_SL_HOLD_BARS_MONDAY": 0,
+        "PUT_SL_SIGMA": 0.728,
+        "PUT_SL_STEPPED": [
+          [
+            5,
+            -0.09
+          ],
+          [
+            10,
+            -0.11
+          ],
+          [
+            15,
+            -0.14
+          ]
+        ],
+        "PUT_SL_STRESS": -0.2,
+        "PUT_THRESHOLD": 25,
+        "PUT_TIER_ALLOC": {
+          "put_low": 0.12,
+          "put_mid": 0.12,
+          "put_top": 0.1
+        },
+        "PUT_TP": 0.35,
+        "PUT_TP_SIGMA": 1.274,
+        "PUT_TP_STRESS": 0.3,
+        "REGIME_SLOPE": 1.0,
+        "REGIME_SLOPE_DOWN": 1.0,
+        "REGIME_SLOPE_PUT": 0.0,
+        "REGIME_SLOPE_PUT_DOWN": null,
+        "REGIME_SLOPE_PUT_UP": -0.5,
+        "REGIME_SLOPE_UP": 0.0,
+        "SLIP_ENTRY": -0.01,
+        "SLIP_HARD": -0.005,
+        "SLIP_SL": -0.013,
+        "SLIP_TP": 0.0,
+        "SL_BASE": -0.3,
+        "SL_SIGMA_BASE": 1.274,
+        "SL_SIGMA_STRESS": 1.456,
+        "SL_STRESS": -0.35,
+        "STARTING_CASH": 50000.0,
+        "TIER_ALLOC": {
+          "low": 0.15,
+          "mid": 0.15,
+          "overflow": 0.0,
+          "top": 0.12,
+          "ultra": 0.18
+        },
+        "TP_BASE": 0.35,
+        "TP_SIGMA_BASE": 1.274,
+        "TP_SIGMA_STRESS": 1.456,
+        "TP_STRESS": 0.4,
+        "VOL_BARS": 60,
+        "VOL_LOOKBACK": 60
+      },
+      "source_constants": {
+        "portfolio_sources/backtest_cascade.py": {
+          "ALLOC_SCALE_CEIL": 1.75,
+          "ALLOC_SCALE_FLOOR": 0.25,
+          "BREADTH_ALLOC_ENABLED": true,
+          "BREADTH_THRESHOLD": 50,
+          "CT_CALL_TIER": "95+",
+          "CT_CALL_TREND_MAX": 20,
+          "CT_PROMOTE": true,
+          "CT_PUT_TIER": "p<=15",
+          "CT_PUT_TREND_MIN": 80,
+          "EARN_SUPP_PUT": true,
+          "EARN_SUPP_PUT_DAYS": 5,
+          "EARN_SUPP_PUT_MAX_OV": 20,
+          "EARN_SUPP_PUT_MIN_OV": 16,
+          "F3F_CALL_FLOOR": 0.5,
+          "F3F_CALL_LOW": 20.0,
+          "F3F_CALL_THRESH": 50.0,
+          "F3F_PUT_FLOOR": 0.5,
+          "F3F_PUT_HIGH": 95.0,
+          "F3F_PUT_THRESH": 75.0,
+          "HOLD_CALENDAR_DAYS": 15,
+          "INITIAL_CAPITAL": 50000.0,
+          "MAX_POSITIONS": 14,
+          "MIN_VOL_BARS": 20,
+          "NET_HARD": -0.415,
+          "NET_SL_BASE": -0.323,
+          "NET_SL_STRESS": -0.373,
+          "NET_TP_BASE": 0.34,
+          "NET_TP_STRESS": 0.39,
+          "PUT_NET_SL": -0.223,
+          "PUT_NET_TP": 0.34,
+          "PUT_SL": -0.2,
+          "PUT_SL_HOLD_BARS_DEFAULT": 0,
+          "PUT_SL_HOLD_BARS_MONDAY": 0,
+          "PUT_SL_SIGMA": 0.728,
+          "PUT_THRESHOLD": 25,
+          "PUT_TP": 0.35,
+          "PUT_TP_SIGMA": 1.274,
+          "REGIME_SLOPE": 1.0,
+          "REGIME_SLOPE_DOWN": 1.0,
+          "REGIME_SLOPE_PUT": 0.0,
+          "REGIME_SLOPE_PUT_DOWN": null,
+          "REGIME_SLOPE_PUT_UP": -0.5,
+          "REGIME_SLOPE_UP": 0.0,
+          "SL_SIGMA_BASE": 1.274,
+          "SL_SIGMA_STRESS": 1.456,
+          "TIER_ALLOC": {
+            "70-74": 0.0,
+            "75-79": 0.15,
+            "80-84": 0.15,
+            "85-94": 0.12,
+            "95+": 0.18,
+            "p16-20": 0.12,
+            "p21-25": 0.12,
+            "p<=15": 0.1
+          },
+          "TP_SIGMA_BASE": 1.092,
+          "TP_SIGMA_STRESS": 1.274,
+          "VOL_BARS": 60
+        },
+        "portfolio_sources/monte_carlo.py": {
+          "ALLOC_SCALE_CEIL": 1.75,
+          "ALLOC_SCALE_FLOOR": 0.25,
+          "BREADTH_ALLOC_ENABLED": true,
+          "BREADTH_THRESHOLD": 50,
+          "COLLAPSE_THRESHOLD": 0.2,
+          "DELTA": 0.5,
+          "F3F_CALL_FLOOR": 0.5,
+          "F3F_CALL_LOW": 20.0,
+          "F3F_CALL_THRESH": 50.0,
+          "F3F_PUT_FLOOR": 0.5,
+          "F3F_PUT_HIGH": 95.0,
+          "F3F_PUT_THRESH": 75.0,
+          "HARD_SELL_LOSS": -0.4,
+          "HOLD_DAYS": 15,
+          "MAX_POSITIONS": 14,
+          "MAX_POSITIONS_CALL": null,
+          "MAX_POSITIONS_PUT": null,
+          "NET_HARD_SELL": -0.415,
+          "NET_SL_BASE": -0.323,
+          "NET_SL_STRESS": -0.373,
+          "NET_TP_BASE": 0.34,
+          "NET_TP_STRESS": 0.39,
+          "N_ITER": 500,
+          "OVERFLOW_THRESHOLD": 70,
+          "PREMIUM_MULT": 1.82,
+          "PRIMARY_THRESHOLD": 75,
+          "PUT_BREADTH_MODE": "none",
+          "PUT_BREADTH_THRESHOLD": 50,
+          "PUT_NET_SL": -0.223,
+          "PUT_NET_TP": 0.34,
+          "PUT_SL": -0.2,
+          "PUT_SL_HOLD_BARS_DEFAULT": 0,
+          "PUT_SL_HOLD_BARS_MONDAY": 0,
+          "PUT_SL_STEPPED": [
+            [
+              5,
+              -0.09
+            ],
+            [
+              10,
+              -0.11
+            ],
+            [
+              15,
+              -0.14
+            ]
+          ],
+          "PUT_SL_STRESS": -0.2,
+          "PUT_TIER_ALLOC": {
+            "put_low": 0.12,
+            "put_mid": 0.12,
+            "put_top": 0.1
+          },
+          "PUT_TP": 0.35,
+          "PUT_TP_SIGMA": 1.274,
+          "PUT_TP_STRESS": 0.3,
+          "REGIME_SLOPE": 1.0,
+          "REGIME_SLOPE_DOWN": 1.0,
+          "REGIME_SLOPE_PUT": 0.0,
+          "REGIME_SLOPE_PUT_DOWN": null,
+          "REGIME_SLOPE_PUT_UP": -0.5,
+          "REGIME_SLOPE_UP": 0.0,
+          "SLIP_ENTRY": -0.01,
+          "SLIP_HARD": -0.005,
+          "SLIP_SL": -0.013,
+          "SLIP_TP": 0.0,
+          "SL_BASE": -0.3,
+          "SL_STRESS": -0.35,
+          "STARTING_CASH": 50000.0,
+          "TIER_ALLOC": {
+            "low": 0.15,
+            "mid": 0.15,
+            "overflow": 0.0,
+            "top": 0.12,
+            "ultra": 0.18
+          },
+          "TP_BASE": 0.35,
+          "TP_SIGMA_BASE": 1.274,
+          "TP_SIGMA_STRESS": 1.456,
+          "TP_STRESS": 0.4,
+          "VOL_LOOKBACK": 60
+        }
+      },
+      "source_files": [
+        "portfolio_sources/monte_carlo.py",
+        "portfolio_sources/backtest_cascade.py"
+      ],
+      "source_mode": "legacy_source_constants",
+      "status": "available",
+      "strategy_key": "30dte",
+      "unsupported": [
+        {
+          "line": 81,
+          "name": "SL_SIGMA_BASE",
+          "reason": "unsupported expression Call",
+          "source": "portfolio_sources/monte_carlo.py"
+        },
+        {
+          "line": 82,
+          "name": "SL_SIGMA_STRESS",
+          "reason": "unsupported expression Call",
+          "source": "portfolio_sources/monte_carlo.py"
+        },
+        {
+          "line": 93,
+          "name": "PUT_SL_SIGMA",
+          "reason": "unsupported expression Call",
+          "source": "portfolio_sources/monte_carlo.py"
+        },
+        {
+          "line": 125,
+          "name": "PUT_SL_MODE",
+          "reason": "unsupported expression Call",
+          "source": "portfolio_sources/monte_carlo.py"
+        },
+        {
+          "line": 134,
+          "name": "PUT_PRIORITY",
+          "reason": "unsupported expression Call",
+          "source": "portfolio_sources/monte_carlo.py"
+        },
+        {
+          "line": 193,
+          "name": "PUT_THRESHOLD",
+          "reason": "unsupported expression Call",
+          "source": "portfolio_sources/monte_carlo.py"
+        },
+        {
+          "line": 218,
+          "name": "EARN_SUPP_PUT",
+          "reason": "unsupported expression Compare",
+          "source": "portfolio_sources/monte_carlo.py"
+        },
+        {
+          "line": 219,
+          "name": "EARN_SUPP_PUT_DAYS",
+          "reason": "unsupported expression Call",
+          "source": "portfolio_sources/monte_carlo.py"
+        },
+        {
+          "line": 220,
+          "name": "EARN_SUPP_PUT_MIN_OV",
+          "reason": "unsupported expression Call",
+          "source": "portfolio_sources/monte_carlo.py"
+        },
+        {
+          "line": 221,
+          "name": "EARN_SUPP_PUT_MAX_OV",
+          "reason": "unsupported expression Call",
+          "source": "portfolio_sources/monte_carlo.py"
+        },
+        {
+          "line": 231,
+          "name": "PUT_TIGHTEN_BREADTH_LE",
+          "reason": "unsupported expression Call",
+          "source": "portfolio_sources/monte_carlo.py"
+        },
+        {
+          "line": 232,
+          "name": "PUT_TIGHTEN_BREADTH_GE",
+          "reason": "unsupported expression Call",
+          "source": "portfolio_sources/monte_carlo.py"
+        },
+        {
+          "line": 233,
+          "name": "PUT_TIGHTEN_THRESH",
+          "reason": "unsupported expression Call",
+          "source": "portfolio_sources/monte_carlo.py"
+        },
+        {
+          "line": 245,
+          "name": "WEAK_WEEKLY_PUT_DROP",
+          "reason": "unsupported expression Compare",
+          "source": "portfolio_sources/monte_carlo.py"
+        },
+        {
+          "line": 246,
+          "name": "WEAK_WEEKLY_PUT_MIN_OV",
+          "reason": "unsupported expression Call",
+          "source": "portfolio_sources/monte_carlo.py"
+        },
+        {
+          "line": 247,
+          "name": "WEAK_WEEKLY_PUT_MAX_OV",
+          "reason": "unsupported expression Call",
+          "source": "portfolio_sources/monte_carlo.py"
+        },
+        {
+          "line": 248,
+          "name": "WEAK_WEEKLY_PUT_WADJ",
+          "reason": "unsupported expression Call",
+          "source": "portfolio_sources/monte_carlo.py"
+        },
+        {
+          "line": 249,
+          "name": "WEAK_WEEKLY_PUT_VSIG_REJ_ONLY",
+          "reason": "unsupported expression Compare",
+          "source": "portfolio_sources/monte_carlo.py"
+        },
+        {
+          "line": 259,
+          "name": "EARN_BOOST_CALL",
+          "reason": "unsupported expression Compare",
+          "source": "portfolio_sources/monte_carlo.py"
+        },
+        {
+          "line": 260,
+          "name": "EARN_BOOST_CALL_DAYS",
+          "reason": "unsupported expression Call",
+          "source": "portfolio_sources/monte_carlo.py"
+        },
+        {
+          "line": 261,
+          "name": "EARN_BOOST_CALL_MIN_OV",
+          "reason": "unsupported expression Call",
+          "source": "portfolio_sources/monte_carlo.py"
+        },
+        {
+          "line": 262,
+          "name": "EARN_BOOST_CALL_MAX_OV",
+          "reason": "unsupported expression Call",
+          "source": "portfolio_sources/monte_carlo.py"
+        },
+        {
+          "line": 263,
+          "name": "EARN_BOOST_CALL_TIER",
+          "reason": "unsupported expression Call",
+          "source": "portfolio_sources/monte_carlo.py"
+        },
+        {
+          "line": 272,
+          "name": "CT_PROMOTE",
+          "reason": "unsupported expression Compare",
+          "source": "portfolio_sources/monte_carlo.py"
+        },
+        {
+          "line": 273,
+          "name": "CT_PUT_TREND_MIN",
+          "reason": "unsupported expression Call",
+          "source": "portfolio_sources/monte_carlo.py"
+        },
+        {
+          "line": 274,
+          "name": "CT_CALL_TREND_MAX",
+          "reason": "unsupported expression Call",
+          "source": "portfolio_sources/monte_carlo.py"
+        },
+        {
+          "line": 275,
+          "name": "CT_CALL_TIER",
+          "reason": "unsupported expression Call",
+          "source": "portfolio_sources/monte_carlo.py"
+        },
+        {
+          "line": 276,
+          "name": "CT_PUT_TIER",
+          "reason": "unsupported expression Call",
+          "source": "portfolio_sources/monte_carlo.py"
+        },
+        {
+          "line": 289,
+          "name": "WINDOWS",
+          "reason": "unsupported expression Call",
+          "source": "portfolio_sources/monte_carlo.py"
+        }
+      ]
+    }
+  }
+}

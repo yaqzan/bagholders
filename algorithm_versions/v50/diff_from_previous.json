@@ -1,0 +1,40 @@
+{
+  "changed_paths": [
+    "ALGORITHM_VERSION",
+    "api.py",
+    "database/models/core.py",
+    "database/utils/scoring.py",
+    "strategy_config.py"
+  ],
+  "name_status": [
+    {
+      "path": "ALGORITHM_VERSION",
+      "status": "M"
+    },
+    {
+      "path": "api.py",
+      "status": "M"
+    },
+    {
+      "path": "database/models/core.py",
+      "status": "M"
+    },
+    {
+      "path": "database/utils/scoring.py",
+      "status": "M"
+    },
+    {
+      "path": "strategy_config.py",
+      "status": "M"
+    }
+  ],
+  "range": "61561eed..b0c19549",
+  "stat": [
+    "ALGORITHM_VERSION         |  2 +-",
+    " api.py                    |  7 ++++---",
+    " database/models/core.py   | 25 +++++++++++++++++++++++++",
+    " database/utils/scoring.py |  8 +++-----",
+    " strategy_config.py        | 18 +++++++++---------",
+    " 5 files changed, 42 insertions(+), 18 deletions(-)"
+  ]
+}

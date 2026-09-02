@@ -1,0 +1,178 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-05-13T01:12:58",
+    "git_commit": "e568b2f4",
+    "git_message": "Ship direct Market Wave score transform",
+    "id": 57,
+    "label": "v57",
+    "notes": null
+  },
+  "captured_at": "2026-05-13T16:08:52+00:00",
+  "classification": {
+    "category": "scoring_algorithm",
+    "reason": "Commit message names score-stage or score-context behavior.",
+    "scoring_algorithm_snapshot": true
+  },
+  "files": {
+    "portfolio_sources": [
+      {
+        "bytes": 57540,
+        "path": "strategy_config.py",
+        "sha256": "eb14c859bb255353c59f90ec3e2595fcb2e840a08698c50db17efc7362645496",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 21184,
+        "path": "mechanism_registry.py",
+        "sha256": "250179801418e46188d0dfe9f2782843f1c21a6dd190f1118d8cc432f14e1d56",
+        "source": "mechanism_registry.py"
+      },
+      {
+        "bytes": 117417,
+        "path": "monte_carlo.py",
+        "sha256": "9ff1ca22fbc992ced199027990c764526effcff1a8b416df76250b8c9f44e5ad",
+        "source": "monte_carlo.py"
+      },
+      {
+        "bytes": 90354,
+        "path": "monte_carlo_15dte.py",
+        "sha256": "71e893ea7abf52595587c7d1ec343fcd9ff2a240b50a548e1f8d813a22c24d1d",
+        "source": "monte_carlo_15dte.py"
+      },
+      {
+        "bytes": 96554,
+        "path": "backtest_cascade.py",
+        "sha256": "e9aff8f7ef1bb46834c36d82375e3372cc6c4d90b078193dcedb3337b7d6de16",
+        "source": "backtest_cascade.py"
+      },
+      {
+        "bytes": 85451,
+        "path": "backtest_cascade_15dte.py",
+        "sha256": "cef55c5f0f0fe2b31b65e145ba283228e182ed2baa050364d62acef09e4f18d8",
+        "source": "backtest_cascade_15dte.py"
+      },
+      {
+        "bytes": 174161,
+        "path": "api.py",
+        "sha256": "48ff8b60a60efa8c6ae839c1a216b5a946dc8ead339daf8770a750734858600f",
+        "source": "api.py"
+      },
+      {
+        "bytes": 210862,
+        "path": "trader.py",
+        "sha256": "1cf06946831d20f429c05c212c7fdb6830d67ac781f9a1b34bde06ab3a792e7c",
+        "source": "trader.py"
+      }
+    ],
+    "scoring": [
+      {
+        "bytes": 9,
+        "path": "ALGORITHM_VERSION",
+        "sha256": "c735965413446b5ca0210820e6f5715dcdd5908cb1311a7352864db9beec0829",
+        "source": "ALGORITHM_VERSION"
+      },
+      {
+        "bytes": 57540,
+        "path": "strategy_config.py",
+        "sha256": "eb14c859bb255353c59f90ec3e2595fcb2e840a08698c50db17efc7362645496",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 70600,
+        "path": "database/utils/scoring.py",
+        "sha256": "b9f47ff37bc81d97f7ce4ed59ff4ea48c45f2f1a180db22912bab08efd6af6c0",
+        "source": "database/utils/scoring.py"
+      },
+      {
+        "bytes": 12659,
+        "path": "database/utils/sector_breadth_wave.py",
+        "sha256": "02548d3dacecfbce0f92469068797933711d8ccf61c7ebe0d990a68b73ef61a2",
+        "source": "database/utils/sector_breadth_wave.py"
+      },
+      {
+        "bytes": 250151,
+        "path": "database/models/core.py",
+        "sha256": "ac652ad3f2671e91dc33cf351f179dd0c4961f17e870af5e212577f88c0dc341",
+        "source": "database/models/core.py"
+      },
+      {
+        "bytes": 23552,
+        "path": "database/models/technical.py",
+        "sha256": "22648938cd5a14bb2d38b926252cde14ca6d0bbd3dfc0133c367cc7b6dc0dcb4",
+        "source": "database/models/technical.py"
+      },
+      {
+        "bytes": 961,
+        "path": "database/project_root.py",
+        "sha256": "7fae4a33e2321f0a2098aeb9be4f976655d060552f7b09d08fcf15cf9ba39c3c",
+        "source": "database/project_root.py"
+      },
+      {
+        "bytes": 41019,
+        "path": "market_breadth.py",
+        "sha256": "a3abd868b6961de52e94c4530974b428659677098a6cbc80fba74ffe783483c2",
+        "source": "market_breadth.py"
+      },
+      {
+        "bytes": 31003,
+        "path": "market_regime.py",
+        "sha256": "d1a81d7ba5fdc22d0e19d6528f9f2af437556161cc101a97c87e4edbdbbe3c16",
+        "source": "market_regime.py"
+      },
+      {
+        "bytes": 36724,
+        "path": "volume_amplifier.py",
+        "sha256": "2dc87a230b98a5bba4b179751c6649d2bcb0f3f9a52f4260e580ff68610320ac",
+        "source": "volume_amplifier.py"
+      },
+      {
+        "bytes": 40449,
+        "path": "simulator.py",
+        "sha256": "aed28e424ac26dc63690902267facdd63e98121e0eada0379e64d7bab5a1e1cd",
+        "source": "simulator.py"
+      },
+      {
+        "bytes": 9763,
+        "path": "recalculate_scores.py",
+        "sha256": "1a08dfd87bb07fb12e33ea02581a0941ba17309937c32dab02a3cef1191d5434",
+        "source": "recalculate_scores.py"
+      }
+    ]
+  },
+  "fingerprints": {
+    "manifest_inputs": "bae5b99fb60cd82c5cfe2b6664cd850251279774e1dd35339ec9b5664cddc9d2",
+    "portfolio_config": "50513691d90c9559b93a09a55cd3e24960aea5182f04b4c18d16f17d77bff1ab",
+    "portfolio_snapshot": "7c05698758310da8e1775063e84aa1fe3f9956ef260954b19092322da56594d6",
+    "portfolio_source_files": "9f73c81254eb263191061e48756978f231b6fa1ad1c6a1b7840aafc2c6d4ebfb",
+    "scoring_config": "03654f8566e891e307426a43c7727955aec11d4cd704846481abb3742ead6d3e",
+    "scoring_files": "81def1c71b0f96677a7bef3d55c99b757e1fe50d5f11e6bbdbc10ea27eb1f9e4"
+  },
+  "label": "v57",
+  "notes": [
+    "This snapshot was copied from the git commit recorded by AlgorithmVersion rather than from the current worktree.",
+    "Runtime scoring still imports the checkout code until the injected loader phase lands."
+  ],
+  "paths": {
+    "cache_root": ".cache/algorithm_versions/v57",
+    "evidence_manifest": "evidence_manifest.json",
+    "portfolio_config": "portfolio_config.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_sources": "portfolio_sources",
+    "root": "algorithm_versions/v57",
+    "scoring": "scoring",
+    "scoring_config": "scoring_config.json"
+  },
+  "previous_resolved_key": "v56",
+  "schema_version": 1,
+  "silo_key": "v57",
+  "source": {
+    "algorithm_version_file": "c6f384ab",
+    "commit": "e568b2f4d8b646b296c1eff693462df9dfa98805",
+    "commit_body": "",
+    "commit_short": "e568b2f4",
+    "commit_subject": "Ship direct Market Wave score transform",
+    "mode": "git_ref",
+    "requested_ref": "e568b2f4"
+  },
+  "status": "shipped"
+}

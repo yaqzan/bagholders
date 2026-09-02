@@ -1,0 +1,162 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-04-14T12:18:37",
+    "git_commit": "83851db",
+    "git_message": "",
+    "id": 15,
+    "label": "v15",
+    "notes": null
+  },
+  "captured_at": "2026-05-13T16:11:15+00:00",
+  "classification": {
+    "category": "scoring_algorithm",
+    "reason": "Commit message names score-stage or score-context behavior.",
+    "scoring_algorithm_snapshot": true
+  },
+  "files": {
+    "portfolio_sources": [
+      {
+        "missing": true,
+        "source": "strategy_config.py"
+      },
+      {
+        "missing": true,
+        "source": "mechanism_registry.py"
+      },
+      {
+        "missing": true,
+        "source": "monte_carlo.py"
+      },
+      {
+        "missing": true,
+        "source": "monte_carlo_15dte.py"
+      },
+      {
+        "missing": true,
+        "source": "backtest_cascade.py"
+      },
+      {
+        "missing": true,
+        "source": "backtest_cascade_15dte.py"
+      },
+      {
+        "bytes": 68829,
+        "path": "api.py",
+        "sha256": "6a38beb8cfeac9b1ae854d6002125c8aac0f4a6ecf9596b05cfe582a680008fe",
+        "source": "api.py"
+      },
+      {
+        "bytes": 68998,
+        "path": "trader.py",
+        "sha256": "b84900f90a9447a975bc3d9796db563c461bfb8d60f4a1bd6d0be90b599ba692",
+        "source": "trader.py"
+      }
+    ],
+    "scoring": [
+      {
+        "bytes": 8,
+        "path": "ALGORITHM_VERSION",
+        "sha256": "ac0b7d5ee9d66b6fd682709c25019e0e879e8f2d03fd8e6a13dc317a2ba61b98",
+        "source": "ALGORITHM_VERSION"
+      },
+      {
+        "missing": true,
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 12675,
+        "path": "database/utils/scoring.py",
+        "sha256": "85cf91accb81932a8ce855be4f033ab105aa05dc6c0e5fa5a3043973fc925207",
+        "source": "database/utils/scoring.py"
+      },
+      {
+        "missing": true,
+        "source": "database/utils/sector_breadth_wave.py"
+      },
+      {
+        "bytes": 153916,
+        "path": "database/models/core.py",
+        "sha256": "6d8135f927b5df20acaaff53d5ce85cdf17917ed27ebaa0c8169c67e0092184b",
+        "source": "database/models/core.py"
+      },
+      {
+        "bytes": 17689,
+        "path": "database/models/technical.py",
+        "sha256": "3f44c93f24cce14284787a5732ea0b8e471371fd27f4837041e24e47ee01b24d",
+        "source": "database/models/technical.py"
+      },
+      {
+        "bytes": 961,
+        "path": "database/project_root.py",
+        "sha256": "7fae4a33e2321f0a2098aeb9be4f976655d060552f7b09d08fcf15cf9ba39c3c",
+        "source": "database/project_root.py"
+      },
+      {
+        "bytes": 24055,
+        "path": "market_breadth.py",
+        "sha256": "ee48a20f94b622941f1e4760c70d18cab82efd170835e606e8488eb3ee16043b",
+        "source": "market_breadth.py"
+      },
+      {
+        "bytes": 17671,
+        "path": "market_regime.py",
+        "sha256": "090d30931a1a7fdec84c6ae12676dc7c5d9556896679a5b71a0776e4861af2e5",
+        "source": "market_regime.py"
+      },
+      {
+        "bytes": 32288,
+        "path": "volume_amplifier.py",
+        "sha256": "255c7f7006b5e9e26ffe8e2c9a6d56b855d9304ce299a61b1c4ed19528ca9822",
+        "source": "volume_amplifier.py"
+      },
+      {
+        "bytes": 26526,
+        "path": "simulator.py",
+        "sha256": "67926d81ebeffb93d64f1cf1c4a9ce8859cb514f6c00c60943140b06e1d24884",
+        "source": "simulator.py"
+      },
+      {
+        "bytes": 8844,
+        "path": "recalculate_scores.py",
+        "sha256": "b79bee141827ee8c86562044c03de47c0fec395e2926a8eaadd064268a02633d",
+        "source": "recalculate_scores.py"
+      }
+    ]
+  },
+  "fingerprints": {
+    "manifest_inputs": "0747ddec5e350f361917ec793c2e7d14be1c2970cf57bcef18eb8be034d042bb",
+    "portfolio_config": "c146469b3e7a0f21376944824838878d059ffff788762b66331841d0bc9d65e5",
+    "portfolio_snapshot": "1980fb44138f406632feec71da8abfa47068cd100aaa500cbb085cb985bec355",
+    "portfolio_source_files": "ccda5edb281543034fac101b5d49516fc49d218dea5bab22e53cad7ed90d4a29",
+    "scoring_config": "af73a503aa4a694ec2ccf8a54d8e0bc2eea5b05564ac3a02ebd2d2d195c5bf09",
+    "scoring_files": "e00389f7344c8f9d2f3de9b55827ef4947af866e25fe42f9d4e59cc577494181"
+  },
+  "label": "v15",
+  "notes": [
+    "This snapshot was copied from the git commit recorded by AlgorithmVersion rather than from the current worktree.",
+    "Runtime scoring still imports the checkout code until the injected loader phase lands."
+  ],
+  "paths": {
+    "cache_root": ".cache/algorithm_versions/v15",
+    "evidence_manifest": "evidence_manifest.json",
+    "portfolio_config": "portfolio_config.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_sources": "portfolio_sources",
+    "root": "algorithm_versions/v15",
+    "scoring": "scoring",
+    "scoring_config": "scoring_config.json"
+  },
+  "previous_resolved_key": "v14",
+  "schema_version": 1,
+  "silo_key": "v15",
+  "source": {
+    "algorithm_version_file": "32a74b5",
+    "commit": "83851dbbe129d30522f2934dd94144e44daa154b",
+    "commit_body": "CONVICTION / REJECTION now blend toward a direction-aware target\n(0 or 100) weighted by magnitude \u00d7 vol_boost (cap 0.60), replacing\nthe asymmetric `50 + (score-50) \u00d7 (1 + deviation)` multiplicative\nformula. The old path amplified distance from 50 regardless of\nvol direction, so a bullish volume signal on a below-50 score\npushed the score FURTHER below 50, pinning many stocks at 0.\n\n47/47 zero-score rows in the active version had bullish volume\n(vol_raw>50); 95% of scores <5 and 83% of scores <10 had\ncontra-directional volume \u2014 a systematic sign-inversion bug.\n\nSimulated v4a (blend cap 0.60) on 150-stock random sample \u00d7 2y:\n  70+ WR 65.7% \u2192 67.5%, Cap30 0.176 \u2192 0.207 (N=2283)\n  75+ WR 64.2% \u2192 67.2%, Cap30 0.199 \u2192 0.240 (N=1072)\n  80+ WR 61.1% \u2192 63.7%, Cap30 0.237 \u2192 0.191 (N=370)\n  85+ WR 65.6% \u2192 69.0%, Cap30 0.391 \u2192 0.412 (N=80)\n  <25 near-neutral (N=1827)\n  Zero clustering eliminated.\n\nTHIN_AIR keeps original multiplicative dampening (vol_mult<1 pulls\ntoward 50 which is correct \"no conviction\").\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>",
+    "commit_short": "83851dbb",
+    "commit_subject": "Fix zero-score clustering from asymmetric volume amplification",
+    "mode": "git_ref",
+    "requested_ref": "83851db"
+  },
+  "status": "shipped"
+}

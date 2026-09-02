@@ -1,0 +1,2 @@
+- 2026-07-18T10:28:56Z | HEAD=5fbef3e6fc67 | cmd: experiments/real_priced_replay/build_replay_ledger.py | outcome: SUCCESS candidates=1661 matched=785 liquid_primary=195 match_rate=47.3% floor_pass=False elapsed=25s
+- 2026-07-18T10:30:45Z | HEAD=5fbef3e6fc67 | cmd: experiments/real_priced_replay/replay.py | outcome: SUCCESS liquid_n=195 all_n=785 flags=[FILL_MODEL_OPTIMISTIC=False,PREMIUM_MODEL_CHEAP=False,report_only=True] elapsed=0.2s

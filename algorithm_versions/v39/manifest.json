@@ -1,0 +1,174 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-05-06T07:53:23",
+    "git_commit": "200f33a",
+    "git_message": "v39 scoring: PESS (Put Earnings Score Suppression) + retire EARN_SUPP_PUT",
+    "id": 39,
+    "label": "v39",
+    "notes": null
+  },
+  "captured_at": "2026-05-13T16:09:49+00:00",
+  "classification": {
+    "category": "scoring_algorithm",
+    "reason": "Commit message names score-stage or score-context behavior.",
+    "scoring_algorithm_snapshot": true
+  },
+  "files": {
+    "portfolio_sources": [
+      {
+        "bytes": 27601,
+        "path": "strategy_config.py",
+        "sha256": "51b74e6fda3a2bef4425d1e538cfe0f6afc760c49fc3366c41ae1b963fc6719d",
+        "source": "strategy_config.py"
+      },
+      {
+        "missing": true,
+        "source": "mechanism_registry.py"
+      },
+      {
+        "bytes": 105700,
+        "path": "monte_carlo.py",
+        "sha256": "662eec7780949406198cb73f86888db3c35ff5428e8feedffccbde0f95a23a43",
+        "source": "monte_carlo.py"
+      },
+      {
+        "bytes": 84907,
+        "path": "monte_carlo_15dte.py",
+        "sha256": "4fdebafd2d8131df41e14fca7603b69c5cf32fd902e7e1d207cae2c1bc9578fc",
+        "source": "monte_carlo_15dte.py"
+      },
+      {
+        "bytes": 89905,
+        "path": "backtest_cascade.py",
+        "sha256": "e635136e2c5c67f00a64ba66668ee3ccee14a4d76aa63a39fb445f2064acaeea",
+        "source": "backtest_cascade.py"
+      },
+      {
+        "bytes": 83169,
+        "path": "backtest_cascade_15dte.py",
+        "sha256": "717650e5bc52d176ba0981d154ce1b42b892d8c725903b083ac9ae328d206225",
+        "source": "backtest_cascade_15dte.py"
+      },
+      {
+        "bytes": 155581,
+        "path": "api.py",
+        "sha256": "8335a3a08c9577a6d4520af67f517bb7e46680d0bede59ba8aa3408cb2abe3be",
+        "source": "api.py"
+      },
+      {
+        "bytes": 180032,
+        "path": "trader.py",
+        "sha256": "ae99ea86a654a4c7f9bd226c6b8e492c42288211c288f6fa8cfd6180e3dadce0",
+        "source": "trader.py"
+      }
+    ],
+    "scoring": [
+      {
+        "bytes": 8,
+        "path": "ALGORITHM_VERSION",
+        "sha256": "6de838fee8fc5e8bf76fd13c28856bf4f27067101c948d7ee3c208718ff0d525",
+        "source": "ALGORITHM_VERSION"
+      },
+      {
+        "bytes": 27601,
+        "path": "strategy_config.py",
+        "sha256": "51b74e6fda3a2bef4425d1e538cfe0f6afc760c49fc3366c41ae1b963fc6719d",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 42529,
+        "path": "database/utils/scoring.py",
+        "sha256": "f12f689f467fcfbd92adce8bb3346ba4355e52a5dc2f7498ffd203c07a81688c",
+        "source": "database/utils/scoring.py"
+      },
+      {
+        "missing": true,
+        "source": "database/utils/sector_breadth_wave.py"
+      },
+      {
+        "bytes": 217263,
+        "path": "database/models/core.py",
+        "sha256": "298d7de6134377cd223f0c82e868952e4c39ea9d06f274f741182032bbf232ec",
+        "source": "database/models/core.py"
+      },
+      {
+        "bytes": 23553,
+        "path": "database/models/technical.py",
+        "sha256": "2752501ca5f3171ca2368ef5357fb66e2a468242b03a55381916273001762fc3",
+        "source": "database/models/technical.py"
+      },
+      {
+        "bytes": 961,
+        "path": "database/project_root.py",
+        "sha256": "7fae4a33e2321f0a2098aeb9be4f976655d060552f7b09d08fcf15cf9ba39c3c",
+        "source": "database/project_root.py"
+      },
+      {
+        "bytes": 24055,
+        "path": "market_breadth.py",
+        "sha256": "ee48a20f94b622941f1e4760c70d18cab82efd170835e606e8488eb3ee16043b",
+        "source": "market_breadth.py"
+      },
+      {
+        "bytes": 31003,
+        "path": "market_regime.py",
+        "sha256": "d1a81d7ba5fdc22d0e19d6528f9f2af437556161cc101a97c87e4edbdbbe3c16",
+        "source": "market_regime.py"
+      },
+      {
+        "bytes": 36724,
+        "path": "volume_amplifier.py",
+        "sha256": "2dc87a230b98a5bba4b179751c6649d2bcb0f3f9a52f4260e580ff68610320ac",
+        "source": "volume_amplifier.py"
+      },
+      {
+        "bytes": 38250,
+        "path": "simulator.py",
+        "sha256": "ca81216ffa6adc5bdd8bf916dddf2be6c3643b9cc0e57a143ee743423f2d6066",
+        "source": "simulator.py"
+      },
+      {
+        "bytes": 9763,
+        "path": "recalculate_scores.py",
+        "sha256": "1a08dfd87bb07fb12e33ea02581a0941ba17309937c32dab02a3cef1191d5434",
+        "source": "recalculate_scores.py"
+      }
+    ]
+  },
+  "fingerprints": {
+    "manifest_inputs": "f95e1ba7a52df5316bc62d7a2135cd2d8e57654e626d39a375a3e3f28ff734e5",
+    "portfolio_config": "1dc749efc6bd290a497b60d8c60ead4c28056db47ba992caa53a5fc3b63a135b",
+    "portfolio_snapshot": "1a1d21540b96157a0cba40e8542fa838bae3e62000bdac76c612c9bf2520b7d8",
+    "portfolio_source_files": "f23414450f94c32ffb87e49b84cdad9bc6332f2a2acf38ca1f90b5f0175cb1f3",
+    "scoring_config": "f07320e9b50eebf13486177104307b4f0bab9d6ef346fe4356c5ffc618f19ef5",
+    "scoring_files": "735b02433de0e075a2a1a255edf60ca491de290a3cbdb724ee0f5e40d1df3b42"
+  },
+  "label": "v39",
+  "notes": [
+    "This snapshot was copied from the git commit recorded by AlgorithmVersion rather than from the current worktree.",
+    "Runtime scoring still imports the checkout code until the injected loader phase lands."
+  ],
+  "paths": {
+    "cache_root": ".cache/algorithm_versions/v39",
+    "evidence_manifest": "evidence_manifest.json",
+    "portfolio_config": "portfolio_config.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_sources": "portfolio_sources",
+    "root": "algorithm_versions/v39",
+    "scoring": "scoring",
+    "scoring_config": "scoring_config.json"
+  },
+  "previous_resolved_key": "v38",
+  "schema_version": 1,
+  "silo_key": "v39",
+  "source": {
+    "algorithm_version_file": "b093e2d",
+    "commit": "200f33a273a76f77a000f117e5c071c32e179c28",
+    "commit_body": "Score-stage gradient lift for puts in [16,20] near upcoming earnings,\nreplacing the EARN_SUPP_PUT cascade-stage filter (shipped 2026-04-26,\n10 days live).  The score itself now drifts these signals OUT of put-\nqualifying range so the dashboard doesn't show them as red badges\nthe strategy will silently skip.\n\nMechanism (gradient over thresholds, applied BEFORE EARN_BOOST):\n\n    if 16 <= overall <= 20 and 1 <= days_to_earnings <= 7:\n        # Score gradient: peaks at 16-20, fades width 3\n        score_grad = clip((overall-13)/3, 0, 1) for 16-17\n                    OR clip((23-overall)/3, 0, 1) for 18-20\n        # Proximity: 1.0 at d=1-5, fades to 0 at d=8\n        proximity = 1.0 if d <= 5 else (8-d)/3\n        weakness  = score_grad * proximity\n        overall  += 0.95 * weakness * (28 - overall)\n\nTarget=28 places the lifted signal just past the <25 put-qualifying\nthreshold AND past EARN_BOOST's put gate (overall<=25), so subsequent\nEARN_BOOST won't re-amplify on the put side.\n\nCalibration via fast_variant_runner sweep\n(experiments/pess_v39/sweep.py, 11 variants on v37 5y).  Per-trade\n<25 cumulative impact is small (+0.06pp \u0394) because v37 PCD already\nfiltered most of the cohort; the residual (~65 puts/year) is what\nPESS targets.  Portfolio impact comes from cascade slot displacement\n(matching the original EARN_SUPP_PUT N=1000 MC validation: +44.7%\n5y compound Realistic).\n\nPer-trade gate (sub-25 H1 fix per assessment-backtest.md, soft):\n  - <25 TP%: +0.06pp / N -2.3% (cohort dampened out of universe)\n  - <20/<15/<10/<5: within \u00b10.4pp (gradient edges only)\n  - Calls: byte-identical (gate is puts-only)\n  - Multi-window: 3y -0.02 / 1y -0.20 (small cohort, within tolerance)\n\nApplies stoch_grad smoothly so signals on the wadj-mild edge of\nthe cohort get partial dampening (per \"gradient over thresholds\"\nship guidance).\n\nRetires the EARN_SUPP_PUT filter:\n  - strategy_config.py: EARN_SUPP_PUT = False (both DTEs)\n  - trader.py: EARN_SUPP_PUT = False\n  - frontend StockTable.js: EARN_SUPP_PUT skip badge removed\n    (no API will emit this reason now that the filter is off)\n\nBuilds atop v38 CWWD (commit b093e2d) \u2014 both score-stage fixes\nencode their cascade-stage filter ancestors as proper score\nadjustments, eliminating the dashboard divergence problem.\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+    "commit_short": "200f33a2",
+    "commit_subject": "v39 scoring: PESS (Put Earnings Score Suppression) + retire EARN_SUPP_PUT",
+    "mode": "git_ref",
+    "requested_ref": "200f33a"
+  },
+  "status": "shipped"
+}

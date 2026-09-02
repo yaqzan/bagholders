@@ -1,0 +1,180 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-05-26T19:17:58",
+    "git_commit": "1bba5f965",
+    "git_message": "Fix v64 recalc signal sigma map",
+    "id": 64,
+    "label": "v64",
+    "notes": null
+  },
+  "captured_at": "2026-05-26T23:28:05+00:00",
+  "classification": {
+    "category": "db_linked_snapshot",
+    "reason": "AlgorithmVersion row points at this commit; message is not specific.",
+    "scoring_algorithm_snapshot": true
+  },
+  "files": {
+    "portfolio_sources": [
+      {
+        "bytes": 64967,
+        "path": "strategy_config.py",
+        "sha256": "9b08bf79077592226a799d9ea74cee5f552eb8b2b23b82cffb32b784827dfa07",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 23009,
+        "path": "mechanism_registry.py",
+        "sha256": "0e4a57070b9e5d211b823daa215ede962cd9fe49716086ac160b46820c395d8f",
+        "source": "mechanism_registry.py"
+      },
+      {
+        "bytes": 131444,
+        "path": "monte_carlo.py",
+        "sha256": "c521d45ac988491962a6849b19f4e97477b824d55fa4f81b61d3f294a1271e85",
+        "source": "monte_carlo.py"
+      },
+      {
+        "bytes": 90354,
+        "path": "monte_carlo_15dte.py",
+        "sha256": "71e893ea7abf52595587c7d1ec343fcd9ff2a240b50a548e1f8d813a22c24d1d",
+        "source": "monte_carlo_15dte.py"
+      },
+      {
+        "bytes": 110145,
+        "path": "backtest_cascade.py",
+        "sha256": "dff23551abc222e0e829d09ef745a4c264c4a4c118956339dcfea237abd604d7",
+        "source": "backtest_cascade.py"
+      },
+      {
+        "bytes": 85451,
+        "path": "backtest_cascade_15dte.py",
+        "sha256": "cef55c5f0f0fe2b31b65e145ba283228e182ed2baa050364d62acef09e4f18d8",
+        "source": "backtest_cascade_15dte.py"
+      },
+      {
+        "bytes": 216074,
+        "path": "api.py",
+        "sha256": "f52e74419fe61e71c73784f827dbc348a795aa19accd2da8ceea4c3f9c105b08",
+        "source": "api.py"
+      },
+      {
+        "bytes": 232979,
+        "path": "trader.py",
+        "sha256": "9ea23ef5f30b5e1b63a8d7e07b3f03279be93fa35c88e0fcd6736f2957590ff5",
+        "source": "trader.py"
+      }
+    ],
+    "scoring": [
+      {
+        "bytes": 10,
+        "path": "ALGORITHM_VERSION",
+        "sha256": "f451294790c6a6982a36dcb2f935f0714a8eda85e240e3359f9dd85438827568",
+        "source": "ALGORITHM_VERSION"
+      },
+      {
+        "bytes": 64967,
+        "path": "strategy_config.py",
+        "sha256": "9b08bf79077592226a799d9ea74cee5f552eb8b2b23b82cffb32b784827dfa07",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 98148,
+        "path": "database/utils/scoring.py",
+        "sha256": "b00f4e84e0e989a6433c47f2534db56061b09cdb0d3132a1465ff1143d4dc989",
+        "source": "database/utils/scoring.py"
+      },
+      {
+        "bytes": 12659,
+        "path": "database/utils/sector_breadth_wave.py",
+        "sha256": "02548d3dacecfbce0f92469068797933711d8ccf61c7ebe0d990a68b73ef61a2",
+        "source": "database/utils/sector_breadth_wave.py"
+      },
+      {
+        "bytes": 266390,
+        "path": "database/models/core.py",
+        "sha256": "9215c8a17b07af9156106c3f7db5a7d4959cd92534b091242419576a50378d5b",
+        "source": "database/models/core.py"
+      },
+      {
+        "bytes": 24417,
+        "path": "database/models/technical.py",
+        "sha256": "aa267949307463164561744e895afea43746a467e6f918d0f7fc2603c62372f9",
+        "source": "database/models/technical.py"
+      },
+      {
+        "bytes": 961,
+        "path": "database/project_root.py",
+        "sha256": "7fae4a33e2321f0a2098aeb9be4f976655d060552f7b09d08fcf15cf9ba39c3c",
+        "source": "database/project_root.py"
+      },
+      {
+        "bytes": 41126,
+        "path": "market_breadth.py",
+        "sha256": "e9bc8d559261731032af7c7d19f263209645ff3511d82e15360d491a86c73c5c",
+        "source": "market_breadth.py"
+      },
+      {
+        "bytes": 31003,
+        "path": "market_regime.py",
+        "sha256": "d1a81d7ba5fdc22d0e19d6528f9f2af437556161cc101a97c87e4edbdbbe3c16",
+        "source": "market_regime.py"
+      },
+      {
+        "bytes": 37033,
+        "path": "volume_amplifier.py",
+        "sha256": "c40b9b979c6306d24b7e4ba55f40d69f6bae1757c01d1a69ba1358aeaf9d2224",
+        "source": "volume_amplifier.py"
+      },
+      {
+        "bytes": 41635,
+        "path": "simulator.py",
+        "sha256": "028cb516e927aaec9025433cff38ed4cfe558f0c4a54cfaff4d724b02265fdcc",
+        "source": "simulator.py"
+      },
+      {
+        "bytes": 19620,
+        "path": "recalculate_scores.py",
+        "sha256": "b54195b8bac40540488ea272269ad61d31031a936daa08c366633a0ae194b5e9",
+        "source": "recalculate_scores.py"
+      }
+    ]
+  },
+  "fingerprints": {
+    "manifest_inputs": "762fc79698a59b6743097765253c49e23b25fef4d5fcd9631db57fbe260e65b3",
+    "portfolio_config": "7f2290062a19994e72227e159f40e60d7e283d0334b90a06e9987e9b769a453a",
+    "portfolio_snapshot": "97ea3d6536621f57ad8c4b1f6ca8b69afd43cb9d34c02fde36388fa7130c618c",
+    "portfolio_source_files": "41c9cf358b2bcd6a1ccc7d7d61aeed64f0e0e66cce3bac535a77d4b04167132a",
+    "scoring_config": "7cfb4aff794127a4bea1c95fed7837d435997f68ca8a46ba6972f20028c07b05",
+    "scoring_files": "bd3f5793105f10c1d32c67ca11d73d2986c76bd19d24898161b44e1725513aa9"
+  },
+  "label": "v64-boundary-freshness-ship-candidate",
+  "notes": [
+    "This snapshot was copied from the git commit recorded by AlgorithmVersion rather than from the current worktree.",
+    "Runtime scoring still imports the checkout code until the injected loader phase lands.",
+    "Candidate silo only; production active remains v60 unless ALGORITHM_VERSION changes."
+  ],
+  "paths": {
+    "cache_root": ".cache/algorithm_versions/v64",
+    "evidence_manifest": "evidence_manifest.json",
+    "portfolio_config": "portfolio_config.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_sources": "portfolio_sources",
+    "root": "algorithm_versions/v64",
+    "scoring": "scoring",
+    "scoring_config": "scoring_config.json"
+  },
+  "previous_resolved_key": "v63",
+  "promoted_at": "2026-05-27T09:38:47+00:00",
+  "schema_version": 1,
+  "silo_key": "v64",
+  "source": {
+    "algorithm_version_file": "6f4bbe2c4",
+    "commit": "1bba5f965e8ed625675527e15ce6df01aa137a2b",
+    "commit_body": "",
+    "commit_short": "1bba5f965",
+    "commit_subject": "Fix v64 recalc signal sigma map",
+    "mode": "git_ref",
+    "requested_ref": "1bba5f965"
+  },
+  "status": "ship_candidate"
+}

@@ -1,0 +1,3425 @@
+#!/usr/bin/env python3
+"""
+Deterministic historical backtest — Cascade Allocation Strategy
+
+Replays every actual scored signal from the database in chronological order.
+For each signal, walks real OHLCV data forward to determine whether the trade
+hit TP, SL, or the day-15 hard sell (breadth-adaptive barriers — see Exit rules below).
+
+No Monte Carlo, no synthetic signals, no assumed win rates.
+The TP/SL rates emerge from actual price history.
+Every run produces the same equity curve (fully deterministic).
+
+Portfolio mechanics (from CLAUDE.md):
+  - Instruments: ATM 30d calls (score >= min_score) AND ATM 30d puts (score <= 25),
+                 entered at close on signal date
+  - Call cascade (% of current portfolio value):
+        85+   → 15%   (90+ and 85-89 merged — 85-89 EV > 90-94)
+        80-84 → 12%
+        75-79 → 12%
+        70-74 →  5%   (overflow — filled after all 75+ slots)
+  - Put cascade:
+        <=15  → 15%   (extreme put)
+        16-20 → 12%
+        21-25 → 12%
+  - Max 14 concurrent positions (shared pool; calls fill each day first)
+  - Re-entry blocked while same symbol already has an open position (either side)
+  - Tiebreak: calls (score desc) before puts (score asc), then symbol ascending
+
+Exit rules:
+  Calls — breadth-adaptive (same signal drives BOTH TP and SL):
+    breadth_score ≤ 50 ("stressed"):
+      TP: intraday high ≥ entry × (1 + 1.274 × σ_daily)   (+35% premium)
+      SL: intraday low  ≤ entry × (1 − 1.456 × σ_daily)   (−40% premium)
+    breadth_score > 50 ("healthy"):
+      TP: intraday high ≥ entry × (1 + 1.092 × σ_daily)   (+30% premium)
+      SL: intraday low  ≤ entry × (1 − 1.274 × σ_daily)   (−35% premium)
+  Puts — fixed (no breadth switch):
+    TP: intraday low  ≤ entry × (1 − 1.092 × σ_daily)   (+30% premium)
+    SL: intraday high ≥ entry × (1 + 0.728 × σ_daily)   (−20% premium; tight)
+
+  Hard sell: first trading day on or after entry_date + 15 calendar days
+  If TP and SL both breach on the same bar, TP wins (consistent with
+  assess_scores.py convention: intraday high used for call win detection).
+
+Net option P&L (per-exit slippage — entry −1%, TP 0% limit sell, SL −1.3%,
+hard −0.5%):
+  TP base    → +29.0%   TP stressed  → +34.0%
+  SL base    → −37.3%   SL stressed  → −42.3%
+  Hard       → −51.5%
+
+σ_daily = 60-bar realized stdev of daily returns at signal date.
+
+Data barrier: signals before 2020-01-01 are excluded regardless of DB history.
+
+Usage:
+  python backtest_cascade.py
+  python backtest_cascade.py --capital 100000
+  python backtest_cascade.py --min-score 75
+  python backtest_cascade.py --from 2022-01-01
+  python backtest_cascade.py --from 2022-01-01 --to 2022-12-31
+  python backtest_cascade.py --version 14
+"""
+
+import argparse
+import bisect
+import csv
+import math
+import os
+import sys
+from collections import defaultdict
+from dataclasses import dataclass, field
+from datetime import date, timedelta
+from pathlib import Path
+from typing import Optional
+
+import numpy as np
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+# ---------------------------------------------------------------------------
+# Strategy constants — sourced from strategy_config.py (single source of truth).
+# Module-level names persist for back-compat; values come from STRATEGY_30DTE.
+# Sweeps mutate via env vars; the dataclass is frozen and never touched.
+# Drift between this file and strategy_config is caught by
+# tests/test_strategy_config_drift.py.
+#
+# IMPORTANT NOTE — A.2 fixes a latent bug: prior to this refactor, the
+# TP_SIGMA_*/SL_SIGMA_* constants were stale at v19 values (TP_SIGMA_BASE=1.092
+# corresponding to TP=0.30) instead of the H5 ship values (TP=0.35 ->
+# TP_SIGMA_BASE=1.274). The deterministic backtest fired TP ~17% too eagerly
+# and SL ~17% too late. Reading from strategy_config (where TP_SIGMA is a
+# computed @property) auto-derives the correct value. This is the FIRST
+# behavioral change to backtest_cascade outputs since H5 ship.
+# ---------------------------------------------------------------------------
+import os as _os
+import strategy_config as _sc
+from dte_router import load_router_market_maps, value_on_or_before
+try:
+    from database.utils.semivol import compute_semivol_r  # SVR skew-bridge feature
+except Exception:                                          # degrade to SVR-off, never crash
+    def compute_semivol_r(closes, idx, win=60):
+        return None
+_cfg = _sc.STRATEGY_30DTE   # this engine is the 30 DTE deterministic backtest
+_opt = _cfg.option
+
+INITIAL_CAPITAL     = 50_000.0
+MAX_POSITIONS       = _cfg.MAX_POSITIONS
+MAX_POSITIONS_CALL  = _cfg.MAX_POSITIONS_CALL
+MAX_POSITIONS_PUT   = _cfg.MAX_POSITIONS_PUT
+# Calendar hold + honest theta standard (shipped 2026-06-09). The hard-sell deadline
+# here is already CALENDAR-based; CALENDAR_HOLD additionally makes the option theta
+# honest (decay over NOMINAL_CAL_DTE CALENDAR days from the signal, not trading bars).
+# When on, the deadline is HOLD_CAL_DAYS calendar days (env overrides for experiments).
+CALENDAR_HOLD       = (os.environ.get('CALENDAR_HOLD', '').strip() or ('1' if _cfg.CALENDAR_HOLD else '0')) == '1'
+NOMINAL_CAL_DTE     = int(os.environ.get('NOMINAL_CAL_DTE', '').strip() or _cfg.NOMINAL_CAL_DTE)
+HOLD_CALENDAR_DAYS  = (int(os.environ.get('HOLD_CAL_DAYS', '').strip() or _cfg.HOLD_CAL_DAYS)
+                       if CALENDAR_HOLD else _cfg.HOLD_DAYS)
+
+# Practical exposure saturation (Stage 3, env-overridable for sweeps).
+PRACTICAL_EXPOSURE_ENABLED = os.environ.get(
+    'PRACTICAL_EXPOSURE_ENABLED',
+    '1' if getattr(_cfg, 'PRACTICAL_EXPOSURE_ENABLED', False) else '0',
+) == '1'
+_practical_default = lambda name, disabled='0.0': str(getattr(_cfg, name, float(disabled))) if PRACTICAL_EXPOSURE_ENABLED else disabled
+PRACTICAL_CAPITAL_CEILING = float(os.environ.get('PRACTICAL_CAPITAL_CEILING', _practical_default('PRACTICAL_CAPITAL_CEILING')))
+GROSS_PREMIUM_CAP         = float(os.environ.get('GROSS_PREMIUM_CAP', _practical_default('GROSS_PREMIUM_CAP')))
+CALL_PREMIUM_CAP          = float(os.environ.get('CALL_PREMIUM_CAP', _practical_default('CALL_PREMIUM_CAP')))
+PUT_PREMIUM_CAP           = float(os.environ.get('PUT_PREMIUM_CAP', _practical_default('PUT_PREMIUM_CAP')))
+OPP_SAT_CALL_REF          = float(os.environ.get('OPP_SAT_CALL_REF', _practical_default('OPP_SAT_CALL_REF')))
+OPP_SAT_PUT_REF           = float(os.environ.get('OPP_SAT_PUT_REF', _practical_default('OPP_SAT_PUT_REF')))
+OPP_SAT_POWER             = float(os.environ.get('OPP_SAT_POWER', _practical_default('OPP_SAT_POWER', '1.0')))
+OPP_SAT_FLOOR             = float(os.environ.get('OPP_SAT_FLOOR', _practical_default('OPP_SAT_FLOOR')))
+
+def _env_symbol_tuple(name, default):
+    raw = os.environ.get(name)
+    if raw is None:
+        return tuple(default)
+    return tuple(s.strip().upper() for s in raw.split(',') if s.strip())
+
+# DTE router — portfolio-only overlay on the 30 DTE backtest.
+DTE_ROUTER_ENABLED = os.environ.get(
+    'DTE_ROUTER_ENABLED',
+    '1' if getattr(_cfg, 'DTE_ROUTER_ENABLED', False) else '0',
+) == '1'
+DTE_ROUTER_TARGET_DTE = int(os.environ.get('DTE_ROUTER_TARGET_DTE', str(getattr(_cfg, 'DTE_ROUTER_TARGET_DTE', 15))))
+DTE_ROUTER_SCORE_MIN = int(os.environ.get('DTE_ROUTER_SCORE_MIN', str(getattr(_cfg, 'DTE_ROUTER_SCORE_MIN', 80))))
+DTE_ROUTER_TREND_LT = float(os.environ.get('DTE_ROUTER_TREND_LT', str(getattr(_cfg, 'DTE_ROUTER_TREND_LT', 50.0))))
+DTE_ROUTER_VIX_MIN = float(os.environ.get('DTE_ROUTER_VIX_MIN', str(getattr(_cfg, 'DTE_ROUTER_VIX_MIN', 0.0))))
+DTE_ROUTER_VIX_MAX = float(os.environ.get('DTE_ROUTER_VIX_MAX', str(getattr(_cfg, 'DTE_ROUTER_VIX_MAX', 0.0))))
+DTE_ROUTER_REGIME_MIN = float(os.environ.get('DTE_ROUTER_REGIME_MIN', str(getattr(_cfg, 'DTE_ROUTER_REGIME_MIN', 0.0))))
+DTE_ROUTER_REGIME_MAX = float(os.environ.get('DTE_ROUTER_REGIME_MAX', str(getattr(_cfg, 'DTE_ROUTER_REGIME_MAX', 100.0))))
+DTE_ROUTER_DAY_CAP = int(os.environ.get('DTE_ROUTER_DAY_CAP', str(getattr(_cfg, 'DTE_ROUTER_DAY_CAP', 0))))
+DTE_ROUTER_ALLOC_SCORE_CAP = int(os.environ.get('DTE_ROUTER_ALLOC_SCORE_CAP', str(getattr(_cfg, 'DTE_ROUTER_ALLOC_SCORE_CAP', 0))))
+DTE_ROUTER_EXCLUDED_SYMBOLS = _env_symbol_tuple(
+    'DTE_ROUTER_EXCLUDED_SYMBOLS',
+    getattr(_cfg, 'DTE_ROUTER_EXCLUDED_SYMBOLS', ()),
+)
+
+# H3 — DD-soft band call alloc contraction (shipped 2026-05-04 for 30 DTE).
+DD_SOFT_BAND_LO     = float(_os.environ.get('DD_SOFT_BAND_LO', str(_cfg.DD_SOFT_BAND_LO)))
+DD_SOFT_BAND_HI     = float(_os.environ.get('DD_SOFT_BAND_HI', str(_cfg.DD_SOFT_BAND_HI)))
+DD_SOFT_CALL_FLOOR  = float(_os.environ.get('DD_SOFT_CALL_FLOOR', str(_cfg.DD_SOFT_CALL_FLOOR)))
+
+# RXDD — VIX-regime call-alloc dampener (shipped 2026-06-04, 30 DTE). Mirror of the
+# monte_carlo.py mechanism: smooth Gaussian contraction of CALL alloc in the low-EV
+# VIX ~20-26 "slow-bleed" band, gated to running DD >= DD_MIN. Default OFF → no-op.
+# getattr defaults: a long-running server holding a pre-RXDD strategy_config in
+# memory degrades to RXDD-off (no crash) until it's restarted, instead of raising.
+RXDD_ENABLED  = _os.environ.get('RXDD_ENABLED', '1' if getattr(_cfg, 'RXDD_ENABLED', False) else '0') == '1'
+RXDD_VIX_C    = float(_os.environ.get('RXDD_VIX_C',  str(getattr(_cfg, 'RXDD_VIX_C', 24.0))))
+RXDD_VIX_W    = float(_os.environ.get('RXDD_VIX_W',  str(getattr(_cfg, 'RXDD_VIX_W', 4.0))))
+RXDD_DEPTH    = float(_os.environ.get('RXDD_DEPTH',  str(getattr(_cfg, 'RXDD_DEPTH', 0.30))))
+RXDD_DD_MIN   = float(_os.environ.get('RXDD_DD_MIN', str(getattr(_cfg, 'RXDD_DD_MIN', 0.0))))
+
+# LIQUIDITY_FLOOR — P3.6 / known-issues.md #10, Stage-3 staged ship-candidate
+# (mechanism_registry.py; FF3_STAGEB_RESULTS.md). Drops a 75+ CALL signal in
+# load_signals() when its per-signal option_volume_30d feature (nearest-ATM
+# 20-45 DTE call, trailing-30-cal-day avg REAL contract volume where
+# option_prices covers the date [2025-02-10+], tagged Stock.average_volume*
+# 0.005 fallback otherwise — see experiments/liquidity_cascade/DESIGN.md) is
+# below floor. Default OFF (0.0) => no-op, bit-identical production. Sourced
+# from strategy_config.LIQUIDITY_FLOOR (both DTEs =0.0 pending P2.B live-fill
+# confirmation — Core-evidence only, Apex failed T4).
+LIQUIDITY_FLOOR = float(_os.environ.get('LIQUIDITY_FLOOR', str(getattr(_cfg, 'LIQUIDITY_FLOOR', 0.0))))
+
+# LIQUIDITY_MAP_FILE — Stage B' path override for _liquidity_load() (FF3_STAGEB_
+# PREREG.md hook #1; mirror of monte_carlo.py). Default '' preserves the exact
+# current source (cache_path('liquidity_option_volume_30d'), the 2026-07-14
+# P3.6 artifact). No strategy_config field (forward-compatible stub, same as
+# monte_carlo.py's own LIQUIDITY_MAP_FILE).
+LIQUIDITY_MAP_FILE = _os.environ.get('LIQUIDITY_MAP_FILE', str(getattr(_cfg, 'LIQUIDITY_MAP_FILE', ''))).strip()
+
+_LIQUIDITY_DATA_NAME = 'liquidity_option_volume_30d'   # experiments/liquidity_cascade/build_option_volume.py
+_LIQUIDITY_MAP = None
+def _liquidity_load():
+    """Lazy {(symbol_str, date): option_volume_30d} map. Source is
+    LIQUIDITY_MAP_FILE when set, else the P3.6 feature parquet (cache_path(
+    'liquidity_option_volume_30d'), unchanged default) — mirrors
+    monte_carlo.py's _liquidity_load(). No-op (empty dict -> filter never
+    drops) on failure, matching _spread_tilt_load()'s graceful-degradation
+    shape."""
+    global _LIQUIDITY_MAP
+    if _LIQUIDITY_MAP is not None:
+        return _LIQUIDITY_MAP
+    _LIQUIDITY_MAP = {}
+    try:
+        import polars as _pl
+        if LIQUIDITY_MAP_FILE:
+            from pathlib import Path as _Path
+            path = _Path(LIQUIDITY_MAP_FILE)
+        else:
+            from database.bulk_cache import cache_path as _cp
+            path = _cp(_LIQUIDITY_DATA_NAME)
+        if path.exists():
+            df = _pl.read_parquet(path)
+            for sym, d, v in zip(df['symbol'].to_list(), df['date'].to_list(),
+                                 df['option_volume_30d'].to_list()):
+                _LIQUIDITY_MAP[(sym, d)] = v
+    except Exception as _e:
+        print(f"  [LIQUIDITY_FLOOR] map load failed ({_e}); filter inactive")
+    return _LIQUIDITY_MAP
+
+
+def _apply_liquidity_floor_filter(signals, floor=None):
+    """Drop 75+ CALL signals whose option_volume_30d < floor (module
+    LIQUIDITY_FLOOR default when floor is None -- lets a per-request
+    cfg['liquidity_floor'] override reach this filter via load_signals(cfg=)).
+    Gated default-OFF (floor<=0.0 => every signal passes, since volume is
+    never negative); mirrors _apply_weekly_overflow_filter's drop-from-list
+    shape and print-a-summary style. Missing-from-map signals (feature not
+    built for that (symbol,date), e.g. non-75+ overflow rows, or a live date
+    past the map's coverage) pass through unfiltered -- absence of evidence
+    is not evidence of illiquidity here."""
+    if floor is None:
+        floor = LIQUIDITY_FLOOR
+    if floor <= 0.0 or not signals:
+        return signals
+    liq_map = _liquidity_load()
+    if not liq_map:
+        return signals
+    kept = []
+    dropped = 0
+    for s in signals:
+        v = liq_map.get((s.symbol, s.date))
+        if v is not None and v < floor:
+            dropped += 1
+            continue
+        kept.append(s)
+    if dropped:
+        print(f"  LIQUIDITY_FLOOR={floor}: dropped {dropped}/{len(signals)} calls "
+              f"(option_volume_30d below floor)")
+    return kept
+
+
+def _rxdd_call_scale(dd, vix, enabled, vix_c, vix_w, depth, dd_min):
+    """Smooth VIX-band CALL alloc multiplier in [1-depth, 1.0]; no-op (1.0) when
+    disabled, vix unavailable, running dd < dd_min, or vix_w<=0."""
+    if not enabled or vix is None or dd < dd_min or vix_w <= 0:
+        return 1.0
+    z = (float(vix) - vix_c) / vix_w
+    return 1.0 - depth * math.exp(-0.5 * z * z)
+
+
+# MWDD — McClellan (breadth-momentum / "market wave") flat-band CALL alloc dampener
+# (shipped 2026-06-05, 30 DTE). Mirror of the monte_carlo.py mechanism: smooth Gaussian
+# contraction of CALL alloc in the low-EV flat/topping McClellan band (~0), gated to
+# running DD >= DD_MIN, VIX-panic-excluded. Default OFF → no-op. getattr defaults degrade
+# a stale server holding a pre-MWDD strategy_config to MWDD-off (no crash) until restart.
+MWDD_ENABLED   = _os.environ.get('MWDD_ENABLED', '1' if getattr(_cfg, 'MWDD_ENABLED', False) else '0') == '1'
+MWDD_MCC_C     = float(_os.environ.get('MWDD_MCC_C',     str(getattr(_cfg, 'MWDD_MCC_C', 0.0))))
+MWDD_MCC_W     = float(_os.environ.get('MWDD_MCC_W',     str(getattr(_cfg, 'MWDD_MCC_W', 22.0))))
+MWDD_DEPTH     = float(_os.environ.get('MWDD_DEPTH',     str(getattr(_cfg, 'MWDD_DEPTH', 0.30))))
+MWDD_DD_MIN    = float(_os.environ.get('MWDD_DD_MIN',    str(getattr(_cfg, 'MWDD_DD_MIN', 0.10))))
+MWDD_VIX_PANIC = float(_os.environ.get('MWDD_VIX_PANIC', str(getattr(_cfg, 'MWDD_VIX_PANIC', 28.0))))
+
+
+def _mwdd_call_scale(dd, mcc, vix, enabled, mcc_c, mcc_w, depth, dd_min, vix_panic):
+    """Smooth McClellan-flat-band CALL alloc multiplier in [1-depth, 1.0]; no-op (1.0)
+    when disabled, McClellan unavailable, running dd < dd_min, mcc_w<=0, or VIX in the
+    panic band (>= vix_panic, capitulation = mean-reversion winners)."""
+    if not enabled or mcc is None or dd < dd_min or mcc_w <= 0:
+        return 1.0
+    if vix is not None and vix_panic > 0 and float(vix) >= vix_panic:
+        return 1.0
+    z = (float(mcc) - mcc_c) / mcc_w
+    return 1.0 - depth * math.exp(-0.5 * z * z)
+
+
+# TVDD — TRIN (Arms-index, volume-FLOW) neutral-band CALL alloc dampener (Stage-3 sweep,
+# 30 DTE). Mirror of the monte_carlo.py mechanism: smooth Gaussian contraction of CALL alloc
+# in the low-EV neutral volume-flow band (TRIN ~1.0-1.3 = balanced/mild-distribution), gated
+# to running DD >= DD_MIN, VIX-panic-excluded. TRIN extremes (froth <0.7, panic >1.8) are
+# mean-reversion/momentum winners left alone by the bump. Orthogonal to RXDD(VIX)/MWDD
+# (McClellan count-momentum)/F3F(breadth level). Default OFF → no-op. getattr defaults degrade
+# a stale server holding a pre-TVDD strategy_config to TVDD-off (no crash) until restart.
+TVDD_ENABLED   = _os.environ.get('TVDD_ENABLED', '1' if getattr(_cfg, 'TVDD_ENABLED', False) else '0') == '1'
+TVDD_TRIN_C    = float(_os.environ.get('TVDD_TRIN_C',    str(getattr(_cfg, 'TVDD_TRIN_C', 1.15))))
+TVDD_TRIN_W    = float(_os.environ.get('TVDD_TRIN_W',    str(getattr(_cfg, 'TVDD_TRIN_W', 0.30))))
+TVDD_DEPTH     = float(_os.environ.get('TVDD_DEPTH',     str(getattr(_cfg, 'TVDD_DEPTH', 0.30))))
+TVDD_DD_MIN    = float(_os.environ.get('TVDD_DD_MIN',    str(getattr(_cfg, 'TVDD_DD_MIN', 0.13))))
+TVDD_VIX_PANIC = float(_os.environ.get('TVDD_VIX_PANIC', str(getattr(_cfg, 'TVDD_VIX_PANIC', 28.0))))
+
+
+def _tvdd_call_scale(dd, trin, vix, enabled, trin_c, trin_w, depth, dd_min, vix_panic):
+    """Smooth TRIN-neutral-band CALL alloc multiplier in [1-depth, 1.0]; no-op (1.0)
+    when disabled, TRIN unavailable, running dd < dd_min, trin_w<=0, or VIX in the panic
+    band (>= vix_panic, capitulation = mean-reversion winners)."""
+    if not enabled or trin is None or dd < dd_min or trin_w <= 0:
+        return 1.0
+    if vix is not None and vix_panic > 0 and float(vix) >= vix_panic:
+        return 1.0
+    z = (float(trin) - trin_c) / trin_w
+    return 1.0 - depth * math.exp(-0.5 * z * z)
+
+# BDIV — pre-top Breadth-DIVergence-at-highs CALL alloc dampener (shipped 2026-06-10,
+# 30 DTE). Mirror of the monte_carlo.py mechanism: contract CALL alloc when SPY is near
+# its 60d high WHILE internal breadth is rolling over (the classic pre-top divergence).
+# The FIRST leading DD lever: NO DD-gate (fires PRE-onset at the top, where running dd
+# ~ 0) and NO VIX-panic knob — the SPY-near-highs requirement is the structural crash
+# guard (cannot fire mid-crash; 2022/COVID untouched by construction). Gap extremes
+# (>12 = sharp shakeout) are mean-reversion winners left alone by the Gaussian.
+# Default OFF → no-op. getattr defaults degrade a stale pre-BDIV server to off.
+BDIV_ENABLED   = _os.environ.get('BDIV_ENABLED', '1' if getattr(_cfg, 'BDIV_ENABLED', False) else '0') == '1'
+BDIV_PROX_CUT  = float(_os.environ.get('BDIV_PROX_CUT',  str(getattr(_cfg, 'BDIV_PROX_CUT', 0.020))))
+BDIV_PROX_FULL = float(_os.environ.get('BDIV_PROX_FULL', str(getattr(_cfg, 'BDIV_PROX_FULL', 0.005))))
+BDIV_GAP_C     = float(_os.environ.get('BDIV_GAP_C',     str(getattr(_cfg, 'BDIV_GAP_C', 6.5))))
+BDIV_GAP_W     = float(_os.environ.get('BDIV_GAP_W',     str(getattr(_cfg, 'BDIV_GAP_W', 2.5))))
+BDIV_DEPTH     = float(_os.environ.get('BDIV_DEPTH',     str(getattr(_cfg, 'BDIV_DEPTH', 0.40))))
+
+
+def _bdiv_call_scale(bdiv, enabled, prox_cut, prox_full, gap_c, gap_w, depth):
+    """Smooth pre-top breadth-divergence CALL alloc multiplier in [1-depth, 1.0].
+    bdiv = (spy_from60h, brd_det10): SPY's distance below its 60d high (<= 0) and the
+    NEGATED breadth_score 10d change (positive = deteriorating). scale = 1 - depth *
+    prox_ramp(spy_from60h) * gauss(brd_det10; gap_c, gap_w). No-op (1.0) when disabled
+    or the map value is unavailable. No DD-gate / VIX-panic by design (see block comment)."""
+    if not enabled or bdiv is None:
+        return 1.0
+    spyh, det = bdiv
+    if spyh is None or det is None or gap_w <= 0 or prox_cut <= prox_full:
+        return 1.0
+    prox = (float(spyh) + prox_cut) / (prox_cut - prox_full)
+    prox = 0.0 if prox < 0.0 else 1.0 if prox > 1.0 else prox
+    if prox <= 0.0:
+        return 1.0
+    z = (float(det) - gap_c) / gap_w
+    return 1.0 - depth * prox * math.exp(-0.5 * z * z)
+
+# SVR — semivol_r (skew-bridge) entry filter (shipped 2026-06-05, 30 DTE). Mirror of
+# monte_carlo.py: smooth band-pass CALL-alloc scale by per-signal semivol_r (60d
+# downside/upside realized-vol ratio = the live cousin of put-skew). Contracts toward
+# SVR_FLOOR below SVR_LO_FULL (euphoric/expensive call) and above SVR_HI_FULL (crash
+# mode), full in the [LO_FULL, HI_FULL] sweet spot. Default OFF → no-op. getattr
+# defaults so a stale pre-SVR strategy_config in a long-running server degrades to off.
+SVR_ENABLED  = _os.environ.get('SVR_ENABLED', '1' if getattr(_cfg, 'SVR_ENABLED', False) else '0') == '1'
+SVR_LO_CUT   = float(_os.environ.get('SVR_LO_CUT',  str(getattr(_cfg, 'SVR_LO_CUT', 0.60))))
+SVR_LO_FULL  = float(_os.environ.get('SVR_LO_FULL', str(getattr(_cfg, 'SVR_LO_FULL', 0.80))))
+SVR_HI_FULL  = float(_os.environ.get('SVR_HI_FULL', str(getattr(_cfg, 'SVR_HI_FULL', 9.0))))
+SVR_HI_CUT   = float(_os.environ.get('SVR_HI_CUT',  str(getattr(_cfg, 'SVR_HI_CUT', 99.0))))
+SVR_FLOOR    = float(_os.environ.get('SVR_FLOOR',   str(getattr(_cfg, 'SVR_FLOOR', 0.50))))
+
+
+def _svr_call_scale(svr, enabled, lo_cut, lo_full, hi_full, hi_cut, floor):
+    """Call-alloc scale in [floor, 1.0]; no-op (1.0) when disabled or svr missing.
+    Contracts toward `floor` below `lo_full` (linear over [lo_cut, lo_full]) and above
+    `hi_full` (linear over [hi_full, hi_cut]); full (1.0) in the [lo_full, hi_full] band."""
+    if not enabled or svr is None:
+        return 1.0
+    if svr < lo_full:
+        if lo_full <= lo_cut:
+            t = 0.0 if svr <= lo_cut else 1.0
+        else:
+            t = (svr - lo_cut) / (lo_full - lo_cut)
+        t = min(1.0, max(0.0, t))
+        return floor + (1.0 - floor) * t
+    if svr > hi_full:
+        if hi_cut <= hi_full:
+            t = 0.0 if svr >= hi_cut else 1.0
+        else:
+            t = (hi_cut - svr) / (hi_cut - hi_full)
+        t = min(1.0, max(0.0, t))
+        return floor + (1.0 - floor) * t
+    return 1.0
+
+# SPREAD_TILT — 75-79-band-only high-disagreement CALL alloc haircut (weatherization #6;
+# Stage-3 MC-validation arm). Mirror of monte_carlo.py. spread = component disagreement
+# (5-member pop-stdev). DOWN-WEIGHT ONLY, strictly gated to 75<=score<=79 (80-84 inverts).
+# spread is stamped on the outcome at build time (run_cascade_backtest), like semivol_r.
+# Default OFF → no-op (byte-identical). getattr defaults so a stale config degrades to off.
+SPREAD_TILT_ENABLED = _os.environ.get('SPREAD_TILT_ENABLED', '1' if getattr(_cfg, 'SPREAD_TILT_ENABLED', False) else '0') == '1'
+SPREAD_TILT_LO      = float(_os.environ.get('SPREAD_TILT_LO',    str(getattr(_cfg, 'SPREAD_TILT_LO', 26.9))))
+SPREAD_TILT_HI      = float(_os.environ.get('SPREAD_TILT_HI',    str(getattr(_cfg, 'SPREAD_TILT_HI', 31.3))))
+SPREAD_TILT_DEPTH   = float(_os.environ.get('SPREAD_TILT_DEPTH', str(getattr(_cfg, 'SPREAD_TILT_DEPTH', 0.40))))
+_SPREAD_TILT_BAND_LO, _SPREAD_TILT_BAND_HI = 75, 79
+_SPREAD_TILT_MEMBERS = ['trend', 'bb', 'rsi', 'macd', 'stoch']
+_SPREAD_TILT_DATA_NAME = 'ensemble_spread_v73_calls_2016'   # v73==v74 pre_boost; identical spread
+
+
+def _spread_tilt_call_scale(score, spread, enabled, lo, hi, depth):
+    """Call-alloc scale in [1-depth, 1.0]; no-op (1.0) unless enabled AND 75<=score<=79
+    AND spread known. Linear ramp from full at/below `lo` to (1-depth) at/above `hi`.
+    Down-weight only; <75 / 80+ untouched (the 80-84 band inverts the EV sign)."""
+    if not enabled or spread is None:
+        return 1.0
+    if score < _SPREAD_TILT_BAND_LO or score > _SPREAD_TILT_BAND_HI:
+        return 1.0
+    if hi <= lo or depth <= 0.0:
+        return 1.0
+    if spread <= lo:
+        return 1.0
+    if spread >= hi:
+        return 1.0 - depth
+    t = (spread - lo) / (hi - lo)
+    return 1.0 - depth * t
+
+
+_SPREAD_TILT_MAP = None
+def _spread_tilt_load():
+    """Lazy {(symbol_str, date): component_spread} map from the v73 component parquet
+    (v73==v74 pre_boost; spread on pre-pre_boost comps => identical). No-op on failure."""
+    global _SPREAD_TILT_MAP
+    if _SPREAD_TILT_MAP is not None:
+        return _SPREAD_TILT_MAP
+    _SPREAD_TILT_MAP = {}
+    try:
+        import polars as _pl
+        from datetime import date as _date
+        from database.bulk_cache import materialize_polars as _mat
+        df = _pl.read_parquet(_mat(_SPREAD_TILT_DATA_NAME, lambda: None))
+        mean5 = sum(_pl.col(c) for c in _SPREAD_TILT_MEMBERS) / 5.0
+        var5 = sum((_pl.col(c) - mean5) ** 2 for c in _SPREAD_TILT_MEMBERS) / 5.0
+        df = df.with_columns(_spread=var5.sqrt())
+        for sym, ds, sp in zip(df['symbol'].to_list(), df['date'].to_list(), df['_spread'].to_list()):
+            y, m, d = ds[:10].split('-')
+            _SPREAD_TILT_MAP[(sym, _date(int(y), int(m), int(d)))] = float(sp)
+    except Exception as _e:
+        print(f"  [SPREAD_TILT] map load failed ({_e}); SPREAD_TILT inactive")
+    return _SPREAD_TILT_MAP
+
+# Breadth-adaptive σ barriers — derived properties on the dataclass keep
+# these in sync with TP_BASE / SL_BASE automatically.
+# PREMIUM_MULT=1.82, DELTA=0.5  -> pct * 3.64 = σ
+TP_SIGMA_BASE       = _cfg.TP_SIGMA_BASE        # 1.274 (was stale 1.092)
+TP_SIGMA_STRESS     = _cfg.TP_SIGMA_STRESS      # 1.456 (was stale 1.274)
+SL_SIGMA_BASE       = _cfg.SL_SIGMA_BASE        # 1.092 (was stale 1.274)
+SL_SIGMA_STRESS     = _cfg.SL_SIGMA_STRESS      # 1.274 (was stale 1.456)
+
+BREADTH_THRESHOLD   = _opt.BREADTH_THRESHOLD
+
+# Regime-aware allocation (asymmetric CUT_ONLY shipped 2026-04-17).
+REGIME_SLOPE          = _cfg.REGIME_SLOPE
+REGIME_SLOPE_PUT      = _cfg.REGIME_SLOPE_PUT
+ALLOC_SCALE_FLOOR     = _cfg.ALLOC_SCALE_FLOOR
+ALLOC_SCALE_CEIL      = _cfg.ALLOC_SCALE_CEIL
+REGIME_SLOPE_UP       = _cfg.REGIME_SLOPE_UP
+REGIME_SLOPE_DOWN     = _cfg.REGIME_SLOPE_DOWN
+REGIME_SLOPE_PUT_UP   = _cfg.REGIME_SLOPE_PUT_UP
+REGIME_SLOPE_PUT_DOWN = _cfg.REGIME_SLOPE_PUT_DOWN
+
+# Breadth-driven allocation knob (F3f). Set BREADTH_ALLOC_ENABLED=False
+# in strategy_config to revert to the legacy regime-slope path.
+BREADTH_ALLOC_ENABLED = _cfg.BREADTH_ALLOC_ENABLED
+F3F_CALL_THRESH       = _cfg.F3F_CALL_THRESH
+F3F_CALL_FLOOR        = _cfg.F3F_CALL_FLOOR
+F3F_CALL_LOW          = _cfg.F3F_CALL_LOW
+F3F_PUT_THRESH        = _cfg.F3F_PUT_THRESH
+F3F_PUT_FLOOR         = _cfg.F3F_PUT_FLOOR
+F3F_PUT_HIGH          = _cfg.F3F_PUT_HIGH
+
+# SAW Put U-curve — sector-breadth-driven put alloc gradient (shipped 2026-05-08)
+SAW_PUT_UCURVE_ENABLED   = int(os.environ.get('SAW_PUT_UCURVE_ENABLED', '1' if _cfg.SAW_PUT_UCURVE_ENABLED else '0'))
+SAW_PUT_UCURVE_SHAPE     = os.environ.get('SAW_PUT_UCURVE_SHAPE',  _cfg.SAW_PUT_UCURVE_SHAPE)
+SAW_PUT_UCURVE_MIDPOINT  = float(os.environ.get('SAW_PUT_UCURVE_MIDPOINT',  str(_cfg.SAW_PUT_UCURVE_MIDPOINT)))
+SAW_PUT_UCURVE_HALFWIDTH = float(os.environ.get('SAW_PUT_UCURVE_HALFWIDTH', str(_cfg.SAW_PUT_UCURVE_HALFWIDTH)))
+SAW_PUT_UCURVE_FLOOR     = float(os.environ.get('SAW_PUT_UCURVE_FLOOR',     str(_cfg.SAW_PUT_UCURVE_FLOOR)))
+SAW_PUT_UCURVE_CEIL      = float(os.environ.get('SAW_PUT_UCURVE_CEIL',      str(_cfg.SAW_PUT_UCURVE_CEIL)))
+SAW_PUT_UCURVE_POWER     = float(os.environ.get('SAW_PUT_UCURVE_POWER',     str(_cfg.SAW_PUT_UCURVE_POWER)))
+SAW_PUT_UCURVE_K         = float(os.environ.get('SAW_PUT_UCURVE_K',         str(_cfg.SAW_PUT_UCURVE_K)))
+
+_SAW_SEC_BRD_MAP   = None
+_SAW_SEC_BRD_DATES = None
+
+def _saw_load_sec_brd():
+    global _SAW_SEC_BRD_MAP, _SAW_SEC_BRD_DATES
+    if _SAW_SEC_BRD_MAP is not None:
+        return
+    pq_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                           '.cache', 'sector_etf_screen',
+                           'sector_breadth_daily_2020plus.csv')
+    m = {}
+    if os.path.exists(pq_path):
+        import csv as _csv
+        from datetime import date as _d
+        with open(pq_path, 'r') as f:
+            rdr = _csv.DictReader(f)
+            for row in rdr:
+                try:
+                    m[_d.fromisoformat(row['date'])] = float(row['sec_brd_ema50'])
+                except (KeyError, ValueError):
+                    continue
+    _SAW_SEC_BRD_MAP = m
+    _SAW_SEC_BRD_DATES = sorted(m.keys())
+
+def saw_put_ucurve_scale(d):
+    """U-curve scale at signal date d. Returns 1.0 when disabled."""
+    if not SAW_PUT_UCURVE_ENABLED:
+        return 1.0
+    _saw_load_sec_brd()
+    if not _SAW_SEC_BRD_DATES:
+        return 1.0
+    import bisect as _bs
+    idx = _bs.bisect_right(_SAW_SEC_BRD_DATES, d) - 1
+    brd = _SAW_SEC_BRD_MAP[_SAW_SEC_BRD_DATES[idx]] if idx >= 0 else 50.0
+    floor = SAW_PUT_UCURVE_FLOOR
+    ceil  = SAW_PUT_UCURVE_CEIL
+    if SAW_PUT_UCURVE_SHAPE == 'sigmoid':
+        lo_thresh = SAW_PUT_UCURVE_MIDPOINT - SAW_PUT_UCURVE_HALFWIDTH
+        hi_thresh = SAW_PUT_UCURVE_MIDPOINT + SAW_PUT_UCURVE_HALFWIDTH
+        import math as _m
+        try:
+            sig_lo = 1.0 / (1.0 + _m.exp(-(lo_thresh - brd) / max(0.5, SAW_PUT_UCURVE_K)))
+        except OverflowError:
+            sig_lo = 0.0 if (lo_thresh - brd) < 0 else 1.0
+        try:
+            sig_hi = 1.0 / (1.0 + _m.exp(-(brd - hi_thresh) / max(0.5, SAW_PUT_UCURVE_K)))
+        except OverflowError:
+            sig_hi = 0.0 if (brd - hi_thresh) < 0 else 1.0
+        activation = min(1.0, sig_lo + sig_hi)
+        return floor + activation * (ceil - floor)
+    d_norm = abs(brd - SAW_PUT_UCURVE_MIDPOINT) / max(1.0, SAW_PUT_UCURVE_HALFWIDTH)
+    if d_norm > 1.0: d_norm = 1.0
+    return floor + (d_norm ** SAW_PUT_UCURVE_POWER) * (ceil - floor)
+
+
+# Put-wave cash reserve (Stage 3 research, env-gated; default inert).
+PUT_WAVE_RESERVE_ENABLED       = os.environ.get('PUT_WAVE_RESERVE_ENABLED', '0') == '1'
+PUT_WAVE_RESERVE_DAILY_STATE   = os.environ.get('PUT_WAVE_RESERVE_DAILY_STATE_CSV', '').strip()
+PUT_WAVE_RESERVE_STRENGTH      = float(os.environ.get('PUT_WAVE_RESERVE_STRENGTH', '0.75'))
+PUT_WAVE_RESERVE_FLOOR         = float(os.environ.get('PUT_WAVE_RESERVE_FLOOR', '0.40'))
+PUT_WAVE_RESERVE_WEAK_TP_FLOOR = float(os.environ.get('PUT_WAVE_RESERVE_WEAK_TP_FLOOR', '0.539'))
+PUT_WAVE_RESERVE_WEAK_TP_WIDTH = float(os.environ.get('PUT_WAVE_RESERVE_WEAK_TP_WIDTH', '0.08'))
+PUT_WAVE_RESERVE_OPEN_PUT_TRIG = float(os.environ.get('PUT_WAVE_RESERVE_OPEN_PUT_TRIGGER', '13'))
+PUT_WAVE_RESERVE_OPEN_PUT_W    = float(os.environ.get('PUT_WAVE_RESERVE_OPEN_PUT_WIDTH', '10'))
+PUT_WAVE_RESERVE_FILLED_TRIG   = float(os.environ.get('PUT_WAVE_RESERVE_FILLED_PUT_TRIGGER', '1'))
+PUT_WAVE_RESERVE_FILLED_W      = float(os.environ.get('PUT_WAVE_RESERVE_FILLED_PUT_WIDTH', '3'))
+PUT_WAVE_RESERVE_SHARE_TRIG    = float(os.environ.get('PUT_WAVE_RESERVE_OPEN_PUT_SHARE_TRIGGER', '0.75'))
+PUT_WAVE_RESERVE_SHARE_W       = float(os.environ.get('PUT_WAVE_RESERVE_OPEN_PUT_SHARE_WIDTH', '0.15'))
+PUT_WAVE_RESERVE_WAVE_TRIG     = float(os.environ.get('PUT_WAVE_RESERVE_WAVE_THRESHOLD', '0'))
+PUT_WAVE_RESERVE_WAVE_W        = float(os.environ.get('PUT_WAVE_RESERVE_WAVE_WIDTH', '16'))
+_PUT_WAVE_RESERVE_DAILY_MAP    = None
+
+
+def _float_env_surface(value, default=0.0):
+    if value in (None, '', 'None'):
+        return default
+    try:
+        out = float(value)
+    except (TypeError, ValueError):
+        return default
+    return out if math.isfinite(out) else default
+
+
+def _smoothstep01(t):
+    x = max(0.0, min(1.0, t))
+    return x * x * (3.0 - 2.0 * x)
+
+
+def _above_wave(value, trigger, width):
+    if width <= 0:
+        return 1.0 if value >= trigger else 0.0
+    return _smoothstep01((value - trigger) / width)
+
+
+def _below_wave(value, trigger, width):
+    if width <= 0:
+        return 1.0 if value <= trigger else 0.0
+    return _smoothstep01((trigger - value) / width)
+
+
+def _load_put_wave_reserve_daily():
+    global _PUT_WAVE_RESERVE_DAILY_MAP
+    if _PUT_WAVE_RESERVE_DAILY_MAP is not None:
+        return _PUT_WAVE_RESERVE_DAILY_MAP
+    rows = []
+    if PUT_WAVE_RESERVE_ENABLED and PUT_WAVE_RESERVE_DAILY_STATE:
+        try:
+            with open(PUT_WAVE_RESERVE_DAILY_STATE, 'r', encoding='utf-8', newline='') as fh:
+                for row in csv.DictReader(fh):
+                    try:
+                        row['_date'] = date.fromisoformat(str(row.get('date', ''))[:10])
+                        rows.append(row)
+                    except ValueError:
+                        continue
+        except OSError:
+            rows = []
+    rows.sort(key=lambda row: row['_date'])
+    tp5 = []
+    pnl5 = []
+    for row in rows:
+        open_call = _float_env_surface(row.get('open_call_n'))
+        open_put = _float_env_surface(row.get('open_put_n'))
+        if row.get('open_put_share') in (None, '', 'None'):
+            row['open_put_share'] = open_put / (open_call + open_put) if open_call + open_put else 0.0
+        if row.get('prev5_entry_tp_rate') in (None, '', 'None'):
+            row['prev5_entry_tp_rate'] = sum(tp5) / len(tp5) if tp5 else None
+        if row.get('prev5_entry_avg_pnl_pct') in (None, '', 'None'):
+            row['prev5_entry_avg_pnl_pct'] = sum(pnl5) / len(pnl5) if pnl5 else None
+        tp = _float_env_surface(row.get('entry_tp_rate'), None)
+        pnl = _float_env_surface(row.get('entry_avg_pnl_pct'), None)
+        if tp is not None:
+            tp5.append(tp)
+            tp5 = tp5[-5:]
+        if pnl is not None:
+            pnl5.append(pnl)
+            pnl5 = pnl5[-5:]
+    _PUT_WAVE_RESERVE_DAILY_MAP = {row['_date']: row for row in rows}
+    return _PUT_WAVE_RESERVE_DAILY_MAP
+
+
+def _put_wave_reserve_scale(today):
+    if not PUT_WAVE_RESERVE_ENABLED:
+        return 1.0
+    row = _load_put_wave_reserve_daily().get(today)
+    if not row:
+        return 1.0
+    recent_weak = _below_wave(
+        _float_env_surface(row.get('prev5_entry_tp_rate'), 0.63),
+        PUT_WAVE_RESERVE_WEAK_TP_FLOOR,
+        PUT_WAVE_RESERVE_WEAK_TP_WIDTH,
+    )
+    put_overhang = max(
+        _above_wave(_float_env_surface(row.get('open_put_n')), PUT_WAVE_RESERVE_OPEN_PUT_TRIG, PUT_WAVE_RESERVE_OPEN_PUT_W),
+        _above_wave(_float_env_surface(row.get('filled_put_n')), PUT_WAVE_RESERVE_FILLED_TRIG, PUT_WAVE_RESERVE_FILLED_W),
+        _above_wave(_float_env_surface(row.get('open_put_share')), PUT_WAVE_RESERVE_SHARE_TRIG, PUT_WAVE_RESERVE_SHARE_W),
+    )
+    wave_divergence = _above_wave(
+        _float_env_surface(row.get('breadth_sector_etf_market_wave_signed'), -20.0),
+        PUT_WAVE_RESERVE_WAVE_TRIG,
+        PUT_WAVE_RESERVE_WAVE_W,
+    )
+    pressure = recent_weak * wave_divergence * (0.5 + 0.5 * put_overhang)
+    scale = max(PUT_WAVE_RESERVE_FLOOR, 1.0 - PUT_WAVE_RESERVE_STRENGTH * pressure)
+    return max(0.35, min(1.35, scale))
+
+
+# Net option P&L after per-exit slippage — derived properties.
+NET_TP_BASE     = _opt.NET_TP_BASE         # +0.340
+NET_TP_STRESS   = _opt.NET_TP_STRESS       # +0.390
+NET_SL_BASE     = _opt.NET_SL_BASE         # -0.323
+NET_SL_STRESS   = _opt.NET_SL_STRESS       # -0.373
+NET_HARD        = _cfg.NET_HARD_SELL       # -0.415
+
+# Cascade allocation per score tier. backtest_cascade uses score-range
+# keys for display ('95+' etc.); strategy_config uses semantic keys
+# ('ultra' etc.). Map at the boundary.
+TIER_ALLOC = {
+    '95+':    _cfg.TIER_ALLOC['ultra'],
+    '85-94':  _cfg.TIER_ALLOC['top'],
+    '80-84':  _cfg.TIER_ALLOC['mid'],
+    '75-79':  _cfg.TIER_ALLOC['low'],
+    '70-74':  _cfg.TIER_ALLOC['overflow'],
+    'p<=15':  _cfg.PUT_TIER_ALLOC['put_top'],
+    'p16-20': _cfg.PUT_TIER_ALLOC['put_mid'],
+    'p21-25': _cfg.PUT_TIER_ALLOC['put_low'],
+}
+
+# Put-side fixed TP/SL (no breadth switch by default).
+PUT_TP            = _opt.PUT_TP
+PUT_SL            = _opt.PUT_SL
+PUT_NET_TP        = _opt.PUT_NET_TP
+PUT_NET_SL        = _opt.PUT_NET_SL
+PUT_TP_SIGMA      = _cfg.PUT_TP_SIGMA
+PUT_SL_SIGMA      = _cfg.PUT_SL_SIGMA
+PUT_THRESHOLD     = _cfg.PUT_THRESHOLD
+
+# Put SL hard-hold (Phase H1/H5: hold=0 ships).
+PUT_SL_HOLD_BARS_DEFAULT = _opt.PUT_SL_HOLD_BARS_DEFAULT
+PUT_SL_HOLD_BARS_MONDAY  = _opt.PUT_SL_HOLD_BARS_MONDAY
+
+# Counter-trend cascade promotion (Path B / V2, shipped 2026-04-21).
+# Display tier names map to backtest_cascade's display keys.
+CT_PROMOTE         = _cfg.CT_PROMOTE
+CT_PUT_TREND_MIN   = _cfg.CT_PUT_TREND_MIN
+CT_CALL_TREND_MAX  = _cfg.CT_CALL_TREND_MAX
+CT_CALL_TIER       = '95+'    # display key for monte_carlo.py 'ultra' tier
+CT_PUT_TIER        = 'p<=15'  # display key for monte_carlo.py 'put_top' tier
+
+# CTSL — Counter-Trend Score Lift (Stage 1 winner, shipped 2026-05-08).
+# Score-stage continuous lift applied at signal-load time. Stacks ADDITIVELY
+# with CT_PROMOTE — 30 DTE only per registry. Mirrors monte_carlo.py wiring.
+CTSL_ENABLED                 = _cfg.CTSL_ENABLED
+CTSL_CALL_TREND_MAX          = _cfg.CTSL_CALL_TREND_MAX
+CTSL_CALL_TARGET             = _cfg.CTSL_CALL_TARGET
+CTSL_CALL_ALPHA              = _cfg.CTSL_CALL_ALPHA
+CTSL_CALL_TREND_POWER        = _cfg.CTSL_CALL_TREND_POWER
+CTSL_CALL_TIER_FLOOR         = _cfg.CTSL_CALL_TIER_FLOOR
+CTSL_CALL_SCORE_NORM_WEIGHT  = _cfg.CTSL_CALL_SCORE_NORM_WEIGHT
+CTSL_CALL_SCORE_NORM_POWER   = _cfg.CTSL_CALL_SCORE_NORM_POWER
+CTSL_PUT_TREND_MIN           = _cfg.CTSL_PUT_TREND_MIN
+CTSL_PUT_TARGET              = _cfg.CTSL_PUT_TARGET
+CTSL_PUT_ALPHA               = _cfg.CTSL_PUT_ALPHA
+CTSL_PUT_TREND_POWER         = _cfg.CTSL_PUT_TREND_POWER
+CTSL_PUT_TIER_CEILING        = _cfg.CTSL_PUT_TIER_CEILING
+CTSL_PUT_SCORE_NORM_WEIGHT   = _cfg.CTSL_PUT_SCORE_NORM_WEIGHT
+CTSL_PUT_SCORE_NORM_POWER    = _cfg.CTSL_PUT_SCORE_NORM_POWER
+
+
+def _ctsl_call_lift(overall: float, trend) -> float:
+    """Compute new_overall for CT-call signal under CTSL transform.
+    Mirrors monte_carlo.py:_ctsl_call_lift byte-for-byte."""
+    if trend is None or trend > CTSL_CALL_TREND_MAX:
+        return float(overall)
+    tm = float(CTSL_CALL_TREND_MAX + 1)
+    trend_dist = max(0.0, min(1.0, (CTSL_CALL_TREND_MAX - trend + 1) / tm))
+    snw = CTSL_CALL_SCORE_NORM_WEIGHT
+    snp = CTSL_CALL_SCORE_NORM_POWER
+    if abs(snw) < 1e-6:
+        score_factor = 1.0
+    elif snw > 0:
+        sn = max(0.0, min(1.0, (overall - 70.0) / 30.0))
+        score_factor = 1.0 + snw * (sn ** snp)
+    else:
+        sn = max(0.0, min(1.0, (76.0 - overall) / 6.0))
+        score_factor = 1.0 + abs(snw) * (sn ** snp)
+    lift = (CTSL_CALL_ALPHA * (trend_dist ** CTSL_CALL_TREND_POWER)
+            * score_factor * (CTSL_CALL_TARGET - overall))
+    new_overall = overall + lift
+    if new_overall < CTSL_CALL_TIER_FLOOR:
+        new_overall = CTSL_CALL_TIER_FLOOR
+    return max(0.0, min(100.0, new_overall))
+
+
+def _ctsl_put_dampen(overall: float, trend) -> float:
+    """Compute new_overall for CT-put signal under CTSL transform.
+    Mirrors monte_carlo.py:_ctsl_put_dampen byte-for-byte."""
+    if trend is None or trend < CTSL_PUT_TREND_MIN:
+        return float(overall)
+    span = max(1.0, float(100 - CTSL_PUT_TREND_MIN + 1))
+    trend_dist = max(0.0, min(1.0, (trend - CTSL_PUT_TREND_MIN + 1) / span))
+    snw = CTSL_PUT_SCORE_NORM_WEIGHT
+    snp = CTSL_PUT_SCORE_NORM_POWER
+    if abs(snw) < 1e-6:
+        score_factor = 1.0
+    elif snw > 0:
+        sn = max(0.0, min(1.0, (25.0 - overall) / 25.0))
+        score_factor = 1.0 + snw * (sn ** snp)
+    else:
+        sn = max(0.0, min(1.0, (overall - 19.0) / 6.0))
+        score_factor = 1.0 + abs(snw) * (sn ** snp)
+    dampen = (CTSL_PUT_ALPHA * (trend_dist ** CTSL_PUT_TREND_POWER)
+              * score_factor * (overall - CTSL_PUT_TARGET))
+    new_overall = overall - dampen
+    if new_overall > CTSL_PUT_TIER_CEILING:
+        new_overall = CTSL_PUT_TIER_CEILING
+    return max(0.0, min(100.0, new_overall))
+
+
+def _apply_ctsl_to_signals(sigs, side: str):
+    """Apply CTSL transform to a list of namedtuple signals. Returns a NEW
+    list with overall replaced via _replace() since namedtuples are immutable.
+    Idempotent if CTSL_ENABLED=False."""
+    if not CTSL_ENABLED or not sigs:
+        return sigs
+    fn = _ctsl_call_lift if side == 'call' else _ctsl_put_dampen
+    out = []
+    for s in sigs:
+        try:
+            ov = int(s.overall)
+            tr = int(s.trend) if s.trend is not None else None
+            new_ov = fn(float(ov), tr)
+            new_ov_int = int(round(new_ov))
+            if new_ov_int != ov:
+                out.append(s._replace(overall=new_ov_int))
+            else:
+                out.append(s)
+        except (TypeError, ValueError, AttributeError):
+            out.append(s)
+    return out
+
+# Earnings-window put suppression — SHIPPED 2026-04-26.
+EARN_SUPP_PUT          = _cfg.EARN_SUPP_PUT
+EARN_SUPP_PUT_DAYS     = _cfg.EARN_SUPP_PUT_DAYS
+EARN_SUPP_PUT_MIN_OV   = _cfg.EARN_SUPP_PUT_MIN_OV
+
+# Weak-weekly call filter — SHIPPED 2026-05-05 (30 DTE D variant).
+WEAK_WEEKLY_CALL_DROP     = _cfg.WEAK_WEEKLY_CALL_DROP
+WEAK_WEEKLY_CALL_MIN_OV   = _cfg.WEAK_WEEKLY_CALL_MIN_OV
+WEAK_WEEKLY_CALL_MAX_OV   = _cfg.WEAK_WEEKLY_CALL_MAX_OV
+WEAK_WEEKLY_CALL_WADJ_LT  = _cfg.WEAK_WEEKLY_CALL_WADJ_LT
+WEAK_WEEKLY_CALL_STOCH_GE = _cfg.WEAK_WEEKLY_CALL_STOCH_GE
+EARN_SUPP_PUT_MAX_OV   = _cfg.EARN_SUPP_PUT_MAX_OV
+
+# Data quality barrier — no signals before this date
+MIN_DATE        = date(2016, 1, 1)
+
+# Realized vol: 60 trading bars (consistent with assess_scores._realized_vol_pct)
+VOL_BARS        = _cfg.VOL_LOOKBACK
+
+# Option pricing (delta + theta + vega) — shipped 2026-04-29. Env-gated
+# fallback to legacy static-pricing JIT path.
+OPTION_PRICING_AWARE = _os.environ.get('OPTION_PRICING_AWARE', '1') == '1'
+
+# Design B — premium-based liquidation stop. When option_pnl_pct at end-of-bar
+# falls to or below this threshold, force-exit at close. Disabled by default
+# (0.0). Tested values: -0.40, -0.50, -0.60. Cheap (one option_pnl_pct call
+# per bar). Catches theta-driven adverse trades that the σ-SL trigger would
+# either miss entirely (hard sell at deep loss) or fire late at deeper realized
+# loss after additional theta drag accumulates.
+PREM_STOP_LOSS = float(_os.environ.get('PREM_STOP_LOSS', '0.0'))
+
+# Dead-hold post-SL mechanism (Spec C, in flight 2026-04-30). When SL fires
+# AND realized option pnl ≤ DEAD_HOLD_TRIGGER_PNL, do NOT sell — hold the
+# position forward bar-by-bar (slot stays occupied at portfolio level). On
+# any subsequent bar, if option value at intraday extreme reaches POPOUT,
+# exit at popout target (limit-order semantics, with gap-better fill if
+# the bar opens past the limit). Otherwise hold to expiry close.
+DEAD_HOLD_ENABLED      = (_os.environ.get('DEAD_HOLD_ENABLED', '1' if _cfg.DEAD_HOLD_ENABLED else '0') == '1')
+DEAD_HOLD_TRIGGER_PNL  = float(_os.environ.get('DEAD_HOLD_TRIGGER_PNL', _cfg.DEAD_HOLD_TRIGGER_PNL))
+DEAD_HOLD_POPOUT_PNL   = float(_os.environ.get('DEAD_HOLD_POPOUT_PNL',  _cfg.DEAD_HOLD_POPOUT_PNL))
+
+# Constants required for option-pricing path
+PREMIUM_MULT  = _cfg.PREMIUM_MULT
+DELTA         = _opt.DELTA
+SLIP_ENTRY    = _opt.SLIP_ENTRY
+SLIP_TP       = _opt.SLIP_TP
+SLIP_SL       = _opt.SLIP_SL
+SLIP_HARD     = _opt.SLIP_HARD   # canon: read from config (was hardcoded -0.005, a divergence)
+DEFAULT_TOTAL_DTE = 30
+MIN_VOL_BARS    = 20   # minimum bars to produce a vol estimate
+
+# ---------------------------------------------------------------------------
+# Gamma x IV Phase B -- real-IV option premium plug (env-gated, default OFF;
+# bit-identical to production when unset). Mirrors option_pricing.py's
+# GAMMA_AWARE pattern. See experiments/gamma_iv_phaseb/DESIGN.md.
+#
+# When IV_PREMIUM=1: premium_pct is sourced from a real ATM-IV panel keyed by
+# (symbol, signal_date) wherever a panel hit exists (Brenner-Subrahmanyam ATM
+# approx: 0.4 * atm_iv * sqrt(dte/365), fraction-of-underlying -- same units
+# as the existing premium_mult*sigma/100 proxy). On a miss (or flag unset),
+# the caller's already-computed realized-vol premium_pct is used unchanged.
+# IV changes option COST only -- tp_price/sl_price (K-sigma trigger barriers)
+# are derived from realized vol upstream and are never touched by this plug.
+#
+# NOTE: this deterministic backtest is NOT exercised by the gamma_iv_phaseb
+# sweep (experiments/concentration_2x/sweep.py drives monte_carlo.py only);
+# this plug is wired for whole-system fidelity (trader backtest / Assessment
+# page / any future consumer of backtest_cascade.py) per FABLE's scope.
+# ---------------------------------------------------------------------------
+IV_PREMIUM        = os.environ.get('IV_PREMIUM', '0').strip() == '1'
+IV_PREMIUM_PANEL  = os.environ.get('IV_PREMIUM_PANEL',
+                                    r'.cache/polygon_iv/iv_ledger_polygon.parquet')
+IV_COVERAGE_DIR   = os.environ.get('IV_COVERAGE_DIR', '').strip()
+
+# Amendment 2 (2026-07-10): strictly-backward as-of join tolerance (calendar days).
+# Fixed module constant per DESIGN.md spec, not env-gated.
+IV_ASOF_MAX_DAYS  = 14
+
+_IV_PANEL       = None   # lazy {(symbol, date): atm_iv} exact-match dict; {} if load failed
+_IV_PANEL_ASOF  = None   # lazy {symbol: (sorted_dates, atm_ivs)} for the as-of bisect fallback
+_IV_HITS   = 0
+_IV_MISSES = 0
+_IV_STALE_0D    = 0   # exact-date hits (fast path)
+_IV_STALE_1_3D  = 0   # as-of hits, 1-3 calendar days stale
+_IV_STALE_4_7D  = 0   # as-of hits, 4-7 calendar days stale
+_IV_STALE_8_14D = 0   # as-of hits, 8-14 calendar days stale
+
+# ---------------------------------------------------------------------------
+# IV Premium MODEL -- Amendment (2026-07-12, FABLE ruling on
+# experiments/iv_premium_model/DESIGN.md). IV_MODEL is a MODIFIER of the
+# IV_PREMIUM path above, meaningful only when IV_PREMIUM=1 (when IV_PREMIUM=0,
+# _iv_premium_pct early-returns before IV_MODEL is ever consulted -- flags-off
+# path is provably untouched by construction). When IV_PREMIUM=1 and
+# IV_MODEL=1, the raw signal-keyed panel join (~19% dosed pre-2022, unusable
+# for the 2016-2022 A/B grid) is bypassed entirely in favor of a calibrated
+# F2 affine-RV+VIX model of atm_iv, applied at ~100% dose using only inputs
+# the engine ALWAYS has (its own realized_vol + MarketRegime.vix_close).
+#
+# Form + coefficients: F2 (RECOMMENDED, chosen over the mechanical-parsimony
+# winner F0 per FABLE's ruling -- see DESIGN.md AMENDMENTS A1). Fit provenance:
+# experiments/iv_premium_model/fit_report.json / fit_report.txt (numpy lstsq,
+# n=8,642 fit-eligible rows, full-sample coefficients). Clamp = panel's own
+# atm_iv [p1, p99].
+#
+# The model changes premium_pct (option COST) ONLY (DESIGN.md AMENDMENTS A2)
+# -- it never touches sigma, tp_price/sl_price, or any barrier definition;
+# those are all computed from realized vol upstream, before this plug runs.
+# ---------------------------------------------------------------------------
+IV_MODEL          = os.environ.get('IV_MODEL', '0').strip() == '1'
+VIX_SERIES_PATH   = os.environ.get('VIX_SERIES_PATH',
+                                    r'.cache/iv_premium_model/vix_series.parquet')
+
+IV_MODEL_FORM        = 'F2_affine_rv_vix'   # experiments/iv_premium_model/DESIGN.md
+IV_MODEL_COEF_A      = 0.14920
+IV_MODEL_COEF_B_RV   = 0.09545
+IV_MODEL_COEF_C_VIX  = 0.006242
+IV_MODEL_CLAMP_FLOOR = 0.163326
+IV_MODEL_CLAMP_CAP   = 1.758980
+
+_VIX_SERIES = None   # lazy {date: vix_close} dict; {} if load failed (never raises)
+_MODEL_HITS = 0
+_MODEL_MISSES = 0
+_MODEL_CLAMP_FLOOR_HITS = 0
+_MODEL_CLAMP_CAP_HITS   = 0
+# model_premium_pct / fallback(rv)_premium_pct, hits only (Amendment A3 telemetry).
+_MODEL_RATIOS: list = []
+
+
+def _load_vix_series():
+    """Lazily load MarketRegime.vix_close by date from a small pre-materialized
+    parquet (experiments/iv_premium_model/build_vix_series.py), mirroring
+    _load_iv_panel()'s shape exactly: module-level cache dict, guarded lazy
+    read, safe all-miss degrade, never raises. Deliberately NOT a live MySQL
+    query per sweep worker -- same on-demand-parquet-cache precedent as the
+    IV panel itself and database/bulk_cache.py (DESIGN.md section 6)."""
+    global _VIX_SERIES
+    if _VIX_SERIES is not None:
+        return _VIX_SERIES
+    try:
+        import polars as _pl
+        df = _pl.read_parquet(VIX_SERIES_PATH, columns=['date', 'vix_close'])
+        dts  = [date.fromisoformat(s) for s in df['date'].to_list()]
+        vixs = df['vix_close'].to_list()
+        _VIX_SERIES = dict(zip(dts, vixs))
+    except Exception as _e:
+        print(f"  [IV_MODEL] vix series load failed ({_e}); degraded to all-miss fallback")
+        _VIX_SERIES = {}
+    return _VIX_SERIES
+
+
+def _load_iv_panel():
+    """Lazily load the real-IV panel into two structures:
+      - exact {(symbol, date): atm_iv} dict -- the O(1) fast path (unchanged).
+      - asof  {symbol: (sorted_dates, atm_ivs)} -- per-symbol sorted arrays for
+        the strictly-backward as-of bisect fallback (Amendment 2, 2026-07-10).
+    polars NaN != null trap: fill_nan(None) BEFORE drop_nulls. Returns ({}, {})
+    (safe all-miss fallback) if the panel is absent/unreadable -- never raises."""
+    global _IV_PANEL, _IV_PANEL_ASOF
+    if _IV_PANEL is not None:
+        return _IV_PANEL, _IV_PANEL_ASOF
+    try:
+        import polars as _pl
+        df = _pl.read_parquet(IV_PREMIUM_PANEL, columns=['symbol', 'date', 'atm_iv'])
+        df = df.with_columns(_pl.col('atm_iv').fill_nan(None)).drop_nulls(subset=['atm_iv'])
+        syms = df['symbol'].to_list()
+        dts  = [date.fromisoformat(s) for s in df['date'].to_list()]
+        ivs  = df['atm_iv'].to_list()
+        _IV_PANEL = dict(zip(zip(syms, dts), ivs))
+        _by_date = defaultdict(dict)   # symbol -> {date: atm_iv}; last-write-wins, same as _IV_PANEL
+        for sym, d, iv in zip(syms, dts, ivs):
+            _by_date[sym][d] = iv
+        _IV_PANEL_ASOF = {}
+        for sym, dm in _by_date.items():
+            sorted_dates = sorted(dm.keys())
+            _IV_PANEL_ASOF[sym] = (sorted_dates, [dm[d] for d in sorted_dates])
+    except Exception as _e:
+        print(f"  [IV_PREMIUM] panel load failed ({_e}); degraded to all-miss fallback")
+        _IV_PANEL = {}
+        _IV_PANEL_ASOF = {}
+    return _IV_PANEL, _IV_PANEL_ASOF
+
+
+def _iv_premium_pct(symbol, signal_date, dte, fallback_premium_pct, count=True, rv=None):
+    """Real-IV premium_pct on a panel hit; else the caller's already-computed
+    fallback, unchanged. No-op when IV_PREMIUM is unset (bit-identical to
+    production). count=False excludes MTM re-marks (same (symbol, entry_date)
+    key as the trade's own entry) from the primary per-trade coverage stat.
+
+    Join (Amendment 2, 2026-07-10): exact (symbol, signal_date) dict lookup
+    first (fast path, 0d-stale). On a miss, binary-search the symbol's sorted
+    panel dates for the most recent panel_date <= signal_date -- STRICTLY
+    BACKWARD, the search never considers a later date, so this cannot
+    introduce look-ahead. Accepted only if signal_date - panel_date <=
+    IV_ASOF_MAX_DAYS calendar days; otherwise falls through to the miss path.
+
+    Amendment (2026-07-12, FABLE): when IV_MODEL=1 (meaningful only if
+    IV_PREMIUM=1 too), skips the raw panel join entirely and instead prices
+    atm_iv from the calibrated F2 RV+VIX model, applied at ~100% dose
+    engine-wide. Requires the caller's own realized-vol (`rv`, optional kwarg,
+    default None preserves prior behavior) threaded through; a missing `rv`
+    or a missing VIX row is a model miss -- falls back to
+    fallback_premium_pct, counted (subject to the same `count` gate as the
+    panel path, so MTM re-marks don't inflate model telemetry either). Model
+    changes premium_pct (COST) ONLY -- never sigma/tp_price/sl_price
+    (DESIGN.md AMENDMENTS A2)."""
+    global _IV_HITS, _IV_MISSES, _IV_STALE_0D, _IV_STALE_1_3D, _IV_STALE_4_7D, _IV_STALE_8_14D
+    global _MODEL_HITS, _MODEL_MISSES, _MODEL_CLAMP_FLOOR_HITS, _MODEL_CLAMP_CAP_HITS
+    if not IV_PREMIUM or symbol is None:
+        return fallback_premium_pct
+    if IV_MODEL:
+        if rv is None:
+            if count:
+                _MODEL_MISSES += 1
+            return fallback_premium_pct
+        vix = _load_vix_series().get(signal_date)
+        if vix is None:
+            if count:
+                _MODEL_MISSES += 1
+            return fallback_premium_pct
+        atm_iv_hat = IV_MODEL_COEF_A + IV_MODEL_COEF_B_RV * rv + IV_MODEL_COEF_C_VIX * vix
+        clamped = atm_iv_hat
+        if clamped < IV_MODEL_CLAMP_FLOOR:
+            clamped = IV_MODEL_CLAMP_FLOOR
+            if count:
+                _MODEL_CLAMP_FLOOR_HITS += 1
+        elif clamped > IV_MODEL_CLAMP_CAP:
+            clamped = IV_MODEL_CLAMP_CAP
+            if count:
+                _MODEL_CLAMP_CAP_HITS += 1
+        model_premium_pct = 0.4 * clamped * math.sqrt(dte / 365.0)
+        if count:
+            _MODEL_HITS += 1
+            if fallback_premium_pct and fallback_premium_pct > 0:
+                _MODEL_RATIOS.append(model_premium_pct / fallback_premium_pct)
+        return model_premium_pct
+    exact, asof = _load_iv_panel()
+    atm_iv = exact.get((symbol, signal_date))
+    age_days = 0
+    if atm_iv is None:
+        rows = asof.get(symbol)
+        if rows:
+            dates_arr, ivs_arr = rows
+            idx = bisect.bisect_right(dates_arr, signal_date) - 1
+            if idx >= 0:
+                age = (signal_date - dates_arr[idx]).days
+                if age <= IV_ASOF_MAX_DAYS:
+                    atm_iv = ivs_arr[idx]
+                    age_days = age
+    if atm_iv is None:
+        if count:
+            _IV_MISSES += 1
+        return fallback_premium_pct
+    if count:
+        _IV_HITS += 1
+        if age_days == 0:
+            _IV_STALE_0D += 1
+        elif age_days <= 3:
+            _IV_STALE_1_3D += 1
+        elif age_days <= 7:
+            _IV_STALE_4_7D += 1
+        else:
+            _IV_STALE_8_14D += 1
+    return 0.4 * atm_iv * math.sqrt(dte / 365.0)
+
+
+def _flush_iv_coverage(tag='bc'):
+    """Write cumulative process-level hit/miss + staleness-histogram coverage
+    to IV_COVERAGE_DIR (if set) at process exit. Registered via atexit only
+    when IV_PREMIUM=1.
+
+    Amendment (2026-07-12, FABLE, DESIGN.md AMENDMENTS A3): when IV_MODEL=1,
+    the payload also carries the model's own cumulative hit/miss/clamp counts
+    and the model/RV premium ratio distribution (median + tercile means)."""
+    if not IV_COVERAGE_DIR:
+        return
+    total = _IV_HITS + _IV_MISSES
+    model_total = _MODEL_HITS + _MODEL_MISSES
+    if total == 0 and model_total == 0:
+        return
+    import json as _json
+    import uuid as _uuid
+    os.makedirs(IV_COVERAGE_DIR, exist_ok=True)
+    _path = os.path.join(IV_COVERAGE_DIR,
+                         f"ivcov_{tag}_{os.getpid()}_{_uuid.uuid4().hex[:8]}.json")
+    payload = {'hits': _IV_HITS, 'misses': _IV_MISSES,
+               'coverage_pct': (100.0 * _IV_HITS / total) if total else None,
+               'stale_0d': _IV_STALE_0D, 'stale_1_3d': _IV_STALE_1_3D,
+               'stale_4_7d': _IV_STALE_4_7D, 'stale_8_14d': _IV_STALE_8_14D}
+    if IV_MODEL:
+        _sorted = sorted(_MODEL_RATIOS)
+        _n = len(_sorted)
+        if _n:
+            _median = (_sorted[_n // 2] if _n % 2
+                      else 0.5 * (_sorted[_n // 2 - 1] + _sorted[_n // 2]))
+            _b1 = _sorted[: _n // 3] or _sorted
+            _b2 = _sorted[_n // 3: 2 * _n // 3] or _sorted
+            _b3 = _sorted[2 * _n // 3:] or _sorted
+            _tercile_means = [sum(_b) / len(_b) for _b in (_b1, _b2, _b3)]
+        else:
+            _median, _tercile_means = None, None
+        payload.update({
+            'model_hits': _MODEL_HITS, 'model_misses': _MODEL_MISSES,
+            'model_dose_pct': (100.0 * _MODEL_HITS / model_total) if model_total else None,
+            'model_clamp_floor_hits': _MODEL_CLAMP_FLOOR_HITS,
+            'model_clamp_cap_hits': _MODEL_CLAMP_CAP_HITS,
+            'model_ratio_median': _median,
+            'model_ratio_tercile_means': _tercile_means,
+            'model_ratio_n': _n,
+        })
+        if model_total and (100.0 * _MODEL_HITS / model_total) < 95.0:
+            print(f"  [IV_MODEL] WARNING tag={tag}: cumulative dose "
+                  f"{100.0 * _MODEL_HITS / model_total:.1f}% < 95% pre-registered bar "
+                  f"-- COVERAGE-BLOCKED, do not read outcomes")
+    with open(_path, 'w') as _f:
+        _json.dump(payload, _f)
+
+
+if IV_PREMIUM:
+    import atexit as _atexit
+    _atexit.register(_flush_iv_coverage, tag='bc')
+
+
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
+def score_to_tier(score: float) -> str:
+    if score >= 95:  return '95+'
+    if score >= 85:  return '85-94'
+    if score >= 80:  return '80-84'
+    if score >= 75:  return '75-79'
+    return '70-74'
+
+
+def put_score_to_tier(score: float) -> str:
+    if score <= 15: return 'p<=15'
+    if score <= 20: return 'p16-20'
+    return 'p21-25'  # 21-25
+
+
+def ct_tag(overall: float, trend: float | None, side: str) -> str | None:
+    """Return 'ct_call' / 'ct_put' / None per V2 thresholds.
+
+    Mirrors monte_carlo.py::ct_tag. Trend missing -> no tag.
+    """
+    if not CT_PROMOTE or trend is None:
+        return None
+    if side == 'call' and overall >= 70 and trend <= CT_CALL_TREND_MAX:
+        return 'ct_call'
+    if side == 'put' and overall <= 25 and trend >= CT_PUT_TREND_MIN:
+        return 'ct_put'
+    return None
+
+
+def realized_vol_pct(closes: list) -> float | None:
+    """60-bar realized daily stdev as % (None if insufficient data)."""
+    if len(closes) < MIN_VOL_BARS:
+        return None
+    arr  = np.array(closes, dtype=float)
+    rets = np.diff(arr) / arr[:-1]
+    return float(np.std(rets)) * 100.0
+
+
+# ---------------------------------------------------------------------------
+# Data loading
+# ---------------------------------------------------------------------------
+def load_signals(version_id: int, min_score: float,
+                 from_date=None, to_date=None, flagged_only: bool = False,
+                 cfg: dict | None = None) -> list:
+    """All qualifying call-side score rows for the given algorithm version.
+
+    cfg: optional per-request override dict. Only 'liquidity_floor' is read
+    here (cfg.get('liquidity_floor', LIQUIDITY_FLOOR) -- lets /api/backtest/run
+    override the module default without touching the other filters below,
+    which stay module-constant-driven like WEAK_WEEKLY_CALL_DROP/CTSL)."""
+    from database.models.core import AlgorithmVersion, Score, Stock
+    version = AlgorithmVersion.get(AlgorithmVersion.id == version_id)
+    where = (
+        (Score.version == version)
+        & (Score.overall >= min_score)
+        & (Score.date   >= (from_date or MIN_DATE))
+    )
+    if to_date:
+        where &= (Score.date <= to_date)
+    q = Score.select(Score.symbol, Score.date, Score.overall, Score.trend,
+                     Score.weight_info, Score.stoch)
+    if flagged_only:
+        q = q.join(Stock, on=(Score.symbol == Stock.symbol)).where(where & (Stock.flagged == True))
+    else:
+        q = q.where(where)
+    sigs = list(q.order_by(Score.date, Score.overall.desc(), Score.symbol).namedtuples())
+    # CTSL — Counter-Trend Score Lift (Stage 1 winner). Applied at load time
+    # before WEAK_WEEKLY_CALL_DROP / EARN_SUPP_PUT filters, so subsequent
+    # filters see the post-CTSL overall (matches monte_carlo.py ordering).
+    if CTSL_ENABLED:
+        sigs = _apply_ctsl_to_signals(sigs, 'call')
+        # Re-sort by overall after CTSL since lift can reorder
+        sigs.sort(key=lambda s: (s.date, -int(s.overall), s.symbol))
+    if WEAK_WEEKLY_CALL_DROP and sigs:
+        import json as _json
+        kept = []
+        dropped = 0
+        for s in sigs:
+            ov = int(s.overall)
+            if not (WEAK_WEEKLY_CALL_MIN_OV <= ov <= WEAK_WEEKLY_CALL_MAX_OV):
+                kept.append(s); continue
+            wadj = None
+            wi_raw = getattr(s, 'weight_info', None)
+            if wi_raw:
+                try:
+                    wi = _json.loads(wi_raw) if isinstance(wi_raw, str) else wi_raw
+                    wa = wi.get('w_adj')
+                    if wa is None: wa = wi.get('weekly_adj')
+                    if wa is not None: wadj = float(wa)
+                except Exception:
+                    wadj = None
+            if wadj is None or wadj >= WEAK_WEEKLY_CALL_WADJ_LT:
+                kept.append(s); continue
+            if WEAK_WEEKLY_CALL_STOCH_GE > 0:
+                stoch_v = getattr(s, 'stoch', None)
+                if stoch_v is None or int(stoch_v) < WEAK_WEEKLY_CALL_STOCH_GE:
+                    kept.append(s); continue
+            dropped += 1
+        if dropped:
+            print(f"  WEAK_WEEKLY_CALL_DROP: dropped {dropped}/{len(sigs)} calls "
+                  f"(overall in [{WEAK_WEEKLY_CALL_MIN_OV},{WEAK_WEEKLY_CALL_MAX_OV}] AND w_adj<{WEAK_WEEKLY_CALL_WADJ_LT}"
+                  f"{' AND stoch>=' + str(WEAK_WEEKLY_CALL_STOCH_GE) if WEAK_WEEKLY_CALL_STOCH_GE > 0 else ''})")
+        sigs = kept
+    # LIQUIDITY_FLOOR — Stage-3 staged ship-candidate (default OFF => no-op).
+    # cfg override lets /api/backtest/run set a per-request floor; falls back
+    # to the module/strategy_config default when cfg is absent or silent.
+    cfg = cfg or {}
+    sigs = _apply_liquidity_floor_filter(sigs, floor=cfg.get('liquidity_floor', LIQUIDITY_FLOOR))
+    return sigs
+
+
+def load_put_signals(version_id: int, max_put_score: float = None,
+                     from_date=None, to_date=None, flagged_only: bool = False) -> list:
+    """Put-side signals (overall <= max_put_score, default PUT_THRESHOLD).
+
+    When EARN_SUPP_PUT (shipped 2026-04-26), drops puts in
+    [EARN_SUPP_PUT_MIN_OV, EARN_SUPP_PUT_MAX_OV] when an EarningsDate falls
+    in (signal_date, signal_date + EARN_SUPP_PUT_DAYS trading days].
+    """
+    from database.models.core import AlgorithmVersion, Score, Stock
+    threshold = max_put_score if max_put_score is not None else PUT_THRESHOLD
+    version = AlgorithmVersion.get(AlgorithmVersion.id == version_id)
+    where = (
+        (Score.version == version)
+        & (Score.overall <= threshold)
+        & (Score.date   >= (from_date or MIN_DATE))
+    )
+    if to_date:
+        where &= (Score.date <= to_date)
+    q = Score.select(Score.symbol, Score.date, Score.overall, Score.trend)
+    if flagged_only:
+        q = q.join(Stock, on=(Score.symbol == Stock.symbol)).where(where & (Stock.flagged == True))
+    else:
+        q = q.where(where)
+    sigs = list(q.order_by(Score.date, Score.overall.asc(), Score.symbol).namedtuples())
+    # CTSL — apply put-side dampener (mirror call-side timing).
+    if CTSL_ENABLED:
+        sigs = _apply_ctsl_to_signals(sigs, 'put')
+        sigs.sort(key=lambda s: (s.date, int(s.overall), s.symbol))
+
+    if EARN_SUPP_PUT and sigs:
+        sigs = _earnings_suppress_puts(sigs)
+    return sigs
+
+
+def _earnings_suppress_puts(sigs):
+    """Filter put signals where an earnings event falls within the suppression window."""
+    from database.models.core import EarningsDate
+    from database.utils.trading_calendar import is_trading_day
+    from collections import defaultdict
+    syms = {s.symbol for s in sigs}
+    if not syms:
+        return sigs
+    d_min = min(s.date for s in sigs)
+    d_max = max(s.date for s in sigs)
+    ed_rows = list(EarningsDate
+                   .select(EarningsDate.symbol, EarningsDate.date, EarningsDate.call_time)
+                   .where((EarningsDate.symbol.in_(list(syms)))
+                          & (EarningsDate.date >= d_min - timedelta(days=10))
+                          & (EarningsDate.date <= d_max + timedelta(days=EARN_SUPP_PUT_DAYS * 2 + 7)))
+                   .order_by(EarningsDate.symbol, EarningsDate.date)
+                   .tuples())
+    from iv_crush_model import compute_effective_date
+    ed_map = defaultdict(list)
+    for sym, d, ct in ed_rows:
+        ed_map[sym].append(compute_effective_date(d, ct))   # AMC shifted forward
+
+    def _fwd_n(d, n):
+        out = d
+        while n > 0:
+            out += timedelta(days=1)
+            if is_trading_day(out):
+                n -= 1
+        return out
+
+    kept = []
+    dropped = 0
+    for s in sigs:
+        ov = int(s.overall)
+        if not (EARN_SUPP_PUT_MIN_OV <= ov <= EARN_SUPP_PUT_MAX_OV):
+            kept.append(s); continue
+        sym_ed = ed_map.get(s.symbol, [])
+        if not sym_ed:
+            kept.append(s); continue
+        win_end = _fwd_n(s.date, EARN_SUPP_PUT_DAYS)
+        if any(s.date < ed <= win_end for ed in sym_ed):
+            dropped += 1
+            continue
+        kept.append(s)
+    if dropped:
+        print(f"  EARN_SUPP_PUT: dropped {dropped} puts in [{EARN_SUPP_PUT_MIN_OV},{EARN_SUPP_PUT_MAX_OV}] within {EARN_SUPP_PUT_DAYS} trd days of upcoming earnings ({len(kept)} remain)")
+    return kept
+
+
+def load_breadth_map(earliest: date):
+    """Return (sorted_dates, {date: breadth_score}) for stress-detection."""
+    from database.models.core import MarketBreadth
+    rows = (MarketBreadth
+            .select(MarketBreadth.date, MarketBreadth.breadth_score)
+            .where(
+                (MarketBreadth.date >= earliest - timedelta(days=60))
+                & (MarketBreadth.breadth_score.is_null(False))
+            )
+            .order_by(MarketBreadth.date)
+            .tuples())
+    m = {d: float(bs) for d, bs in rows}
+    return sorted(m.keys()), m
+
+
+def load_mcclellan_map(earliest: date):
+    """Return (sorted_dates, {date: mcclellan_oscillator}) for the MWDD breadth-momentum band."""
+    from database.models.core import MarketBreadth
+    rows = (MarketBreadth
+            .select(MarketBreadth.date, MarketBreadth.mcclellan_oscillator)
+            .where(
+                (MarketBreadth.date >= earliest - timedelta(days=60))
+                & (MarketBreadth.mcclellan_oscillator.is_null(False))
+            )
+            .order_by(MarketBreadth.date)
+            .tuples())
+    m = {d: float(v) for d, v in rows}
+    return sorted(m.keys()), m
+
+
+def load_trin_map(earliest: date):
+    """Return (sorted_dates, {date: trin}) for the TVDD volume-flow band."""
+    from database.models.core import MarketBreadth
+    rows = (MarketBreadth
+            .select(MarketBreadth.date, MarketBreadth.trin)
+            .where(
+                (MarketBreadth.date >= earliest - timedelta(days=60))
+                & (MarketBreadth.trin.is_null(False))
+            )
+            .order_by(MarketBreadth.date)
+            .tuples())
+    m = {d: float(v) for d, v in rows}
+    return sorted(m.keys()), m
+
+
+def load_bdiv_map(earliest: date):
+    """Return (sorted_dates, {date: (spy_from60h, brd_det10)}) for BDIV.
+    spy_from60h = SPY close / rolling-60-trading-day max - 1 (<= 0; ~0 = at the high).
+    brd_det10   = -(breadth_score - breadth_score 10 trading days earlier) (positive =
+    internals deteriorating). 120d warmup so the rolling max + 10d diff are warm."""
+    from database.models.core import MarketBreadth
+    from database.models.technical import PriceHistory
+    spy_rows = (PriceHistory
+                .select(PriceHistory.date, PriceHistory.close)
+                .where(
+                    (PriceHistory.symbol == 'SPY')
+                    & (PriceHistory.date >= earliest - timedelta(days=120))
+                    & (PriceHistory.close.is_null(False))
+                )
+                .order_by(PriceHistory.date)
+                .tuples())
+    brd_rows = (MarketBreadth
+                .select(MarketBreadth.date, MarketBreadth.breadth_score)
+                .where(
+                    (MarketBreadth.date >= earliest - timedelta(days=120))
+                    & (MarketBreadth.breadth_score.is_null(False))
+                )
+                .order_by(MarketBreadth.date)
+                .tuples())
+    spyh = {}
+    closes = []
+    for d, c in spy_rows:
+        closes.append(float(c))
+        spyh[d] = closes[-1] / max(closes[-60:]) - 1.0
+    det = {}
+    bd = [(d, float(v)) for d, v in brd_rows]
+    for i, (d, v) in enumerate(bd):
+        if i >= 10:
+            det[d] = -(v - bd[i - 10][1])
+    m = {d: (spyh[d], det[d]) for d in det if d in spyh}
+    return sorted(m.keys()), m
+
+
+def is_stressed(sorted_dates, bmap, d) -> bool:
+    """breadth_score on-or-before d <= threshold -> stressed regime."""
+    idx = bisect.bisect_right(sorted_dates, d) - 1
+    if idx < 0:
+        return False
+    return bmap[sorted_dates[idx]] <= BREADTH_THRESHOLD
+
+
+def load_regime_map(earliest: date, breadth_enabled: bool | None = None):
+    """Return (sorted_dates, {date: alloc_scalar}).
+
+    When breadth_enabled (default = module-level BREADTH_ALLOC_ENABLED) is
+    True, returns breadth_score per date (F3f knob). Otherwise returns
+    regime_multiplier per date (legacy). The function name is preserved
+    for call-site compatibility; semantics are determined by the flag and
+    must match the consumer in alloc_scale_for.
+    """
+    if breadth_enabled is None:
+        breadth_enabled = BREADTH_ALLOC_ENABLED
+    from database.models.core import MarketRegime, MarketBreadth
+    if breadth_enabled:
+        rows = (MarketBreadth
+                .select(MarketBreadth.date, MarketBreadth.breadth_score)
+                .where(
+                    (MarketBreadth.date >= earliest - timedelta(days=60))
+                    & (MarketBreadth.breadth_score.is_null(False))
+                )
+                .order_by(MarketBreadth.date)
+                .tuples())
+        m = {d: float(brd) for d, brd in rows}
+    else:
+        rows = (MarketRegime
+                .select(MarketRegime.date, MarketRegime.regime_multiplier)
+                .where(
+                    (MarketRegime.date >= earliest - timedelta(days=60))
+                    & (MarketRegime.regime_multiplier.is_null(False))
+                )
+                .order_by(MarketRegime.date)
+                .tuples())
+        m = {d: float(mult) for d, mult in rows}
+    return sorted(m.keys()), m
+
+
+def regime_on_or_before(sorted_dates, rmap, d, breadth_enabled: bool | None = None) -> float:
+    """Return alloc scalar on-or-before d; neutral default if no coverage."""
+    if breadth_enabled is None:
+        breadth_enabled = BREADTH_ALLOC_ENABLED
+    neutral = 50.0 if breadth_enabled else 1.0
+    if not sorted_dates:
+        return neutral
+    idx = bisect.bisect_right(sorted_dates, d) - 1
+    if idx < 0:
+        return neutral
+    return rmap[sorted_dates[idx]]
+
+
+def _breadth_alloc_scale(breadth: float, is_put: bool) -> float:
+    """F3f curve: breadth -> alloc scale. See F3F_* constants for shape."""
+    if breadth is None:
+        return 1.0
+    if is_put:
+        if breadth <= F3F_PUT_THRESH:
+            return 1.0
+        if breadth >= F3F_PUT_HIGH:
+            return F3F_PUT_FLOOR
+        return 1.0 - (breadth - F3F_PUT_THRESH) / (F3F_PUT_HIGH - F3F_PUT_THRESH) * (1.0 - F3F_PUT_FLOOR)
+    else:
+        if breadth >= F3F_CALL_THRESH:
+            return 1.0
+        if breadth <= F3F_CALL_LOW:
+            return F3F_CALL_FLOOR
+        return F3F_CALL_FLOOR + (breadth - F3F_CALL_LOW) / (F3F_CALL_THRESH - F3F_CALL_LOW) * (1.0 - F3F_CALL_FLOOR)
+
+
+def alloc_scale_for(value: float, is_put: bool = False,
+                    params: dict | None = None) -> float:
+    """alloc multiplier, clamped [floor, ceil].
+
+    When breadth_alloc_enabled (params['breadth_alloc_enabled'] or module
+    default), `value` is a breadth_score and the F3f curves apply. params
+    keys (all optional, fall back to module globals):
+        breadth_alloc_enabled, f3f_call_thresh, f3f_call_floor, f3f_call_low,
+        f3f_put_thresh, f3f_put_floor, f3f_put_high
+    Otherwise `value` is a regime_multiplier and the legacy asymmetric slope
+    logic applies.
+    """
+    p = params or {}
+    breadth_enabled = p.get('breadth_alloc_enabled', BREADTH_ALLOC_ENABLED)
+    if breadth_enabled:
+        if value is None:
+            return 1.0
+        if is_put:
+            pt = p.get('f3f_put_thresh', F3F_PUT_THRESH)
+            pf = p.get('f3f_put_floor',  F3F_PUT_FLOOR)
+            ph = p.get('f3f_put_high',   F3F_PUT_HIGH)
+            if value <= pt:
+                s = 1.0
+            elif value >= ph:
+                s = pf
+            else:
+                s = 1.0 - (value - pt) / (ph - pt) * (1.0 - pf)
+        else:
+            ct = p.get('f3f_call_thresh', F3F_CALL_THRESH)
+            cf = p.get('f3f_call_floor',  F3F_CALL_FLOOR)
+            cl = p.get('f3f_call_low',    F3F_CALL_LOW)
+            if value >= ct:
+                s = 1.0
+            elif value <= cl:
+                s = cf
+            else:
+                s = cf + (value - cl) / (ct - cl) * (1.0 - cf)
+        return max(ALLOC_SCALE_FLOOR, min(ALLOC_SCALE_CEIL, s))
+
+    # Legacy regime_multiplier path
+    delta = value - 1.0
+    if is_put:
+        if delta >= 0 and REGIME_SLOPE_PUT_UP is not None:
+            slope = REGIME_SLOPE_PUT_UP
+        elif delta < 0 and REGIME_SLOPE_PUT_DOWN is not None:
+            slope = REGIME_SLOPE_PUT_DOWN
+        else:
+            slope = REGIME_SLOPE_PUT if REGIME_SLOPE_PUT is not None else REGIME_SLOPE
+    else:
+        if delta >= 0 and REGIME_SLOPE_UP is not None:
+            slope = REGIME_SLOPE_UP
+        elif delta < 0 and REGIME_SLOPE_DOWN is not None:
+            slope = REGIME_SLOPE_DOWN
+        else:
+            slope = REGIME_SLOPE
+    if slope == 0.0:
+        return 1.0
+    scale = 1.0 + slope * delta
+    return max(ALLOC_SCALE_FLOOR, min(ALLOC_SCALE_CEIL, scale))
+
+
+class BarSeries(list):
+    """List of OHLCV namedtuples with cached numpy views for JIT-friendly walks.
+
+    Behaves like a list (existing code uses ph_rows[i].high etc.) but also
+    exposes np_highs / np_lows / np_closes / np_ords for vectorized passes.
+    Arrays are built once per symbol; subsequent compute_outcome calls reuse.
+    """
+    __slots__ = ('np_highs', 'np_lows', 'np_closes', 'np_ords')
+
+    def __init__(self, rows):
+        super().__init__(rows)
+        if rows:
+            import numpy as _np
+            self.np_highs  = _np.array([float(r.high)  for r in rows], dtype=_np.float64)
+            self.np_lows   = _np.array([float(r.low)   for r in rows], dtype=_np.float64)
+            self.np_closes = _np.array([float(r.close) for r in rows], dtype=_np.float64)
+            self.np_ords   = _np.array([r.date.toordinal() for r in rows], dtype=_np.int64)
+        else:
+            import numpy as _np
+            self.np_highs = _np.empty(0, dtype=_np.float64)
+            self.np_lows  = _np.empty(0, dtype=_np.float64)
+            self.np_closes = _np.empty(0, dtype=_np.float64)
+            self.np_ords  = _np.empty(0, dtype=_np.int64)
+
+
+def load_price_history(symbols: set, earliest: date) -> dict:
+    """Bulk-load OHLCV for all symbols.
+
+    Returns {symbol: BarSeries} where BarSeries is a list of namedtuples
+    extended with cached numpy arrays for JIT walks.
+    Loads from (earliest − VOL_BARS trading days buffer) to cover vol lookback.
+    """
+    from database.models.core import Stock
+    from database.models.technical import PriceHistory
+
+    buffer_date = earliest - timedelta(days=VOL_BARS * 2)
+
+    raw = defaultdict(list)
+    syms = list(symbols)
+
+    chunk = 100
+    for start in range(0, len(syms), chunk):
+        batch = syms[start:start + chunk]
+        rows  = (PriceHistory
+                 .select(PriceHistory.date,
+                         PriceHistory.open,
+                         PriceHistory.high,
+                         PriceHistory.low,
+                         PriceHistory.close,
+                         Stock.symbol)
+                 .join(Stock)
+                 .where(
+                     (Stock.symbol.in_(batch))
+                     & (PriceHistory.date >= buffer_date)
+                 )
+                 .order_by(Stock.symbol, PriceHistory.date)
+                 .namedtuples())
+        for r in rows:
+            raw[r.symbol].append(r)
+
+    # Wrap each symbol's bars with cached numpy arrays
+    return {sym: BarSeries(rows) for sym, rows in raw.items()}
+
+
+# ---------------------------------------------------------------------------
+# Trade outcome computation
+# ---------------------------------------------------------------------------
+@dataclass
+class TradeOutcome:
+    symbol:      str
+    signal_date: date
+    score:       float
+    tier:        str
+    entry_price: float
+    sigma_daily: float   # 60-bar realized vol %
+    outcome:     str     # 'tp' | 'sl' | 'hard'
+    exit_date:   date
+    net_return:  float   # breadth-adaptive NET_TP/SL or NET_HARD
+    hold_bars:   int     # trading bars held
+    stressed:    bool    # breadth regime at entry
+    side:        str            = 'call'  # 'call' or 'put'
+    exit_price:  float          = 0.0    # underlying price at exit bar (close, or barrier hit)
+    tp_price:    float          = 0.0    # TP barrier price
+    sl_price:    float          = 0.0    # SL barrier price
+    deadline:    Optional[date] = None   # hard-sell deadline (signal_date + hold_days)
+    dte:         int            = DEFAULT_TOTAL_DTE
+    premium_mult: float         = PREMIUM_MULT
+    delta:       float          = DELTA
+    routed_15dte: bool          = False
+    semivol_r:   Optional[float] = None  # 60d downside/upside vol ratio; SVR entry filter (calls)
+    spread:      Optional[float] = None  # 5-member component disagreement; SPREAD_TILT 75-79 haircut (calls)
+
+
+def _dte_router_call_eligible(sig, router_dates, vix_map, regime_map, routed_today: int) -> bool:
+    if not DTE_ROUTER_ENABLED or DTE_ROUTER_TARGET_DTE != 15:
+        return False
+    if routed_today >= DTE_ROUTER_DAY_CAP:
+        return False
+    if float(sig.overall) < DTE_ROUTER_SCORE_MIN:
+        return False
+    trend = getattr(sig, 'trend', None)
+    if trend is None or float(trend) >= DTE_ROUTER_TREND_LT:
+        return False
+    if DTE_ROUTER_VIX_MIN > 0.0:
+        vix = value_on_or_before(router_dates, vix_map, sig.date)
+        if vix is None or float(vix) < DTE_ROUTER_VIX_MIN:
+            return False
+    if DTE_ROUTER_VIX_MAX > 0.0:   # crash-gate: route to 15DTE only in low-vol/bull
+        vix = value_on_or_before(router_dates, vix_map, sig.date)
+        if vix is None or float(vix) > DTE_ROUTER_VIX_MAX:
+            return False
+    if DTE_ROUTER_REGIME_MIN > 0.0 or DTE_ROUTER_REGIME_MAX < 100.0:
+        regime_comp = value_on_or_before(router_dates, regime_map, sig.date)
+        if regime_comp is None:
+            return False
+        if float(regime_comp) < DTE_ROUTER_REGIME_MIN or float(regime_comp) > DTE_ROUTER_REGIME_MAX:
+            return False
+    if str(sig.symbol).upper() in DTE_ROUTER_EXCLUDED_SYMBOLS:
+        return False
+    return True
+
+
+def _dte_router_15dte_call_cfg(base_cfg: dict) -> dict:
+    s15 = _sc.STRATEGY_15DTE
+    o15 = s15.option
+    routed_cfg = dict(base_cfg)
+    routed_cfg.update({
+        'hold_calendar_days': s15.HOLD_DAYS,
+        'premium_mult': s15.PREMIUM_MULT,
+        'delta': o15.DELTA,
+        'total_dte': DTE_ROUTER_TARGET_DTE,
+        'tp_sigma_base': s15.TP_SIGMA_BASE,
+        'tp_sigma_stress': s15.TP_SIGMA_STRESS,
+        'sl_sigma_base': s15.SL_SIGMA_BASE,
+        'sl_sigma_stress': s15.SL_SIGMA_STRESS,
+        'net_tp_base': o15.NET_TP_BASE,
+        'net_tp_stress': o15.NET_TP_STRESS,
+        'net_sl_base': o15.NET_SL_BASE,
+        'net_sl_stress': o15.NET_SL_STRESS,
+        'net_hard': s15.NET_HARD_SELL,
+    })
+    return routed_cfg
+
+
+def compute_outcome(symbol: str, signal_date: date, score: float,
+                    ph_rows: list, stressed: bool,
+                    trend: float | None = None,
+                    cfg: dict | None = None) -> 'TradeOutcome | None':
+    """Walk OHLCV data from signal_date forward to determine trade outcome."""
+    cfg = cfg or {}
+    breadth_adaptive = cfg.get('breadth_adaptive', True)
+    hold_days = cfg.get('hold_calendar_days', HOLD_CALENDAR_DAYS)
+    net_hard  = cfg.get('net_hard', NET_HARD)
+    premium_mult = float(cfg.get('premium_mult', PREMIUM_MULT))
+    total_dte = int(cfg.get('total_dte', DEFAULT_TOTAL_DTE))
+    delta = float(cfg.get('delta', DELTA))
+    # per-call honest-calendar tenor (profile-overridable; defaults to module globals
+    # so Core / unprofiled runs are bit-identical). Lets e.g. an Apex 15-DTE profile
+    # run alongside Core 30-DTE in the same process.
+    calendar_hold = bool(cfg.get('calendar_hold', CALENDAR_HOLD))
+    nominal_cal_dte = int(cfg.get('nominal_cal_dte', NOMINAL_CAL_DTE))
+
+    date_idx = {r.date: i for i, r in enumerate(ph_rows)}
+
+    sig_i = date_idx.get(signal_date)
+    if sig_i is None:
+        return None
+
+    entry_price = float(ph_rows[sig_i].close)
+    if entry_price <= 0:
+        return None
+
+    vol_start = max(0, sig_i - VOL_BARS)
+    closes    = [float(ph_rows[j].close) for j in range(vol_start, sig_i + 1)]
+    sigma     = realized_vol_pct(closes)
+    if not sigma or sigma <= 0:
+        return None
+
+    if breadth_adaptive and stressed:
+        tp_sigma = cfg.get('tp_sigma_stress', TP_SIGMA_STRESS)
+        sl_sigma = cfg.get('sl_sigma_stress', SL_SIGMA_STRESS)
+        net_tp   = cfg.get('net_tp_stress',   NET_TP_STRESS)
+        net_sl   = cfg.get('net_sl_stress',   NET_SL_STRESS)
+    else:
+        tp_sigma = cfg.get('tp_sigma_base', TP_SIGMA_BASE)
+        sl_sigma = cfg.get('sl_sigma_base', SL_SIGMA_BASE)
+        net_tp   = cfg.get('net_tp_base',   NET_TP_BASE)
+        net_sl   = cfg.get('net_sl_base',   NET_SL_BASE)
+
+    # HOLD-config research override (off in production): widen the call SL barrier so positions
+    # ride to TP or the day-15 hard-sell instead of stopping early. Used by the marked-DD
+    # experiment to measure the true paper drawdown of a hold-through strategy.
+    _sl_ov = os.environ.get('BC_SL_SIGMA_OV')
+    if _sl_ov:
+        sl_sigma = float(_sl_ov)
+
+    tp_price = entry_price * (1.0 + tp_sigma * sigma / 100.0)
+    sl_price = entry_price * (1.0 - sl_sigma * sigma / 100.0)
+    deadline = signal_date + timedelta(days=hold_days)
+    tier     = CT_CALL_TIER if ct_tag(score, trend, 'call') else score_to_tier(score)
+    premium_pct = premium_mult * sigma / 100.0
+    # Gamma x IV Phase B: real-IV premium override (COST only; tp_price/sl_price
+    # barriers above are computed from realized vol and are untouched by this).
+    # rv=sigma (Amendment 2026-07-12): the model path (IV_MODEL=1) needs the
+    # engine's own realized vol; no-op when IV_MODEL is unset.
+    _iv_dte = nominal_cal_dte if calendar_hold else total_dte
+    premium_pct = _iv_premium_pct(symbol, signal_date, _iv_dte, premium_pct, rv=sigma)
+
+    # Earnings-spanning vega sampler. Deterministic per (symbol, signal_date)
+    # so the backtest stays reproducible while still drawing from the same
+    # empirical post/pre IV ratio pool the MC samples per-iter. Uses md5 for a
+    # process-stable seed (Python's hash() is salt-randomized for strings).
+    sym_ed = (cfg.get('ern_map') or {}).get(symbol, [])
+    def _vega_for(exit_date):
+        if not sym_ed:
+            return 1.0
+        try:
+            from iv_crush_model import find_spanning_earnings
+            from option_pricing import sample_vega_ratio
+        except ImportError:
+            return 1.0
+        if find_spanning_earnings(signal_date, exit_date, sym_ed) is None:
+            return 1.0
+        import random, hashlib
+        seed = int.from_bytes(hashlib.md5(
+            f"{symbol}_{signal_date.toordinal()}".encode()).digest()[:4], 'little')
+        return sample_vega_ratio('CALL', total_dte, random.Random(seed))
+
+    def _theta_args(fire_idx, bars_held):
+        """Honest calendar theta (shipped 2026-06-09): when CALENDAR_HOLD, the option
+        decays over NOMINAL_CAL_DTE CALENDAR days and `held` = calendar days from the
+        signal to the fire bar (real options expire on calendar dates). Else trading bars."""
+        if calendar_hold:
+            return (ph_rows[fire_idx].date - signal_date).days, nominal_cal_dte
+        return bars_held, total_dte
+
+    def _option_aware_pnl(kind_code, bars_held, fire_idx, vega_ratio=1.0):
+        """Compute realized net P&L using option_pricing model.
+
+        Bounded-midpoint fill (deterministic, reproducible — matches MC's
+        bounded-uniform model on expectation while keeping results cacheable):
+          kind 0 (hard): u_fill = bar close            (deadline market-on-close)
+          kind 1 (tp):   u_fill = mid([tp_price, high])(call limit-or-better)
+          kind 2 (sl):   bimodal — sl_price (intraday trigger) or
+                         mid([low, open]) (gap-through; calibrated 2026-04-30
+                         against sl_fill_bias_audit empirical bar fills)
+        """
+        from option_pricing import option_pnl_pct
+        bar = ph_rows[fire_idx]
+        u_high  = float(bar.high)  if hasattr(bar, 'high')  else float(bar.close)
+        u_low   = float(bar.low)   if hasattr(bar, 'low')   else float(bar.close)
+        u_open  = float(bar.open)  if hasattr(bar, 'open')  else u_low
+        u_close = float(bar.close)
+        if kind_code == 1:
+            # Call TP: high >= tp_price; fill in [tp_price, high] (limit-or-better)
+            u_fill = (tp_price + u_high) / 2.0
+        elif kind_code == 2:
+            # Call SL: bimodal. sl_price < entry. Intraday: open > sl_price.
+            if u_open > sl_price:
+                u_fill = sl_price
+            else:
+                u_fill = (u_low + u_open) / 2.0
+        else:
+            # Hard sell at deadline — market-on-close
+            u_fill = u_close
+        _h, _td = _theta_args(fire_idx, bars_held)
+        gross = option_pnl_pct('call', u_fill, entry_price, _h,
+                               premium_pct=premium_pct,
+                               total_dte=_td,
+                               vega_ratio=vega_ratio,
+                               delta=delta)
+        if kind_code == 1:   return gross + SLIP_ENTRY + SLIP_TP
+        if kind_code == 2:   return gross + SLIP_ENTRY + SLIP_SL
+        return gross + SLIP_ENTRY + SLIP_HARD
+
+    # JIT path: ph_rows is a BarSeries with cached numpy arrays. Falls back
+    # to per-row Python loop if arrays unavailable (e.g. tests pass plain lists).
+    # OPTION_PRICING_AWARE=1 (default) bypasses JIT to use Python fallback
+    # with theta-aware fire P&L. Set =0 for legacy static-pricing JIT path.
+    if hasattr(ph_rows, 'np_highs') and not OPTION_PRICING_AWARE:
+        from database.barrier_walk_numba import walk_call_option_outcome
+        kind_code, bars_held, exit_px = walk_call_option_outcome(
+            ph_rows.np_highs, ph_rows.np_lows, ph_rows.np_closes, ph_rows.np_ords,
+            sig_i, tp_price, sl_price, deadline.toordinal()
+        )
+        if kind_code == 1:
+            return TradeOutcome(symbol, signal_date, score, tier, entry_price, sigma,
+                                'tp', ph_rows[sig_i + bars_held].date, net_tp, bars_held, stressed,
+                                exit_price=exit_px, tp_price=tp_price, sl_price=sl_price, deadline=deadline)
+        if kind_code == 2:
+            return TradeOutcome(symbol, signal_date, score, tier, entry_price, sigma,
+                                'sl', ph_rows[sig_i + bars_held].date, net_sl, bars_held, stressed,
+                                exit_price=exit_px, tp_price=tp_price, sl_price=sl_price, deadline=deadline)
+        if kind_code == 0:
+            return TradeOutcome(symbol, signal_date, score, tier, entry_price, sigma,
+                                'hard', ph_rows[sig_i + bars_held].date, net_hard, bars_held, stressed,
+                                exit_price=exit_px, tp_price=tp_price, sl_price=sl_price, deadline=deadline)
+        # kind_code == 3: exhausted, open
+        return TradeOutcome(symbol, signal_date, score, tier, entry_price, sigma,
+                            'open', deadline, 0.0, bars_held, stressed,
+                            exit_price=exit_px, tp_price=tp_price, sl_price=sl_price, deadline=deadline)
+
+    # Pure-Python fallback (also used when OPTION_PRICING_AWARE=1)
+    for j in range(sig_i + 1, len(ph_rows)):
+        bar      = ph_rows[j]
+        bar_date = bar.date
+        high     = float(bar.high)
+        low      = float(bar.low)
+        bars_held = j - sig_i
+        if high >= tp_price:
+            tp_pnl = _option_aware_pnl(1, bars_held, j, _vega_for(bar_date)) if OPTION_PRICING_AWARE else net_tp
+            return TradeOutcome(symbol, signal_date, score, tier,
+                                entry_price, sigma, 'tp', bar_date,
+                                tp_pnl, bars_held, stressed,
+                                exit_price=tp_price,
+                                tp_price=tp_price, sl_price=sl_price, deadline=deadline)
+        if low <= sl_price:
+            sl_pnl = _option_aware_pnl(2, bars_held, j, _vega_for(bar_date)) if OPTION_PRICING_AWARE else net_sl
+            # Dead-hold check: if realized SL pnl is too deep to actually sell
+            # (no liquid bid on a deep-OTM option), hold forward instead of
+            # realizing the loss now.
+            if DEAD_HOLD_ENABLED and sl_pnl <= DEAD_HOLD_TRIGGER_PNL:
+                from option_pricing import option_pnl_pct
+                sl_fire_idx = j
+                for k in range(j + 1, len(ph_rows)):
+                    bar_k = ph_rows[k]
+                    bars_k = k - sig_i
+                    high_k = float(bar_k.high)
+                    open_k = float(bar_k.open) if hasattr(bar_k, 'open') else high_k
+                    _hk, _tdk = _theta_args(k, bars_k)
+                    high_pnl_k = option_pnl_pct('call', high_k, entry_price, _hk,
+                                                premium_pct=premium_pct,
+                                                total_dte=_tdk,
+                                                vega_ratio=_vega_for(bar_k.date),
+                                                delta=delta)
+                    if high_pnl_k >= DEAD_HOLD_POPOUT_PNL:
+                        # Limit-order fill at popout, or better if bar gapped open above
+                        open_pnl_k = option_pnl_pct('call', open_k, entry_price, _hk,
+                                                    premium_pct=premium_pct,
+                                                    total_dte=_tdk,
+                                                    vega_ratio=_vega_for(bar_k.date),
+                                                    delta=delta)
+                        fill_pnl = max(DEAD_HOLD_POPOUT_PNL, open_pnl_k)
+                        return TradeOutcome(symbol, signal_date, score, tier,
+                                            entry_price, sigma, 'dh_pop', bar_k.date,
+                                            fill_pnl + SLIP_ENTRY, bars_k, stressed,  # popout = limit fill, no exit spread
+                                            exit_price=high_k,
+                                            tp_price=tp_price, sl_price=sl_price, deadline=deadline)
+                    if bar_k.date >= deadline:
+                        # Hard sell at expiry close
+                        close_k = float(bar_k.close)
+                        _hk2, _tdk2 = _theta_args(k, bars_k)
+                        close_pnl = option_pnl_pct('call', close_k, entry_price, _hk2,
+                                                   premium_pct=premium_pct,
+                                                   total_dte=_tdk2,
+                                                   vega_ratio=_vega_for(bar_k.date),
+                                                   delta=delta)
+                        return TradeOutcome(symbol, signal_date, score, tier,
+                                            entry_price, sigma, 'dh_expiry', bar_k.date,
+                                            close_pnl + SLIP_ENTRY + SLIP_HARD, bars_k, stressed,  # forced day-15 close
+                                            exit_price=close_k,
+                                            tp_price=tp_price, sl_price=sl_price, deadline=deadline)
+                # Ran off price history during dead-hold
+                last = ph_rows[-1]
+                last_bars = len(ph_rows) - 1 - sig_i
+                _hl, _tdl = _theta_args(len(ph_rows) - 1, last_bars)
+                last_pnl = option_pnl_pct('call', float(last.close), entry_price, _hl,
+                                          premium_pct=premium_pct,
+                                          total_dte=_tdl,
+                                          vega_ratio=_vega_for(last.date),
+                                          delta=delta)
+                return TradeOutcome(symbol, signal_date, score, tier,
+                                    entry_price, sigma, 'dh_open', last.date,
+                                    last_pnl + SLIP_ENTRY + SLIP_HARD, last_bars, stressed,  # forced expiry close
+                                    exit_price=float(last.close),
+                                    tp_price=tp_price, sl_price=sl_price, deadline=deadline)
+            return TradeOutcome(symbol, signal_date, score, tier,
+                                entry_price, sigma, 'sl', bar_date,
+                                sl_pnl, bars_held, stressed,
+                                exit_price=sl_price,
+                                tp_price=tp_price, sl_price=sl_price, deadline=deadline)
+        # Design B — premium-based liquidation stop. End-of-bar check on actual
+        # option P&L. Fires when the option has bled past PREM_STOP_LOSS via
+        # theta + adverse-but-not-extreme underlying move, before σ-SL triggers.
+        prem_stop = cfg.get('prem_stop_loss', PREM_STOP_LOSS)
+        if OPTION_PRICING_AWARE and prem_stop < 0.0:
+            from option_pricing import option_pnl_pct
+            _hp, _tdp = _theta_args(j, bars_held)
+            cur_pnl = option_pnl_pct('call', float(bar.close), entry_price, _hp,
+                                     premium_pct=premium_pct,
+                                     total_dte=_tdp,
+                                     vega_ratio=_vega_for(bar_date),
+                                     delta=delta)
+            if cur_pnl <= prem_stop:
+                return TradeOutcome(symbol, signal_date, score, tier,
+                                    entry_price, sigma, 'prem', bar_date,
+                                    cur_pnl + SLIP_ENTRY + SLIP_SL, bars_held, stressed,
+                                    exit_price=float(bar.close),
+                                    tp_price=tp_price, sl_price=sl_price, deadline=deadline)
+        if bar_date >= deadline:
+            hard_pnl = _option_aware_pnl(0, bars_held, j, _vega_for(bar_date)) if OPTION_PRICING_AWARE else net_hard
+            return TradeOutcome(symbol, signal_date, score, tier,
+                                entry_price, sigma, 'hard', bar_date,
+                                hard_pnl, bars_held, stressed,
+                                exit_price=float(bar.close),
+                                tp_price=tp_price, sl_price=sl_price, deadline=deadline)
+
+    last = ph_rows[-1]
+    return TradeOutcome(symbol, signal_date, score, tier,
+                        entry_price, sigma, 'open', deadline,
+                        0.0, len(ph_rows) - 1 - sig_i, stressed,
+                        exit_price=float(last.close),
+                        tp_price=tp_price, sl_price=sl_price, deadline=deadline)
+
+
+def compute_put_outcome(symbol: str, signal_date: date, score: float,
+                        ph_rows: list,
+                        trend: float | None = None,
+                        cfg: dict | None = None) -> 'TradeOutcome | None':
+    """Put trade: win = underlying falls PUT_TP_SIGMA sigmas; stop = rises PUT_SL_SIGMA."""
+    cfg = cfg or {}
+    hold_days       = cfg.get('hold_calendar_days',      HOLD_CALENDAR_DAYS)
+    put_tp_sigma    = cfg.get('put_tp_sigma',             PUT_TP_SIGMA)
+    put_sl_sigma = cfg.get('put_sl_sigma', PUT_SL_SIGMA)
+    put_net_tp   = cfg.get('put_net_tp',   PUT_NET_TP)
+    put_net_sl   = cfg.get('put_net_sl',   PUT_NET_SL)
+    net_hard     = cfg.get('net_hard',     NET_HARD)
+
+    date_idx = {r.date: i for i, r in enumerate(ph_rows)}
+    sig_i = date_idx.get(signal_date)
+    if sig_i is None:
+        return None
+    entry_price = float(ph_rows[sig_i].close)
+    if entry_price <= 0:
+        return None
+    vol_start = max(0, sig_i - VOL_BARS)
+    closes    = [float(ph_rows[j].close) for j in range(vol_start, sig_i + 1)]
+    sigma     = realized_vol_pct(closes)
+    if not sigma or sigma <= 0:
+        return None
+
+    tp_price = entry_price * (1.0 - put_tp_sigma * sigma / 100.0)
+    sl_price = entry_price * (1.0 + put_sl_sigma * sigma / 100.0)
+    deadline = signal_date + timedelta(days=hold_days)
+    tier     = CT_PUT_TIER if ct_tag(score, trend, 'put') else put_score_to_tier(score)
+    hold_default = cfg.get('put_sl_hold_default', PUT_SL_HOLD_BARS_DEFAULT)
+    hold_monday  = cfg.get('put_sl_hold_monday',  PUT_SL_HOLD_BARS_MONDAY)
+    sl_hold  = hold_monday if signal_date.weekday() == 0 else hold_default
+    premium_pct = PREMIUM_MULT * sigma / 100.0
+    # Gamma x IV Phase B: real-IV premium override (COST only; matches this
+    # function's existing option_pnl_pct calls, which use DEFAULT_TOTAL_DTE).
+    # rv=sigma (Amendment 2026-07-12): threaded for the IV_MODEL path.
+    premium_pct = _iv_premium_pct(symbol, signal_date, DEFAULT_TOTAL_DTE, premium_pct, rv=sigma)
+
+    sym_ed = (cfg.get('ern_map') or {}).get(symbol, [])
+    def _vega_for(exit_date):
+        if not sym_ed:
+            return 1.0
+        try:
+            from iv_crush_model import find_spanning_earnings
+            from option_pricing import sample_vega_ratio
+        except ImportError:
+            return 1.0
+        if find_spanning_earnings(signal_date, exit_date, sym_ed) is None:
+            return 1.0
+        import random, hashlib
+        seed = int.from_bytes(hashlib.md5(
+            f"{symbol}_{signal_date.toordinal()}".encode()).digest()[:4], 'little')
+        return sample_vega_ratio('PUT', DEFAULT_TOTAL_DTE, random.Random(seed))
+
+    def _put_option_aware_pnl(kind_code, bars_held, fire_idx, vega_ratio=1.0):
+        """Compute realized net P&L using option_pricing model.
+
+        Bounded-midpoint fill (deterministic, reproducible — matches MC's
+        bounded-uniform model on expectation while keeping results cacheable):
+          kind 0 (hard): u_fill = bar close             (deadline market-on-close)
+          kind 1 (tp):   u_fill = mid([low, tp_price]) (put limit-or-better)
+          kind 2 (sl):   bimodal — sl_price (intraday trigger) or
+                         mid([open, high]) (gap-through)
+        """
+        from option_pricing import option_pnl_pct
+        bar = ph_rows[fire_idx]
+        u_high  = float(bar.high)  if hasattr(bar, 'high')  else float(bar.close)
+        u_low   = float(bar.low)   if hasattr(bar, 'low')   else float(bar.close)
+        u_open  = float(bar.open)  if hasattr(bar, 'open')  else u_high
+        u_close = float(bar.close)
+        if kind_code == 1:
+            # Put TP: low <= tp_price; fill in [low, tp_price] (limit-or-better)
+            u_fill = (u_low + tp_price) / 2.0
+        elif kind_code == 2:
+            # Put SL: bimodal. sl_price > entry. Intraday: open < sl_price.
+            if u_open < sl_price:
+                u_fill = sl_price
+            else:
+                u_fill = (u_open + u_high) / 2.0
+        else:
+            # Hard sell at deadline — market-on-close
+            u_fill = u_close
+        gross = option_pnl_pct('put', u_fill, entry_price, bars_held,
+                               premium_pct=premium_pct,
+                               total_dte=DEFAULT_TOTAL_DTE,
+                               vega_ratio=vega_ratio,
+                               delta=DELTA)
+        if kind_code == 1:   return gross + SLIP_ENTRY + SLIP_TP
+        if kind_code == 2:   return gross + SLIP_ENTRY + SLIP_SL
+        return gross + SLIP_ENTRY + SLIP_HARD
+
+    # JIT path: ph_rows is a BarSeries with cached numpy arrays.
+    # OPTION_PRICING_AWARE=1 (default) bypasses JIT for theta-aware pricing.
+    if hasattr(ph_rows, 'np_highs') and not OPTION_PRICING_AWARE:
+        from database.barrier_walk_numba import walk_put_option_outcome
+        kind_code, bars_held, exit_px = walk_put_option_outcome(
+            ph_rows.np_highs, ph_rows.np_lows, ph_rows.np_closes, ph_rows.np_ords,
+            sig_i, tp_price, sl_price, deadline.toordinal(), sl_hold
+        )
+        if kind_code == 1:
+            return TradeOutcome(symbol, signal_date, score, tier, entry_price, sigma,
+                                'tp', ph_rows[sig_i + bars_held].date, put_net_tp, bars_held, False, 'put',
+                                exit_price=exit_px, tp_price=tp_price, sl_price=sl_price, deadline=deadline)
+        if kind_code == 2:
+            return TradeOutcome(symbol, signal_date, score, tier, entry_price, sigma,
+                                'sl', ph_rows[sig_i + bars_held].date, put_net_sl, bars_held, False, 'put',
+                                exit_price=exit_px, tp_price=tp_price, sl_price=sl_price, deadline=deadline)
+        if kind_code == 0:
+            return TradeOutcome(symbol, signal_date, score, tier, entry_price, sigma,
+                                'hard', ph_rows[sig_i + bars_held].date, net_hard, bars_held, False, 'put',
+                                exit_price=exit_px, tp_price=tp_price, sl_price=sl_price, deadline=deadline)
+        # kind_code == 3: exhausted
+        return TradeOutcome(symbol, signal_date, score, tier, entry_price, sigma,
+                            'open', deadline, 0.0, bars_held, False, 'put',
+                            exit_price=exit_px, tp_price=tp_price, sl_price=sl_price, deadline=deadline)
+
+    # Pure-Python fallback (also used when OPTION_PRICING_AWARE=1)
+    for j in range(sig_i + 1, len(ph_rows)):
+        bar = ph_rows[j]
+        bars_held = j - sig_i
+        high = float(bar.high); low = float(bar.low)
+        if low <= tp_price:
+            tp_pnl = _put_option_aware_pnl(1, bars_held, j, _vega_for(bar.date)) if OPTION_PRICING_AWARE else put_net_tp
+            return TradeOutcome(symbol, signal_date, score, tier,
+                                entry_price, sigma, 'tp', bar.date,
+                                tp_pnl, bars_held, False, 'put',
+                                exit_price=tp_price,
+                                tp_price=tp_price, sl_price=sl_price, deadline=deadline)
+        if high >= sl_price and bars_held > sl_hold:
+            sl_pnl = _put_option_aware_pnl(2, bars_held, j, _vega_for(bar.date)) if OPTION_PRICING_AWARE else put_net_sl
+            # Dead-hold check (puts): same logic as calls but check intraday low
+            # for popout (puts recover when underlying falls).
+            if DEAD_HOLD_ENABLED and sl_pnl <= DEAD_HOLD_TRIGGER_PNL:
+                from option_pricing import option_pnl_pct
+                for k in range(j + 1, len(ph_rows)):
+                    bar_k = ph_rows[k]
+                    bars_k = k - sig_i
+                    low_k = float(bar_k.low)
+                    open_k = float(bar_k.open) if hasattr(bar_k, 'open') else low_k
+                    low_pnl_k = option_pnl_pct('put', low_k, entry_price, bars_k,
+                                                premium_pct=premium_pct,
+                                                total_dte=DEFAULT_TOTAL_DTE,
+                                                vega_ratio=_vega_for(bar_k.date),
+                                                delta=DELTA)
+                    if low_pnl_k >= DEAD_HOLD_POPOUT_PNL:
+                        open_pnl_k = option_pnl_pct('put', open_k, entry_price, bars_k,
+                                                    premium_pct=premium_pct,
+                                                    total_dte=DEFAULT_TOTAL_DTE,
+                                                    vega_ratio=_vega_for(bar_k.date),
+                                                    delta=DELTA)
+                        fill_pnl = max(DEAD_HOLD_POPOUT_PNL, open_pnl_k)
+                        return TradeOutcome(symbol, signal_date, score, tier,
+                                            entry_price, sigma, 'dh_pop', bar_k.date,
+                                            fill_pnl + SLIP_ENTRY, bars_k, False, 'put',  # popout = limit fill, no exit spread
+                                            exit_price=low_k,
+                                            tp_price=tp_price, sl_price=sl_price, deadline=deadline)
+                    if bar_k.date >= deadline:
+                        close_k = float(bar_k.close)
+                        close_pnl = option_pnl_pct('put', close_k, entry_price, bars_k,
+                                                   premium_pct=premium_pct,
+                                                   total_dte=DEFAULT_TOTAL_DTE,
+                                                   vega_ratio=_vega_for(bar_k.date),
+                                                   delta=DELTA)
+                        return TradeOutcome(symbol, signal_date, score, tier,
+                                            entry_price, sigma, 'dh_expiry', bar_k.date,
+                                            close_pnl + SLIP_ENTRY + SLIP_HARD, bars_k, False, 'put',  # forced day-15 close
+                                            exit_price=close_k,
+                                            tp_price=tp_price, sl_price=sl_price, deadline=deadline)
+                last = ph_rows[-1]
+                last_bars = len(ph_rows) - 1 - sig_i
+                last_pnl = option_pnl_pct('put', float(last.close), entry_price, last_bars,
+                                          premium_pct=premium_pct,
+                                          total_dte=DEFAULT_TOTAL_DTE,
+                                          vega_ratio=_vega_for(last.date),
+                                          delta=DELTA)
+                return TradeOutcome(symbol, signal_date, score, tier,
+                                    entry_price, sigma, 'dh_open', last.date,
+                                    last_pnl + SLIP_ENTRY + SLIP_HARD, last_bars, False, 'put',  # forced expiry close
+                                    exit_price=float(last.close),
+                                    tp_price=tp_price, sl_price=sl_price, deadline=deadline)
+            return TradeOutcome(symbol, signal_date, score, tier,
+                                entry_price, sigma, 'sl', bar.date,
+                                sl_pnl, bars_held, False, 'put',
+                                exit_price=sl_price,
+                                tp_price=tp_price, sl_price=sl_price, deadline=deadline)
+        # Design B premium stop (puts).
+        prem_stop = cfg.get('prem_stop_loss', PREM_STOP_LOSS)
+        if OPTION_PRICING_AWARE and prem_stop < 0.0 and bars_held > sl_hold:
+            from option_pricing import option_pnl_pct
+            cur_pnl = option_pnl_pct('put', float(bar.close), entry_price, bars_held,
+                                     premium_pct=premium_pct,
+                                     total_dte=DEFAULT_TOTAL_DTE,
+                                     vega_ratio=_vega_for(bar.date),
+                                     delta=DELTA)
+            if cur_pnl <= prem_stop:
+                return TradeOutcome(symbol, signal_date, score, tier,
+                                    entry_price, sigma, 'prem', bar.date,
+                                    cur_pnl + SLIP_ENTRY + SLIP_SL, bars_held, False, 'put',
+                                    exit_price=float(bar.close),
+                                    tp_price=tp_price, sl_price=sl_price, deadline=deadline)
+        if bar.date >= deadline:
+            hard_pnl = _put_option_aware_pnl(0, bars_held, j, _vega_for(bar.date)) if OPTION_PRICING_AWARE else net_hard
+            return TradeOutcome(symbol, signal_date, score, tier,
+                                entry_price, sigma, 'hard', bar.date,
+                                hard_pnl, bars_held, False, 'put',
+                                exit_price=float(bar.close),
+                                tp_price=tp_price, sl_price=sl_price, deadline=deadline)
+
+    # Price data exhausted before deadline — position is still open.
+    last = ph_rows[-1]
+    return TradeOutcome(symbol, signal_date, score, tier,
+                        entry_price, sigma, 'open', deadline,
+                        0.0, len(ph_rows) - 1 - sig_i, False, 'put',
+                        exit_price=float(last.close),
+                        tp_price=tp_price, sl_price=sl_price, deadline=deadline)
+
+
+# ---------------------------------------------------------------------------
+# Portfolio simulation (deterministic)
+# ---------------------------------------------------------------------------
+@dataclass
+class OpenPosition:
+    outcome:   TradeOutcome
+    premium:   float        # dollar amount allocated (tier % × equity at entry)
+    entry_eq:  float        # portfolio equity at entry (for reference)
+
+
+def run_backtest(outcomes_by_date: dict,
+                 trading_days: list,
+                 initial_capital: float,
+                 regime_dates: list | None = None,
+                 regime_map: dict | None = None,
+                 cfg: dict | None = None,
+                 ph: dict | None = None,
+                 vix_dates: list | None = None,
+                 vix_map: dict | None = None,
+                 mcc_dates: list | None = None,
+                 mcc_map: dict | None = None,
+                 trin_dates: list | None = None,
+                 trin_map: dict | None = None,
+                 bdiv_dates: list | None = None,
+                 bdiv_map: dict | None = None) -> dict:
+    """
+    outcomes_by_date: {signal_date: [TradeOutcome, ...]}
+                      each list pre-sorted: score desc, symbol asc.
+    trading_days:     sorted list of all trading dates in the window.
+    ph:               {symbol: [bar, ...]} — needed for reallocation MTM.
+                      Optional; reallocation disabled if absent.
+    """
+    cfg        = cfg or {}
+    max_pos    = cfg.get('max_positions', MAX_POSITIONS)
+    max_call_pos = cfg.get('max_positions_call', MAX_POSITIONS_CALL)
+    max_put_pos = cfg.get('max_positions_put', MAX_POSITIONS_PUT)
+    tier_alloc = cfg.get('tier_alloc',   TIER_ALLOC)
+    net_hard   = cfg.get('net_hard',     NET_HARD)
+    practical_enabled = cfg.get('practical_exposure_enabled', PRACTICAL_EXPOSURE_ENABLED)
+    if isinstance(practical_enabled, str):
+        practical_enabled = practical_enabled.lower() in ('1', 'true', 'yes', 'on')
+    practical_capital_ceiling = float(cfg.get('practical_capital_ceiling', PRACTICAL_CAPITAL_CEILING) or 0.0)
+    gross_premium_cap = float(cfg.get('gross_premium_cap', GROSS_PREMIUM_CAP) or 0.0)
+    call_premium_cap = float(cfg.get('call_premium_cap', CALL_PREMIUM_CAP) or 0.0)
+    bt_calendar_hold = bool(cfg.get('calendar_hold', CALENDAR_HOLD))
+    bt_nominal_cal_dte = int(cfg.get('nominal_cal_dte', NOMINAL_CAL_DTE))
+    put_premium_cap = float(cfg.get('put_premium_cap', PUT_PREMIUM_CAP) or 0.0)
+    opp_sat_call_ref = float(cfg.get('opp_sat_call_ref', OPP_SAT_CALL_REF) or 0.0)
+    opp_sat_put_ref = float(cfg.get('opp_sat_put_ref', OPP_SAT_PUT_REF) or 0.0)
+    opp_sat_power = float(cfg.get('opp_sat_power', OPP_SAT_POWER) or 0.0)
+    opp_sat_floor = float(cfg.get('opp_sat_floor', OPP_SAT_FLOOR) or 0.0)
+    dd_soft_band_lo = float(cfg.get('dd_soft_band_lo', DD_SOFT_BAND_LO) or 0.0)
+    dd_soft_band_hi = float(cfg.get('dd_soft_band_hi', DD_SOFT_BAND_HI) or 0.0)
+    dd_soft_call_floor = float(cfg.get('dd_soft_call_floor', DD_SOFT_CALL_FLOOR) or 1.0)
+    rxdd_enabled = cfg.get('rxdd_enabled', RXDD_ENABLED)
+    if isinstance(rxdd_enabled, str):
+        rxdd_enabled = rxdd_enabled.lower() in ('1', 'true', 'yes')
+    rxdd_vix_c = float(cfg.get('rxdd_vix_c', RXDD_VIX_C) or 0.0)
+    rxdd_vix_w = float(cfg.get('rxdd_vix_w', RXDD_VIX_W) or 0.0)
+    rxdd_depth = float(cfg.get('rxdd_depth', RXDD_DEPTH) or 0.0)
+    rxdd_dd_min = float(cfg.get('rxdd_dd_min', RXDD_DD_MIN) or 0.0)
+    mwdd_enabled = cfg.get('mwdd_enabled', MWDD_ENABLED)
+    if isinstance(mwdd_enabled, str):
+        mwdd_enabled = mwdd_enabled.lower() in ('1', 'true', 'yes')
+    mwdd_mcc_c = float(cfg.get('mwdd_mcc_c', MWDD_MCC_C) or 0.0)
+    mwdd_mcc_w = float(cfg.get('mwdd_mcc_w', MWDD_MCC_W) or 0.0)
+    mwdd_depth = float(cfg.get('mwdd_depth', MWDD_DEPTH) or 0.0)
+    mwdd_dd_min = float(cfg.get('mwdd_dd_min', MWDD_DD_MIN) or 0.0)
+    mwdd_vix_panic = float(cfg.get('mwdd_vix_panic', MWDD_VIX_PANIC) or 0.0)
+    tvdd_enabled = cfg.get('tvdd_enabled', TVDD_ENABLED)
+    if isinstance(tvdd_enabled, str):
+        tvdd_enabled = tvdd_enabled.lower() in ('1', 'true', 'yes')
+    tvdd_trin_c = float(cfg.get('tvdd_trin_c', TVDD_TRIN_C) or 0.0)
+    tvdd_trin_w = float(cfg.get('tvdd_trin_w', TVDD_TRIN_W) or 0.0)
+    tvdd_depth = float(cfg.get('tvdd_depth', TVDD_DEPTH) or 0.0)
+    tvdd_dd_min = float(cfg.get('tvdd_dd_min', TVDD_DD_MIN) or 0.0)
+    tvdd_vix_panic = float(cfg.get('tvdd_vix_panic', TVDD_VIX_PANIC) or 0.0)
+    bdiv_enabled = cfg.get('bdiv_enabled', BDIV_ENABLED)
+    if isinstance(bdiv_enabled, str):
+        bdiv_enabled = bdiv_enabled.lower() in ('1', 'true', 'yes')
+    bdiv_prox_cut = float(cfg.get('bdiv_prox_cut', BDIV_PROX_CUT) or 0.0)
+    bdiv_prox_full = float(cfg.get('bdiv_prox_full', BDIV_PROX_FULL) or 0.0)
+    bdiv_gap_c = float(cfg.get('bdiv_gap_c', BDIV_GAP_C) or 0.0)
+    bdiv_gap_w = float(cfg.get('bdiv_gap_w', BDIV_GAP_W) or 0.0)
+    bdiv_depth = float(cfg.get('bdiv_depth', BDIV_DEPTH) or 0.0)
+    svr_enabled = cfg.get('svr_enabled', SVR_ENABLED)
+    if isinstance(svr_enabled, str):
+        svr_enabled = svr_enabled.lower() in ('1', 'true', 'yes')
+    svr_lo_cut = float(cfg.get('svr_lo_cut', SVR_LO_CUT) or 0.0)
+    svr_lo_full = float(cfg.get('svr_lo_full', SVR_LO_FULL) or 0.0)
+    svr_hi_full = float(cfg.get('svr_hi_full', SVR_HI_FULL) or 0.0)
+    svr_hi_cut = float(cfg.get('svr_hi_cut', SVR_HI_CUT) or 0.0)
+    svr_floor = float(cfg.get('svr_floor', SVR_FLOOR) or 1.0)
+    spread_tilt_enabled = cfg.get('spread_tilt_enabled', SPREAD_TILT_ENABLED)
+    if isinstance(spread_tilt_enabled, str):
+        spread_tilt_enabled = spread_tilt_enabled.lower() in ('1', 'true', 'yes')
+    spread_tilt_lo    = float(cfg.get('spread_tilt_lo', SPREAD_TILT_LO) or 0.0)
+    spread_tilt_hi    = float(cfg.get('spread_tilt_hi', SPREAD_TILT_HI) or 0.0)
+    spread_tilt_depth = float(cfg.get('spread_tilt_depth', SPREAD_TILT_DEPTH) or 0.0)
+
+    # Reallocation: when pool is capped and a new high-conviction signal arrives,
+    # try to displace an existing position by the configured strategy. Disabled
+    # by default. Strategies sell:
+    #   'entry_score_low'    — position with lowest entry conviction (|score-50|)
+    #   'days_held_high'     — oldest position (closest to deadline)
+    #   'current_pnl_high'   — most profitable (lock in gains, free cash)
+    #   'current_pnl_low'    — biggest loser (cut losses)
+    #   'sigma_distance_low' — furthest from TP (least likely to win)
+    realloc_strategy   = cfg.get('realloc_strategy', None)
+    realloc_min_adv    = cfg.get('realloc_min_advantage', 5.0)
+    realloc_enabled    = realloc_strategy is not None and ph is not None
+
+    # Build trading-day index for O(1) bars_held computation
+    _td_idx = {d: i for i, d in enumerate(trading_days)}
+    # Build per-symbol date->close lookup for fast MTM
+    _close_by_sym_date: dict = {}
+    if ph is not None:
+        for sym, rows in ph.items():
+            _close_by_sym_date[sym] = {r.date: float(r.close) for r in rows}
+
+    def _mtm_pnl(pos, today):
+        """Return current MTM option pnl_pct as of today's close. Cheap.
+
+        Honest-theta basis (2026-06-09 calendar-hold standardization): when
+        CALENDAR_HOLD, theta decays over the position's own total_dte CALENDAR
+        days (falling back to DEFAULT_TOTAL_DTE only if the position has no
+        dte of its own) with held = calendar days since the signal —
+        identical to compute_outcome's final mark (`_held_total`) and
+        portfolio_engine._mark_pnl. Before this, the intermediate MTM curve
+        used trading-bar held/`pos.dte` while the realized exits used
+        calendar theta, so equity_curve_mtm / max_dd_mtm disagreed with the
+        cost-basis exits and with the live Portfolio snapshot curve over
+        every weekend (the engine-vs-backtest MTM divergence,
+        experiments/portfolio_engine_parity/).
+
+        Per-position DTE fix (2026-07-14, experiments/mtm_divergence/DIAGNOSIS.md):
+        this branch previously substituted the run-level `bt_nominal_cal_dte`
+        constant for every open position instead of reading each position's
+        own `dte`, so a position routed to a non-default tenor (e.g. the
+        15-DTE router) was marked with the wrong total_dte, diverging from
+        the sibling `else` branch and from portfolio_engine._mark_pnl (both
+        already read per-position dte). Fixed by mirroring the `else`
+        branch's read here too.
+        """
+        sym = pos.outcome.symbol
+        d2c = _close_by_sym_date.get(sym, {})
+        today_close = d2c.get(today)
+        if today_close is None or pos.outcome.entry_price <= 0:
+            return 0.0
+        if bt_calendar_hold:
+            held = (today - pos.outcome.signal_date).days
+            total_dte = getattr(pos.outcome, 'dte', DEFAULT_TOTAL_DTE)
+        else:
+            held = _td_idx.get(today, 0) - _td_idx.get(pos.outcome.signal_date, 0)
+            total_dte = getattr(pos.outcome, 'dte', DEFAULT_TOTAL_DTE)
+        if held <= 0:
+            return 0.0
+        sigma = pos.outcome.sigma_daily
+        if sigma <= 0:
+            return 0.0
+        premium_mult = getattr(pos.outcome, 'premium_mult', PREMIUM_MULT)
+        delta = getattr(pos.outcome, 'delta', DELTA)
+        premium_pct = premium_mult * sigma / 100.0
+        # Gamma x IV Phase B: real-IV premium override (COST only). Keyed on the
+        # position's ENTRY date (not `today`) so the MTM mark stays consistent
+        # with the entry premium basis across the position's whole life -- same
+        # (symbol, date) key every day, so this always reproduces the entry
+        # value on a hit. count=False: MTM re-marks don't inflate the primary
+        # per-trade coverage stat (compute_outcome/compute_put_outcome already
+        # counted this same key once, at entry). rv=pos.outcome.sigma_daily
+        # (Amendment 2026-07-12): the value is already cached on the outcome
+        # object at entry, so the IV_MODEL path gets a real RV input for free.
+        premium_pct = _iv_premium_pct(sym, pos.outcome.signal_date, total_dte,
+                                      premium_pct, count=False, rv=pos.outcome.sigma_daily)
+        try:
+            from option_pricing import option_pnl_pct
+            return option_pnl_pct(pos.outcome.side, today_close, pos.outcome.entry_price,
+                                  held, premium_pct=premium_pct,
+                                  total_dte=total_dte,
+                                  vega_ratio=1.0, delta=delta)
+        except Exception:
+            return 0.0
+
+    def _pick_displacement(positions, new_outcome, today):
+        """Returns idx of position to displace, or None."""
+        if not realloc_enabled:
+            return None
+        new_conv = abs(new_outcome.score - 50)
+        candidates = [(i, p) for i, p in enumerate(positions)
+                      if (new_conv - abs(p.outcome.score - 50)) >= realloc_min_adv]
+        if not candidates:
+            return None
+        if realloc_strategy == 'entry_score_low':
+            candidates.sort(key=lambda x: abs(x[1].outcome.score - 50))
+            return candidates[0][0]
+        if realloc_strategy == 'days_held_high':
+            candidates.sort(key=lambda x: _td_idx.get(x[1].outcome.signal_date, 0))
+            return candidates[0][0]
+        if realloc_strategy in ('current_pnl_high', 'current_pnl_low'):
+            scored = [(i, p, _mtm_pnl(p, today)) for i, p in candidates]
+            scored.sort(key=lambda x: -x[2] if realloc_strategy == 'current_pnl_high' else x[2])
+            return scored[0][0]
+        if realloc_strategy == 'sigma_distance_low':
+            scored = []
+            for i, p in candidates:
+                cur = _close_by_sym_date.get(p.outcome.symbol, {}).get(today)
+                if cur is None:
+                    continue
+                if p.outcome.side == 'call':
+                    dist = (p.outcome.tp_price - cur) / max(cur, 1e-9)
+                else:
+                    dist = (cur - p.outcome.tp_price) / max(cur, 1e-9)
+                scored.append((i, p, dist))
+            scored.sort(key=lambda x: -x[2])  # furthest from TP first
+            return scored[0][0] if scored else None
+        return None
+
+    # F3f / legacy alloc-scale params extracted once; passed to alloc_scale_for
+    # on every signal.  Lookup keys mirror the module globals; missing keys fall
+    # back to module defaults inside alloc_scale_for.
+    _alloc_params = {k: cfg[k] for k in (
+        'breadth_alloc_enabled',
+        'f3f_call_thresh', 'f3f_call_floor', 'f3f_call_low',
+        'f3f_put_thresh',  'f3f_put_floor',  'f3f_put_high',
+    ) if k in cfg}
+    _breadth_enabled = _alloc_params.get('breadth_alloc_enabled', BREADTH_ALLOC_ENABLED)
+
+    cash: float             = initial_capital
+    open_pos: list[OpenPosition] = []
+    equity_curve: list      = []   # [(date, equity), ...]  cost-basis (opens held at premium)
+    equity_curve_mtm: list  = []   # [(date, equity_mtm), ...] honest mark-to-market (opens priced)
+    trade_log: list         = []
+    peak_equity: float      = initial_capital
+    max_dd: float           = 0.0
+    peak_equity_mtm: float  = initial_capital   # honest mark-to-market peak (open positions via option_pnl_pct, not cost)
+    max_dd_mtm: float       = 0.0
+    cash_reserves: list[tuple[date, float]] = []
+    reserved_cash: float = 0.0
+    reserve_pct_sum: float = 0.0
+    reserve_pct_n: int = 0
+    max_reserved_cash_pct: float = 0.0
+    open_premium_pcts: list[float] = []
+    open_premium_base_pcts: list[float] = []
+    call_open_premium_base_pcts: list[float] = []
+    put_open_premium_base_pcts: list[float] = []
+    open_position_counts: list[int] = []
+    call_open_position_counts: list[int] = []
+    put_open_position_counts: list[int] = []
+    pool_full_days = 0
+    call_pool_full_days = 0
+    put_pool_full_days = 0
+    sat_scales: list[float] = []
+
+    for today in trading_days:
+        n_day_start = len(trade_log)   # track trades added today for portfolio_value backfill
+
+        # 1. Close positions whose exit_date has arrived (skip still-open outcomes)
+        remaining = []
+        for pos in open_pos:
+            if pos.outcome.outcome != 'open' and pos.outcome.exit_date <= today:
+                proceeds = pos.premium * (1.0 + pos.outcome.net_return)
+                cash    += proceeds
+                trade_log.append({
+                    'entry_date':  pos.outcome.signal_date,
+                    'exit_date':   pos.outcome.exit_date,
+                    'symbol':      pos.outcome.symbol,
+                    'score':       pos.outcome.score,
+                    'tier':        pos.outcome.tier,
+                    'sigma':       pos.outcome.sigma_daily,
+                    'premium':     pos.premium,
+                    'outcome':     pos.outcome.outcome,
+                    'hold_bars':   pos.outcome.hold_bars,
+                    'pnl':         proceeds - pos.premium,
+                    'pnl_pct':     pos.outcome.net_return,
+                    'stressed':    pos.outcome.stressed,
+                    'side':        pos.outcome.side,
+                    'dte':         getattr(pos.outcome, 'dte', DEFAULT_TOTAL_DTE),
+                    'routed_15dte': getattr(pos.outcome, 'routed_15dte', False),
+                    'entry_price': pos.outcome.entry_price,
+                    'exit_price':  pos.outcome.exit_price,
+                    'entry_eq':    pos.entry_eq,
+                    'tp_price':    pos.outcome.tp_price,
+                    'sl_price':    pos.outcome.sl_price,
+                    'deadline':    pos.outcome.deadline,
+                })
+            else:
+                remaining.append(pos)
+        open_pos = remaining
+        if cash_reserves:
+            cash_reserves = [
+                (release_date, amount)
+                for release_date, amount in cash_reserves
+                if release_date > today and amount > 0
+            ]
+        reserved_cash = sum(amount for _, amount in cash_reserves)
+
+        # 2. Mark-to-market (open positions marked at cost; realistic for options)
+        equity = cash + sum(p.premium for p in open_pos)
+
+        # 2.5 Running DD snapshot for allocation modifiers.
+        running_dd = (1.0 - equity / peak_equity) if peak_equity > 0 else 0.0
+
+        # 3. Open new trades for today's signals
+        open_syms = {p.outcome.symbol for p in open_pos}
+        todays_outcomes = outcomes_by_date.get(today, [])
+        call_pressure = sum(1 for o in todays_outcomes if getattr(o, 'side', 'call') == 'call' and o.symbol not in open_syms)
+        put_pressure = sum(1 for o in todays_outcomes if getattr(o, 'side', 'call') == 'put' and o.symbol not in open_syms)
+
+        def _allocation_base(value: float) -> float:
+            if practical_enabled and practical_capital_ceiling > 0:
+                return min(value, practical_capital_ceiling)
+            return value
+
+        def _premium_cap_remaining(side: str, base_value: float) -> float | None:
+            active = practical_enabled and (gross_premium_cap > 0 or call_premium_cap > 0 or put_premium_cap > 0)
+            if not active:
+                return None
+            total_open = sum(p.premium for p in open_pos)
+            remaining = float('inf')
+            if gross_premium_cap > 0:
+                remaining = min(remaining, base_value * gross_premium_cap - total_open)
+            if side == 'call' and call_premium_cap > 0:
+                side_open = sum(p.premium for p in open_pos if getattr(p.outcome, 'side', 'call') == 'call')
+                remaining = min(remaining, base_value * call_premium_cap - side_open)
+            if side == 'put' and put_premium_cap > 0:
+                side_open = sum(p.premium for p in open_pos if getattr(p.outcome, 'side', 'call') == 'put')
+                remaining = min(remaining, base_value * put_premium_cap - side_open)
+            return max(0.0, remaining)
+
+        def _opportunity_saturation_scale(side: str) -> float:
+            if not practical_enabled:
+                return 1.0
+            ref = opp_sat_call_ref if side == 'call' else opp_sat_put_ref
+            pressure = call_pressure if side == 'call' else put_pressure
+            if ref <= 0 or pressure <= ref:
+                return 1.0
+            scale = (ref / max(1.0, float(pressure))) ** max(0.0, opp_sat_power)
+            return max(opp_sat_floor, min(1.0, scale))
+
+        for outcome in todays_outcomes:
+            if outcome.symbol in open_syms:
+                continue                      # re-entry block
+
+            is_put = getattr(outcome, 'side', 'call') == 'put'
+            call_open = sum(1 for p in open_pos if getattr(p.outcome, 'side', 'call') == 'call')
+            put_open = sum(1 for p in open_pos if getattr(p.outcome, 'side', 'call') == 'put')
+            if (not is_put) and max_call_pos is not None and call_open >= max_call_pos:
+                continue
+            if is_put and max_put_pos is not None and put_open >= max_put_pos:
+                continue
+
+            # Reallocation: if pool capped, try displacement before skipping
+            if len(open_pos) >= max_pos:
+                if not realloc_enabled:
+                    break
+                target_idx = _pick_displacement(open_pos, outcome, today)
+                if target_idx is None:
+                    break
+                target = open_pos[target_idx]
+                target_pnl = _mtm_pnl(target, today)
+                target_proceeds = target.premium * (1.0 + target_pnl)
+                cash += target_proceeds
+                trade_log.append({
+                    'entry_date':  target.outcome.signal_date,
+                    'exit_date':   today,
+                    'symbol':      target.outcome.symbol,
+                    'score':       target.outcome.score,
+                    'tier':        target.outcome.tier,
+                    'sigma':       target.outcome.sigma_daily,
+                    'premium':     target.premium,
+                    'outcome':     'realloc',
+                    'hold_bars':   _td_idx.get(today, 0) - _td_idx.get(target.outcome.signal_date, 0),
+                    'pnl':         target_proceeds - target.premium,
+                    'pnl_pct':     target_pnl,
+                    'stressed':    target.outcome.stressed,
+                    'side':        target.outcome.side,
+                    'dte':         getattr(target.outcome, 'dte', DEFAULT_TOTAL_DTE),
+                    'routed_15dte': getattr(target.outcome, 'routed_15dte', False),
+                    'entry_price': target.outcome.entry_price,
+                    'exit_price':  _close_by_sym_date.get(target.outcome.symbol, {}).get(today,
+                                                                                          target.outcome.exit_price),
+                })
+                open_syms.discard(target.outcome.symbol)
+                open_pos.pop(target_idx)
+                equity = cash + sum(p.premium for p in open_pos)
+
+            reg_mult = (regime_on_or_before(regime_dates, regime_map, today,
+                                            breadth_enabled=_breadth_enabled)
+                        if regime_dates else (50.0 if _breadth_enabled else 1.0))
+            reg_scale = alloc_scale_for(reg_mult, is_put=is_put, params=_alloc_params)
+            alloc_frac = tier_alloc.get(outcome.tier, TIER_ALLOC.get(outcome.tier, 0.0))
+            # H3: DD-soft-band call alloc contraction (calls only)
+            dd_scale = 1.0
+            if (not is_put) and dd_soft_band_hi > dd_soft_band_lo and running_dd > dd_soft_band_lo:
+                if running_dd >= dd_soft_band_hi:
+                    dd_scale = dd_soft_call_floor
+                else:
+                    t = (running_dd - dd_soft_band_lo) / (dd_soft_band_hi - dd_soft_band_lo)
+                    dd_scale = 1.0 - t * (1.0 - dd_soft_call_floor)
+            # SAW Put U-curve: scale put alloc by sector-breadth U-curve
+            saw_scale = saw_put_ucurve_scale(today) if is_put else 1.0
+            sat_scale = _opportunity_saturation_scale('put' if is_put else 'call')
+            # RXDD: VIX-band call-alloc contraction (calls only)
+            rxdd_scale = 1.0
+            if (not is_put) and rxdd_enabled:
+                rxdd_vix_today = value_on_or_before(vix_dates, vix_map, today) if vix_dates else None
+                rxdd_scale = _rxdd_call_scale(running_dd, rxdd_vix_today, rxdd_enabled,
+                                              rxdd_vix_c, rxdd_vix_w, rxdd_depth, rxdd_dd_min)
+            # SVR: semivol_r skew-bridge call-alloc band-pass (calls only). semivol_r is
+            # stamped on the outcome at build time (run_cascade_backtest), so no per-day map.
+            svr_scale = 1.0
+            if (not is_put) and svr_enabled:
+                svr_scale = _svr_call_scale(getattr(outcome, 'semivol_r', None), svr_enabled,
+                                            svr_lo_cut, svr_lo_full, svr_hi_full, svr_hi_cut, svr_floor)
+            # MWDD: McClellan flat-band call-alloc contraction (calls only), DD-gated, VIX-panic-excluded
+            mwdd_scale = 1.0
+            if (not is_put) and mwdd_enabled:
+                mwdd_mcc_today = value_on_or_before(mcc_dates, mcc_map, today) if mcc_dates else None
+                mwdd_vix_today = value_on_or_before(vix_dates, vix_map, today) if vix_dates else None
+                mwdd_scale = _mwdd_call_scale(running_dd, mwdd_mcc_today, mwdd_vix_today, mwdd_enabled,
+                                              mwdd_mcc_c, mwdd_mcc_w, mwdd_depth, mwdd_dd_min, mwdd_vix_panic)
+            # TVDD: TRIN neutral volume-flow-band call-alloc contraction (calls only), DD-gated, VIX-panic-excluded
+            tvdd_scale = 1.0
+            if (not is_put) and tvdd_enabled:
+                tvdd_trin_today = value_on_or_before(trin_dates, trin_map, today) if trin_dates else None
+                tvdd_vix_today = value_on_or_before(vix_dates, vix_map, today) if vix_dates else None
+                tvdd_scale = _tvdd_call_scale(running_dd, tvdd_trin_today, tvdd_vix_today, tvdd_enabled,
+                                              tvdd_trin_c, tvdd_trin_w, tvdd_depth, tvdd_dd_min, tvdd_vix_panic)
+            # BDIV: pre-top breadth-divergence-at-highs call-alloc contraction (calls only;
+            # no DD-gate — leading lever; SPY-near-highs is the structural crash guard)
+            bdiv_scale = 1.0
+            if (not is_put) and bdiv_enabled:
+                bdiv_today = value_on_or_before(bdiv_dates, bdiv_map, today) if bdiv_dates else None
+                bdiv_scale = _bdiv_call_scale(bdiv_today, bdiv_enabled, bdiv_prox_cut, bdiv_prox_full,
+                                              bdiv_gap_c, bdiv_gap_w, bdiv_depth)
+            # SPREAD_TILT: 75-79-band-only high-disagreement call-alloc haircut (calls only).
+            # spread is stamped on the outcome at build time (run_cascade_backtest).
+            spread_tilt_scale = 1.0
+            if (not is_put) and spread_tilt_enabled:
+                spread_tilt_scale = _spread_tilt_call_scale(outcome.score, getattr(outcome, 'spread', None),
+                                                            spread_tilt_enabled, spread_tilt_lo,
+                                                            spread_tilt_hi, spread_tilt_depth)
+            allocation_base = _allocation_base(equity)
+            base_premium = alloc_frac * reg_scale * dd_scale * saw_scale * sat_scale * rxdd_scale * svr_scale * mwdd_scale * tvdd_scale * bdiv_scale * spread_tilt_scale * allocation_base
+            cap_remaining = _premium_cap_remaining('put' if is_put else 'call', allocation_base)
+            if cap_remaining is not None:
+                if cap_remaining <= 0:
+                    continue
+                base_premium = min(base_premium, cap_remaining)
+            reserve_scale = _put_wave_reserve_scale(today) if is_put else 1.0
+            premium = base_premium * reserve_scale
+            required_cash = base_premium if is_put and PUT_WAVE_RESERVE_ENABLED and reserve_scale < 0.999 else premium
+            if cash - reserved_cash < required_cash or premium < 10.0:
+                continue
+
+            cash    -= premium
+            sat_scales.append(sat_scale)
+            if is_put and PUT_WAVE_RESERVE_ENABLED and reserve_scale < 0.999:
+                reserve_amount = max(0.0, base_premium - premium)
+                if reserve_amount >= 10.0:
+                    release_date = outcome.exit_date if outcome.outcome != 'open' else outcome.deadline
+                    cash_reserves.append((release_date, reserve_amount))
+                    reserved_cash += reserve_amount
+            open_pos.append(OpenPosition(outcome=outcome,
+                                         premium=premium,
+                                         entry_eq=equity))
+            open_syms.add(outcome.symbol)
+            equity = cash + sum(p.premium for p in open_pos)
+
+        # 4. Drawdown tracking (cost-basis equity — drives sizing/DD-band, unchanged)
+        if equity > peak_equity:
+            peak_equity = equity
+        dd = (1.0 - equity / peak_equity) if peak_equity > 0 else 0.0
+        if dd > max_dd:
+            max_dd = dd
+
+        # 4b. HONEST marked-to-market drawdown — open positions valued via the validated
+        # option_pnl_pct (delta+theta+vega) model on today's close, NOT cost. Parallel
+        # track only; it does NOT feed sizing/DD-band, so trade selection is identical to
+        # the cost-basis run. This is the true peak-to-trough a holder actually experiences.
+        equity_mtm = cash + sum(p.premium * (1.0 + _mtm_pnl(p, today)) for p in open_pos)
+        if equity_mtm > peak_equity_mtm:
+            peak_equity_mtm = equity_mtm
+        dd_mtm = (1.0 - equity_mtm / peak_equity_mtm) if peak_equity_mtm > 0 else 0.0
+        if dd_mtm > max_dd_mtm:
+            max_dd_mtm = dd_mtm
+        equity_curve_mtm.append((today, equity_mtm))
+
+        equity_curve.append((today, equity))
+        if equity > 0:
+            reserve_pct = reserved_cash / equity
+            reserve_pct_sum += reserve_pct
+            reserve_pct_n += 1
+            max_reserved_cash_pct = max(max_reserved_cash_pct, reserve_pct)
+        end_base = _allocation_base(equity)
+        total_open_premium = sum(p.premium for p in open_pos)
+        call_open_premium = sum(p.premium for p in open_pos if getattr(p.outcome, 'side', 'call') == 'call')
+        put_open_premium = total_open_premium - call_open_premium
+        denom_value = equity if equity > 0 else 1.0
+        denom_base = end_base if end_base > 0 else 1.0
+        open_premium_pcts.append(total_open_premium / denom_value)
+        open_premium_base_pcts.append(total_open_premium / denom_base)
+        call_open_premium_base_pcts.append(call_open_premium / denom_base)
+        put_open_premium_base_pcts.append(put_open_premium / denom_base)
+        call_open_count = sum(1 for p in open_pos if getattr(p.outcome, 'side', 'call') == 'call')
+        put_open_count = len(open_pos) - call_open_count
+        open_position_counts.append(len(open_pos))
+        call_open_position_counts.append(call_open_count)
+        put_open_position_counts.append(put_open_count)
+        if max_pos > 0 and len(open_pos) >= max_pos:
+            pool_full_days += 1
+        if max_call_pos is not None and max_call_pos > 0 and call_open_count >= max_call_pos:
+            call_pool_full_days += 1
+        if max_put_pos is not None and max_put_pos > 0 and put_open_count >= max_put_pos:
+            put_pool_full_days += 1
+
+        # Backfill portfolio_value for all trades (closures + reallocs) logged today.
+        for _i in range(n_day_start, len(trade_log)):
+            trade_log[_i]['portfolio_value'] = equity
+
+    # Remaining open positions — do NOT force-close. Mark at cost (premium paid).
+    # Return them separately so callers can display as open holdings rather than
+    # injecting artificial hard-sell P&L into closed-trade statistics.
+    open_holdings = []
+    for pos in open_pos:
+        open_holdings.append({
+            'entry_date':    pos.outcome.signal_date,
+            'hard_sell_date': pos.outcome.deadline,
+            'symbol':        pos.outcome.symbol,
+            'score':         pos.outcome.score,
+            'tier':          pos.outcome.tier,
+            'sigma':         pos.outcome.sigma_daily,
+            'premium':       pos.premium,
+            'side':          pos.outcome.side,
+            'dte':           getattr(pos.outcome, 'dte', DEFAULT_TOTAL_DTE),
+            'routed_15dte':  getattr(pos.outcome, 'routed_15dte', False),
+            'entry_price':   pos.outcome.entry_price,
+            'current_price': pos.outcome.exit_price,
+            'tp_price':      pos.outcome.tp_price,
+            'sl_price':      pos.outcome.sl_price,
+            'hold_bars':     pos.outcome.hold_bars,
+            'entry_eq':      pos.entry_eq,
+        })
+
+    return {
+        'equity_curve':  equity_curve,
+        'equity_curve_mtm': equity_curve_mtm,
+        'trade_log':     trade_log,
+        'final_equity':  cash + sum(p.premium for p in open_pos),   # mark at cost
+        'max_dd':        max_dd,
+        'max_dd_mtm':    max_dd_mtm,   # honest marked-to-market peak-to-trough (open positions priced, not held at cost)
+        'initial':       initial_capital,
+        'open_holdings': open_holdings,
+        'avg_reserved_cash_pct': reserve_pct_sum / reserve_pct_n * 100 if reserve_pct_n else 0.0,
+        'max_reserved_cash_pct': max_reserved_cash_pct * 100,
+        'avg_open_premium_pct': sum(open_premium_pcts) / len(open_premium_pcts) * 100 if open_premium_pcts else 0.0,
+        'max_open_premium_pct': max(open_premium_pcts) * 100 if open_premium_pcts else 0.0,
+        'avg_open_premium_base_pct': sum(open_premium_base_pcts) / len(open_premium_base_pcts) * 100 if open_premium_base_pcts else 0.0,
+        'max_open_premium_base_pct': max(open_premium_base_pcts) * 100 if open_premium_base_pcts else 0.0,
+        'avg_call_open_premium_base_pct': sum(call_open_premium_base_pcts) / len(call_open_premium_base_pcts) * 100 if call_open_premium_base_pcts else 0.0,
+        'avg_put_open_premium_base_pct': sum(put_open_premium_base_pcts) / len(put_open_premium_base_pcts) * 100 if put_open_premium_base_pcts else 0.0,
+        'avg_open_positions': sum(open_position_counts) / len(open_position_counts) if open_position_counts else 0.0,
+        'avg_call_open_positions': sum(call_open_position_counts) / len(call_open_position_counts) if call_open_position_counts else 0.0,
+        'avg_put_open_positions': sum(put_open_position_counts) / len(put_open_position_counts) if put_open_position_counts else 0.0,
+        'max_open_positions': max(open_position_counts) if open_position_counts else 0,
+        'pool_full_rate': pool_full_days / len(open_position_counts) * 100 if open_position_counts else 0.0,
+        'call_pool_full_rate': call_pool_full_days / len(call_open_position_counts) * 100 if call_open_position_counts else 0.0,
+        'put_pool_full_rate': put_pool_full_days / len(put_open_position_counts) * 100 if put_open_position_counts else 0.0,
+        'max_positions': max_pos,
+        'max_call_positions': max_call_pos,
+        'max_put_positions': max_put_pos,
+        'avg_saturation_scale': sum(sat_scales) / len(sat_scales) if sat_scales else 1.0,
+    }
+
+
+# ---------------------------------------------------------------------------
+# Reporting
+# ---------------------------------------------------------------------------
+def print_report(result: dict, start_date: date, end_date: date, min_score: float):
+    trades   = result['trade_log']
+    initial  = result['initial']
+    terminal = result['final_equity']
+    n_days   = (end_date - start_date).days
+    years    = n_days / 365.25
+    cagr     = (terminal / initial) ** (1.0 / years) - 1.0 if years > 0 else 0.0
+
+    call_trades = [t for t in trades if t.get('side', 'call') == 'call']
+    put_trades  = [t for t in trades if t.get('side') == 'put']
+    n_tp   = sum(1 for t in trades if t['outcome'] == 'tp')
+    n_sl   = sum(1 for t in trades if t['outcome'] == 'sl')
+    n_hard = sum(1 for t in trades if t['outcome'] == 'hard')
+    n_tot  = len(trades)
+
+    print()
+    print("=" * 72)
+    print(" HISTORICAL BACKTEST — Cascade Allocation Strategy")
+    print("=" * 72)
+    print(f"  Signal threshold : score >= {min_score:.0f} (call side only)")
+    print(f"  Period:   {start_date} → {end_date}  ({n_days:,}d  /  {years:.1f}y)")
+    print(f"  Capital:  ${initial:>10,.0f} → ${terminal:>12,.0f}")
+    print(f"  CAGR:     {cagr*100:.1f}%")
+    print(f"  Max DD:   {result['max_dd']*100:.1f}%")
+
+    if n_tot == 0:
+        print("  No trades executed.")
+        return
+
+    print()
+    print(f"  Trades:  {n_tot:,} total  ({len(call_trades):,} calls, {len(put_trades):,} puts)")
+    print(f"    TP:    {n_tp:>5,}  ({n_tp/n_tot*100:.1f}%)")
+    print(f"    SL:    {n_sl:>5,}  ({n_sl/n_tot*100:.1f}%)")
+    print(f"    Hard:  {n_hard:>5,}  ({n_hard/n_tot*100:.1f}%)")
+    if put_trades:
+        p_tp = sum(1 for t in put_trades if t['outcome'] == 'tp')
+        p_sl = sum(1 for t in put_trades if t['outcome'] == 'sl')
+        c_tp = sum(1 for t in call_trades if t['outcome'] == 'tp')
+        c_sl = sum(1 for t in call_trades if t['outcome'] == 'sl')
+        print(f"    Calls: TP={c_tp/len(call_trades)*100:.1f}%  SL={c_sl/len(call_trades)*100:.1f}%")
+        print(f"    Puts:  TP={p_tp/len(put_trades)*100:.1f}%  SL={p_sl/len(put_trades)*100:.1f}%")
+
+    # Break-even context (calm vs stressed regime differ slightly)
+    be_calm = abs(NET_SL_BASE)   / (NET_TP_BASE   + abs(NET_SL_BASE))
+    be_str  = abs(NET_SL_STRESS) / (NET_TP_STRESS + abs(NET_SL_STRESS))
+    observed_tp = n_tp / n_tot
+    n_stress_trades = sum(1 for t in trades if t.get('stressed'))
+    print(f"  Break-even TP rate: calm={be_calm*100:.1f}%  stressed={be_str*100:.1f}%  |  "
+          f"Observed: {observed_tp*100:.1f}%  |  "
+          f"Stressed entries: {n_stress_trades/n_tot*100:.1f}%")
+
+    # By tier
+    print()
+    print(f"  {'Tier':<8}  {'Trades':>6}  {'TP%':>6}  {'SL%':>6}  "
+          f"{'Alloc':>6}  {'Avg hold':>9}")
+    print("  " + "-" * 52)
+    for tier in TIER_ALLOC:
+        tt = [t for t in trades if t['tier'] == tier]
+        n  = len(tt)
+        if n == 0:
+            continue
+        tp_r = sum(1 for t in tt if t['outcome'] == 'tp') / n
+        sl_r = sum(1 for t in tt if t['outcome'] == 'sl') / n
+        avg_hold = sum(t['hold_bars'] for t in tt) / n
+        print(f"  {tier:<8}  {n:>6,}  {tp_r*100:>5.1f}%  {sl_r*100:>5.1f}%  "
+              f"{TIER_ALLOC[tier]*100:>5.0f}%  {avg_hold:>7.1f}d")
+
+    # By year
+    print()
+    print(f"  {'Year':<6}  {'Trades':>6}  {'TP%':>6}  {'Year-end equity':>16}")
+    print("  " + "-" * 42)
+    eq_by_date = dict(result['equity_curve'])
+    years_seen = sorted({t['exit_date'].year for t in trades})
+    prev_eq    = initial
+    for yr in years_seen:
+        yr_trades = [t for t in trades if t['exit_date'].year == yr]
+        n_yr      = len(yr_trades)
+        tp_yr     = sum(1 for t in yr_trades if t['outcome'] == 'tp')
+        tp_rate   = tp_yr / n_yr if n_yr > 0 else 0.0
+        # Year-end equity: last equity_curve entry for this year
+        yr_eq = next(
+            (eq for d, eq in reversed(result['equity_curve']) if d.year == yr),
+            prev_eq
+        )
+        print(f"  {yr:<6}  {n_yr:>6,}  {tp_rate*100:>5.1f}%  ${yr_eq:>15,.0f}")
+        prev_eq = yr_eq
+
+
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
+def main():
+    ap = argparse.ArgumentParser(
+        description='Deterministic historical backtest — cascade allocation')
+    ap.add_argument('--capital',   type=float, default=INITIAL_CAPITAL,
+                    help='Starting capital (default $50,000)')
+    ap.add_argument('--version',   type=int,   default=14,
+                    help='AlgorithmVersion id (default 14)')
+    ap.add_argument('--min-score', type=float, default=70.0,
+                    help='Minimum score threshold (default 70)')
+    ap.add_argument('--from',      dest='from_date', default=None,
+                    help='Override start date YYYY-MM-DD (must be >= 2016-01-01)')
+    ap.add_argument('--to',        dest='to_date',   default=None,
+                    help='Override end date YYYY-MM-DD (inclusive)')
+    args = ap.parse_args()
+
+    from_date = None
+    if args.from_date:
+        from_date = date.fromisoformat(args.from_date)
+        if from_date < MIN_DATE:
+            print(f"Warning: --from clamped to {MIN_DATE} (data quality barrier)")
+            from_date = MIN_DATE
+
+    to_date = None
+    if args.to_date:
+        to_date = date.fromisoformat(args.to_date)
+
+    print("Loading signals from database...")
+    result = run_cascade_backtest(args.version, min_score=args.min_score,
+                                  from_date=from_date, to_date=to_date,
+                                  initial=args.capital, verbose=True)
+    if not result:
+        print("No qualifying signals found.")
+        return
+
+    print_report(result, result['start_date'], result['end_date'], args.min_score)
+
+
+def compute_temporal_stats(trade_log: list, equity_curve: list, initial: float,
+                           vacuum_month_sim: dict | None = None) -> dict:
+    """Year-by-year, month-by-month, and cross-year monthly-average breakdown.
+
+    Single pass over trade_log buckets everything into year_trades and
+    month_trades simultaneously.  monthly_avg aggregates each calendar month
+    (1-12) across all years — used as the bottom summary row in the heatmap.
+    """
+    if not trade_log:
+        return {'yearly': [], 'monthly': [], 'monthly_avg': []}
+
+    # ── Single pass: bucket by year AND (year, month) at the same time ──────
+    year_trades  = defaultdict(list)
+    month_trades = defaultdict(list)   # (year, month) -> [trades]
+
+    for t in trade_log:
+        d = t['exit_date']
+        year_trades[d.year].append(t)
+        month_trades[(d.year, d.month)].append(t)
+
+    # Build an equity lookup by (year, month) — one scan of equity_curve
+    eq_by_year_month = {}
+    for d, eq in equity_curve:
+        eq_by_year_month[(d.year, d.month)] = eq   # last entry per (yr, mo) wins
+
+    eq_by_year = {}
+    for (yr, _mo), eq in eq_by_year_month.items():
+        # Keep the latest month's equity as year-end equity
+        if yr not in eq_by_year or _mo > max(
+            m for (y, m) in eq_by_year_month if y == yr
+        ):
+            eq_by_year[yr] = eq
+
+    # Simpler: one more pass to get year-end equity correctly
+    eq_by_year = {}
+    for d, eq in equity_curve:
+        eq_by_year[d.year] = eq   # last entry per year wins (equity_curve is sorted by date)
+
+    def _rates(tlist):
+        n      = len(tlist)
+        n_tp   = sum(1 for t in tlist if t['outcome'] == 'tp')
+        n_sl   = sum(1 for t in tlist if t['outcome'] == 'sl')
+        n_hard = sum(1 for t in tlist if t['outcome'] == 'hard')
+        return n, n_tp, n_sl, n_hard
+
+    # ── Year-by-year ─────────────────────────────────────────────────────────
+    yearly  = []
+    prev_eq = initial
+    for yr in sorted(year_trades):
+        yr_t  = year_trades[yr]
+        calls = [t for t in yr_t if t.get('side', 'call') == 'call']
+        puts  = [t for t in yr_t if t.get('side') == 'put']
+        n, n_tp, n_sl, n_hard = _rates(yr_t)
+
+        yr_eq  = eq_by_year.get(yr, prev_eq)
+        yr_ret = round((yr_eq / prev_eq - 1.0) * 100, 1) if prev_eq > 0 else 0.0
+
+        c_n  = len(calls);  c_tp = sum(1 for t in calls if t['outcome'] == 'tp')
+        p_n  = len(puts);   p_tp = sum(1 for t in puts  if t['outcome'] == 'tp')
+
+        yearly.append({
+            'year':         yr,
+            'n_trades':     n,
+            'tp_count':     n_tp,
+            'sl_count':     n_sl,
+            'hard_count':   n_hard,
+            'tp_rate':      round(n_tp / n * 100, 1) if n else None,
+            'call_n':       c_n,
+            'call_tp_rate': round(c_tp / c_n * 100, 1) if c_n else None,
+            'put_n':        p_n,
+            'put_tp_rate':  round(p_tp / p_n * 100, 1) if p_n else None,
+            'equity_end':   round(yr_eq, 2),
+            'return_pct':   yr_ret,
+        })
+        prev_eq = yr_eq
+
+    # ── Month-by-month ───────────────────────────────────────────────────────
+    monthly = []
+    # Also accumulate per-calendar-month buckets for the cross-year average
+    cal_month_trades = defaultdict(list)   # 1-12 -> [all trades for that month across years]
+
+    for (yr, mo) in sorted(month_trades):
+        mt    = month_trades[(yr, mo)]
+        calls = [t for t in mt if t.get('side', 'call') == 'call']
+        puts  = [t for t in mt if t.get('side') == 'put']
+        n, n_tp, _, _ = _rates(mt)
+        c_n  = len(calls);  c_tp = sum(1 for t in calls if t['outcome'] == 'tp')
+        p_n  = len(puts);   p_tp = sum(1 for t in puts  if t['outcome'] == 'tp')
+        mo_eq = eq_by_year_month.get((yr, mo))
+        mo_ret = None
+        if vacuum_month_sim is not None:
+            mo_ret = vacuum_month_sim.get((yr, mo))
+        elif mo_eq is not None and initial and initial > 0:
+            mo_ret = round((mo_eq / initial - 1.0) * 100, 1)
+
+        monthly.append({
+            'year':         yr,
+            'month':        mo,
+            'n_trades':     n,
+            'tp_count':     n_tp,
+            'tp_rate':      round(n_tp / n * 100, 1) if n else None,
+            'call_n':       c_n,
+            'call_tp_rate': round(c_tp / c_n * 100, 1) if c_n else None,
+            'put_n':        p_n,
+            'put_tp_rate':  round(p_tp / p_n * 100, 1) if p_n else None,
+            'equity_end':   round(mo_eq, 2) if mo_eq is not None else None,
+            'return_pct':   mo_ret,
+        })
+        cal_month_trades[mo].extend(mt)
+
+    # ── Cross-year monthly average (one row per calendar month) ──────────────
+    monthly_avg = []
+    for mo in range(1, 13):
+        mt = cal_month_trades[mo]
+        if not mt:
+            monthly_avg.append({'month': mo, 'n_trades': 0, 'years_sampled': 0,
+                                 'tp_rate': None, 'call_tp_rate': None, 'put_tp_rate': None})
+            continue
+        calls = [t for t in mt if t.get('side', 'call') == 'call']
+        puts  = [t for t in mt if t.get('side') == 'put']
+        n, n_tp, _, _ = _rates(mt)
+        c_n  = len(calls);  c_tp = sum(1 for t in calls if t['outcome'] == 'tp')
+        p_n  = len(puts);   p_tp = sum(1 for t in puts  if t['outcome'] == 'tp')
+        years_sampled = len({t['exit_date'].year for t in mt})
+        monthly_avg.append({
+            'month':         mo,
+            'n_trades':      n,
+            'years_sampled': years_sampled,
+            'tp_rate':       round(n_tp / n * 100, 1) if n else None,
+            'call_tp_rate':  round(c_tp / c_n * 100, 1) if c_n else None,
+            'put_tp_rate':   round(p_tp / p_n * 100, 1) if p_n else None,
+        })
+
+    return {'yearly': yearly, 'monthly': monthly, 'monthly_avg': monthly_avg}
+
+
+# ---------------------------------------------------------------------------
+# Shared backtest pipeline  (called by main() AND compute_and_store_temporal)
+# ---------------------------------------------------------------------------
+import threading as _knob_threading
+import contextlib as _knob_contextlib
+_KNOB_LOCK = _knob_threading.Lock()
+
+# Per-request portfolio-knob overrides: cfg_key -> this-module global name. The
+# /api/backtest/run endpoint puts an EXPLICITLY-overridden knob into cfg; the
+# wrapper below snapshots+sets the module global from it for the run, then restores
+# (under a lock for the threaded server). No override in cfg = the module constant
+# (= current strategy_config / profile) is used unchanged, so default runs are
+# bit-identical. Keep in sync with portfolio_param_manifest.ENGINE_GLOBAL_KEYS
+# (CI: tests/test_portfolio_param_manifest.py::test_engine_global_keys_in_sync).
+_CFG_KNOB_GLOBALS = {
+    'breadth_threshold': 'BREADTH_THRESHOLD',
+    'breadth_alloc_enabled': 'BREADTH_ALLOC_ENABLED',
+    'f3f_call_thresh': 'F3F_CALL_THRESH', 'f3f_call_floor': 'F3F_CALL_FLOOR', 'f3f_call_low': 'F3F_CALL_LOW',
+    'f3f_put_thresh': 'F3F_PUT_THRESH', 'f3f_put_floor': 'F3F_PUT_FLOOR', 'f3f_put_high': 'F3F_PUT_HIGH',
+    'alloc_scale_floor': 'ALLOC_SCALE_FLOOR', 'alloc_scale_ceil': 'ALLOC_SCALE_CEIL',
+    'regime_slope_up': 'REGIME_SLOPE_UP', 'regime_slope_down': 'REGIME_SLOPE_DOWN',
+    'ct_promote': 'CT_PROMOTE', 'ct_put_trend_min': 'CT_PUT_TREND_MIN', 'ct_call_trend_max': 'CT_CALL_TREND_MAX',
+    'ctsl_enabled': 'CTSL_ENABLED', 'ctsl_call_trend_max': 'CTSL_CALL_TREND_MAX', 'ctsl_call_target': 'CTSL_CALL_TARGET',
+    'ctsl_call_alpha': 'CTSL_CALL_ALPHA', 'ctsl_call_trend_power': 'CTSL_CALL_TREND_POWER', 'ctsl_call_tier_floor': 'CTSL_CALL_TIER_FLOOR',
+    'ctsl_call_score_norm_weight': 'CTSL_CALL_SCORE_NORM_WEIGHT', 'ctsl_call_score_norm_power': 'CTSL_CALL_SCORE_NORM_POWER',
+    'ctsl_put_trend_min': 'CTSL_PUT_TREND_MIN', 'ctsl_put_target': 'CTSL_PUT_TARGET', 'ctsl_put_alpha': 'CTSL_PUT_ALPHA',
+    'ctsl_put_trend_power': 'CTSL_PUT_TREND_POWER', 'ctsl_put_tier_ceiling': 'CTSL_PUT_TIER_CEILING',
+    'ctsl_put_score_norm_weight': 'CTSL_PUT_SCORE_NORM_WEIGHT', 'ctsl_put_score_norm_power': 'CTSL_PUT_SCORE_NORM_POWER',
+    'saw_put_ucurve_enabled': 'SAW_PUT_UCURVE_ENABLED', 'saw_put_ucurve_shape': 'SAW_PUT_UCURVE_SHAPE',
+    'saw_put_ucurve_midpoint': 'SAW_PUT_UCURVE_MIDPOINT', 'saw_put_ucurve_halfwidth': 'SAW_PUT_UCURVE_HALFWIDTH',
+    'saw_put_ucurve_floor': 'SAW_PUT_UCURVE_FLOOR', 'saw_put_ucurve_ceil': 'SAW_PUT_UCURVE_CEIL',
+    'saw_put_ucurve_power': 'SAW_PUT_UCURVE_POWER', 'saw_put_ucurve_k': 'SAW_PUT_UCURVE_K',
+    'dte_router_enabled': 'DTE_ROUTER_ENABLED', 'dte_router_score_min': 'DTE_ROUTER_SCORE_MIN', 'dte_router_trend_lt': 'DTE_ROUTER_TREND_LT',
+    'dte_router_vix_min': 'DTE_ROUTER_VIX_MIN', 'dte_router_vix_max': 'DTE_ROUTER_VIX_MAX', 'dte_router_day_cap': 'DTE_ROUTER_DAY_CAP',
+    'dte_router_alloc_score_cap': 'DTE_ROUTER_ALLOC_SCORE_CAP',
+    'dead_hold_enabled': 'DEAD_HOLD_ENABLED', 'dead_hold_trigger_pnl': 'DEAD_HOLD_TRIGGER_PNL', 'dead_hold_popout_pnl': 'DEAD_HOLD_POPOUT_PNL',
+}
+_KNOB_BOOL_GLOBALS = {'BREADTH_ALLOC_ENABLED', 'CT_PROMOTE', 'CTSL_ENABLED', 'SAW_PUT_UCURVE_ENABLED', 'DTE_ROUTER_ENABLED', 'DEAD_HOLD_ENABLED'}
+
+
+@_knob_contextlib.contextmanager
+def _cfg_knob_overrides(cfg):
+    """Snapshot+set the mapped module globals from cfg for the run, then restore.
+    Lock-guarded (threaded server). No-op when cfg is empty or has no mapped keys."""
+    if not cfg:
+        yield
+        return
+    g = globals()
+    saved = {}
+    with _KNOB_LOCK:
+        try:
+            for ck, gname in _CFG_KNOB_GLOBALS.items():
+                if ck in cfg and cfg[ck] is not None:
+                    v = cfg[ck]
+                    if gname in _KNOB_BOOL_GLOBALS and isinstance(v, str):
+                        v = v.lower() in ('1', 'true', 'yes')
+                    saved[gname] = g[gname]
+                    g[gname] = v
+            yield
+        finally:
+            for gname, val in saved.items():
+                g[gname] = val
+
+
+def run_cascade_backtest(*args, **kwargs):
+    """Apply per-request portfolio-knob overrides (module-global snapshot/restore
+    under a lock — so every manifest knob is editable per run), then delegate to
+    the impl. No override in cfg = identical to the strategy_config/profile defaults."""
+    with _cfg_knob_overrides(kwargs.get('cfg')):
+        return _run_cascade_backtest_impl(*args, **kwargs)
+
+
+def _run_cascade_backtest_impl(version_id: int,
+                         min_score: float = 70.0,
+                         max_put_score: float = None,
+                         from_date=None,
+                         to_date=None,
+                         initial: float = INITIAL_CAPITAL,
+                         verbose: bool = True,
+                         calls_only: bool = False,
+                         flagged_only: bool = False,
+                         cfg: dict | None = None) -> dict:
+    """Single-pass full cascade backtest pipeline.
+
+    Loads signals, price history, breadth/regime maps, computes trade outcomes,
+    runs the portfolio simulation, and returns the complete result dict
+    (equity_curve, trade_log, final_equity, max_dd, initial).
+
+    Shared by main() (CLI) and compute_and_store_temporal() so the heavy work
+    is never duplicated across callers.
+    """
+    def _log(*args, **kwargs):
+        if verbose:
+            print(*args, **kwargs)
+
+    raw     = load_signals(version_id, min_score, from_date=from_date, to_date=to_date, flagged_only=flagged_only, cfg=cfg)
+    put_raw = [] if calls_only else load_put_signals(version_id, max_put_score, from_date=from_date, to_date=to_date, flagged_only=flagged_only)
+
+    if not raw and not put_raw:
+        return {}
+
+    symbols    = {s.symbol for s in raw} | {s.symbol for s in put_raw}
+    all_sigs   = raw + put_raw
+    start_date = min(s.date for s in all_sigs)
+    end_date   = max(s.date for s in all_sigs)
+
+    _log(f"  {len(raw):,} call signals, {len(put_raw):,} put signals "
+         f"across {len(symbols):,} symbols")
+    _log(f"  Window: {start_date} → {end_date}")
+
+    _log("Loading price history...")
+    ph = load_price_history(symbols, start_date)
+
+    _log("Loading market breadth & regime...")
+    b_dates, b_map = load_breadth_map(start_date)
+    _breadth_alloc = (cfg or {}).get('breadth_alloc_enabled', BREADTH_ALLOC_ENABLED)
+    r_dates, r_map = load_regime_map(start_date, breadth_enabled=_breadth_alloc)
+    _log(f"  {len(b_map):,} breadth dates, {len(r_map):,} alloc-map dates "
+         f"({'F3f breadth' if _breadth_alloc else 'legacy regime_mult'})")
+    if DTE_ROUTER_ENABLED and DTE_ROUTER_TARGET_DTE == 15:
+        dte_router_dates, dte_router_vix_map, dte_router_regime_map = load_router_market_maps(start_date, end_date)
+        router_market_desc = (
+            f"VIX>={DTE_ROUTER_VIX_MIN:.0f}, regime {DTE_ROUTER_REGIME_MIN:.0f}-{DTE_ROUTER_REGIME_MAX:.0f}"
+            if DTE_ROUTER_VIX_MIN > 0.0 or DTE_ROUTER_REGIME_MIN > 0.0 or DTE_ROUTER_REGIME_MAX < 100.0
+            else "market filters off"
+        )
+        router_alloc_desc = str(DTE_ROUTER_ALLOC_SCORE_CAP) if DTE_ROUTER_ALLOC_SCORE_CAP > 0 else "off"
+        _log(
+            f"  DTE router map: {len(dte_router_dates):,} dates | "
+            f"score>={DTE_ROUTER_SCORE_MIN}, trend<{DTE_ROUTER_TREND_LT:.0f}, "
+            f"{router_market_desc}, daycap={DTE_ROUTER_DAY_CAP}, "
+            f"alloc_score_cap={router_alloc_desc}"
+        )
+    else:
+        dte_router_dates, dte_router_vix_map, dte_router_regime_map = [], {}, {}
+
+    # RXDD VIX map — load when enabled (independent of the DTE router).
+    rxdd_vix_dates, rxdd_vix_map = [], {}
+    _rxdd_on = (cfg or {}).get('rxdd_enabled', RXDD_ENABLED)
+    if isinstance(_rxdd_on, str):
+        _rxdd_on = _rxdd_on.lower() in ('1', 'true', 'yes')
+    if _rxdd_on:
+        try:
+            rxdd_vix_dates, rxdd_vix_map, _ = load_router_market_maps(start_date, end_date)
+        except Exception as _rxdd_e:
+            _log(f"  [RXDD] vix map load failed ({_rxdd_e}); RXDD inactive")
+            rxdd_vix_dates, rxdd_vix_map = [], {}
+    # MWDD McClellan map — load when enabled.
+    mwdd_mcc_dates, mwdd_mcc_map = [], {}
+    _mwdd_on = (cfg or {}).get('mwdd_enabled', MWDD_ENABLED)
+    if isinstance(_mwdd_on, str):
+        _mwdd_on = _mwdd_on.lower() in ('1', 'true', 'yes')
+    if _mwdd_on:
+        try:
+            mwdd_mcc_dates, mwdd_mcc_map = load_mcclellan_map(start_date)
+        except Exception as _mwdd_e:
+            _log(f"  [MWDD] mcclellan map load failed ({_mwdd_e}); MWDD inactive")
+            mwdd_mcc_dates, mwdd_mcc_map = [], {}
+
+    # TVDD TRIN map — load when enabled.
+    tvdd_trin_dates, tvdd_trin_map = [], {}
+    _tvdd_on = (cfg or {}).get('tvdd_enabled', TVDD_ENABLED)
+    if isinstance(_tvdd_on, str):
+        _tvdd_on = _tvdd_on.lower() in ('1', 'true', 'yes')
+    if _tvdd_on:
+        try:
+            tvdd_trin_dates, tvdd_trin_map = load_trin_map(start_date)
+        except Exception as _tvdd_e:
+            _log(f"  [TVDD] trin map load failed ({_tvdd_e}); TVDD inactive")
+            tvdd_trin_dates, tvdd_trin_map = [], {}
+
+    # BDIV divergence map — load when enabled.
+    bdiv_dates, bdiv_map = [], {}
+    _bdiv_on = (cfg or {}).get('bdiv_enabled', BDIV_ENABLED)
+    if isinstance(_bdiv_on, str):
+        _bdiv_on = _bdiv_on.lower() in ('1', 'true', 'yes')
+    if _bdiv_on:
+        try:
+            bdiv_dates, bdiv_map = load_bdiv_map(start_date)
+        except Exception as _bdiv_e:
+            _log(f"  [BDIV] divergence map load failed ({_bdiv_e}); BDIV inactive")
+            bdiv_dates, bdiv_map = [], {}
+
+    # Earnings effective-date map for span-detection + vega sampling on
+    # earnings-spanning trades. Built once and threaded through cfg so each
+    # compute_outcome call is O(1) (already-sorted per-symbol list).
+    cfg = dict(cfg or {})
+    if 'ern_map' not in cfg:
+        from database.models.core import EarningsDate
+        from iv_crush_model import compute_effective_date
+        ed_rows = list(EarningsDate
+                       .select(EarningsDate.symbol, EarningsDate.date, EarningsDate.call_time)
+                       .where((EarningsDate.symbol.in_(list(symbols)))
+                              & (EarningsDate.date >= start_date - timedelta(days=10))
+                              & (EarningsDate.date <= end_date + timedelta(days=HOLD_CALENDAR_DAYS + 10)))
+                       .order_by(EarningsDate.symbol, EarningsDate.date)
+                       .tuples())
+        ern_map: dict = defaultdict(list)
+        for sym, d, ct in ed_rows:
+            ern_map[sym].append(compute_effective_date(d, ct))
+        cfg['ern_map'] = dict(ern_map)
+        _log(f"  Earnings effective dates: {len(cfg['ern_map']):,} symbols, {len(ed_rows):,} events")
+
+    _log("Computing trade outcomes...")
+    outcomes_by_date: dict = defaultdict(list)
+    n_skipped = 0;  n_stressed = 0;  n_put_outcomes = 0
+    n_routed_decisions = 0;  n_routed_outcomes = 0
+    routed_by_date: dict = defaultdict(int)
+    _svr_sym_cache: dict = {}   # symbol -> (closes_list, {date: idx}) for SVR stamping
+
+    for sig in raw:
+        rows     = ph.get(sig.symbol, [])
+        stressed = is_stressed(b_dates, b_map, sig.date)
+        trend    = float(sig.trend) if sig.trend is not None else None
+        routed_15dte = _dte_router_call_eligible(
+            sig,
+            dte_router_dates,
+            dte_router_vix_map,
+            dte_router_regime_map,
+            routed_by_date[sig.date],
+        )
+        outcome_cfg = _dte_router_15dte_call_cfg(cfg) if routed_15dte else cfg
+        score_for_alloc = float(sig.overall)
+        if routed_15dte and DTE_ROUTER_ALLOC_SCORE_CAP > 0:
+            score_for_alloc = min(score_for_alloc, float(DTE_ROUTER_ALLOC_SCORE_CAP))
+        outcome  = compute_outcome(sig.symbol, sig.date, score_for_alloc,
+                                   rows, stressed, trend=trend, cfg=outcome_cfg)
+        if outcome is None:
+            n_skipped += 1
+            continue
+        # SVR: stamp per-signal semivol_r (calls only; skew-bridge entry filter).
+        # Cache (closes, date->idx) per symbol so repeat signals don't rebuild.
+        if outcome.side == 'call':
+            _svc = _svr_sym_cache.get(sig.symbol)
+            if _svc is None:
+                _svc = ([float(r.close) for r in rows], {r.date: i for i, r in enumerate(rows)})
+                _svr_sym_cache[sig.symbol] = _svc
+            _si = _svc[1].get(sig.date)
+            if _si is not None:
+                outcome.semivol_r = compute_semivol_r(_svc[0], _si)
+            # SPREAD_TILT: stamp per-signal component disagreement (75-79-band haircut).
+            if SPREAD_TILT_ENABLED:
+                outcome.spread = _spread_tilt_load().get((sig.symbol, sig.date))
+        if routed_15dte:
+            n_routed_decisions += 1
+            n_routed_outcomes += 1
+            routed_by_date[sig.date] += 1
+            outcome.dte = DTE_ROUTER_TARGET_DTE
+            outcome.premium_mult = _sc.STRATEGY_15DTE.PREMIUM_MULT
+            outcome.delta = _sc.STRATEGY_15DTE.option.DELTA
+            outcome.routed_15dte = True
+        if stressed:
+            n_stressed += 1
+        outcomes_by_date[sig.date].append(outcome)
+
+    for sig in put_raw:
+        rows    = ph.get(sig.symbol, [])
+        trend   = float(sig.trend) if sig.trend is not None else None
+        outcome = compute_put_outcome(sig.symbol, sig.date, float(sig.overall),
+                                      rows, trend=trend, cfg=cfg)
+        if outcome is None:
+            n_skipped += 1
+            continue
+        n_put_outcomes += 1
+        outcomes_by_date[sig.date].append(outcome)
+
+    def _sort_key(o):
+        # ct_priority below is the deterministic mirror of monte_carlo.py's primary/
+        # overflow CT promotion: CT-tagged calls (<95) / puts (>15) fill AHEAD of
+        # higher-score plain signals (CT_PROMOTE). Do NOT drop it for a plain score
+        # sort — that silently removes CT promotion. The 75+ > 70-74 ordering is
+        # emergent from score_key (no separate overflow pass needed — sort is stable).
+        side_order  = 0 if o.side == 'call' else 1
+        ct_priority = 0 if (o.side == 'call' and o.tier == CT_CALL_TIER and o.score < 95) \
+                          or (o.side == 'put'  and o.tier == CT_PUT_TIER  and o.score > 15) \
+                       else 1
+        score_key   = -o.score if o.side == 'call' else o.score
+        return (side_order, ct_priority, score_key, o.symbol)
+
+    for d in outcomes_by_date:
+        outcomes_by_date[d].sort(key=_sort_key)
+
+    total_outcomes   = sum(len(v) for v in outcomes_by_date.values())
+    n_call_outcomes  = total_outcomes - n_put_outcomes
+    stress_pct       = (n_stressed / n_call_outcomes * 100) if n_call_outcomes else 0.0
+    _log(f"  {total_outcomes:,} outcomes  ({n_call_outcomes:,} calls, {n_put_outcomes:,} puts)  "
+         f"| {n_skipped:,} skipped  | stressed calls: {n_stressed:,} ({stress_pct:.1f}%)")
+    if DTE_ROUTER_ENABLED and DTE_ROUTER_TARGET_DTE == 15:
+        _log(f"  DTE router: {n_routed_outcomes:,} routed 15DTE call outcomes")
+
+    hold_days  = (cfg or {}).get('hold_calendar_days', HOLD_CALENDAR_DAYS)
+    settle_end = end_date + timedelta(days=hold_days + 10)
+    if to_date is not None:
+        settle_end = min(settle_end, to_date)
+    all_dates  = sorted({
+        r.date
+        for rows in ph.values()
+        for r in rows
+        if start_date <= r.date <= settle_end
+    })
+
+    _log(f"Running backtest over {len(all_dates):,} trading days...")
+    result = run_backtest(outcomes_by_date, all_dates, initial,
+                          regime_dates=r_dates, regime_map=r_map, cfg=cfg, ph=ph,
+                          vix_dates=rxdd_vix_dates, vix_map=rxdd_vix_map,
+                          mcc_dates=mwdd_mcc_dates, mcc_map=mwdd_mcc_map,
+                          trin_dates=tvdd_trin_dates, trin_map=tvdd_trin_map,
+                          bdiv_dates=bdiv_dates, bdiv_map=bdiv_map)
+    result['dte_router_routed_decisions'] = n_routed_decisions
+    result['dte_router_routed_outcomes'] = n_routed_outcomes
+    result['start_date']      = start_date
+    result['end_date']        = end_date
+    result['min_score']       = min_score
+    result['outcomes_by_date'] = outcomes_by_date
+    result['all_dates']       = all_dates
+    result['regime_dates']    = r_dates
+    result['regime_map']      = r_map
+    result['vix_dates']       = rxdd_vix_dates
+    result['vix_map']         = rxdd_vix_map
+    result['mcc_dates']       = mwdd_mcc_dates
+    result['mcc_map']         = mwdd_mcc_map
+    result['trin_dates']      = tvdd_trin_dates
+    result['trin_map']        = tvdd_trin_map
+    return result
+
+
+def compute_and_store_temporal(version=None, initial: float = 50_000.0,
+                                dte_strategy: str = '30',
+                                portfolio_profile: str = 'sentinel') -> dict:
+    """Run the full cascade backtest (single pass) and persist temporal stats.
+
+    Called by `trader assess --force`. dte_strategy='30' (default) writes
+    BacktestTemporalStats with the 30 DTE H5 strategy. dte_strategy='15' writes
+    a separate row using the 15 DTE C1 strategy from monte_carlo_15dte.py.
+    Returns the stored temporal dict.
+    """
+    import json as _json
+    import portfolio_profiles
+    from database.models.core import BacktestTemporalStats, AlgorithmVersion
+
+    if version is None:
+        version = AlgorithmVersion.get_active_scores_version()
+
+    cfg, profile = portfolio_profiles.apply_profile_to_config(
+        {}, portfolio_profile, root=Path(__file__).resolve().parent
+    )
+    profile_key = profile['key']
+
+    result = run_cascade_backtest(version.id, min_score=70.0, initial=initial,
+                                  verbose=False, cfg=cfg)
+    if not result:
+        return {}
+
+    trade_log    = result['trade_log']
+    equity_curve = result['equity_curve']
+    final_eq     = equity_curve[-1][1] if equity_curve else initial
+    max_dd_pct   = result['max_dd'] * 100
+
+    # ── Per-month vacuum $50k simulation ─────────────────────────────────────
+    # Each month run in isolation from a fresh $50k start, through the cascade
+    # allocator with the same regime map. Return is the profit margin of that
+    # month's signals standalone.
+    outcomes_by_date = result.get('outcomes_by_date') or {}
+    all_dates        = result.get('all_dates') or []
+    r_dates          = result.get('regime_dates') or []
+    r_map            = result.get('regime_map') or {}
+
+    VACUUM_START = 50_000.0
+    vacuum_month_sim: dict = {}
+    months_present = sorted({(t['exit_date'].year, t['exit_date'].month)
+                             for t in trade_log})
+    for (yr, mo) in months_present:
+        month_start = date(yr, mo, 1)
+        if mo == 12:
+            month_end = date(yr, 12, 31)
+        else:
+            month_end = date(yr, mo + 1, 1) - timedelta(days=1)
+        settle_end = month_end + timedelta(days=HOLD_CALENDAR_DAYS + 10)
+
+        mo_outs = {d: outs for d, outs in outcomes_by_date.items()
+                   if month_start <= d <= month_end}
+        if not mo_outs:
+            continue
+        mo_days = [d for d in all_dates if month_start <= d <= settle_end]
+        if not mo_days:
+            continue
+
+        # Per-month vacuum sims run without RXDD: single-month fresh-$50k starts
+        # rarely reach the RXDD_DD_MIN drawdown gate, so the effect is negligible;
+        # the main temporal backtest above (run_cascade_backtest) already applies it.
+        vac = run_backtest(mo_outs, mo_days, VACUUM_START,
+                           regime_dates=r_dates, regime_map=r_map, cfg=cfg)
+        vac_eq = vac['equity_curve'][-1][1] if vac['equity_curve'] else VACUUM_START
+        vacuum_month_sim[(yr, mo)] = round((vac_eq / VACUUM_START - 1.0) * 100, 1)
+
+    temporal = compute_temporal_stats(trade_log, equity_curve, initial,
+                                      vacuum_month_sim=vacuum_month_sim)
+
+    n_call = sum(1 for t in trade_log if t.get('side', 'call') == 'call')
+    n_put  = sum(1 for t in trade_log if t.get('side') == 'put')
+    summary = {
+        'initial':          initial,
+        'final_equity':     round(final_eq, 2),
+        'total_return_pct': round((final_eq / initial - 1.0) * 100, 2) if initial else 0.0,
+        'max_dd':           round(max_dd_pct, 1),
+        'n_trades':         len(trade_log),
+        'n_call_trades':    n_call,
+        'n_put_trades':     n_put,
+        'portfolio_profile': profile_key,
+        'portfolio_profile_name': profile.get('name'),
+        'portfolio_profile_version': profile.get('version'),
+    }
+
+    BacktestTemporalStats.ensure_schema()
+    BacktestTemporalStats.delete().where(
+        BacktestTemporalStats.version == version,
+        BacktestTemporalStats.dte_strategy == dte_strategy,
+        BacktestTemporalStats.portfolio_profile == profile_key,
+    ).execute()
+    BacktestTemporalStats.create(
+        version          = version,
+        initial_capital  = initial,
+        summary_json     = _json.dumps(summary),
+        yearly_json      = _json.dumps(temporal['yearly']),
+        monthly_json     = _json.dumps(temporal['monthly']),
+        monthly_avg_json = _json.dumps(temporal['monthly_avg']),
+        dte_strategy     = dte_strategy,
+        portfolio_profile = profile_key,
+    )
+
+    return {**temporal, 'summary': summary, 'portfolio_profile': profile}
+
+
+if __name__ == '__main__':
+    main()

@@ -1,0 +1,174 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-05-04T20:13:28",
+    "git_commit": "e77714f",
+    "git_message": "v35 scoring: EARN_BOOST recalibration on v34 pre-boost scores",
+    "id": 35,
+    "label": "v35",
+    "notes": null
+  },
+  "captured_at": "2026-05-13T16:10:06+00:00",
+  "classification": {
+    "category": "scoring_algorithm",
+    "reason": "Commit message names score-stage or score-context behavior.",
+    "scoring_algorithm_snapshot": true
+  },
+  "files": {
+    "portfolio_sources": [
+      {
+        "bytes": 23766,
+        "path": "strategy_config.py",
+        "sha256": "507a0a946df1031d6d57e45e52b60090ef0da9a59b5005249e8bcd046a29fef1",
+        "source": "strategy_config.py"
+      },
+      {
+        "missing": true,
+        "source": "mechanism_registry.py"
+      },
+      {
+        "bytes": 95253,
+        "path": "monte_carlo.py",
+        "sha256": "273fd8d063823889e376ed77d8b022d06cc5c9659d23e2bad91f68105d53d248",
+        "source": "monte_carlo.py"
+      },
+      {
+        "bytes": 80899,
+        "path": "monte_carlo_15dte.py",
+        "sha256": "9908a7c485af8629d15cfca27502449335ba1c4d646d3af1aa76cf365d9b9a6f",
+        "source": "monte_carlo_15dte.py"
+      },
+      {
+        "bytes": 88055,
+        "path": "backtest_cascade.py",
+        "sha256": "b64c4a5063f4a37f48eff8339be02afbc96f6166c26211e8235b883f853809cf",
+        "source": "backtest_cascade.py"
+      },
+      {
+        "bytes": 81306,
+        "path": "backtest_cascade_15dte.py",
+        "sha256": "832d6d59b67a757e4dae4d9e76e8779b6b34640dd1ac7d8e2ee6028aed4ae7ae",
+        "source": "backtest_cascade_15dte.py"
+      },
+      {
+        "bytes": 149561,
+        "path": "api.py",
+        "sha256": "03661ff53ec9144e35c65f0c20b16e1b2d33284c30cb5a38ef36511f1b1bc409",
+        "source": "api.py"
+      },
+      {
+        "bytes": 166536,
+        "path": "trader.py",
+        "sha256": "943ec3cea07d406bfae6877e4c4c8718179dc440554fc39114e20bfc331aceaf",
+        "source": "trader.py"
+      }
+    ],
+    "scoring": [
+      {
+        "bytes": 8,
+        "path": "ALGORITHM_VERSION",
+        "sha256": "8ded85089af7baf34ae49272953f87d8ff08d1c9ac015ec7288609f52b092d64",
+        "source": "ALGORITHM_VERSION"
+      },
+      {
+        "bytes": 23766,
+        "path": "strategy_config.py",
+        "sha256": "507a0a946df1031d6d57e45e52b60090ef0da9a59b5005249e8bcd046a29fef1",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 32874,
+        "path": "database/utils/scoring.py",
+        "sha256": "9445b73453091d5ae9655d66330a800ca675388b9691793a42a2b63385e2d919",
+        "source": "database/utils/scoring.py"
+      },
+      {
+        "missing": true,
+        "source": "database/utils/sector_breadth_wave.py"
+      },
+      {
+        "bytes": 215934,
+        "path": "database/models/core.py",
+        "sha256": "40730a604fbfd86ff3dc7bdd47422a5db64766d3b31f21143e12a13a35428b7e",
+        "source": "database/models/core.py"
+      },
+      {
+        "bytes": 23553,
+        "path": "database/models/technical.py",
+        "sha256": "2752501ca5f3171ca2368ef5357fb66e2a468242b03a55381916273001762fc3",
+        "source": "database/models/technical.py"
+      },
+      {
+        "bytes": 961,
+        "path": "database/project_root.py",
+        "sha256": "7fae4a33e2321f0a2098aeb9be4f976655d060552f7b09d08fcf15cf9ba39c3c",
+        "source": "database/project_root.py"
+      },
+      {
+        "bytes": 24055,
+        "path": "market_breadth.py",
+        "sha256": "ee48a20f94b622941f1e4760c70d18cab82efd170835e606e8488eb3ee16043b",
+        "source": "market_breadth.py"
+      },
+      {
+        "bytes": 31003,
+        "path": "market_regime.py",
+        "sha256": "d1a81d7ba5fdc22d0e19d6528f9f2af437556161cc101a97c87e4edbdbbe3c16",
+        "source": "market_regime.py"
+      },
+      {
+        "bytes": 36724,
+        "path": "volume_amplifier.py",
+        "sha256": "2dc87a230b98a5bba4b179751c6649d2bcb0f3f9a52f4260e580ff68610320ac",
+        "source": "volume_amplifier.py"
+      },
+      {
+        "bytes": 37875,
+        "path": "simulator.py",
+        "sha256": "24cf1b9f0f0ba2023ca56ab2c38e6577b66517043b6a46ee5edc11e3b21547a2",
+        "source": "simulator.py"
+      },
+      {
+        "bytes": 9763,
+        "path": "recalculate_scores.py",
+        "sha256": "1a08dfd87bb07fb12e33ea02581a0941ba17309937c32dab02a3cef1191d5434",
+        "source": "recalculate_scores.py"
+      }
+    ]
+  },
+  "fingerprints": {
+    "manifest_inputs": "61e4028df2f6b3a58139946b9b4406136298353439a1381c2c2f5d39b93b0778",
+    "portfolio_config": "f360b39dccc8e711a369d51ac173761bdac8e74ca14a8c9f8ed9e7b4e6cd6152",
+    "portfolio_snapshot": "29339034c7adf7219f0fa39efa7699649d0b8b2ed2ddc992d8ee6c45ef6d8688",
+    "portfolio_source_files": "6c026d3e0b25217a82944685f2962337b761ba525701cd4611dfb74c7ba1c549",
+    "scoring_config": "f07320e9b50eebf13486177104307b4f0bab9d6ef346fe4356c5ffc618f19ef5",
+    "scoring_files": "b85c36f43c9b46e5398858fb32acfb09584144c8dfe1782b1bdbe42810716182"
+  },
+  "label": "v35",
+  "notes": [
+    "This snapshot was copied from the git commit recorded by AlgorithmVersion rather than from the current worktree.",
+    "Runtime scoring still imports the checkout code until the injected loader phase lands."
+  ],
+  "paths": {
+    "cache_root": ".cache/algorithm_versions/v35",
+    "evidence_manifest": "evidence_manifest.json",
+    "portfolio_config": "portfolio_config.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_sources": "portfolio_sources",
+    "root": "algorithm_versions/v35",
+    "scoring": "scoring",
+    "scoring_config": "scoring_config.json"
+  },
+  "previous_resolved_key": "v34",
+  "schema_version": 1,
+  "silo_key": "v35",
+  "source": {
+    "algorithm_version_file": "232a725",
+    "commit": "e77714f61b9120459d82766941593fca10dae554",
+    "commit_body": "Lift table rebuilt from v34 production scores (pre_boost extracted from\nweight_info to remove v28-boost contamination). v27 table was based on\nv27 score distribution; v32/v33/v34 changes shifted the distribution\nsubstantially (CWCF dampener pulls 75+ wadj<0 calls down; continuation\nboost elevates 70-74 calls; CSWC dampener filters call stoch-weekly\ncontradictions).\n\nCalibration changes (database/utils/scoring.py):\n  - LIFT_TABLE_PATH: experiments/v27_optimization/phase_tp3b_lift_table.json\n                  \u2192 experiments/v34_calibration/lift_table_v34.json\n  - EARN_BOOST_MAX:        0.50 \u2192 0.55\n  - EARN_BOOST_LIFT_NORM_CALL: 22.3 \u2192 14.0\n  - EARN_BOOST_LIFT_NORM_PUT:  16.3  (unchanged)\n  - EARN_BOOST_WINDOW:      5      (unchanged)\n\nPhase 1 sweep over saturation/window/admit threshold gradients narrowed\nto a 2D MAX \u00d7 NORM_CALL grid. Phase 3 fine-grid winner V34_M55_NC14\nstrictly passes H1-H5 per-trade gate at 1y/3y/5y:\n\n  5y per-trade WR15 vs prior calibration (v27 table, MAX=0.50, NC=22.3):\n    95+   76.42% N=123 \u2192 80.62% N=129  (\u0394WR +4.20pp / \u0394N +4.9%)\n    90+   72.04% N=540 \u2192 76.22% N=534  (\u0394WR +4.18pp / \u0394N -1.1%)\n    85+   74.80% N=1,881 \u2192 75.66% N=2,034  (\u0394WR +0.86pp / \u0394N +8.1%)\n    80+   69.68% N=6,330 \u2192 70.66% N=6,895  (\u0394WR +0.98pp / \u0394N +8.9%)\n    75+   66.47% N=19,062 \u2192 66.47% N=19,128  (flat)\n    <5    61.00% N=1,482 \u2192 63.71% N=1,761  (\u0394WR +2.72pp / \u0394N +18.8%)\n    <15   60.67% N=12,155 \u2192 60.83% N=12,389  (\u0394WR +0.16pp)\n    <25   57.90% (unchanged)\n\nMulti-window sign consistency (1y / 3y / 5y):\n  95+: +3.33 / +4.21 / +4.20  \u2713\n  90+: +8.59 / +4.95 / +4.18  \u2713\n  85+: -0.97 / +0.61 / +0.86  (1y noise on small N=435)\n  80+: +0.68 / +0.86 / +0.98  \u2713\n\nH1-H5 strict gate (5y) PASS \u2014 no per-trade regression beyond -1.0pp;\n4 of 5 call tiers improve \u2265+0.5pp; N stability all within \u00b115%; <5/<15\nputs strictly improve.\n\nNo MC required per assessment-backtest.md \"Why N=300 canonical MC is\nNOT the gate for scoring changes\" \u2014 H1-H5 per-trade gate is sufficient.\n\nCalibration artifacts in experiments/v34_calibration/:\n  - build_lift_table_preboost.py (cleanly rebuilds the lift table)\n  - sweep_boost_params.py        (Phase 1: gradient over thresholds)\n  - sweep_phase2_combined.py     (Phase 2: combined variants + alpha)\n  - sweep_phase3_finegrid.py     (Phase 3: 2D MAX \u00d7 NORM_CALL grid)\n  - verify_winner.py             (final per-tier multi-window detail)\n  - lift_table_v34.json          (production table, ship copy)\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+    "commit_short": "e77714f6",
+    "commit_subject": "v35 scoring: EARN_BOOST recalibration on v34 pre-boost scores",
+    "mode": "git_ref",
+    "requested_ref": "e77714f"
+  },
+  "status": "shipped"
+}

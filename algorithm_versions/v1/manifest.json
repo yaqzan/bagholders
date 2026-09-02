@@ -1,0 +1,51 @@
+{
+  "algorithm_version": {
+    "created_at": "0000-00-00 00:00:00",
+    "git_commit": "baseline",
+    "git_message": "Pre-versioning baseline",
+    "id": 1,
+    "label": "v1",
+    "notes": null
+  },
+  "captured_at": "2026-05-13T16:11:56+00:00",
+  "classification": {
+    "category": "legacy_metadata_only",
+    "reason": "No resolvable git commit is recorded for this version.",
+    "scoring_algorithm_snapshot": false
+  },
+  "files": {
+    "portfolio_sources": [],
+    "scoring": []
+  },
+  "fingerprints": {
+    "manifest_inputs": "be2666bcf3b81340a8affd578e569a2ad52d514c8bea8f9db306e2c98678c28e",
+    "portfolio_config": "a395597501dd463ffe8881c693681b5ca0350d9cef8203a6ca09fdfe5d8ac634",
+    "portfolio_snapshot": "84be8ede1893055011d177f3b3ccdc08ad47d13af04cbeb1e71a0317dc04086b",
+    "portfolio_source_files": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "scoring_config": "fb9fa7657e411911dccdf20790010e28f08d7f0670000f9cfca676973bcd4416",
+    "scoring_files": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+  },
+  "label": "v1",
+  "notes": [
+    "This version could not be reconstructed from git and is recorded as metadata only."
+  ],
+  "paths": {
+    "cache_root": ".cache/algorithm_versions/v1",
+    "evidence_manifest": "evidence_manifest.json",
+    "portfolio_config": "portfolio_config.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_sources": "portfolio_sources",
+    "root": "algorithm_versions/v1",
+    "scoring": "scoring",
+    "scoring_config": "scoring_config.json"
+  },
+  "previous_resolved_key": null,
+  "schema_version": 1,
+  "silo_key": "v1",
+  "source": {
+    "mode": "unresolved_git_ref",
+    "reason": "git_commit does not resolve to a commit: baseline",
+    "requested_ref": "baseline"
+  },
+  "status": "legacy_metadata_only"
+}

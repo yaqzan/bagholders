@@ -1,0 +1,178 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-05-20T15:15:23",
+    "git_commit": "e6fbdbde1",
+    "git_message": "v61 scoring: add weekly mature call guard",
+    "id": 61,
+    "label": "v61",
+    "notes": null
+  },
+  "captured_at": "2026-05-26T18:14:56+00:00",
+  "classification": {
+    "category": "scoring_algorithm",
+    "reason": "Commit message names score-stage or score-context behavior.",
+    "scoring_algorithm_snapshot": true
+  },
+  "files": {
+    "portfolio_sources": [
+      {
+        "bytes": 62760,
+        "path": "strategy_config.py",
+        "sha256": "1d718010192acfe99a4d5177a5b341179190aba3f797ad02a491ecd546b4f981",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 21458,
+        "path": "mechanism_registry.py",
+        "sha256": "69b62a711cd751c1a1b60ac9ea299cb46f788c1219c5fdc7656cd8927fc88fe0",
+        "source": "mechanism_registry.py"
+      },
+      {
+        "bytes": 117417,
+        "path": "monte_carlo.py",
+        "sha256": "9ff1ca22fbc992ced199027990c764526effcff1a8b416df76250b8c9f44e5ad",
+        "source": "monte_carlo.py"
+      },
+      {
+        "bytes": 90354,
+        "path": "monte_carlo_15dte.py",
+        "sha256": "71e893ea7abf52595587c7d1ec343fcd9ff2a240b50a548e1f8d813a22c24d1d",
+        "source": "monte_carlo_15dte.py"
+      },
+      {
+        "bytes": 96554,
+        "path": "backtest_cascade.py",
+        "sha256": "e9aff8f7ef1bb46834c36d82375e3372cc6c4d90b078193dcedb3337b7d6de16",
+        "source": "backtest_cascade.py"
+      },
+      {
+        "bytes": 85451,
+        "path": "backtest_cascade_15dte.py",
+        "sha256": "cef55c5f0f0fe2b31b65e145ba283228e182ed2baa050364d62acef09e4f18d8",
+        "source": "backtest_cascade_15dte.py"
+      },
+      {
+        "bytes": 204869,
+        "path": "api.py",
+        "sha256": "35b79a35c4c99f23ac6b8a7353882a262b56144660909e34972a94f2e6fe10ed",
+        "source": "api.py"
+      },
+      {
+        "bytes": 229625,
+        "path": "trader.py",
+        "sha256": "141acedcc9d3f7208c53a9fa93d06f5f5b2aada5ad0e0004e27e4d00dc48078e",
+        "source": "trader.py"
+      }
+    ],
+    "scoring": [
+      {
+        "bytes": 9,
+        "path": "ALGORITHM_VERSION",
+        "sha256": "238ff82d0a678c3bd8956b971bcfa4b4a14020db7c3b4ea3862a5bcc67043e4f",
+        "source": "ALGORITHM_VERSION"
+      },
+      {
+        "bytes": 62760,
+        "path": "strategy_config.py",
+        "sha256": "1d718010192acfe99a4d5177a5b341179190aba3f797ad02a491ecd546b4f981",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 91669,
+        "path": "database/utils/scoring.py",
+        "sha256": "bfb781048e79866e9698680a422026e4d6ba84e012796b03c18eed48850de4a6",
+        "source": "database/utils/scoring.py"
+      },
+      {
+        "bytes": 12659,
+        "path": "database/utils/sector_breadth_wave.py",
+        "sha256": "02548d3dacecfbce0f92469068797933711d8ccf61c7ebe0d990a68b73ef61a2",
+        "source": "database/utils/sector_breadth_wave.py"
+      },
+      {
+        "bytes": 266558,
+        "path": "database/models/core.py",
+        "sha256": "0e8b02fd6bdd3a2f903d598d13d5515a42f745525799df5274fd265398afd199",
+        "source": "database/models/core.py"
+      },
+      {
+        "bytes": 24417,
+        "path": "database/models/technical.py",
+        "sha256": "aa267949307463164561744e895afea43746a467e6f918d0f7fc2603c62372f9",
+        "source": "database/models/technical.py"
+      },
+      {
+        "bytes": 961,
+        "path": "database/project_root.py",
+        "sha256": "7fae4a33e2321f0a2098aeb9be4f976655d060552f7b09d08fcf15cf9ba39c3c",
+        "source": "database/project_root.py"
+      },
+      {
+        "bytes": 41126,
+        "path": "market_breadth.py",
+        "sha256": "e9bc8d559261731032af7c7d19f263209645ff3511d82e15360d491a86c73c5c",
+        "source": "market_breadth.py"
+      },
+      {
+        "bytes": 31003,
+        "path": "market_regime.py",
+        "sha256": "d1a81d7ba5fdc22d0e19d6528f9f2af437556161cc101a97c87e4edbdbbe3c16",
+        "source": "market_regime.py"
+      },
+      {
+        "bytes": 37033,
+        "path": "volume_amplifier.py",
+        "sha256": "c40b9b979c6306d24b7e4ba55f40d69f6bae1757c01d1a69ba1358aeaf9d2224",
+        "source": "volume_amplifier.py"
+      },
+      {
+        "bytes": 42281,
+        "path": "simulator.py",
+        "sha256": "2006a374ea26a3eec5cccc7c7c85e5dc9f5037c8b9641dd57e75c71307531ca4",
+        "source": "simulator.py"
+      },
+      {
+        "bytes": 19620,
+        "path": "recalculate_scores.py",
+        "sha256": "b54195b8bac40540488ea272269ad61d31031a936daa08c366633a0ae194b5e9",
+        "source": "recalculate_scores.py"
+      }
+    ]
+  },
+  "fingerprints": {
+    "manifest_inputs": "0633c17796ea83bda8ee8e05c9dc706f671d44d9a57d8199d8adea1c57594455",
+    "portfolio_config": "9e69b16e2592dadf0547098518076cf3f278af76b12f6e349ca5bbcd54f387c0",
+    "portfolio_snapshot": "3cecdceee353c8b076795269d94cab4e7e6a0d263234e0249d26900ebefea575",
+    "portfolio_source_files": "b555ee99cd1b57b2487e9f8ebfa0ec05c83d34ba2e7d95b8bc7e636d5001d8d2",
+    "scoring_config": "86e23af4196a0ff04b6edfb8e2022bbbe77626b5c43217ca4bd8b3d6da55ee3a",
+    "scoring_files": "3c20dfab2e8c4b1b2ce61276c42c4b9e45fc1266f7ec3adb3546a7b7e7c7e50c"
+  },
+  "label": null,
+  "notes": [
+    "This snapshot was copied from the git commit recorded by AlgorithmVersion rather than from the current worktree.",
+    "Runtime scoring still imports the checkout code until the injected loader phase lands."
+  ],
+  "paths": {
+    "cache_root": ".cache/algorithm_versions/v61",
+    "evidence_manifest": "evidence_manifest.json",
+    "portfolio_config": "portfolio_config.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_sources": "portfolio_sources",
+    "root": "algorithm_versions/v61",
+    "scoring": "scoring",
+    "scoring_config": "scoring_config.json"
+  },
+  "previous_resolved_key": "v60",
+  "schema_version": 1,
+  "silo_key": "v61",
+  "source": {
+    "algorithm_version_file": "d4a3e9fec",
+    "commit": "e6fbdbde10ee66784d3ab4fc2eee9237e97cfc94",
+    "commit_body": "",
+    "commit_short": "e6fbdbde1",
+    "commit_subject": "v61 scoring: add weekly mature call guard",
+    "mode": "git_ref",
+    "requested_ref": "e6fbdbde1"
+  },
+  "status": "shipped"
+}

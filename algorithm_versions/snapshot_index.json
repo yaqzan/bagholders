@@ -1,0 +1,4361 @@
+{
+  "entries": [
+    {
+      "algorithm_version_message": "Pre-versioning baseline",
+      "classification": {
+        "category": "legacy_metadata_only",
+        "reason": "No resolvable git commit is recorded for this version.",
+        "scoring_algorithm_snapshot": false
+      },
+      "commit_subject": "",
+      "diff_from_previous": null,
+      "git_commit": "baseline",
+      "key": "v1",
+      "label": "v1",
+      "path": "algorithm_versions/v1",
+      "previous_resolved_key": null,
+      "resolved_commit": null,
+      "status": "legacy_metadata_only",
+      "version_id": 1
+    },
+    {
+      "algorithm_version_message": "added algorithm tracker and score assessment logic",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "added algorithm tracker and score assessment logic",
+      "diff_from_previous": null,
+      "git_commit": "c1f8fcf",
+      "key": "v2",
+      "label": "v2",
+      "path": "algorithm_versions/v2",
+      "previous_resolved_key": null,
+      "resolved_commit": "c1f8fcf9a537edcf25896d8ead4ca17e7027ccc6",
+      "status": "shipped",
+      "version_id": 2
+    },
+    {
+      "algorithm_version_message": "Systemic backfill",
+      "classification": {
+        "category": "db_linked_snapshot",
+        "reason": "AlgorithmVersion row points at this commit; message is not specific.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "Systemic backfill",
+      "diff_from_previous": {
+        "changed_paths": [
+          "database/models/core.py",
+          "recalculate_scores.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "recalculate_scores.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "c1f8fcf9..b1cc55cb",
+        "stat": [
+          "database/models/core.py | 185 +++++++++++++++++++++++++++++++++++++++++++++---",
+          " recalculate_scores.py   | 103 +--------------------------",
+          " trader.py               |  35 ++++++++-",
+          " 3 files changed, 213 insertions(+), 110 deletions(-)"
+        ]
+      },
+      "git_commit": "b1cc55c",
+      "key": "v3",
+      "label": "v3",
+      "path": "algorithm_versions/v3",
+      "previous_resolved_key": "v2",
+      "resolved_commit": "b1cc55cb1f15d0c2d790187bd67362f3369ff6b3",
+      "status": "shipped",
+      "version_id": 3
+    },
+    {
+      "algorithm_version_message": "26.04.06 - Lower max w_trend - Cap trend weight at 28 isntead of 35",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "26.04.06 - Lower max w_trend - Cap trend weight at 28 isntead of 35",
+      "diff_from_previous": {
+        "changed_paths": [
+          "api.py",
+          "database/models/core.py",
+          "database/project_root.py",
+          "database/utils/scoring.py",
+          "market_breadth.py",
+          "market_regime.py",
+          "recalculate_scores.py",
+          "simulator.py",
+          "trader.py",
+          "volume_amplifier.py"
+        ],
+        "name_status": [
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "database/project_root.py",
+            "status": "A"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "market_breadth.py",
+            "status": "A"
+          },
+          {
+            "path": "market_regime.py",
+            "status": "A"
+          },
+          {
+            "path": "recalculate_scores.py",
+            "status": "M"
+          },
+          {
+            "path": "simulator.py",
+            "status": "A"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          },
+          {
+            "path": "volume_amplifier.py",
+            "status": "M"
+          }
+        ],
+        "range": "b1cc55cb..a8cfc750",
+        "stat": [
+          "api.py                    |  533 +++++++++++++---",
+          " database/models/core.py   | 1529 +++++++++++++++++++++++++++++++--------------",
+          " database/project_root.py  |   39 ++",
+          " database/utils/scoring.py |   97 +++",
+          " market_breadth.py         |  644 +++++++++++++++++++",
+          " market_regime.py          |  411 ++++++++++++",
+          " recalculate_scores.py     |   71 ++-",
+          " simulator.py              |  551 ++++++++++++++++",
+          " trader.py                 |  629 +++++++++++++++++--",
+          " volume_amplifier.py       |  297 ++++++++-",
+          " 10 files changed, 4139 insertions(+), 662 deletions(-)"
+        ]
+      },
+      "git_commit": "a8cfc75",
+      "key": "v5",
+      "label": "v5",
+      "path": "algorithm_versions/v5",
+      "previous_resolved_key": "v3",
+      "resolved_commit": "a8cfc7502f3aa0ae2da4a7a35af4faffad06724a",
+      "status": "shipped",
+      "version_id": 5
+    },
+    {
+      "algorithm_version_message": "merge conflict",
+      "classification": {
+        "category": "db_linked_snapshot",
+        "reason": "AlgorithmVersion row points at this commit; message is not specific.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "merge conflict",
+      "diff_from_previous": {
+        "changed_paths": [
+          "api.py",
+          "database/models/core.py",
+          "recalculate_scores.py",
+          "simulator.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "recalculate_scores.py",
+            "status": "M"
+          },
+          {
+            "path": "simulator.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "a8cfc750..061362d6",
+        "stat": [
+          "api.py                  | 118 ++++++++++++-----",
+          " database/models/core.py | 336 +++++++++++++++++++++++++++++++++++++++---------",
+          " recalculate_scores.py   |  94 +++++++++-----",
+          " simulator.py            |  15 ++-",
+          " trader.py               | 111 ++++++++--------",
+          " 5 files changed, 488 insertions(+), 186 deletions(-)"
+        ]
+      },
+      "git_commit": "061362d",
+      "key": "v6",
+      "label": "v6",
+      "path": "algorithm_versions/v6",
+      "previous_resolved_key": "v5",
+      "resolved_commit": "061362d62db5f9310aa1fee618dd331a65cc3b94",
+      "status": "shipped",
+      "version_id": 6
+    },
+    {
+      "algorithm_version_message": "recalculate cleanup",
+      "classification": {
+        "category": "db_linked_snapshot",
+        "reason": "AlgorithmVersion row points at this commit; message is not specific.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "recalculate cleanup",
+      "diff_from_previous": {
+        "changed_paths": [
+          "database/models/core.py",
+          "recalculate_scores.py"
+        ],
+        "name_status": [
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "recalculate_scores.py",
+            "status": "M"
+          }
+        ],
+        "range": "061362d6..f1553a19",
+        "stat": [
+          "database/models/core.py | 18 ++++++++----",
+          " recalculate_scores.py   | 77 ++++++++++++++++++++++++++++++++++++-------------",
+          " 2 files changed, 70 insertions(+), 25 deletions(-)"
+        ]
+      },
+      "git_commit": "f1553a1",
+      "key": "v7",
+      "label": "v7",
+      "path": "algorithm_versions/v7",
+      "previous_resolved_key": "v6",
+      "resolved_commit": "f1553a19a3ec5edb3c5f48bdf99ba8fff06562e6",
+      "status": "shipped",
+      "version_id": 7
+    },
+    {
+      "algorithm_version_message": "26.04.07 - entry_filter v1: OOS-validated LOW (+20%) and HIGH (+6.5%) gates",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "26.04.07 - entry_filter v1: OOS-validated LOW (+20%) and HIGH (+6.5%) gates",
+      "diff_from_previous": {
+        "changed_paths": [],
+        "name_status": [],
+        "range": "f1553a19..a1a32a27",
+        "stat": []
+      },
+      "git_commit": "a1a32a2",
+      "key": "v8",
+      "label": "v8",
+      "path": "algorithm_versions/v8",
+      "previous_resolved_key": "v7",
+      "resolved_commit": "a1a32a274f93fe4776dd8424a85a2ef87e890b5f",
+      "status": "shipped",
+      "version_id": 8
+    },
+    {
+      "algorithm_version_message": "26.04.07 - Fix vol amplification over-firing in three scenarios",
+      "classification": {
+        "category": "db_linked_snapshot",
+        "reason": "AlgorithmVersion row points at this commit; message is not specific.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "26.04.07 - Fix vol amplification over-firing in three scenarios",
+      "diff_from_previous": {
+        "changed_paths": [
+          "api.py",
+          "database/models/core.py",
+          "database/utils/scoring.py",
+          "recalculate_scores.py",
+          "simulator.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "recalculate_scores.py",
+            "status": "M"
+          },
+          {
+            "path": "simulator.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "a1a32a27..9c8cb86a",
+        "stat": [
+          "api.py                    |  87 +++++++++++++++++----",
+          " database/models/core.py   | 193 ++++++++++++++++++++++++++++++++++++++++++++--",
+          " database/utils/scoring.py |  28 +++++++",
+          " recalculate_scores.py     |  14 +++-",
+          " simulator.py              |   5 ++",
+          " trader.py                 |  34 --------",
+          " 6 files changed, 302 insertions(+), 59 deletions(-)"
+        ]
+      },
+      "git_commit": "9c8cb86",
+      "key": "v9",
+      "label": "v9",
+      "path": "algorithm_versions/v9",
+      "previous_resolved_key": "v8",
+      "resolved_commit": "9c8cb86a1ac96f0fe8101b93f2b7fa017db476ec",
+      "status": "shipped",
+      "version_id": 9
+    },
+    {
+      "algorithm_version_message": "26.04.07 - Dashboard update",
+      "classification": {
+        "category": "mixed_or_ui",
+        "reason": "Commit message does not clearly identify a scoring algorithm change.",
+        "scoring_algorithm_snapshot": false
+      },
+      "commit_subject": "26.04.07 - Dashboard update",
+      "diff_from_previous": {
+        "changed_paths": [],
+        "name_status": [],
+        "range": "9c8cb86a..07bf8c43",
+        "stat": []
+      },
+      "git_commit": "07bf8c4",
+      "key": "v10",
+      "label": "v10",
+      "path": "algorithm_versions/v10",
+      "previous_resolved_key": "v9",
+      "resolved_commit": "07bf8c430a3ed7d180a86d82c660ebbd9e7a1cc8",
+      "status": "shipped",
+      "version_id": 10
+    },
+    {
+      "algorithm_version_message": "26.04.09 - Regime: gradient VIX scoring + dynamic breadth weighting",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "26.04.09 - Regime: gradient VIX scoring + dynamic breadth weighting",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "api.py",
+          "database/models/core.py",
+          "market_breadth.py",
+          "market_regime.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "A"
+          },
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "market_breadth.py",
+            "status": "M"
+          },
+          {
+            "path": "market_regime.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "07bf8c43..d93ff2d4",
+        "stat": [
+          "ALGORITHM_VERSION       |   1 +",
+          " api.py                  | 100 +++++++++++++++++++++++++++++++--",
+          " database/models/core.py |  56 ++++++++++++++++++-",
+          " market_breadth.py       |  30 +++++-----",
+          " market_regime.py        | 145 ++++++++++++++++++++++++++++++++++--------------",
+          " trader.py               |  87 ++++++++++++++++++++++++++++-",
+          " 6 files changed, 355 insertions(+), 64 deletions(-)"
+        ]
+      },
+      "git_commit": "d93ff2d",
+      "key": "v11",
+      "label": "v11",
+      "path": "algorithm_versions/v11",
+      "previous_resolved_key": "v10",
+      "resolved_commit": "d93ff2d4021421fbe9b19e5aad9aa5ec829d16cc",
+      "status": "shipped",
+      "version_id": 11
+    },
+    {
+      "algorithm_version_message": "26.04.09 - Scoring: zero RSI for deeply bearish base signals (put calibration fix)",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "26.04.09 - Scoring: zero RSI for deeply bearish base signals (put calibration fix)",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "database/models/core.py",
+          "database/utils/scoring.py",
+          "market_regime.py",
+          "recalculate_scores.py",
+          "simulator.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "market_regime.py",
+            "status": "M"
+          },
+          {
+            "path": "recalculate_scores.py",
+            "status": "M"
+          },
+          {
+            "path": "simulator.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "d93ff2d4..edf6bd10",
+        "stat": [
+          "ALGORITHM_VERSION         |  2 +-",
+          " database/models/core.py   | 62 ++++++++++++++++++++++++++++++++++++++++-------",
+          " database/utils/scoring.py | 31 ++++++++++++++++++++++++",
+          " market_regime.py          |  7 ++++++",
+          " recalculate_scores.py     | 25 ++++++++++---------",
+          " simulator.py              | 10 +++++++-",
+          " trader.py                 | 15 ++++++++----",
+          " 7 files changed, 124 insertions(+), 28 deletions(-)"
+        ]
+      },
+      "git_commit": "edf6bd1",
+      "key": "v12",
+      "label": "v12",
+      "path": "algorithm_versions/v12",
+      "previous_resolved_key": "v11",
+      "resolved_commit": "edf6bd10389aa0c17198bf0b02e40e67b58bd5f7",
+      "status": "shipped",
+      "version_id": 12
+    },
+    {
+      "algorithm_version_message": "Some dashboard touch up, bug fix,new algoirthm",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "Some dashboard touch up, bug fix,new algoirthm",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "api.py",
+          "database/models/core.py",
+          "trader.py",
+          "volume_amplifier.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          },
+          {
+            "path": "volume_amplifier.py",
+            "status": "M"
+          }
+        ],
+        "range": "edf6bd10..89884745",
+        "stat": [
+          "ALGORITHM_VERSION       |   2 +-",
+          " api.py                  | 560 ++++++++++++++++++++++++------------------------",
+          " database/models/core.py | 112 +++++++++-",
+          " trader.py               |  28 ++-",
+          " volume_amplifier.py     |   5 +",
+          " 5 files changed, 408 insertions(+), 299 deletions(-)"
+        ]
+      },
+      "git_commit": "8988474",
+      "key": "v13",
+      "label": "v13",
+      "path": "algorithm_versions/v13",
+      "previous_resolved_key": "v12",
+      "resolved_commit": "8988474543ead25152a6690b1ff247baa274ef87",
+      "status": "shipped",
+      "version_id": 13
+    },
+    {
+      "algorithm_version_message": "Revert directional volume fix (83851db) due to bucket-level regression",
+      "classification": {
+        "category": "scoring_revert",
+        "reason": "Commit message indicates a scoring revert.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "Revert directional volume fix (83851db) due to bucket-level regression",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "api.py",
+          "database/models/core.py",
+          "database/utils/scoring.py",
+          "market_regime.py",
+          "recalculate_scores.py",
+          "simulator.py",
+          "trader.py",
+          "volume_amplifier.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "market_regime.py",
+            "status": "M"
+          },
+          {
+            "path": "recalculate_scores.py",
+            "status": "M"
+          },
+          {
+            "path": "simulator.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          },
+          {
+            "path": "volume_amplifier.py",
+            "status": "M"
+          }
+        ],
+        "range": "89884745..410a055a",
+        "stat": [
+          "ALGORITHM_VERSION         |   2 +-",
+          " api.py                    | 100 ++++++++++++++++++++++++++++++++------",
+          " database/models/core.py   | 121 +++++++++++++++++++++++++++++++++++++++++-----",
+          " database/utils/scoring.py |  24 ++++++++-",
+          " market_regime.py          |  72 +++++++++++----------------",
+          " recalculate_scores.py     |  60 ++++++++++++++++++++---",
+          " simulator.py              |  15 +++++-",
+          " trader.py                 |  82 +++++++++++++++++--------------",
+          " volume_amplifier.py       |   2 +-",
+          " 9 files changed, 360 insertions(+), 118 deletions(-)"
+        ]
+      },
+      "git_commit": "410a055",
+      "key": "v14",
+      "label": "v14",
+      "path": "algorithm_versions/v14",
+      "previous_resolved_key": "v13",
+      "resolved_commit": "410a055a3b2a0e4c573b0f07028d5f36885db9ee",
+      "status": "shipped",
+      "version_id": 14
+    },
+    {
+      "algorithm_version_message": "",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "Fix zero-score clustering from asymmetric volume amplification",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "database/utils/scoring.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          }
+        ],
+        "range": "410a055a..83851dbb",
+        "stat": [
+          "ALGORITHM_VERSION         |  2 +-",
+          " database/utils/scoring.py | 30 ++++++++++++++++++++----------",
+          " 2 files changed, 21 insertions(+), 11 deletions(-)"
+        ]
+      },
+      "git_commit": "83851db",
+      "key": "v15",
+      "label": "v15",
+      "path": "algorithm_versions/v15",
+      "previous_resolved_key": "v14",
+      "resolved_commit": "83851dbbe129d30522f2934dd94144e44daa154b",
+      "status": "shipped",
+      "version_id": 15
+    },
+    {
+      "algorithm_version_message": "Remove momentum confirmation gradient; cross-version volume seed fallback",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "Remove momentum confirmation gradient; cross-version volume seed fallback",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "api.py",
+          "database/models/core.py",
+          "database/utils/scoring.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "83851dbb..ea8b9feb",
+        "stat": [
+          "ALGORITHM_VERSION         |   2 +-",
+          " api.py                    |  69 ++++++++-",
+          " database/models/core.py   | 360 +++++++++++++++++++++++++++++++++++++++++++++-",
+          " database/utils/scoring.py |  45 ++----",
+          " trader.py                 |  90 ++++++------",
+          " 5 files changed, 482 insertions(+), 84 deletions(-)"
+        ]
+      },
+      "git_commit": "ea8b9fe",
+      "key": "v17",
+      "label": "v17",
+      "path": "algorithm_versions/v17",
+      "previous_resolved_key": "v15",
+      "resolved_commit": "ea8b9febe6924b9047df00791321973dd2293361",
+      "status": "shipped",
+      "version_id": 17
+    },
+    {
+      "algorithm_version_message": "Asymmetric MACD gate for puts",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "Asymmetric MACD gate for puts",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "api.py",
+          "backtest_cascade.py",
+          "database/models/core.py",
+          "database/utils/scoring.py",
+          "market_regime.py",
+          "monte_carlo.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "backtest_cascade.py",
+            "status": "A"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "market_regime.py",
+            "status": "M"
+          },
+          {
+            "path": "monte_carlo.py",
+            "status": "A"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "ea8b9feb..17caf99f",
+        "stat": [
+          "ALGORITHM_VERSION         |   2 +-",
+          " api.py                    | 403 +++++++++++++++++++-",
+          " backtest_cascade.py       | 702 ++++++++++++++++++++++++++++++++++",
+          " database/models/core.py   |  54 ++-",
+          " database/utils/scoring.py |  31 ++",
+          " market_regime.py          | 335 +++++++++++++++-",
+          " monte_carlo.py            | 640 +++++++++++++++++++++++++++++++",
+          " trader.py                 | 948 +++++++++++++++++++++++++++++++++++++++++++++-",
+          " 8 files changed, 3080 insertions(+), 35 deletions(-)"
+        ]
+      },
+      "git_commit": "17caf99",
+      "key": "v18",
+      "label": "v18",
+      "path": "algorithm_versions/v18",
+      "previous_resolved_key": "v17",
+      "resolved_commit": "17caf99f6ee1a8b3bd0fd4fe556f571df125ebdb",
+      "status": "shipped",
+      "version_id": 18
+    },
+    {
+      "algorithm_version_message": "Ship JA4: asymmetric 25% SPY_wk blend for put regime multiplier",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "Ship JA4: asymmetric 25% SPY_wk blend for put regime multiplier",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "api.py",
+          "backtest_cascade.py",
+          "database/models/core.py",
+          "database/utils/scoring.py",
+          "monte_carlo.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "backtest_cascade.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "monte_carlo.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "17caf99f..6656daa4",
+        "stat": [
+          "ALGORITHM_VERSION         |   2 +-",
+          " api.py                    |  86 ++++++++--",
+          " backtest_cascade.py       | 100 +++++++++++-",
+          " database/models/core.py   |  90 +++++++++-",
+          " database/utils/scoring.py |  17 +-",
+          " monte_carlo.py            | 178 ++++++++++++++++++--",
+          " trader.py                 | 408 ++++++++++++++++++++++++++++++++++------------",
+          " 7 files changed, 728 insertions(+), 153 deletions(-)"
+        ]
+      },
+      "git_commit": "6656daa",
+      "key": "v19",
+      "label": "v19",
+      "path": "algorithm_versions/v19",
+      "previous_resolved_key": "v18",
+      "resolved_commit": "6656daa41668c1b08db5ed21792889e5c61bd244",
+      "status": "shipped",
+      "version_id": 19
+    },
+    {
+      "algorithm_version_message": "Add capitulation gradient dampener to scoring",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "Add capitulation gradient dampener to scoring",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "api.py",
+          "database/models/core.py",
+          "database/utils/scoring.py",
+          "monte_carlo.py",
+          "recalculate_scores.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "monte_carlo.py",
+            "status": "M"
+          },
+          {
+            "path": "recalculate_scores.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "6656daa4..66af13d6",
+        "stat": [
+          "ALGORITHM_VERSION         |   2 +-",
+          " api.py                    |   5 +++",
+          " database/models/core.py   |  80 +++++++++++++++++++++++++++++-------",
+          " database/utils/scoring.py |  11 +++++",
+          " monte_carlo.py            |   6 +--",
+          " recalculate_scores.py     |   4 +-",
+          " trader.py                 | 102 ++++++++++++++++++++++++++++++++++------------",
+          " 7 files changed, 163 insertions(+), 47 deletions(-)"
+        ]
+      },
+      "git_commit": "66af13d",
+      "key": "v20",
+      "label": "v20",
+      "path": "algorithm_versions/v20",
+      "previous_resolved_key": "v19",
+      "resolved_commit": "66af13d682984eb9386032c6eda1c61acab152cd",
+      "status": "shipped",
+      "version_id": 20
+    },
+    {
+      "algorithm_version_message": "Add ext-focal gradient dampener for puts above EMA50",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "Add ext-focal gradient dampener for puts above EMA50",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "api.py",
+          "database/models/core.py",
+          "database/utils/scoring.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "66af13d6..aba4f5da",
+        "stat": [
+          "ALGORITHM_VERSION         |   2 +-",
+          " api.py                    | 131 +++++++++++++++++++++++++++-------------------",
+          " database/models/core.py   |   7 +++",
+          " database/utils/scoring.py |  32 +++++++++++",
+          " trader.py                 |   6 ++-",
+          " 5 files changed, 122 insertions(+), 56 deletions(-)"
+        ]
+      },
+      "git_commit": "aba4f5d",
+      "key": "v21",
+      "label": "v21",
+      "path": "algorithm_versions/v21",
+      "previous_resolved_key": "v20",
+      "resolved_commit": "aba4f5dade4700322370f84a8d727c8b0e0c7ed6",
+      "status": "shipped",
+      "version_id": 21
+    },
+    {
+      "algorithm_version_message": "Add v22 X-confidence gate on trend dominance (REVERTED)",
+      "classification": {
+        "category": "scoring_revert",
+        "reason": "Commit message indicates a scoring revert.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "Add v22 X-confidence gate on trend dominance",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "database/utils/scoring.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          }
+        ],
+        "range": "aba4f5da..41784e02",
+        "stat": [
+          "ALGORITHM_VERSION         |  2 +-",
+          " database/utils/scoring.py | 38 ++++++++++++++++++++++++++++----------",
+          " 2 files changed, 29 insertions(+), 11 deletions(-)"
+        ]
+      },
+      "git_commit": "41784e0",
+      "key": "v22",
+      "label": "v22",
+      "path": "algorithm_versions/v22",
+      "previous_resolved_key": "v21",
+      "resolved_commit": "41784e02d46c32eef69141d09bff13260aa9d720",
+      "status": "shipped",
+      "version_id": 22
+    },
+    {
+      "algorithm_version_message": "Ship v23: floored-regime x_conf gate (Priority #8 counter-trend capture)",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "Ship v23: floored-regime x_conf gate (Priority #8 counter-trend capture)",
+      "diff_from_previous": {
+        "changed_paths": [
+          "api.py",
+          "backtest_cascade.py",
+          "database/utils/scoring.py",
+          "monte_carlo.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "backtest_cascade.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "monte_carlo.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "41784e02..be057ce0",
+        "stat": [
+          "api.py                    |  51 ++++++++++++++---",
+          " backtest_cascade.py       |  69 ++++++++++++++++++-----",
+          " database/utils/scoring.py |  84 ++++++++++++++++++---------",
+          " monte_carlo.py            |  74 +++++++++++++++++++-----",
+          " trader.py                 | 141 ++++++++++++++++++++++++++++++++++++----------",
+          " 5 files changed, 325 insertions(+), 94 deletions(-)"
+        ]
+      },
+      "git_commit": "be057ce",
+      "key": "v23",
+      "label": "v23",
+      "path": "algorithm_versions/v23",
+      "previous_resolved_key": "v22",
+      "resolved_commit": "be057ce043764c42dcecaa401d44310dfcce9804",
+      "status": "shipped",
+      "version_id": 23
+    },
+    {
+      "algorithm_version_message": "Fix volume amplifier earnings suppression: call_time-aware semantics",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "Fix volume amplifier earnings suppression: call_time-aware semantics",
+      "diff_from_previous": {
+        "changed_paths": [
+          "api.py",
+          "backtest_cascade.py",
+          "database/models/core.py",
+          "database/utils/scoring.py",
+          "monte_carlo.py",
+          "simulator.py",
+          "trader.py",
+          "volume_amplifier.py"
+        ],
+        "name_status": [
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "backtest_cascade.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "monte_carlo.py",
+            "status": "M"
+          },
+          {
+            "path": "simulator.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          },
+          {
+            "path": "volume_amplifier.py",
+            "status": "M"
+          }
+        ],
+        "range": "be057ce0..41fa5666",
+        "stat": [
+          "api.py                    | 509 +++++++++++++++++++++++++++++++--",
+          " backtest_cascade.py       | 703 ++++++++++++++++++++++++++++++++++------------",
+          " database/models/core.py   | 222 +++++++++++----",
+          " database/utils/scoring.py |  48 ----",
+          " monte_carlo.py            | 152 ++++++++--",
+          " simulator.py              |  13 +-",
+          " trader.py                 | 350 ++++++++++++++++++++---",
+          " volume_amplifier.py       | 188 +++++++++++--",
+          " 8 files changed, 1799 insertions(+), 386 deletions(-)"
+        ]
+      },
+      "git_commit": "41fa566",
+      "key": "v24",
+      "label": "v24",
+      "path": "algorithm_versions/v24",
+      "previous_resolved_key": "v23",
+      "resolved_commit": "41fa56668e1c92d3fb40379499dc01541a1b0da1",
+      "status": "shipped",
+      "version_id": 24
+    },
+    {
+      "algorithm_version_message": "Mis-stress call softener: recover compressed call alpha on narrow-bull misclass days",
+      "classification": {
+        "category": "db_linked_snapshot",
+        "reason": "AlgorithmVersion row points at this commit; message is not specific.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "Mis-stress call softener: recover compressed call alpha on narrow-bull misclass days",
+      "diff_from_previous": {
+        "changed_paths": [
+          "api.py",
+          "backtest_cascade.py",
+          "database/models/core.py",
+          "database/utils/scoring.py",
+          "simulator.py",
+          "trader.py",
+          "volume_amplifier.py"
+        ],
+        "name_status": [
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "backtest_cascade.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "simulator.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          },
+          {
+            "path": "volume_amplifier.py",
+            "status": "M"
+          }
+        ],
+        "range": "41fa5666..9463f028",
+        "stat": [
+          "api.py                    |  25 +++++",
+          " backtest_cascade.py       |  88 +++++++++++++----",
+          " database/models/core.py   | 242 ++++++++++++++++++++++++++++++----------------",
+          " database/utils/scoring.py |  20 ++++",
+          " simulator.py              | 110 +++++++++++++++++++--",
+          " trader.py                 |  61 ++++++++----",
+          " volume_amplifier.py       | 188 ++++-------------------------------",
+          " 7 files changed, 429 insertions(+), 305 deletions(-)"
+        ]
+      },
+      "git_commit": "9463f02",
+      "key": "v25",
+      "label": "v25",
+      "path": "algorithm_versions/v25",
+      "previous_resolved_key": "v24",
+      "resolved_commit": "9463f028a0aeb865f6ea24741146d4b8e593f40c",
+      "status": "shipped",
+      "version_id": 25
+    },
+    {
+      "algorithm_version_message": "EARN_SUPP_PUT: drop puts in [16,20] within 5 trd days of earnings",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "EARN_SUPP_PUT: drop puts in [16,20] within 5 trd days of earnings",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "backtest_cascade.py",
+          "monte_carlo.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "backtest_cascade.py",
+            "status": "M"
+          },
+          {
+            "path": "monte_carlo.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "9463f028..18c3e70f",
+        "stat": [
+          "ALGORITHM_VERSION   |   2 +-",
+          " backtest_cascade.py |  75 ++++++++++++++++-",
+          " monte_carlo.py      | 229 ++++++++++++++++++++++++++++++++++++++++++++++++----",
+          " trader.py           |  79 +++++++++++++++++-",
+          " 4 files changed, 365 insertions(+), 20 deletions(-)"
+        ]
+      },
+      "git_commit": "18c3e70",
+      "key": "v26",
+      "label": "v26",
+      "path": "algorithm_versions/v26",
+      "previous_resolved_key": "v25",
+      "resolved_commit": "18c3e70fba2d139f0b6052b6edde9e7da926bf89",
+      "status": "shipped",
+      "version_id": 26
+    },
+    {
+      "algorithm_version_message": "Weekly-confirmation floor lift on extreme puts (Priority #13)",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "Weekly-confirmation floor lift on extreme puts (Priority #13)",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "api.py",
+          "database/models/core.py",
+          "database/models/technical.py",
+          "database/utils/scoring.py",
+          "monte_carlo.py",
+          "recalculate_scores.py",
+          "simulator.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/technical.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "monte_carlo.py",
+            "status": "M"
+          },
+          {
+            "path": "recalculate_scores.py",
+            "status": "M"
+          },
+          {
+            "path": "simulator.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "18c3e70f..ad02704d",
+        "stat": [
+          "ALGORITHM_VERSION            |   2 +-",
+          " api.py                       | 160 +++++++++++++++++++++++++++++++++++++++-",
+          " database/models/core.py      |  53 +++++++++-----",
+          " database/models/technical.py | 163 ++++++++++++++++++++++++++++++++++++++++-",
+          " database/utils/scoring.py    |  35 +++++++++",
+          " monte_carlo.py               | 171 +++++++++++++++++++++++++++++++++++++++++--",
+          " recalculate_scores.py        |  34 ++++++---",
+          " simulator.py                 |  19 ++++-",
+          " trader.py                    |  19 ++++-",
+          " 9 files changed, 614 insertions(+), 42 deletions(-)"
+        ]
+      },
+      "git_commit": "ad02704",
+      "key": "v27",
+      "label": "v27",
+      "path": "algorithm_versions/v27",
+      "previous_resolved_key": "v26",
+      "resolved_commit": "ad02704d1a17d229ee9714988ccb4b4f8bc72801",
+      "status": "shipped",
+      "version_id": 27
+    },
+    {
+      "algorithm_version_message": "v28: earnings meta-score boost (WR-calibrated, log-smoothed)",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "v28: earnings meta-score boost (WR-calibrated, log-smoothed)",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "api.py",
+          "backtest_cascade.py",
+          "database/models/core.py",
+          "database/utils/scoring.py",
+          "monte_carlo.py",
+          "simulator.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "backtest_cascade.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "monte_carlo.py",
+            "status": "M"
+          },
+          {
+            "path": "simulator.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "ad02704d..e3c8678f",
+        "stat": [
+          "ALGORITHM_VERSION         |   2 +-",
+          " api.py                    |  68 ++++++----",
+          " backtest_cascade.py       | 143 ++++++++++++++++-----",
+          " database/models/core.py   |  98 ++++++++++++++-",
+          " database/utils/scoring.py | 133 ++++++++++++++++++++",
+          " monte_carlo.py            | 314 +++++++++++++++++++++++++++++++++-------------",
+          " simulator.py              |   8 ++",
+          " trader.py                 | 131 +++++++++----------",
+          " 8 files changed, 688 insertions(+), 209 deletions(-)"
+        ]
+      },
+      "git_commit": "e3c8678",
+      "key": "v28",
+      "label": "v28",
+      "path": "algorithm_versions/v28",
+      "previous_resolved_key": "v27",
+      "resolved_commit": "e3c8678f4ce2212348bc11af1f6d73e739e7e671",
+      "status": "shipped",
+      "version_id": 28
+    },
+    {
+      "algorithm_version_message": null,
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "v29: earnings volume suppression \u2014 V6 log-gradient (pre-only, W=2, M=1.0)",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "volume_amplifier.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "volume_amplifier.py",
+            "status": "M"
+          }
+        ],
+        "range": "e3c8678f..8473cba1",
+        "stat": [
+          "ALGORITHM_VERSION   |   2 +-",
+          " volume_amplifier.py | 200 ++++++++++++++++++++++++++++++++++++----------------",
+          " 2 files changed, 140 insertions(+), 62 deletions(-)"
+        ]
+      },
+      "git_commit": "8473cba",
+      "key": "v29",
+      "label": "v29",
+      "path": "algorithm_versions/v29",
+      "previous_resolved_key": "v28",
+      "resolved_commit": "8473cba17de3990edc66d3cbd7a74d874fe1bceb",
+      "status": "shipped",
+      "version_id": 29
+    },
+    {
+      "algorithm_version_message": "AMC-aware earnings effective_date + [low,high] sampling refactor",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "AMC-aware earnings effective_date + [low,high] sampling refactor",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "api.py",
+          "backtest_cascade.py",
+          "backtest_cascade_15dte.py",
+          "database/models/core.py",
+          "monte_carlo.py",
+          "monte_carlo_15dte.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "backtest_cascade.py",
+            "status": "M"
+          },
+          {
+            "path": "backtest_cascade_15dte.py",
+            "status": "A"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "monte_carlo.py",
+            "status": "M"
+          },
+          {
+            "path": "monte_carlo_15dte.py",
+            "status": "A"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "8473cba1..9a9da33a",
+        "stat": [
+          "ALGORITHM_VERSION         |    2 +-",
+          " api.py                    |  221 +++++--",
+          " backtest_cascade.py       |  177 ++++--",
+          " backtest_cascade_15dte.py | 1409 ++++++++++++++++++++++++++++++++++++++++++",
+          " database/models/core.py   |  178 ++++--",
+          " monte_carlo.py            |  577 +++++++++++------",
+          " monte_carlo_15dte.py      | 1496 +++++++++++++++++++++++++++++++++++++++++++++",
+          " trader.py                 |  368 +++++++++--",
+          " 8 files changed, 4055 insertions(+), 373 deletions(-)"
+        ]
+      },
+      "git_commit": "9a9da33",
+      "key": "v30",
+      "label": "v30",
+      "path": "algorithm_versions/v30",
+      "previous_resolved_key": "v29",
+      "resolved_commit": "9a9da33aaf37032baeed97cdd7abcbe3cb01be07",
+      "status": "shipped",
+      "version_id": 30
+    },
+    {
+      "algorithm_version_message": "Strict-future earnings semantics + precomputed effective_date column",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "Strict-future earnings semantics + precomputed effective_date column",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "database/models/core.py",
+          "monte_carlo.py",
+          "volume_amplifier.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "monte_carlo.py",
+            "status": "M"
+          },
+          {
+            "path": "volume_amplifier.py",
+            "status": "M"
+          }
+        ],
+        "range": "9a9da33a..f3ec7c12",
+        "stat": [
+          "ALGORITHM_VERSION       |   2 +-",
+          " database/models/core.py | 108 +++++++++++++++++++++++++++++++++++++++++-------",
+          " monte_carlo.py          | 104 ++++++++++++++++++++++++++++------------------",
+          " volume_amplifier.py     |  43 ++++++++++++-------",
+          " 4 files changed, 187 insertions(+), 70 deletions(-)"
+        ]
+      },
+      "git_commit": "f3ec7c1",
+      "key": "v31",
+      "label": "v31",
+      "path": "algorithm_versions/v31",
+      "previous_resolved_key": "v30",
+      "resolved_commit": "f3ec7c12793b91b661a51e262f9379f2a621332b",
+      "status": "shipped",
+      "version_id": 31
+    },
+    {
+      "algorithm_version_message": "v32 scoring: call-side WCF-mirror dampener (Priority #4 close)",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "v32 scoring: call-side WCF-mirror dampener (Priority #4 close)",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "api.py",
+          "backtest_cascade.py",
+          "backtest_cascade_15dte.py",
+          "database/models/core.py",
+          "database/utils/scoring.py",
+          "monte_carlo.py",
+          "monte_carlo_15dte.py",
+          "strategy_config.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "backtest_cascade.py",
+            "status": "M"
+          },
+          {
+            "path": "backtest_cascade_15dte.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "monte_carlo.py",
+            "status": "M"
+          },
+          {
+            "path": "monte_carlo_15dte.py",
+            "status": "M"
+          },
+          {
+            "path": "strategy_config.py",
+            "status": "A"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "f3ec7c12..43eeceab",
+        "stat": [
+          "ALGORITHM_VERSION         |   2 +-",
+          " api.py                    | 206 ++++++++-----",
+          " backtest_cascade.py       | 603 +++++++++++++++++++++++++++---------",
+          " backtest_cascade_15dte.py | 554 +++++++++++++++++++++++++--------",
+          " database/models/core.py   |  77 +++++",
+          " database/utils/scoring.py |  33 ++",
+          " monte_carlo.py            | 439 ++++++++++++++++----------",
+          " monte_carlo_15dte.py      | 761 ++++++++++++++++++++++++++++++++--------------",
+          " strategy_config.py        | 499 ++++++++++++++++++++++++++++++",
+          " trader.py                 | 262 +++++++++-------",
+          " 10 files changed, 2596 insertions(+), 840 deletions(-)"
+        ]
+      },
+      "git_commit": "43eecea",
+      "key": "v32",
+      "label": "v32",
+      "path": "algorithm_versions/v32",
+      "previous_resolved_key": "v31",
+      "resolved_commit": "43eeceab2f8d4ba6aed417e88d53c7f560a4d925",
+      "status": "shipped",
+      "version_id": 32
+    },
+    {
+      "algorithm_version_message": "v33 scoring: continuation boost \u2014 elevate 70-74 calls with prior-winner support to 75",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "v33 scoring: continuation boost \u2014 elevate 70-74 calls with prior-winner support to 75",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "api.py",
+          "backtest_cascade.py",
+          "backtest_cascade_15dte.py",
+          "database/models/core.py",
+          "database/utils/scoring.py",
+          "monte_carlo.py",
+          "monte_carlo_15dte.py",
+          "strategy_config.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "backtest_cascade.py",
+            "status": "M"
+          },
+          {
+            "path": "backtest_cascade_15dte.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "monte_carlo.py",
+            "status": "M"
+          },
+          {
+            "path": "monte_carlo_15dte.py",
+            "status": "M"
+          },
+          {
+            "path": "strategy_config.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "43eeceab..28fa5227",
+        "stat": [
+          "ALGORITHM_VERSION         |   2 +-",
+          " api.py                    |  20 +++-",
+          " backtest_cascade.py       |  15 ++-",
+          " backtest_cascade_15dte.py |  17 ++-",
+          " database/models/core.py   |  87 +++++++++++++++",
+          " database/utils/scoring.py |  96 ++++++++++++++++",
+          " monte_carlo.py            | 273 +++++++++++++++++++++++++++++++++++++++++++---",
+          " monte_carlo_15dte.py      |  17 ++-",
+          " strategy_config.py        |  43 +++++++-",
+          " trader.py                 |  99 +++++++++++------",
+          " 10 files changed, 614 insertions(+), 55 deletions(-)"
+        ]
+      },
+      "git_commit": "28fa522",
+      "key": "v33",
+      "label": "v33",
+      "path": "algorithm_versions/v33",
+      "previous_resolved_key": "v32",
+      "resolved_commit": "28fa5227077a3e1d9fc3cf9bae1ce5f235d230dc",
+      "status": "shipped",
+      "version_id": 33
+    },
+    {
+      "algorithm_version_message": "v34 scoring: call stoch-weekly contradiction dampener (CSWC)",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "v34 scoring: call stoch-weekly contradiction dampener (CSWC)",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "database/utils/scoring.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "28fa5227..232a7255",
+        "stat": [
+          "ALGORITHM_VERSION         |  2 +-",
+          " database/utils/scoring.py | 30 ++++++++++++++++++++++++++++++",
+          " trader.py                 |  1 -",
+          " 3 files changed, 31 insertions(+), 2 deletions(-)"
+        ]
+      },
+      "git_commit": "232a725",
+      "key": "v34",
+      "label": "v34",
+      "path": "algorithm_versions/v34",
+      "previous_resolved_key": "v33",
+      "resolved_commit": "232a7255fe883cfc51f18d7c2bdcf697da085421",
+      "status": "shipped",
+      "version_id": 34
+    },
+    {
+      "algorithm_version_message": "v35 scoring: EARN_BOOST recalibration on v34 pre-boost scores",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "v35 scoring: EARN_BOOST recalibration on v34 pre-boost scores",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "api.py",
+          "backtest_cascade.py",
+          "backtest_cascade_15dte.py",
+          "database/models/core.py",
+          "database/utils/scoring.py",
+          "monte_carlo.py",
+          "simulator.py",
+          "strategy_config.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "backtest_cascade.py",
+            "status": "M"
+          },
+          {
+            "path": "backtest_cascade_15dte.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "monte_carlo.py",
+            "status": "M"
+          },
+          {
+            "path": "simulator.py",
+            "status": "M"
+          },
+          {
+            "path": "strategy_config.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "232a7255..e77714f6",
+        "stat": [
+          "ALGORITHM_VERSION         |   2 +-",
+          " api.py                    | 398 ++++++++++++++++++++++++++++++++++++----------",
+          " backtest_cascade.py       |  63 ++++++--",
+          " backtest_cascade_15dte.py |   8 +",
+          " database/models/core.py   | 149 ++++++++++++++++-",
+          " database/utils/scoring.py |  15 +-",
+          " monte_carlo.py            |  62 +++++---",
+          " simulator.py              | 126 +++++++++++++++",
+          " strategy_config.py        |  66 ++++++--",
+          " trader.py                 | 112 ++++++++-----",
+          " 10 files changed, 810 insertions(+), 191 deletions(-)"
+        ]
+      },
+      "git_commit": "e77714f",
+      "key": "v35",
+      "label": "v35",
+      "path": "algorithm_versions/v35",
+      "previous_resolved_key": "v34",
+      "resolved_commit": "e77714f61b9120459d82766941593fca10dae554",
+      "status": "shipped",
+      "version_id": 35
+    },
+    {
+      "algorithm_version_message": "v36 scoring: CSWC re-calibration (K 0.30\u21920.50, wg 12\u219214)",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "v36 scoring: CSWC re-calibration (K 0.30\u21920.50, wg 12\u219214)",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "database/utils/scoring.py",
+          "monte_carlo_15dte.py",
+          "strategy_config.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "monte_carlo_15dte.py",
+            "status": "M"
+          },
+          {
+            "path": "strategy_config.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "e77714f6..d5ef1f52",
+        "stat": [
+          "ALGORITHM_VERSION         |   2 +-",
+          " database/utils/scoring.py |  26 +++---",
+          " monte_carlo_15dte.py      |  59 ++++++++----",
+          " strategy_config.py        |  38 ++++++--",
+          " trader.py                 | 233 +++++++++++++++++++++++++++++++++++++++++++---",
+          " 5 files changed, 302 insertions(+), 56 deletions(-)"
+        ]
+      },
+      "git_commit": "d5ef1f5",
+      "key": "v36",
+      "label": "v36",
+      "path": "algorithm_versions/v36",
+      "previous_resolved_key": "v35",
+      "resolved_commit": "d5ef1f5265134da281bef53eadf7af84dea2c702",
+      "status": "shipped",
+      "version_id": 36
+    },
+    {
+      "algorithm_version_message": "v37 scoring: post-crash put dampener (PCD)",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "v37 scoring: post-crash put dampener (PCD)",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "database/models/core.py",
+          "database/utils/scoring.py",
+          "simulator.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "simulator.py",
+            "status": "M"
+          }
+        ],
+        "range": "d5ef1f52..6f9afda9",
+        "stat": [
+          "ALGORITHM_VERSION         |   2 +-",
+          " database/models/core.py   |  27 ++++++++++++",
+          " database/utils/scoring.py | 110 ++++++++++++++++++++++++++++++++++++++++++++++",
+          " simulator.py              |   6 +++",
+          " 4 files changed, 144 insertions(+), 1 deletion(-)"
+        ]
+      },
+      "git_commit": "6f9afda",
+      "key": "v37",
+      "label": "v37",
+      "path": "algorithm_versions/v37",
+      "previous_resolved_key": "v36",
+      "resolved_commit": "6f9afda93c2b70c8f498ac196f4adc74acfa2589",
+      "status": "shipped",
+      "version_id": 37
+    },
+    {
+      "algorithm_version_message": "v38 scoring: Call Weak-Weekly Dampener (CWWD) extends CWCF below 75",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "v38 scoring: Call Weak-Weekly Dampener (CWWD) extends CWCF below 75",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "api.py",
+          "backtest_cascade.py",
+          "backtest_cascade_15dte.py",
+          "database/utils/scoring.py",
+          "monte_carlo.py",
+          "monte_carlo_15dte.py",
+          "strategy_config.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "backtest_cascade.py",
+            "status": "M"
+          },
+          {
+            "path": "backtest_cascade_15dte.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "monte_carlo.py",
+            "status": "M"
+          },
+          {
+            "path": "monte_carlo_15dte.py",
+            "status": "M"
+          },
+          {
+            "path": "strategy_config.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "6f9afda9..b093e2d1",
+        "stat": [
+          "ALGORITHM_VERSION         |   2 +-",
+          " api.py                    | 124 +++++++++++++++++++++",
+          " backtest_cascade.py       |  43 +++++++-",
+          " backtest_cascade_15dte.py |  43 +++++++-",
+          " database/utils/scoring.py |  38 +++++++",
+          " monte_carlo.py            | 270 +++++++++++++++++++++++++++++++++++++++-------",
+          " monte_carlo_15dte.py      |  49 ++++++++-",
+          " strategy_config.py        |  33 ++++++",
+          " trader.py                 |  53 ++++++++-",
+          " 9 files changed, 606 insertions(+), 49 deletions(-)"
+        ]
+      },
+      "git_commit": "b093e2d",
+      "key": "v38",
+      "label": "v38",
+      "path": "algorithm_versions/v38",
+      "previous_resolved_key": "v37",
+      "resolved_commit": "b093e2d1612a6dfc9b359615a3a7b6082760f809",
+      "status": "shipped",
+      "version_id": 38
+    },
+    {
+      "algorithm_version_message": "v39 scoring: PESS (Put Earnings Score Suppression) + retire EARN_SUPP_PUT",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "v39 scoring: PESS (Put Earnings Score Suppression) + retire EARN_SUPP_PUT",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "database/utils/scoring.py",
+          "strategy_config.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "strategy_config.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "b093e2d1..200f33a2",
+        "stat": [
+          "ALGORITHM_VERSION         |  2 +-",
+          " database/utils/scoring.py | 43 +++++++++++++++++++++++++++++++++++++++++++",
+          " strategy_config.py        | 12 ++++++++++--",
+          " trader.py                 | 10 ++++------",
+          " 4 files changed, 58 insertions(+), 9 deletions(-)"
+        ]
+      },
+      "git_commit": "200f33a",
+      "key": "v39",
+      "label": "v39",
+      "path": "algorithm_versions/v39",
+      "previous_resolved_key": "v38",
+      "resolved_commit": "200f33a273a76f77a000f117e5c071c32e179c28",
+      "status": "shipped",
+      "version_id": 39
+    },
+    {
+      "algorithm_version_message": "v40 scoring: SVD (Score Velocity Dampener)",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "v40 scoring: SVD (Score Velocity Dampener)",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "database/models/core.py",
+          "database/utils/scoring.py",
+          "simulator.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "simulator.py",
+            "status": "M"
+          }
+        ],
+        "range": "200f33a2..917659cb",
+        "stat": [
+          "ALGORITHM_VERSION         |  2 +-",
+          " database/models/core.py   | 81 +++++++++++++++++++++++++++++++++++++++++",
+          " database/utils/scoring.py | 93 +++++++++++++++++++++++++++++++++++++++++++++++",
+          " simulator.py              | 30 +++++++++++++--",
+          " 4 files changed, 202 insertions(+), 4 deletions(-)"
+        ]
+      },
+      "git_commit": "917659c",
+      "key": "v40",
+      "label": "v40",
+      "path": "algorithm_versions/v40",
+      "previous_resolved_key": "v39",
+      "resolved_commit": "917659cbbacb17d8022cb92db0f2c5acc31dfa21",
+      "status": "shipped",
+      "version_id": 40
+    },
+    {
+      "algorithm_version_message": "v40 scoring: SVD (Score Velocity Dampener)",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "v40 scoring: SVD (Score Velocity Dampener)",
+      "diff_from_previous": {
+        "changed_paths": [],
+        "name_status": [],
+        "note": "Same resolved git commit as previous AlgorithmVersion row.",
+        "range": "917659cb..917659cb",
+        "stat": []
+      },
+      "git_commit": "917659c",
+      "key": "v41",
+      "label": "v41",
+      "path": "algorithm_versions/v41",
+      "previous_resolved_key": "v40",
+      "resolved_commit": "917659cbbacb17d8022cb92db0f2c5acc31dfa21",
+      "status": "shipped",
+      "version_id": 41
+    },
+    {
+      "algorithm_version_message": "P5: flip WEEKLY_MODE default to 'rolling' \u2014 rolling weekly composite is now active",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "P5: flip WEEKLY_MODE default to 'rolling' \u2014 rolling weekly composite is now active",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "api.py",
+          "database/models/core.py",
+          "database/models/technical.py",
+          "simulator.py",
+          "strategy_config.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/technical.py",
+            "status": "M"
+          },
+          {
+            "path": "simulator.py",
+            "status": "M"
+          },
+          {
+            "path": "strategy_config.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "917659cb..5e6e3d31",
+        "stat": [
+          "ALGORITHM_VERSION            |  2 +-",
+          " api.py                       | 85 ++++++++++++++++++++++++++++++++++++-",
+          " database/models/core.py      | 99 ++++++++++++++++++++++++++++++++++++++++----",
+          " database/models/technical.py | 80 ++++++++++++++++++++++++++++++++++-",
+          " simulator.py                 | 47 +++++++++++++++++++--",
+          " strategy_config.py           | 30 ++++++++++++++",
+          " trader.py                    | 52 ++++++++++++++++++++---",
+          " 7 files changed, 376 insertions(+), 19 deletions(-)"
+        ]
+      },
+      "git_commit": "5e6e3d3",
+      "key": "v42",
+      "label": "v42",
+      "path": "algorithm_versions/v42",
+      "previous_resolved_key": "v41",
+      "resolved_commit": "5e6e3d310e5dab47eccc6276828d56f46a8b9c14",
+      "status": "shipped",
+      "version_id": 42
+    },
+    {
+      "algorithm_version_message": "feat: MCD score-stage mcap dampener (mcap-aware call confidence weight)",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "feat: MCD score-stage mcap dampener (mcap-aware call confidence weight)",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "api.py",
+          "database/models/core.py",
+          "database/models/technical.py",
+          "database/utils/scoring.py",
+          "simulator.py",
+          "strategy_config.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/technical.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "simulator.py",
+            "status": "M"
+          },
+          {
+            "path": "strategy_config.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "5e6e3d31..e0830320",
+        "stat": [
+          "ALGORITHM_VERSION            |   2 +-",
+          " api.py                       |  43 ---------",
+          " database/models/core.py      | 206 ++++++++++--------------------------------",
+          " database/models/technical.py |  78 ----------------",
+          " database/utils/scoring.py    | 167 +++++++++++++++++-----------------",
+          " simulator.py                 |  82 +++--------------",
+          " strategy_config.py           |  50 +++++------",
+          " trader.py                    | 209 +++++++++++++++++++++++++++++++------------",
+          " 8 files changed, 312 insertions(+), 525 deletions(-)"
+        ]
+      },
+      "git_commit": "e083032",
+      "key": "v43",
+      "label": "v43",
+      "path": "algorithm_versions/v43",
+      "previous_resolved_key": "v42",
+      "resolved_commit": "e0830320b55a4491832adb64738f562b70b93d82",
+      "status": "shipped",
+      "version_id": 43
+    },
+    {
+      "algorithm_version_message": "v44 scoring: ICH Ichimoku Kijun-sen state dampener (Phase H Rank #3)",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "v44 scoring: ICH Ichimoku Kijun-sen state dampener (Phase H Rank #3)",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "database/models/core.py",
+          "database/utils/scoring.py",
+          "simulator.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "simulator.py",
+            "status": "M"
+          }
+        ],
+        "range": "e0830320..d8024b9b",
+        "stat": [
+          "ALGORITHM_VERSION         |   2 +-",
+          " database/models/core.py   |  47 +++++++++++",
+          " database/utils/scoring.py | 202 ++++++++++++++++++++++++++++++++++++++++++++++",
+          " simulator.py              |  31 ++++++-",
+          " 4 files changed, 279 insertions(+), 3 deletions(-)"
+        ]
+      },
+      "git_commit": "d8024b9",
+      "key": "v44",
+      "label": "v44",
+      "path": "algorithm_versions/v44",
+      "previous_resolved_key": "v43",
+      "resolved_commit": "d8024b9b6e313a797b46cd7d66c577363e96a867",
+      "status": "shipped",
+      "version_id": 44
+    },
+    {
+      "algorithm_version_message": "Filter ETFs from production breadth universe",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "Filter ETFs from production breadth universe",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "api.py",
+          "market_breadth.py",
+          "monte_carlo.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "market_breadth.py",
+            "status": "M"
+          },
+          {
+            "path": "monte_carlo.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "d8024b9b..56eb1f83",
+        "stat": [
+          "ALGORITHM_VERSION |  2 +-",
+          " api.py            | 50 +++++++++++++++++++++++++++++++-----",
+          " market_breadth.py | 20 ++++++++++++++-",
+          " monte_carlo.py    | 77 ++++++++++++++++++++++++++++++++++++++++++++++++++++++-",
+          " trader.py         |  6 ++---",
+          " 5 files changed, 143 insertions(+), 12 deletions(-)"
+        ]
+      },
+      "git_commit": "56eb1f8",
+      "key": "v45",
+      "label": "v45",
+      "path": "algorithm_versions/v45",
+      "previous_resolved_key": "v44",
+      "resolved_commit": "56eb1f83a3c5a6422cf54cdb0c58d16395934ab3",
+      "status": "shipped",
+      "version_id": 45
+    },
+    {
+      "algorithm_version_message": "v46 scoring: WVD-Wave score-stage inverted-U modulator on weekly volume force1",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "v46 scoring: WVD-Wave score-stage inverted-U modulator on weekly volume force1",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "backtest_cascade.py",
+          "database/models/core.py",
+          "database/utils/scoring.py",
+          "monte_carlo.py",
+          "simulator.py",
+          "strategy_config.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "backtest_cascade.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "monte_carlo.py",
+            "status": "M"
+          },
+          {
+            "path": "simulator.py",
+            "status": "M"
+          },
+          {
+            "path": "strategy_config.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "56eb1f83..f274eb65",
+        "stat": [
+          "ALGORITHM_VERSION         |   2 +-",
+          " backtest_cascade.py       |  68 ++++++++++++++++++++-",
+          " database/models/core.py   |  66 +++++++++++++++++---",
+          " database/utils/scoring.py | 150 ++++++++++++++++++++++++++++++++++++++++++++++",
+          " monte_carlo.py            |  16 ++---",
+          " simulator.py              |  13 +++-",
+          " strategy_config.py        |  55 +++++++++++++++++",
+          " trader.py                 |  61 +++++++++++++++++++",
+          " 8 files changed, 412 insertions(+), 19 deletions(-)"
+        ]
+      },
+      "git_commit": "f274eb6",
+      "key": "v46",
+      "label": "v46",
+      "path": "algorithm_versions/v46",
+      "previous_resolved_key": "v45",
+      "resolved_commit": "f274eb6550258f7dc39de7e5cc3de4d539caaa32",
+      "status": "shipped",
+      "version_id": 46
+    },
+    {
+      "algorithm_version_message": "v48 scoring: add stoch conviction wave",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "v47 scoring: add stoch conviction wave",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "api.py",
+          "backtest_cascade.py",
+          "backtest_cascade_15dte.py",
+          "database/models/core.py",
+          "database/utils/scoring.py",
+          "mechanism_registry.py",
+          "monte_carlo.py",
+          "monte_carlo_15dte.py",
+          "strategy_config.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "backtest_cascade.py",
+            "status": "M"
+          },
+          {
+            "path": "backtest_cascade_15dte.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "mechanism_registry.py",
+            "status": "A"
+          },
+          {
+            "path": "monte_carlo.py",
+            "status": "M"
+          },
+          {
+            "path": "monte_carlo_15dte.py",
+            "status": "M"
+          },
+          {
+            "path": "strategy_config.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "f274eb65..61561eed",
+        "stat": [
+          "ALGORITHM_VERSION         |   2 +-",
+          " api.py                    | 274 +++++++++++++++++--",
+          " backtest_cascade.py       | 103 +++++++",
+          " backtest_cascade_15dte.py |  78 +++++-",
+          " database/models/core.py   | 178 +++++++++++-",
+          " database/utils/scoring.py | 675 +++++++++++++++++++++++-----------------------",
+          " mechanism_registry.py     | 462 +++++++++++++++++++++++++++++++",
+          " monte_carlo.py            | 160 ++++++++++-",
+          " monte_carlo_15dte.py      | 130 ++++++++-",
+          " strategy_config.py        | 535 +++++++++++++++++++++++++++++++++++-",
+          " trader.py                 | 341 +++++++++++++++++++++--",
+          " 11 files changed, 2524 insertions(+), 414 deletions(-)"
+        ]
+      },
+      "git_commit": "61561ee",
+      "key": "v48",
+      "label": "v48",
+      "path": "algorithm_versions/v48",
+      "previous_resolved_key": "v46",
+      "resolved_commit": "61561eedf1f62413dd2521fc50941e85608503d7",
+      "status": "shipped",
+      "version_id": 48
+    },
+    {
+      "algorithm_version_message": "v50 scoring: conservative stoch conviction wave",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "v48 scoring: conservative stoch conviction wave",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "api.py",
+          "database/models/core.py",
+          "database/utils/scoring.py",
+          "strategy_config.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "strategy_config.py",
+            "status": "M"
+          }
+        ],
+        "range": "61561eed..b0c19549",
+        "stat": [
+          "ALGORITHM_VERSION         |  2 +-",
+          " api.py                    |  7 ++++---",
+          " database/models/core.py   | 25 +++++++++++++++++++++++++",
+          " database/utils/scoring.py |  8 +++-----",
+          " strategy_config.py        | 18 +++++++++---------",
+          " 5 files changed, 42 insertions(+), 18 deletions(-)"
+        ]
+      },
+      "git_commit": "b0c1954",
+      "key": "v50",
+      "label": "v50",
+      "path": "algorithm_versions/v50",
+      "previous_resolved_key": "v48",
+      "resolved_commit": "b0c19549026bfbe35790fb3acec4d4afa34323a0",
+      "status": "shipped",
+      "version_id": 50
+    },
+    {
+      "algorithm_version_message": "v52 scoring: temporal echo wave scoring",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "Ship temporal echo wave scoring",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "api.py",
+          "backtest_cascade.py",
+          "backtest_cascade_15dte.py",
+          "database/models/core.py",
+          "database/utils/scoring.py",
+          "mechanism_registry.py",
+          "monte_carlo.py",
+          "monte_carlo_15dte.py",
+          "strategy_config.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "backtest_cascade.py",
+            "status": "M"
+          },
+          {
+            "path": "backtest_cascade_15dte.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "mechanism_registry.py",
+            "status": "M"
+          },
+          {
+            "path": "monte_carlo.py",
+            "status": "M"
+          },
+          {
+            "path": "monte_carlo_15dte.py",
+            "status": "M"
+          },
+          {
+            "path": "strategy_config.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "b0c19549..f66bf9b9",
+        "stat": [
+          "ALGORITHM_VERSION         |   2 +-",
+          " api.py                    | 192 ++++++++++++--------------",
+          " backtest_cascade.py       | 148 +++++++++-----------",
+          " backtest_cascade_15dte.py |  26 +---",
+          " database/models/core.py   | 305 ++++++++++++++++++++++++++++++++++++++---",
+          " database/utils/scoring.py |  86 +++++++-----",
+          " mechanism_registry.py     |  17 ---",
+          " monte_carlo.py            |  58 ++++----",
+          " monte_carlo_15dte.py      |   9 --",
+          " strategy_config.py        |  64 +++++----",
+          " trader.py                 | 339 +++++++++++++++++++++++++++++++++-------------",
+          " 11 files changed, 811 insertions(+), 435 deletions(-)"
+        ]
+      },
+      "git_commit": "f66bf9b",
+      "key": "v52",
+      "label": "v52",
+      "path": "algorithm_versions/v52",
+      "previous_resolved_key": "v50",
+      "resolved_commit": "f66bf9b962ddfcd76a725a224013684d9c69a48e",
+      "status": "shipped",
+      "version_id": 52
+    },
+    {
+      "algorithm_version_message": "v53: Fix temporal echo recalc priors",
+      "classification": {
+        "category": "scoring_context",
+        "reason": "Commit message names score inputs or temporal score context.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "Fix temporal echo recalc priors",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "database/models/core.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          }
+        ],
+        "range": "f66bf9b9..e3ed8060",
+        "stat": [
+          "ALGORITHM_VERSION       |  2 +-",
+          " database/models/core.py | 61 +++++++++++++++++++++++++++++++++++--------------",
+          " 2 files changed, 45 insertions(+), 18 deletions(-)"
+        ]
+      },
+      "git_commit": "e3ed806",
+      "key": "v53",
+      "label": "v53",
+      "path": "algorithm_versions/v53",
+      "previous_resolved_key": "v52",
+      "resolved_commit": "e3ed806012b06eb544b0e79e24a6a07caf368644",
+      "status": "shipped",
+      "version_id": 53
+    },
+    {
+      "algorithm_version_message": "v54 scoring: Sector ETF breadth crash/recovery dampener",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "Revert \"Revert sector breadth score dampener\"",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "api.py",
+          "database/models/core.py",
+          "database/utils/scoring.py",
+          "database/utils/sector_breadth_wave.py",
+          "market_breadth.py",
+          "simulator.py",
+          "strategy_config.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/sector_breadth_wave.py",
+            "status": "A"
+          },
+          {
+            "path": "market_breadth.py",
+            "status": "M"
+          },
+          {
+            "path": "simulator.py",
+            "status": "M"
+          },
+          {
+            "path": "strategy_config.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "e3ed8060..8af574bd",
+        "stat": [
+          "ALGORITHM_VERSION                     |   2 +-",
+          " api.py                                |  53 +++++++-",
+          " database/models/core.py               |  29 +++++",
+          " database/utils/scoring.py             |  83 +++++++++++++",
+          " database/utils/sector_breadth_wave.py | 186 ++++++++++++++++++++++++++++",
+          " market_breadth.py                     | 220 +++++++++++++++++++++++++++++++++-",
+          " simulator.py                          |   2 +",
+          " strategy_config.py                    |  61 ++++++++++",
+          " trader.py                             |   6 +-",
+          " 9 files changed, 634 insertions(+), 8 deletions(-)"
+        ]
+      },
+      "git_commit": "8af574b",
+      "key": "v54",
+      "label": "v54",
+      "path": "algorithm_versions/v54",
+      "previous_resolved_key": "v53",
+      "resolved_commit": "8af574bd53efe0724432137a8436dcf370527b8b",
+      "status": "shipped",
+      "version_id": 54
+    },
+    {
+      "algorithm_version_message": "Ship sector breadth seed099 score dampener",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "Ship sector breadth seed099 score dampener",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "api.py",
+          "database/models/core.py",
+          "database/utils/scoring.py",
+          "database/utils/sector_breadth_wave.py",
+          "market_breadth.py",
+          "strategy_config.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/sector_breadth_wave.py",
+            "status": "M"
+          },
+          {
+            "path": "market_breadth.py",
+            "status": "M"
+          },
+          {
+            "path": "strategy_config.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "8af574bd..bfad76ab",
+        "stat": [
+          "ALGORITHM_VERSION                     |   2 +-",
+          " api.py                                |  14 ++++",
+          " database/models/core.py               |  14 ++++",
+          " database/utils/scoring.py             | 120 +++++++++++++---------------------",
+          " database/utils/sector_breadth_wave.py |   2 +-",
+          " market_breadth.py                     | 112 +++++++++++++++++++++++++------",
+          " strategy_config.py                    | 103 ++++++++++++-----------------",
+          " trader.py                             |  14 ++++",
+          " 8 files changed, 222 insertions(+), 159 deletions(-)"
+        ]
+      },
+      "git_commit": "bfad76a",
+      "key": "v55",
+      "label": "v55",
+      "path": "algorithm_versions/v55",
+      "previous_resolved_key": "v54",
+      "resolved_commit": "bfad76abbba9c6f58a0cd59026fa59ede1546741",
+      "status": "shipped",
+      "version_id": 55
+    },
+    {
+      "algorithm_version_message": "Ship Market Wave dual-wave score dampener",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "Ship Market Wave dual-wave score dampener",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "database/utils/scoring.py",
+          "database/utils/sector_breadth_wave.py",
+          "market_breadth.py",
+          "strategy_config.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/sector_breadth_wave.py",
+            "status": "M"
+          },
+          {
+            "path": "market_breadth.py",
+            "status": "M"
+          },
+          {
+            "path": "strategy_config.py",
+            "status": "M"
+          }
+        ],
+        "range": "bfad76ab..c6f384ab",
+        "stat": [
+          "ALGORITHM_VERSION                     |  2 +-",
+          " database/utils/scoring.py             |  8 +++-",
+          " database/utils/sector_breadth_wave.py | 84 +++++++++++++++++++++++++++++++++--",
+          " market_breadth.py                     | 46 ++++++++++++-------",
+          " strategy_config.py                    | 62 +++++++++++++++-----------",
+          " 5 files changed, 154 insertions(+), 48 deletions(-)"
+        ]
+      },
+      "git_commit": "c6f384ab",
+      "key": "v56",
+      "label": "v56",
+      "path": "algorithm_versions/v56",
+      "previous_resolved_key": "v55",
+      "resolved_commit": "c6f384ab3288c32d864bfb71d7f89fc40e46906a",
+      "status": "shipped",
+      "version_id": 56
+    },
+    {
+      "algorithm_version_message": "Ship direct Market Wave score transform",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "Ship direct Market Wave score transform",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "database/utils/sector_breadth_wave.py",
+          "market_breadth.py",
+          "strategy_config.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/sector_breadth_wave.py",
+            "status": "M"
+          },
+          {
+            "path": "market_breadth.py",
+            "status": "M"
+          },
+          {
+            "path": "strategy_config.py",
+            "status": "M"
+          }
+        ],
+        "range": "c6f384ab..e568b2f4",
+        "stat": [
+          "ALGORITHM_VERSION                     |  2 +-",
+          " database/utils/sector_breadth_wave.py | 73 +++++++++++++++++++++++++++++++++--",
+          " market_breadth.py                     | 55 +++++++++++++++++++++++++-",
+          " strategy_config.py                    | 51 ++++++++----------------",
+          " 4 files changed, 141 insertions(+), 40 deletions(-)"
+        ]
+      },
+      "git_commit": "e568b2f4",
+      "key": "v57",
+      "label": "v57",
+      "path": "algorithm_versions/v57",
+      "previous_resolved_key": "v56",
+      "resolved_commit": "e568b2f4d8b646b296c1eff693462df9dfa98805",
+      "status": "shipped",
+      "version_id": 57
+    },
+    {
+      "algorithm_version_message": "Retune continuation echo weights for v57 WR7 utility",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "Retune continuation echo weights for v57 WR7 utility",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "strategy_config.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "strategy_config.py",
+            "status": "M"
+          }
+        ],
+        "range": "e568b2f4..3cfc4dc2",
+        "stat": [
+          "ALGORITHM_VERSION  |  2 +-",
+          " strategy_config.py | 38 +++++++++++++++++++-------------------",
+          " 2 files changed, 20 insertions(+), 20 deletions(-)"
+        ]
+      },
+      "git_commit": "3cfc4dc2",
+      "key": "v58",
+      "label": "v58",
+      "path": "algorithm_versions/v58",
+      "previous_resolved_key": "v57",
+      "resolved_commit": "3cfc4dc2fd9061556a07e16098ed3e1784023bcb",
+      "status": "shipped",
+      "version_id": 58
+    },
+    {
+      "algorithm_version_message": "v59 scoring: daily volume authority wave",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "v59 scoring: daily volume authority wave",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "api.py",
+          "database/models/core.py",
+          "database/utils/scoring.py",
+          "recalculate_scores.py",
+          "strategy_config.py",
+          "trader.py",
+          "volume_amplifier.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "recalculate_scores.py",
+            "status": "M"
+          },
+          {
+            "path": "strategy_config.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          },
+          {
+            "path": "volume_amplifier.py",
+            "status": "M"
+          }
+        ],
+        "range": "3cfc4dc2..4fd7ffa9",
+        "stat": [
+          "ALGORITHM_VERSION         |   2 +-",
+          " api.py                    | 550 ++++++++++++++++++++++++++++++++++++++++++++--",
+          " database/models/core.py   | 389 ++++++++++++++++++++++++--------",
+          " database/utils/scoring.py | 213 ++++++++++++++++++",
+          " recalculate_scores.py     | 236 +++++++++++++++++++-",
+          " strategy_config.py        |  84 +++++--",
+          " trader.py                 | 237 +++++++++++++++-----",
+          " volume_amplifier.py       |  39 ++--",
+          " 8 files changed, 1538 insertions(+), 212 deletions(-)"
+        ]
+      },
+      "git_commit": "4fd7ffa9",
+      "key": "v59",
+      "label": "v59",
+      "path": "algorithm_versions/v59",
+      "previous_resolved_key": "v58",
+      "resolved_commit": "4fd7ffa919da01c236893e24cbe0cd03c1900eac",
+      "status": "shipped",
+      "version_id": 59
+    },
+    {
+      "algorithm_version_message": "Ship v60 r054 SCW and DD call cap candidate",
+      "classification": {
+        "category": "db_linked_snapshot",
+        "reason": "AlgorithmVersion row points at this commit; message is not specific.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "Ship v60 r054 SCW and DD call cap candidate",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "api.py",
+          "database/models/core.py",
+          "database/models/technical.py",
+          "database/utils/scoring.py",
+          "market_breadth.py",
+          "recalculate_scores.py",
+          "simulator.py",
+          "strategy_config.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/technical.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "market_breadth.py",
+            "status": "M"
+          },
+          {
+            "path": "recalculate_scores.py",
+            "status": "M"
+          },
+          {
+            "path": "simulator.py",
+            "status": "M"
+          },
+          {
+            "path": "strategy_config.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "4fd7ffa9..d4a3e9fe",
+        "stat": [
+          "ALGORITHM_VERSION            |   2 +-",
+          " api.py                       | 269 ++++++++++++++++++++++--",
+          " database/models/core.py      | 149 +++++++++++++-",
+          " database/models/technical.py |  38 +++-",
+          " database/utils/scoring.py    | 182 +++++++++++++++-",
+          " market_breadth.py            |   5 +-",
+          " recalculate_scores.py        |  55 ++++-",
+          " simulator.py                 |  12 ++",
+          " strategy_config.py           |  38 +++-",
+          " trader.py                    | 481 ++++++++++++++++++++++++++++++++++++-------",
+          " 10 files changed, 1108 insertions(+), 123 deletions(-)"
+        ]
+      },
+      "git_commit": "d4a3e9fec",
+      "key": "v60",
+      "label": "v60",
+      "path": "algorithm_versions/v60",
+      "previous_resolved_key": "v59",
+      "resolved_commit": "d4a3e9fec93f6ea25a30861150f5424e8d798676",
+      "status": "shipped",
+      "version_id": 60
+    },
+    {
+      "algorithm_version_message": "v61 scoring: add weekly mature call guard",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "v61 scoring: add weekly mature call guard",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "api.py",
+          "database/models/core.py",
+          "database/utils/scoring.py",
+          "mechanism_registry.py",
+          "simulator.py",
+          "strategy_config.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "mechanism_registry.py",
+            "status": "M"
+          },
+          {
+            "path": "simulator.py",
+            "status": "M"
+          },
+          {
+            "path": "strategy_config.py",
+            "status": "M"
+          }
+        ],
+        "range": "d4a3e9fe..e6fbdbde",
+        "stat": [
+          "ALGORITHM_VERSION         |   2 +-",
+          " api.py                    |  15 +++++",
+          " database/models/core.py   |  12 ++++",
+          " database/utils/scoring.py | 165 ++++++++++++++++++++++++++++++++++++++++++++++",
+          " mechanism_registry.py     |   8 ++-",
+          " simulator.py              |  29 ++++++--",
+          " strategy_config.py        |  54 ++++++++++++---",
+          " 7 files changed, 269 insertions(+), 16 deletions(-)"
+        ]
+      },
+      "git_commit": "e6fbdbde1",
+      "key": "v61",
+      "label": "v61",
+      "path": "algorithm_versions/v61",
+      "previous_resolved_key": "v60",
+      "resolved_commit": "e6fbdbde10ee66784d3ab4fc2eee9237e97cfc94",
+      "status": "shipped",
+      "version_id": 61
+    },
+    {
+      "algorithm_version_message": "Snapshot v62 MACD put wave candidate",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "Snapshot v62 MACD put wave candidate",
+      "diff_from_previous": {
+        "changed_paths": [
+          "api.py",
+          "backtest_cascade.py",
+          "database/models/core.py",
+          "database/utils/scoring.py",
+          "mechanism_registry.py",
+          "monte_carlo.py",
+          "simulator.py",
+          "strategy_config.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "backtest_cascade.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "mechanism_registry.py",
+            "status": "M"
+          },
+          {
+            "path": "monte_carlo.py",
+            "status": "M"
+          },
+          {
+            "path": "simulator.py",
+            "status": "M"
+          },
+          {
+            "path": "strategy_config.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "e6fbdbde..d4d63798",
+        "stat": [
+          "api.py                    | 207 ++++++++++++++++++++++++++++++++",
+          " backtest_cascade.py       | 252 ++++++++++++++++++++++++++++++++++++++-",
+          " database/models/core.py   |  12 --",
+          " database/utils/scoring.py | 264 ++++++++++++++--------------------------",
+          " mechanism_registry.py     |  31 +++++",
+          " monte_carlo.py            | 298 +++++++++++++++++++++++++++++++++++++++++++---",
+          " simulator.py              |  29 +----",
+          " strategy_config.py        |  89 ++++++++------",
+          " trader.py                 |  77 ++++++++++--",
+          " 9 files changed, 991 insertions(+), 268 deletions(-)"
+        ]
+      },
+      "git_commit": "d4d63798e",
+      "key": "v62",
+      "label": "v62",
+      "path": "algorithm_versions/v62",
+      "previous_resolved_key": "v61",
+      "resolved_commit": "d4d63798eaea34609f076025ea78cf251cd179c1",
+      "status": "shipped",
+      "version_id": 62
+    },
+    {
+      "algorithm_version_message": "v63 scoring: add BB location taper candidate",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "v63 scoring: add BB location taper candidate",
+      "diff_from_previous": {
+        "changed_paths": [
+          "database/utils/scoring.py",
+          "strategy_config.py"
+        ],
+        "name_status": [
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "strategy_config.py",
+            "status": "M"
+          }
+        ],
+        "range": "d4d63798..7b263922",
+        "stat": [
+          "database/utils/scoring.py | 144 +++++++++++++++++-----------------------------",
+          " strategy_config.py        |  40 +++++++------",
+          " 2 files changed, 75 insertions(+), 109 deletions(-)"
+        ]
+      },
+      "git_commit": "7b263922f",
+      "key": "v63",
+      "label": "v63",
+      "path": "algorithm_versions/v63",
+      "previous_resolved_key": "v62",
+      "resolved_commit": "7b263922fd8524b439d2ceb97868be2a32fb5669",
+      "status": "shipped",
+      "version_id": 63
+    },
+    {
+      "algorithm_version_message": "Fix v64 recalc signal sigma map",
+      "classification": {
+        "category": "db_linked_snapshot",
+        "reason": "AlgorithmVersion row points at this commit; message is not specific.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "Fix v64 recalc signal sigma map",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "database/models/core.py",
+          "database/utils/scoring.py",
+          "simulator.py",
+          "strategy_config.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "simulator.py",
+            "status": "M"
+          },
+          {
+            "path": "strategy_config.py",
+            "status": "M"
+          }
+        ],
+        "range": "7b263922..1bba5f96",
+        "stat": [
+          "ALGORITHM_VERSION         |   2 +-",
+          " database/models/core.py   |  11 +-",
+          " database/utils/scoring.py | 291 +++++++++++++++++++++++++++++++++++++++++++---",
+          " simulator.py              |   7 +-",
+          " strategy_config.py        |  30 +++++",
+          " 5 files changed, 322 insertions(+), 19 deletions(-)"
+        ]
+      },
+      "git_commit": "1bba5f965",
+      "key": "v64",
+      "label": "v64",
+      "path": "algorithm_versions/v64",
+      "previous_resolved_key": "v63",
+      "resolved_commit": "1bba5f965e8ed625675527e15ce6df01aa137a2b",
+      "status": "ship_candidate",
+      "version_id": 64
+    },
+    {
+      "algorithm_version_message": "v65 scoring: unify weekly partial context",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "v65 scoring: unify weekly partial context",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "api.py",
+          "backtest_cascade.py",
+          "backtest_cascade_15dte.py",
+          "database/models/core.py",
+          "database/utils/scoring.py",
+          "mechanism_registry.py",
+          "simulator.py",
+          "strategy_config.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "backtest_cascade.py",
+            "status": "M"
+          },
+          {
+            "path": "backtest_cascade_15dte.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "mechanism_registry.py",
+            "status": "M"
+          },
+          {
+            "path": "simulator.py",
+            "status": "M"
+          },
+          {
+            "path": "strategy_config.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "1bba5f96..14a5981c",
+        "stat": [
+          "ALGORITHM_VERSION         |   2 +-",
+          " api.py                    | 225 ++++++++++++++++----",
+          " backtest_cascade.py       |  34 +++-",
+          " backtest_cascade_15dte.py |  44 +++-",
+          " database/models/core.py   | 507 +++++++++++++++++++++++++++++++++++++++++-----",
+          " database/utils/scoring.py | 356 ++++----------------------------",
+          " mechanism_registry.py     |   2 +-",
+          " simulator.py              |  31 ++-",
+          " strategy_config.py        |  54 +----",
+          " trader.py                 | 410 ++++++++++++++++++++++++++++++-------",
+          " 10 files changed, 1094 insertions(+), 571 deletions(-)"
+        ]
+      },
+      "git_commit": "14a5981cb",
+      "key": "v65",
+      "label": "v65",
+      "path": "algorithm_versions/v65",
+      "previous_resolved_key": "v64",
+      "resolved_commit": "14a5981cb3b986af401f134d30e374867e856334",
+      "status": "shipped",
+      "version_id": 65
+    },
+    {
+      "algorithm_version_message": "v66 scoring: apply weekly momentum envelope to v60",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "v66 scoring: apply weekly momentum envelope to v60",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "api.py",
+          "backtest_cascade.py",
+          "backtest_cascade_15dte.py",
+          "database/models/core.py",
+          "database/utils/scoring.py",
+          "mechanism_registry.py",
+          "monte_carlo.py",
+          "simulator.py",
+          "strategy_config.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "backtest_cascade.py",
+            "status": "M"
+          },
+          {
+            "path": "backtest_cascade_15dte.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "mechanism_registry.py",
+            "status": "M"
+          },
+          {
+            "path": "monte_carlo.py",
+            "status": "M"
+          },
+          {
+            "path": "simulator.py",
+            "status": "M"
+          },
+          {
+            "path": "strategy_config.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "14a5981c..05d75b4a",
+        "stat": [
+          "ALGORITHM_VERSION         |   2 +-",
+          " api.py                    | 441 ++++-------------------------------------",
+          " backtest_cascade.py       | 286 ++------------------------",
+          " backtest_cascade_15dte.py |  44 +---",
+          " database/models/core.py   | 496 +++++-----------------------------------------",
+          " database/utils/scoring.py | 147 +++++++++++---",
+          " mechanism_registry.py     |  39 +---",
+          " monte_carlo.py            | 298 ++--------------------------",
+          " simulator.py              |  22 --",
+          " strategy_config.py        |  61 +-----",
+          " trader.py                 | 487 ++++++++-------------------------------------",
+          " 11 files changed, 337 insertions(+), 1986 deletions(-)"
+        ]
+      },
+      "git_commit": "05d75b4ae",
+      "key": "v66",
+      "label": "v66",
+      "path": "algorithm_versions/v66",
+      "previous_resolved_key": "v65",
+      "resolved_commit": "05d75b4aef0cc7409bbec4b764132bd1265d3ef1",
+      "status": "ship_candidate",
+      "version_id": 66
+    },
+    {
+      "algorithm_version_message": "VCBW scoring candidate: Vol-Confidence Boundary Wave (Stage 1, pre-bump)",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "VCBW scoring candidate: Vol-Confidence Boundary Wave (Stage 1, pre-bump)",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "api.py",
+          "backtest_cascade.py",
+          "backtest_cascade_15dte.py",
+          "database/models/core.py",
+          "database/utils/scoring.py",
+          "mechanism_registry.py",
+          "monte_carlo.py",
+          "simulator.py",
+          "strategy_config.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "backtest_cascade.py",
+            "status": "M"
+          },
+          {
+            "path": "backtest_cascade_15dte.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "mechanism_registry.py",
+            "status": "M"
+          },
+          {
+            "path": "monte_carlo.py",
+            "status": "M"
+          },
+          {
+            "path": "simulator.py",
+            "status": "M"
+          },
+          {
+            "path": "strategy_config.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "05d75b4a..e85282f5",
+        "stat": [
+          "ALGORITHM_VERSION         |   2 +-",
+          " api.py                    | 441 ++++++++++++++++++++++++++++++++---",
+          " backtest_cascade.py       | 453 +++++++++++++++++++++++++++++++++---",
+          " backtest_cascade_15dte.py |  44 +++-",
+          " database/models/core.py   | 468 ++++++++++++++++++++++++++++++++++----",
+          " database/utils/scoring.py | 215 ++++++++----------",
+          " mechanism_registry.py     |  81 ++++++-",
+          " monte_carlo.py            | 435 +++++++++++++++++++++++++++++++++--",
+          " simulator.py              |   6 +",
+          " strategy_config.py        | 132 ++++++++++-",
+          " trader.py                 | 569 ++++++++++++++++++++++++++++++++++++++--------",
+          " 11 files changed, 2482 insertions(+), 364 deletions(-)"
+        ]
+      },
+      "git_commit": "e85282f5a",
+      "key": "v67",
+      "label": "v67",
+      "path": null,
+      "previous_resolved_key": "v66",
+      "resolved_commit": "e85282f5abceec22272a81f6fa17746ae2279ac6",
+      "status": "missing",
+      "version_id": 67
+    },
+    {
+      "algorithm_version_message": "VCBW scoring on TRUE v60 base (v68 candidate): Vol-Confidence Boundary Wave",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "VCBW scoring on TRUE v60 base (v68 candidate): Vol-Confidence Boundary Wave",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "api.py",
+          "backtest_cascade.py",
+          "backtest_cascade_15dte.py",
+          "database/models/core.py",
+          "mechanism_registry.py",
+          "monte_carlo.py",
+          "strategy_config.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "backtest_cascade.py",
+            "status": "M"
+          },
+          {
+            "path": "backtest_cascade_15dte.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "mechanism_registry.py",
+            "status": "M"
+          },
+          {
+            "path": "monte_carlo.py",
+            "status": "M"
+          },
+          {
+            "path": "strategy_config.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "e85282f5..bb6251c1",
+        "stat": [
+          "ALGORITHM_VERSION         |   2 +-",
+          " api.py                    | 441 +++--------------------------------",
+          " backtest_cascade.py       | 453 +++---------------------------------",
+          " backtest_cascade_15dte.py |  44 +---",
+          " database/models/core.py   | 457 ++++---------------------------------",
+          " mechanism_registry.py     |  81 +------",
+          " monte_carlo.py            | 435 ++---------------------------------",
+          " strategy_config.py        | 112 ++-------",
+          " trader.py                 | 569 ++++++++--------------------------------------",
+          " 9 files changed, 243 insertions(+), 2351 deletions(-)"
+        ]
+      },
+      "git_commit": "bb6251c14",
+      "key": "v68",
+      "label": "v68",
+      "path": null,
+      "previous_resolved_key": "v67",
+      "resolved_commit": "bb6251c147540b1489e246477a75575c2cf6aa0d",
+      "status": "missing",
+      "version_id": 68
+    },
+    {
+      "algorithm_version_message": "scoring: weekly transition blend (point-in-time honest weekly, removes recalc look-ahead + smooths fakeout)",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "scoring: weekly transition blend (point-in-time honest weekly, removes recalc look-ahead + smooths fakeout)",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "api.py",
+          "backtest_cascade.py",
+          "backtest_cascade_15dte.py",
+          "database/models/core.py",
+          "database/utils/scoring.py",
+          "mechanism_registry.py",
+          "monte_carlo.py",
+          "simulator.py",
+          "strategy_config.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "backtest_cascade.py",
+            "status": "M"
+          },
+          {
+            "path": "backtest_cascade_15dte.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "mechanism_registry.py",
+            "status": "M"
+          },
+          {
+            "path": "monte_carlo.py",
+            "status": "M"
+          },
+          {
+            "path": "simulator.py",
+            "status": "M"
+          },
+          {
+            "path": "strategy_config.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "bb6251c1..8b59206c",
+        "stat": [
+          "ALGORITHM_VERSION         |   2 +-",
+          " api.py                    | 736 +++++++++++++++++++++++++++++++++++++++++-----",
+          " backtest_cascade.py       | 480 ++++++++++++++++++++++++++++--",
+          " backtest_cascade_15dte.py |  44 ++-",
+          " database/models/core.py   | 574 ++++++++++++++++++++++++++++++++----",
+          " database/utils/scoring.py | 139 +++------",
+          " mechanism_registry.py     |  81 ++++-",
+          " monte_carlo.py            | 455 +++++++++++++++++++++++++++-",
+          " simulator.py              |  55 +++-",
+          " strategy_config.py        | 130 +++++---",
+          " trader.py                 | 676 ++++++++++++++++++++++++++++++++++++------",
+          " 11 files changed, 2952 insertions(+), 420 deletions(-)"
+        ]
+      },
+      "git_commit": "8b59206c3e4778f0eea1d240c34a48522ee64d1d",
+      "key": "v69",
+      "label": "v69",
+      "path": "algorithm_versions/v69",
+      "previous_resolved_key": "v68",
+      "resolved_commit": "8b59206c3e4778f0eea1d240c34a48522ee64d1d",
+      "status": "shipped",
+      "version_id": 69
+    },
+    {
+      "algorithm_version_message": "v70 scoring: honest EARN_BOOST recalibration (pre7-weighted, both-barrier-gated)",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "v70 scoring: honest EARN_BOOST recalibration (pre7-weighted, both-barrier-gated)",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "database/utils/scoring.py",
+          "monte_carlo.py",
+          "strategy_config.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "monte_carlo.py",
+            "status": "M"
+          },
+          {
+            "path": "strategy_config.py",
+            "status": "M"
+          }
+        ],
+        "range": "8b59206c..c70d16d2",
+        "stat": [
+          "ALGORITHM_VERSION         |  2 +-",
+          " database/utils/scoring.py | 12 +++++++----",
+          " monte_carlo.py            | 30 +++++++++++++++------------",
+          " strategy_config.py        | 52 +++++++++++++++++++++++++++++++----------------",
+          " 4 files changed, 60 insertions(+), 36 deletions(-)"
+        ]
+      },
+      "git_commit": "c70d16d22dc8ad900d19f7014907774edaa3ae26",
+      "key": "v70",
+      "label": "v70",
+      "path": "algorithm_versions/v70",
+      "previous_resolved_key": "v69",
+      "resolved_commit": "c70d16d22dc8ad900d19f7014907774edaa3ae26",
+      "status": "shipped",
+      "version_id": 70
+    },
+    {
+      "algorithm_version_message": "v71 scoring: integrity-audit honest fixes (F1-F4) + 4 mechanism retirements",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "v71 scoring: integrity-audit honest fixes (F1-F4) + 4 mechanism retirements",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "api.py",
+          "backtest_cascade.py",
+          "backtest_cascade_15dte.py",
+          "database/models/core.py",
+          "database/utils/scoring.py",
+          "database/utils/sector_breadth_wave.py",
+          "mechanism_registry.py",
+          "monte_carlo.py",
+          "monte_carlo_15dte.py",
+          "simulator.py",
+          "strategy_config.py",
+          "trader.py",
+          "volume_amplifier.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "backtest_cascade.py",
+            "status": "M"
+          },
+          {
+            "path": "backtest_cascade_15dte.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/sector_breadth_wave.py",
+            "status": "M"
+          },
+          {
+            "path": "mechanism_registry.py",
+            "status": "M"
+          },
+          {
+            "path": "monte_carlo.py",
+            "status": "M"
+          },
+          {
+            "path": "monte_carlo_15dte.py",
+            "status": "M"
+          },
+          {
+            "path": "simulator.py",
+            "status": "M"
+          },
+          {
+            "path": "strategy_config.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          },
+          {
+            "path": "volume_amplifier.py",
+            "status": "M"
+          }
+        ],
+        "range": "c70d16d2..04044b21",
+        "stat": [
+          "ALGORITHM_VERSION                     |   2 +-",
+          " api.py                                | 494 +++++++++++++++++++++-",
+          " backtest_cascade.py                   | 445 ++++++++++++++++++--",
+          " backtest_cascade_15dte.py             |   8 +-",
+          " database/models/core.py               | 142 ++++++-",
+          " database/utils/scoring.py             |  40 ++",
+          " database/utils/sector_breadth_wave.py |  34 ++",
+          " mechanism_registry.py                 | 132 ++++++",
+          " monte_carlo.py                        | 744 +++++++++++++++++++++++++++++++---",
+          " monte_carlo_15dte.py                  |   9 +-",
+          " simulator.py                          |  73 +++-",
+          " strategy_config.py                    | 322 ++++++++++++---",
+          " trader.py                             | 335 ++++++++++++---",
+          " volume_amplifier.py                   |  53 ++-",
+          " 14 files changed, 2590 insertions(+), 243 deletions(-)"
+        ]
+      },
+      "git_commit": "04044b21b",
+      "key": "v71",
+      "label": "v71",
+      "path": "algorithm_versions/v71",
+      "previous_resolved_key": "v70",
+      "resolved_commit": "04044b21b374bd955456395b8ec38764c340f7bb",
+      "status": "shipped",
+      "version_id": 71
+    },
+    {
+      "algorithm_version_message": "Merge algo-exp/wcf-score-ramp: WCF score-gate ramp (27/28 cliff smooth)",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "Merge algo-exp/wcf-score-ramp: WCF score-gate ramp (27/28 cliff smooth)",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "api.py",
+          "backtest_cascade.py",
+          "database/utils/scoring.py",
+          "mechanism_registry.py",
+          "monte_carlo.py",
+          "strategy_config.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "backtest_cascade.py",
+            "status": "M"
+          },
+          {
+            "path": "database/utils/scoring.py",
+            "status": "M"
+          },
+          {
+            "path": "mechanism_registry.py",
+            "status": "M"
+          },
+          {
+            "path": "monte_carlo.py",
+            "status": "M"
+          },
+          {
+            "path": "strategy_config.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "04044b21..fc567120",
+        "stat": [
+          "ALGORITHM_VERSION         |   2 +-",
+          " api.py                    |  61 ++++++++++++++++++++++++-",
+          " backtest_cascade.py       | 108 +++++++++++++++++++++++++++++++++++++++++--",
+          " database/utils/scoring.py |  16 ++++++-",
+          " mechanism_registry.py     |  37 +++++++++++++++",
+          " monte_carlo.py            | 114 ++++++++++++++++++++++++++++++++++++++++++++--",
+          " strategy_config.py        |  83 +++++++++++++++++++++++++++++----",
+          " trader.py                 |  55 ++++++++++++++++++++--",
+          " 8 files changed, 456 insertions(+), 20 deletions(-)"
+        ]
+      },
+      "git_commit": "fc5671200",
+      "key": "v72",
+      "label": "v72",
+      "path": "algorithm_versions/v72",
+      "previous_resolved_key": "v71",
+      "resolved_commit": "fc5671200b8fbdb39a287147f9f21321fa13796c",
+      "status": "shipped",
+      "version_id": 72
+    },
+    {
+      "algorithm_version_message": "Merge algo-exp/v73-dampener-retire: retire WCF+ICH+CWCF+CSWC+SCW (honest ablation)",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "Merge algo-exp/v73-dampener-retire: retire WCF+ICH+CWCF+CSWC+SCW (honest ablation)",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "api.py",
+          "database/models/core.py",
+          "strategy_config.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "database/models/core.py",
+            "status": "M"
+          },
+          {
+            "path": "strategy_config.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "fc567120..07e9722b",
+        "stat": [
+          "ALGORITHM_VERSION       |  2 +-",
+          " api.py                  | 54 +++++++++++++++++++++++++++++++++++++--",
+          " database/models/core.py | 36 +++++++++++++++++---------",
+          " strategy_config.py      | 68 +++++++++++++++++++++++++++++++++++--------------",
+          " trader.py               |  7 +++--",
+          " 5 files changed, 131 insertions(+), 36 deletions(-)"
+        ]
+      },
+      "git_commit": "07e9722b5",
+      "key": "v73",
+      "label": "v73",
+      "path": "algorithm_versions/v73",
+      "previous_resolved_key": "v72",
+      "resolved_commit": "07e9722b5a53080af91ee9fe3be1118fb4c857fc",
+      "status": "shipped",
+      "version_id": 73
+    },
+    {
+      "algorithm_version_message": "v74 lean scoring: retire post-pre_boost dampener tail (cont-echo, WVD, daily-volume, EARN_BOOST)",
+      "classification": {
+        "category": "scoring_algorithm",
+        "reason": "Commit message names score-stage or score-context behavior.",
+        "scoring_algorithm_snapshot": true
+      },
+      "commit_subject": "v74 lean scoring: retire post-pre_boost dampener tail (cont-echo, WVD, daily-volume, EARN_BOOST)",
+      "diff_from_previous": {
+        "changed_paths": [
+          "ALGORITHM_VERSION",
+          "api.py",
+          "strategy_config.py",
+          "trader.py"
+        ],
+        "name_status": [
+          {
+            "path": "ALGORITHM_VERSION",
+            "status": "M"
+          },
+          {
+            "path": "api.py",
+            "status": "M"
+          },
+          {
+            "path": "strategy_config.py",
+            "status": "M"
+          },
+          {
+            "path": "trader.py",
+            "status": "M"
+          }
+        ],
+        "range": "07e9722b..f9fb7b93",
+        "stat": [
+          "ALGORITHM_VERSION  |  2 +-",
+          " api.py             | 67 +++++++++++++++++++++++++++++++++++++++++++++++++-----",
+          " strategy_config.py | 34 +++++++++++++++++----------",
+          " trader.py          |  4 ++--",
+          " 4 files changed, 86 insertions(+), 21 deletions(-)"
+        ]
+      },
+      "git_commit": "f9fb7b934",
+      "key": "v74",
+      "label": "v74",
+      "path": "algorithm_versions/v74",
+      "previous_resolved_key": "v73",
+      "resolved_commit": "f9fb7b9343cafeccb18fd4b9966d19441add00c6",
+      "status": "shipped",
+      "version_id": 74
+    }
+  ],
+  "schema_version": 1,
+  "sort": "version_id_ascending_for_diffs",
+  "updated_at": "2026-07-14T04:46:28+00:00"
+}

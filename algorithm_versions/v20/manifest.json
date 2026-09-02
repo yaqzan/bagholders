@@ -1,0 +1,166 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-04-20T12:04:14",
+    "git_commit": "66af13d",
+    "git_message": "Add capitulation gradient dampener to scoring",
+    "id": 20,
+    "label": "v20",
+    "notes": null
+  },
+  "captured_at": "2026-05-13T16:11:03+00:00",
+  "classification": {
+    "category": "scoring_algorithm",
+    "reason": "Commit message names score-stage or score-context behavior.",
+    "scoring_algorithm_snapshot": true
+  },
+  "files": {
+    "portfolio_sources": [
+      {
+        "missing": true,
+        "source": "strategy_config.py"
+      },
+      {
+        "missing": true,
+        "source": "mechanism_registry.py"
+      },
+      {
+        "bytes": 31886,
+        "path": "monte_carlo.py",
+        "sha256": "6302ce41d022aa2bd64d043464ec7f2142e0a25ca43c07b51685797996c0c5be",
+        "source": "monte_carlo.py"
+      },
+      {
+        "missing": true,
+        "source": "monte_carlo_15dte.py"
+      },
+      {
+        "bytes": 31955,
+        "path": "backtest_cascade.py",
+        "sha256": "7302c9aa0b08aaf0d982de03ff7d15778a359cf7740255444964ad387eeda917",
+        "source": "backtest_cascade.py"
+      },
+      {
+        "missing": true,
+        "source": "backtest_cascade_15dte.py"
+      },
+      {
+        "bytes": 93782,
+        "path": "api.py",
+        "sha256": "cbab665645084fdf4ba5478bb7c3eb8714236391957be8dcb020b9006f834865",
+        "source": "api.py"
+      },
+      {
+        "bytes": 122643,
+        "path": "trader.py",
+        "sha256": "73ad50eecaff85e654c8f79aac175393493ef5263ce8cc4d8c07743f4a60f817",
+        "source": "trader.py"
+      }
+    ],
+    "scoring": [
+      {
+        "bytes": 7,
+        "path": "ALGORITHM_VERSION",
+        "sha256": "14623a30279f47f1fbc5a7f031df0b741d2275abf527a1aabf3a86c2d1c4ed3b",
+        "source": "ALGORITHM_VERSION"
+      },
+      {
+        "missing": true,
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 13606,
+        "path": "database/utils/scoring.py",
+        "sha256": "4f52e162554fd60573b1ee7c24ec81e2cdea0cdfd308d6f4475be27aac281926",
+        "source": "database/utils/scoring.py"
+      },
+      {
+        "missing": true,
+        "source": "database/utils/sector_breadth_wave.py"
+      },
+      {
+        "bytes": 179122,
+        "path": "database/models/core.py",
+        "sha256": "25f10bc01a6161c23a1234d148a6ce543eee47b0f07fc54adef0d81c19478b67",
+        "source": "database/models/core.py"
+      },
+      {
+        "bytes": 17689,
+        "path": "database/models/technical.py",
+        "sha256": "3f44c93f24cce14284787a5732ea0b8e471371fd27f4837041e24e47ee01b24d",
+        "source": "database/models/technical.py"
+      },
+      {
+        "bytes": 961,
+        "path": "database/project_root.py",
+        "sha256": "7fae4a33e2321f0a2098aeb9be4f976655d060552f7b09d08fcf15cf9ba39c3c",
+        "source": "database/project_root.py"
+      },
+      {
+        "bytes": 24055,
+        "path": "market_breadth.py",
+        "sha256": "ee48a20f94b622941f1e4760c70d18cab82efd170835e606e8488eb3ee16043b",
+        "source": "market_breadth.py"
+      },
+      {
+        "bytes": 31003,
+        "path": "market_regime.py",
+        "sha256": "d1a81d7ba5fdc22d0e19d6528f9f2af437556161cc101a97c87e4edbdbbe3c16",
+        "source": "market_regime.py"
+      },
+      {
+        "bytes": 32288,
+        "path": "volume_amplifier.py",
+        "sha256": "255c7f7006b5e9e26ffe8e2c9a6d56b855d9304ce299a61b1c4ed19528ca9822",
+        "source": "volume_amplifier.py"
+      },
+      {
+        "bytes": 26526,
+        "path": "simulator.py",
+        "sha256": "67926d81ebeffb93d64f1cf1c4a9ce8859cb514f6c00c60943140b06e1d24884",
+        "source": "simulator.py"
+      },
+      {
+        "bytes": 8904,
+        "path": "recalculate_scores.py",
+        "sha256": "bfae7e0629bfda0ab96b1f815d729e2ba297606dc4d32eeacc82d4808858c490",
+        "source": "recalculate_scores.py"
+      }
+    ]
+  },
+  "fingerprints": {
+    "manifest_inputs": "b155695ed50cccd9bffda9476b05e24d639fb6c62af027c5e031a3355152fc2c",
+    "portfolio_config": "e59206e7e4484d85b046353b43871ae1866a48e8f519be7d8a7f562c3deae904",
+    "portfolio_snapshot": "1980fb44138f406632feec71da8abfa47068cd100aaa500cbb085cb985bec355",
+    "portfolio_source_files": "8a3a61918e05eb7038ab62b793bf39ad785b83d53975286664b4db2b10fab42d",
+    "scoring_config": "af73a503aa4a694ec2ccf8a54d8e0bc2eea5b05564ac3a02ebd2d2d195c5bf09",
+    "scoring_files": "d8f59dc4fd937ea65053e7de0878057d57ee340a8ff7e0d2e847a2645b11be41"
+  },
+  "label": "v20",
+  "notes": [
+    "This snapshot was copied from the git commit recorded by AlgorithmVersion rather than from the current worktree.",
+    "Runtime scoring still imports the checkout code until the injected loader phase lands."
+  ],
+  "paths": {
+    "cache_root": ".cache/algorithm_versions/v20",
+    "evidence_manifest": "evidence_manifest.json",
+    "portfolio_config": "portfolio_config.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_sources": "portfolio_sources",
+    "root": "algorithm_versions/v20",
+    "scoring": "scoring",
+    "scoring_config": "scoring_config.json"
+  },
+  "previous_resolved_key": "v19",
+  "schema_version": 1,
+  "silo_key": "v20",
+  "source": {
+    "algorithm_version_file": "6656daa",
+    "commit": "66af13d682984eb9386032c6eda1c61acab152cd",
+    "commit_body": "score=0 + pct_from_ema50 < -10% represents active capitulation, not a fresh\nput setup. Apply gradient lift: ext=10%\u21925, 15%\u219210, 20%+\u219220. Filters deeply\nextended stocks out of <5/<10/<15 buckets where WR was dropping off.\n\nValidated 5y diff-assess vs v19 DB:\n  <5  WR15 65.8%\u219271.2% (N 652\u2192657)\n  <10 WR15 68.1%\u219272.6% (N 1787\u21921813)\n  <15 WR15 67.8%\u219271.0% (N 4449\u21924481)\nMid/upper put buckets and call side unchanged.\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+    "commit_short": "66af13d6",
+    "commit_subject": "Add capitulation gradient dampener to scoring",
+    "mode": "git_ref",
+    "requested_ref": "66af13d"
+  },
+  "status": "shipped"
+}

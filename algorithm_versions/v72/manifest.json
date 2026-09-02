@@ -1,0 +1,179 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-06-11T15:58:33.597239",
+    "git_commit": "fc5671200",
+    "git_message": "Merge algo-exp/wcf-score-ramp: WCF score-gate ramp (27/28 cliff smooth)",
+    "id": 72,
+    "label": "v72",
+    "notes": null
+  },
+  "captured_at": "2026-06-11T19:58:40+00:00",
+  "classification": {
+    "category": "scoring_algorithm",
+    "reason": "Commit message names score-stage or score-context behavior.",
+    "scoring_algorithm_snapshot": true
+  },
+  "files": {
+    "portfolio_sources": [
+      {
+        "bytes": 82188,
+        "path": "strategy_config.py",
+        "sha256": "603d91fa4a51d67581cedf9e758d5a34663467a44fc65a185796b9dac8046534",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 32973,
+        "path": "mechanism_registry.py",
+        "sha256": "e1f2b24730eaee584b97951809ddf3fff86bcea403be92f35640f0d71115fc11",
+        "source": "mechanism_registry.py"
+      },
+      {
+        "bytes": 183922,
+        "path": "monte_carlo.py",
+        "sha256": "d060394fea30fe556968b520a6b7e2b6882cc0cb73c09a0e07bc0c5034fda22c",
+        "source": "monte_carlo.py"
+      },
+      {
+        "bytes": 90989,
+        "path": "monte_carlo_15dte.py",
+        "sha256": "6cf9cd5662ccbbd91a76127f13364c4bfa253fba18189def854bedbd184e2936",
+        "source": "monte_carlo_15dte.py"
+      },
+      {
+        "bytes": 149070,
+        "path": "backtest_cascade.py",
+        "sha256": "129bd045329ba431abbcd9f0ce2d1b6112513b13f57e1fe3fb83cd77cbbfcd49",
+        "source": "backtest_cascade.py"
+      },
+      {
+        "bytes": 87029,
+        "path": "backtest_cascade_15dte.py",
+        "sha256": "8e1100c9ee887e5f28945162a21988c79dbfdb3dcd7e40c780cb1be9970d5f89",
+        "source": "backtest_cascade_15dte.py"
+      },
+      {
+        "bytes": 262693,
+        "path": "api.py",
+        "sha256": "55bddfb21e6a57324bd9c732d4aabc19839a59a6c0de728f3e53f77bf07baa3d",
+        "source": "api.py"
+      },
+      {
+        "bytes": 269524,
+        "path": "trader.py",
+        "sha256": "223189813226b4ba547687a8062e77b9be281f629d54fa12c2f6a6e40b4d75c1",
+        "source": "trader.py"
+      }
+    ],
+    "scoring": [
+      {
+        "bytes": 10,
+        "path": "ALGORITHM_VERSION",
+        "sha256": "d3b9506295288e78291b67cbd745b5fa186989c51f2c90e145a5730b6dc17615",
+        "source": "ALGORITHM_VERSION"
+      },
+      {
+        "bytes": 82188,
+        "path": "strategy_config.py",
+        "sha256": "603d91fa4a51d67581cedf9e758d5a34663467a44fc65a185796b9dac8046534",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 91890,
+        "path": "database/utils/scoring.py",
+        "sha256": "66da3ef0fd3feaabc8fab117ab4ead0be597ad3c6aaaff27c87ab7f5f4d73d02",
+        "source": "database/utils/scoring.py"
+      },
+      {
+        "bytes": 14255,
+        "path": "database/utils/sector_breadth_wave.py",
+        "sha256": "fe860a16f6276a00d3fa55408b37ce9d348e6d0b995eddaf2f6ec4072f04b279",
+        "source": "database/utils/sector_breadth_wave.py"
+      },
+      {
+        "bytes": 291998,
+        "path": "database/models/core.py",
+        "sha256": "98db294803ddb1f6a3b62754be7cec18fa196513a57a04aa413a950c6a270677",
+        "source": "database/models/core.py"
+      },
+      {
+        "bytes": 24417,
+        "path": "database/models/technical.py",
+        "sha256": "aa267949307463164561744e895afea43746a467e6f918d0f7fc2603c62372f9",
+        "source": "database/models/technical.py"
+      },
+      {
+        "bytes": 961,
+        "path": "database/project_root.py",
+        "sha256": "7fae4a33e2321f0a2098aeb9be4f976655d060552f7b09d08fcf15cf9ba39c3c",
+        "source": "database/project_root.py"
+      },
+      {
+        "bytes": 41126,
+        "path": "market_breadth.py",
+        "sha256": "e9bc8d559261731032af7c7d19f263209645ff3511d82e15360d491a86c73c5c",
+        "source": "market_breadth.py"
+      },
+      {
+        "bytes": 31003,
+        "path": "market_regime.py",
+        "sha256": "d1a81d7ba5fdc22d0e19d6528f9f2af437556161cc101a97c87e4edbdbbe3c16",
+        "source": "market_regime.py"
+      },
+      {
+        "bytes": 39523,
+        "path": "volume_amplifier.py",
+        "sha256": "13f2844acb4de8ad892803411e8f82734048c35733247654f499bf7dfcc1a0c2",
+        "source": "volume_amplifier.py"
+      },
+      {
+        "bytes": 48200,
+        "path": "simulator.py",
+        "sha256": "6cf35aeb22e6000019252dadafc6760e9b9b5012594ea4c9dd5606780c46344a",
+        "source": "simulator.py"
+      },
+      {
+        "bytes": 19620,
+        "path": "recalculate_scores.py",
+        "sha256": "b54195b8bac40540488ea272269ad61d31031a936daa08c366633a0ae194b5e9",
+        "source": "recalculate_scores.py"
+      }
+    ]
+  },
+  "fingerprints": {
+    "manifest_inputs": "f9e5faa812c7653909ca2d6531c166737fb646438d126520eec53a0ea57fca43",
+    "portfolio_config": "a67940b9f5a9e0e2e7ebef90070db87546cfdd9b7be477b487342664b09004de",
+    "portfolio_snapshot": "b96ccae1a15999e00bda839297096f9e3b76abdb9e08f9d203a6e257a2c3db76",
+    "portfolio_source_files": "28c672de64d2b22ac3f8cdc75d39d7cbbd3242b7783228765ee7bd180919afb9",
+    "scoring_config": "390f9a3e32c8bc0a9e8bf48c1b39cabd2b3302de185d9e456c1b3c3276e6fe7b",
+    "scoring_files": "1dde82e0e6068d3c58e2d70006f2a42f43b0b0b23776788012b4f03155feafb0"
+  },
+  "label": null,
+  "notes": [
+    "This snapshot was copied from the git commit recorded by AlgorithmVersion rather than from the current worktree.",
+    "Runtime scoring still imports the checkout code until the injected loader phase lands."
+  ],
+  "paths": {
+    "cache_root": ".cache/algorithm_versions/v72",
+    "evidence_manifest": "evidence_manifest.json",
+    "portfolio_config": "portfolio_config.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_sources": "portfolio_sources",
+    "root": "algorithm_versions/v72",
+    "scoring": "scoring",
+    "scoring_config": "scoring_config.json"
+  },
+  "previous_resolved_key": "v71",
+  "promoted_at": "2026-06-12T01:29:43+00:00",
+  "schema_version": 1,
+  "silo_key": "v72",
+  "source": {
+    "algorithm_version_file": "04044b21b",
+    "commit": "fc5671200b8fbdb39a287147f9f21321fa13796c",
+    "commit_body": "Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>",
+    "commit_short": "fc5671200",
+    "commit_subject": "Merge algo-exp/wcf-score-ramp: WCF score-gate ramp (27/28 cliff smooth)",
+    "mode": "git_ref",
+    "requested_ref": "fc5671200"
+  },
+  "status": "shipped"
+}

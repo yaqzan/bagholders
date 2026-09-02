@@ -1,0 +1,176 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-05-11T11:59:52",
+    "git_commit": "61561ee",
+    "git_message": "v48 scoring: add stoch conviction wave",
+    "id": 48,
+    "label": "v48",
+    "notes": null
+  },
+  "captured_at": "2026-05-13T16:09:17+00:00",
+  "classification": {
+    "category": "scoring_algorithm",
+    "reason": "Commit message names score-stage or score-context behavior.",
+    "scoring_algorithm_snapshot": true
+  },
+  "files": {
+    "portfolio_sources": [
+      {
+        "bytes": 55438,
+        "path": "strategy_config.py",
+        "sha256": "5ab990aa4e5be5740b91d0f203989ce7aae06fbd3b999a75b731cdb343d6b2ec",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 22000,
+        "path": "mechanism_registry.py",
+        "sha256": "701b58f5efe719dac036b46883cfd50a4679478a302b2636c49685b5e77134d7",
+        "source": "mechanism_registry.py"
+      },
+      {
+        "bytes": 116842,
+        "path": "monte_carlo.py",
+        "sha256": "88869912ba02e66bfc7d64caff2f0fcba945a673e35ec569606da1cc3dcce62e",
+        "source": "monte_carlo.py"
+      },
+      {
+        "bytes": 90828,
+        "path": "monte_carlo_15dte.py",
+        "sha256": "399f5fb35332b366ff8a64717bde52a871aa68c75f2a2597e43b996962957e6f",
+        "source": "monte_carlo_15dte.py"
+      },
+      {
+        "bytes": 97826,
+        "path": "backtest_cascade.py",
+        "sha256": "97ef6754b69c44bc12a7fb1205a8d20b966780d46583e95022f73f2f46648791",
+        "source": "backtest_cascade.py"
+      },
+      {
+        "bytes": 86811,
+        "path": "backtest_cascade_15dte.py",
+        "sha256": "d3c42573eb769d6360f81698a731fe2eda634b7542e02708b7a40be2cb3addc3",
+        "source": "backtest_cascade_15dte.py"
+      },
+      {
+        "bytes": 172005,
+        "path": "api.py",
+        "sha256": "23959702be2d0c755f950a42e00c4a62c452e2b3db6bbcdbba1bd6fbc63b3825",
+        "source": "api.py"
+      },
+      {
+        "bytes": 203284,
+        "path": "trader.py",
+        "sha256": "86566c8a2622190a1ae3fa39d2fced3ee69aed2821265c90f69e018ea7d0fb8b",
+        "source": "trader.py"
+      }
+    ],
+    "scoring": [
+      {
+        "bytes": 7,
+        "path": "ALGORITHM_VERSION",
+        "sha256": "20f563b92ea21853acc14135aabbd3d6875d11623cd813986904cb33a0a3f3d8",
+        "source": "ALGORITHM_VERSION"
+      },
+      {
+        "bytes": 55438,
+        "path": "strategy_config.py",
+        "sha256": "5ab990aa4e5be5740b91d0f203989ce7aae06fbd3b999a75b731cdb343d6b2ec",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 66962,
+        "path": "database/utils/scoring.py",
+        "sha256": "4c98d5853da6fa45c0eab13a6d96fbebc049313e305ab66676e2545b8266e4e7",
+        "source": "database/utils/scoring.py"
+      },
+      {
+        "missing": true,
+        "source": "database/utils/sector_breadth_wave.py"
+      },
+      {
+        "bytes": 233075,
+        "path": "database/models/core.py",
+        "sha256": "df3e726be146fd33ba80728e2a45f6b5603b131218587ec405bd97d27e6b4153",
+        "source": "database/models/core.py"
+      },
+      {
+        "bytes": 23552,
+        "path": "database/models/technical.py",
+        "sha256": "22648938cd5a14bb2d38b926252cde14ca6d0bbd3dfc0133c367cc7b6dc0dcb4",
+        "source": "database/models/technical.py"
+      },
+      {
+        "bytes": 961,
+        "path": "database/project_root.py",
+        "sha256": "7fae4a33e2321f0a2098aeb9be4f976655d060552f7b09d08fcf15cf9ba39c3c",
+        "source": "database/project_root.py"
+      },
+      {
+        "bytes": 24834,
+        "path": "market_breadth.py",
+        "sha256": "9e9237dbd075c5fe56304b08464d9db2b8c97e6ddfa508343ab81977338c76a7",
+        "source": "market_breadth.py"
+      },
+      {
+        "bytes": 31003,
+        "path": "market_regime.py",
+        "sha256": "d1a81d7ba5fdc22d0e19d6528f9f2af437556161cc101a97c87e4edbdbbe3c16",
+        "source": "market_regime.py"
+      },
+      {
+        "bytes": 36724,
+        "path": "volume_amplifier.py",
+        "sha256": "2dc87a230b98a5bba4b179751c6649d2bcb0f3f9a52f4260e580ff68610320ac",
+        "source": "volume_amplifier.py"
+      },
+      {
+        "bytes": 40377,
+        "path": "simulator.py",
+        "sha256": "02671a4489135e09e4a2ad7c8440b0675f8ee2fdc6e50dfc4fe9a090a8c74aa2",
+        "source": "simulator.py"
+      },
+      {
+        "bytes": 9763,
+        "path": "recalculate_scores.py",
+        "sha256": "1a08dfd87bb07fb12e33ea02581a0941ba17309937c32dab02a3cef1191d5434",
+        "source": "recalculate_scores.py"
+      }
+    ]
+  },
+  "fingerprints": {
+    "manifest_inputs": "336b9c450eccad2725c7da026409a1813b2a02c91f142d79390f67a943d343da",
+    "portfolio_config": "fa80e661576c79c8ea662e44ac116bf04ca294923d9e69a7f6ef697308a894e7",
+    "portfolio_snapshot": "e46db44869115d0bec2df03a136a81dbc7d44aec0ddddfe9dfc71c14aac4f112",
+    "portfolio_source_files": "ce1042e3c9d71f6d1f263ef199b0fc484020e90f07d7d4db6db76c6af0f1e412",
+    "scoring_config": "806142b8b0414afb54f68a96fb2a9130728c029cc33861d0e245312d47becc69",
+    "scoring_files": "6d17d06ba81776b829f4ba0d3bf39269d12808c65ba273c3023539d438fb23ad"
+  },
+  "label": "v48",
+  "notes": [
+    "This snapshot was copied from the git commit recorded by AlgorithmVersion rather than from the current worktree.",
+    "Runtime scoring still imports the checkout code until the injected loader phase lands."
+  ],
+  "paths": {
+    "cache_root": ".cache/algorithm_versions/v48",
+    "evidence_manifest": "evidence_manifest.json",
+    "portfolio_config": "portfolio_config.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_sources": "portfolio_sources",
+    "root": "algorithm_versions/v48",
+    "scoring": "scoring",
+    "scoring_config": "scoring_config.json"
+  },
+  "previous_resolved_key": "v46",
+  "schema_version": 1,
+  "silo_key": "v48",
+  "source": {
+    "algorithm_version_file": "f274eb6",
+    "commit": "61561eedf1f62413dd2521fc50941e85608503d7",
+    "commit_body": "",
+    "commit_short": "61561eed",
+    "commit_subject": "v47 scoring: add stoch conviction wave",
+    "mode": "git_ref",
+    "requested_ref": "61561ee"
+  },
+  "status": "shipped"
+}

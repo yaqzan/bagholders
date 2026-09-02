@@ -1,0 +1,52 @@
+{
+  "changed_paths": [
+    "ALGORITHM_VERSION",
+    "database/models/core.py",
+    "database/utils/scoring.py",
+    "market_regime.py",
+    "recalculate_scores.py",
+    "simulator.py",
+    "trader.py"
+  ],
+  "name_status": [
+    {
+      "path": "ALGORITHM_VERSION",
+      "status": "M"
+    },
+    {
+      "path": "database/models/core.py",
+      "status": "M"
+    },
+    {
+      "path": "database/utils/scoring.py",
+      "status": "M"
+    },
+    {
+      "path": "market_regime.py",
+      "status": "M"
+    },
+    {
+      "path": "recalculate_scores.py",
+      "status": "M"
+    },
+    {
+      "path": "simulator.py",
+      "status": "M"
+    },
+    {
+      "path": "trader.py",
+      "status": "M"
+    }
+  ],
+  "range": "d93ff2d4..edf6bd10",
+  "stat": [
+    "ALGORITHM_VERSION         |  2 +-",
+    " database/models/core.py   | 62 ++++++++++++++++++++++++++++++++++++++++-------",
+    " database/utils/scoring.py | 31 ++++++++++++++++++++++++",
+    " market_regime.py          |  7 ++++++",
+    " recalculate_scores.py     | 25 ++++++++++---------",
+    " simulator.py              | 10 +++++++-",
+    " trader.py                 | 15 ++++++++----",
+    " 7 files changed, 124 insertions(+), 28 deletions(-)"
+  ]
+}

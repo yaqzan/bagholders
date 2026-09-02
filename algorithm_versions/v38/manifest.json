@@ -1,0 +1,174 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-05-06T07:43:16",
+    "git_commit": "b093e2d",
+    "git_message": "v38 scoring: Call Weak-Weekly Dampener (CWWD) extends CWCF below 75",
+    "id": 38,
+    "label": "v38",
+    "notes": null
+  },
+  "captured_at": "2026-05-13T16:09:53+00:00",
+  "classification": {
+    "category": "scoring_algorithm",
+    "reason": "Commit message names score-stage or score-context behavior.",
+    "scoring_algorithm_snapshot": true
+  },
+  "files": {
+    "portfolio_sources": [
+      {
+        "bytes": 27103,
+        "path": "strategy_config.py",
+        "sha256": "58405aea0e608bcee28fd049e645ecba2224cc548c9196b8ab04d0d3a8a5d8af",
+        "source": "strategy_config.py"
+      },
+      {
+        "missing": true,
+        "source": "mechanism_registry.py"
+      },
+      {
+        "bytes": 105700,
+        "path": "monte_carlo.py",
+        "sha256": "662eec7780949406198cb73f86888db3c35ff5428e8feedffccbde0f95a23a43",
+        "source": "monte_carlo.py"
+      },
+      {
+        "bytes": 84907,
+        "path": "monte_carlo_15dte.py",
+        "sha256": "4fdebafd2d8131df41e14fca7603b69c5cf32fd902e7e1d207cae2c1bc9578fc",
+        "source": "monte_carlo_15dte.py"
+      },
+      {
+        "bytes": 89905,
+        "path": "backtest_cascade.py",
+        "sha256": "e635136e2c5c67f00a64ba66668ee3ccee14a4d76aa63a39fb445f2064acaeea",
+        "source": "backtest_cascade.py"
+      },
+      {
+        "bytes": 83169,
+        "path": "backtest_cascade_15dte.py",
+        "sha256": "717650e5bc52d176ba0981d154ce1b42b892d8c725903b083ac9ae328d206225",
+        "source": "backtest_cascade_15dte.py"
+      },
+      {
+        "bytes": 155581,
+        "path": "api.py",
+        "sha256": "8335a3a08c9577a6d4520af67f517bb7e46680d0bede59ba8aa3408cb2abe3be",
+        "source": "api.py"
+      },
+      {
+        "bytes": 180146,
+        "path": "trader.py",
+        "sha256": "68a90e6ba54d51ca9203149aab2ae4a0067136d0528a50b899fab83af189310b",
+        "source": "trader.py"
+      }
+    ],
+    "scoring": [
+      {
+        "bytes": 8,
+        "path": "ALGORITHM_VERSION",
+        "sha256": "06bf2f954c843008d37edfd161330d4034ef8da737129a2df3adb3d5f9134561",
+        "source": "ALGORITHM_VERSION"
+      },
+      {
+        "bytes": 27103,
+        "path": "strategy_config.py",
+        "sha256": "58405aea0e608bcee28fd049e645ecba2224cc548c9196b8ab04d0d3a8a5d8af",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 40223,
+        "path": "database/utils/scoring.py",
+        "sha256": "24170b776aeb651a62770f69005d2ce06b7ebe2a4e938f0e5f16c97027667732",
+        "source": "database/utils/scoring.py"
+      },
+      {
+        "missing": true,
+        "source": "database/utils/sector_breadth_wave.py"
+      },
+      {
+        "bytes": 217263,
+        "path": "database/models/core.py",
+        "sha256": "298d7de6134377cd223f0c82e868952e4c39ea9d06f274f741182032bbf232ec",
+        "source": "database/models/core.py"
+      },
+      {
+        "bytes": 23553,
+        "path": "database/models/technical.py",
+        "sha256": "2752501ca5f3171ca2368ef5357fb66e2a468242b03a55381916273001762fc3",
+        "source": "database/models/technical.py"
+      },
+      {
+        "bytes": 961,
+        "path": "database/project_root.py",
+        "sha256": "7fae4a33e2321f0a2098aeb9be4f976655d060552f7b09d08fcf15cf9ba39c3c",
+        "source": "database/project_root.py"
+      },
+      {
+        "bytes": 24055,
+        "path": "market_breadth.py",
+        "sha256": "ee48a20f94b622941f1e4760c70d18cab82efd170835e606e8488eb3ee16043b",
+        "source": "market_breadth.py"
+      },
+      {
+        "bytes": 31003,
+        "path": "market_regime.py",
+        "sha256": "d1a81d7ba5fdc22d0e19d6528f9f2af437556161cc101a97c87e4edbdbbe3c16",
+        "source": "market_regime.py"
+      },
+      {
+        "bytes": 36724,
+        "path": "volume_amplifier.py",
+        "sha256": "2dc87a230b98a5bba4b179751c6649d2bcb0f3f9a52f4260e580ff68610320ac",
+        "source": "volume_amplifier.py"
+      },
+      {
+        "bytes": 38250,
+        "path": "simulator.py",
+        "sha256": "ca81216ffa6adc5bdd8bf916dddf2be6c3643b9cc0e57a143ee743423f2d6066",
+        "source": "simulator.py"
+      },
+      {
+        "bytes": 9763,
+        "path": "recalculate_scores.py",
+        "sha256": "1a08dfd87bb07fb12e33ea02581a0941ba17309937c32dab02a3cef1191d5434",
+        "source": "recalculate_scores.py"
+      }
+    ]
+  },
+  "fingerprints": {
+    "manifest_inputs": "0ce0296752170a68cfbca2e775c7bc3943bb8a700d72d778b29ea3accbe027a8",
+    "portfolio_config": "bf77b4b0c75c17fc6e5a9b1ae18a65bde202260f5635e7802fbefdff02d5acab",
+    "portfolio_snapshot": "94c05bddc065d5340b0864e3526fd0519b6d1d016b67ecabebfb022b81595e54",
+    "portfolio_source_files": "4f0d78df31ee9fd1a44bcde44250e77bbe1a3d5ce4aa504574b0c819ef567ea7",
+    "scoring_config": "f07320e9b50eebf13486177104307b4f0bab9d6ef346fe4356c5ffc618f19ef5",
+    "scoring_files": "2e3bb8053caa2d9f969d67f658e3f53f76749dbb92d718b2628f34338e1208ef"
+  },
+  "label": "v38",
+  "notes": [
+    "This snapshot was copied from the git commit recorded by AlgorithmVersion rather than from the current worktree.",
+    "Runtime scoring still imports the checkout code until the injected loader phase lands."
+  ],
+  "paths": {
+    "cache_root": ".cache/algorithm_versions/v38",
+    "evidence_manifest": "evidence_manifest.json",
+    "portfolio_config": "portfolio_config.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_sources": "portfolio_sources",
+    "root": "algorithm_versions/v38",
+    "scoring": "scoring",
+    "scoring_config": "scoring_config.json"
+  },
+  "previous_resolved_key": "v37",
+  "schema_version": 1,
+  "silo_key": "v38",
+  "source": {
+    "algorithm_version_file": "6f9afda",
+    "commit": "b093e2d1612a6dfc9b359615a3a7b6082760f809",
+    "commit_body": "Score-stage gradient dampener targeting the v36/v37 wadj-neg miss residue\nat 70-74 (z=+9.2, miss 52.7%, N=1537/5y).  CWCF gates on overall>=75 and\nleft this zone untreated; CWWD covers it with a 2D gradient (no hard\nthreshold) on (wadj, stoch).\n\nMechanism:\n  if 70 <= overall < 75 and wadj < 0:\n      stoch_grad = clip((stoch - 25) / 35, 0, 1)\n      wadj_grad  = clip(-wadj / 5, 0, 1)\n      weakness   = stoch_grad * wadj_grad\n      overall   -= 0.95 * weakness * (overall - 55)\n\nCalibration via fast_variant_runner Bayesian sweep\n(experiments/cwwd_v38/sweep.py, 14 variants on v37 5y).  All variants\nsoft-passed the new sub-75 H1 gate; selected variant maximizes 70+\nTP improvement while preserving zero spillover to higher tiers.\n\nPer-trade gate (sub-75 H1 fix per assessment-backtest.md):\n  - 70+ TP%: 58.9% -> 59.5% (+0.62pp)\n  - 70+ N: -4.6% (filtered the bad-quality cohort)\n  - 75+/80+/85+/90+/95+: byte-identical (zero spillover)\n  - Puts: byte-identical (gate is calls-only)\n  - Multi-window: 1y +0.62 / 3y +0.74 / 5y +0.62 (sign-consistent)\n\nRetires WEAK_WEEKLY_CALL_DROP cascade-stage filter (shipped 2026-05-05,\n1 day live).  Score-stage encoding fixes the dashboard divergence\nproblem: a 73 wadj-neg call now drifts below 70 in the score itself,\nso it neither shows on the dashboard as a call signal nor enters the\ncascade.  Single source of truth.\n\nAlso fixes H1-H5 ship gate to handle sub-75 changes \u2014 the original\ngate measured only {95+, 90+, 85+, 80+, 75+} which has a blind spot\nfor changes targeting signals already inside the cascade but below\n75.  New gate adds 70+ as the affected-tier metric for sub-75\nchanges; updated assessment-backtest.md.\n\nFrontend: removed the WEAK_WEEKLY_CALL_DROP SkipBadge (filter retired,\nno API will emit that reason).  EARN_SUPP_PUT badge stays until v39\nships its score-stage replacement (PESS).\n\nCo-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>",
+    "commit_short": "b093e2d1",
+    "commit_subject": "v38 scoring: Call Weak-Weekly Dampener (CWWD) extends CWCF below 75",
+    "mode": "git_ref",
+    "requested_ref": "b093e2d"
+  },
+  "status": "shipped"
+}

@@ -1,0 +1,58 @@
+{
+  "changed_paths": [
+    "api.py",
+    "backtest_cascade.py",
+    "database/models/core.py",
+    "database/utils/scoring.py",
+    "monte_carlo.py",
+    "simulator.py",
+    "trader.py",
+    "volume_amplifier.py"
+  ],
+  "name_status": [
+    {
+      "path": "api.py",
+      "status": "M"
+    },
+    {
+      "path": "backtest_cascade.py",
+      "status": "M"
+    },
+    {
+      "path": "database/models/core.py",
+      "status": "M"
+    },
+    {
+      "path": "database/utils/scoring.py",
+      "status": "M"
+    },
+    {
+      "path": "monte_carlo.py",
+      "status": "M"
+    },
+    {
+      "path": "simulator.py",
+      "status": "M"
+    },
+    {
+      "path": "trader.py",
+      "status": "M"
+    },
+    {
+      "path": "volume_amplifier.py",
+      "status": "M"
+    }
+  ],
+  "range": "be057ce0..41fa5666",
+  "stat": [
+    "api.py                    | 509 +++++++++++++++++++++++++++++++--",
+    " backtest_cascade.py       | 703 ++++++++++++++++++++++++++++++++++------------",
+    " database/models/core.py   | 222 +++++++++++----",
+    " database/utils/scoring.py |  48 ----",
+    " monte_carlo.py            | 152 ++++++++--",
+    " simulator.py              |  13 +-",
+    " trader.py                 | 350 ++++++++++++++++++++---",
+    " volume_amplifier.py       | 188 +++++++++++--",
+    " 8 files changed, 1799 insertions(+), 386 deletions(-)"
+  ]
+}

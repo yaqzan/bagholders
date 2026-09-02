@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c ':*)",
+      "Bash(python3)",
+      "PowerShell(Get-Process python -ErrorAction SilentlyContinue | Where-Object { $_.CPU -gt 50 } | Select-Object Id, StartTime, CPU | Format-Table)",
+      "PowerShell(Get-Process python -ErrorAction SilentlyContinue | Where-Object { $_.CPU -gt 5 } | Select-Object Id, StartTime, CPU | Format-Table)",
+      "PowerShell(Get-Process python -ErrorAction SilentlyContinue | Where-Object { $_.Id -eq 21332 } | Select-Object Id, StartTime, CPU, WorkingSet | Format-Table)",
+      "PowerShell(Get-Process python -ErrorAction SilentlyContinue)",
+      "PowerShell($env:PYTHONIOENCODING=\"utf-8\"; python -c \"import polars as pl; df = pl.read_parquet\\('.cache/weekly_avwap/calls_v39_1825d.parquet'\\); print\\('shape:', df.shape\\); print\\(\\); print\\('null counts:'\\); [print\\(f'  {c}: {df[c].null_count\\(\\):,} / {len\\(df\\):,}'\\) for c in df.columns]; print\\(\\); print\\('numeric describe \\(avwap, ichimoku, sma50w, w52\\):'\\); print\\(df.select\\(['avwap_pct','price_vs_kijun_pct','price_vs_tenkan_pct','price_vs_span_b_pct','sma50w_pct','w52_high_pct','w52_low_pct','avwap_bars']\\).describe\\(\\)\\); print\\(\\); print\\('cloud_position counts:'\\); print\\(df.group_by\\('cloud_position'\\).len\\(\\).sort\\('cloud_position'\\)\\); print\\(\\); print\\('tenkan_kijun_dir counts:'\\); print\\(df.group_by\\('tenkan_kijun_dir'\\).len\\(\\).sort\\('tenkan_kijun_dir'\\)\\); print\\(\\); print\\('opt_result_15 counts \\(1=win, 0=loss\\):'\\); print\\(df.group_by\\('opt_result_15'\\).len\\(\\).sort\\('opt_result_15'\\)\\)\")",
+      "Bash(tasklist //FI \"PID eq 24128\")"
+    ]
+  }
+}

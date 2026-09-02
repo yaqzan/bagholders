@@ -1,0 +1,74 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Claude/Codex worktrees
+.claude/worktrees/
+.codex/worktrees/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+Thumbs.db
+cloudflared.exe
+*.exe
+
+.gitnexus
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Numba JIT cache
+*.nbc
+*.nbi
+
+# Local caches & runtime artifacts
+.cache/
+*.parquet
+
+# Experiment outputs (logs, profiles, sweep stdout dumps)
+experiments/*.out
+experiments/*.log
+experiments/*.prof
+
+# Codex/background run artifacts
+codex_runs/
+experiments/**/runs/
+
+# Large experiment fixtures / data dumps (regenerate locally; not for VCS)
+experiments/mos_refactor/*.pkl
+experiments/nvda_analysis/data/*.csv
+experiments/miss_regime_fakeout/results/*.parquet
+experiments/lifecycle_mc/results/
+.codex/
+*.pkl
+experiments/**/*.json
+experiments/**/*.jsonl
+experiments/**/*.csv

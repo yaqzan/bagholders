@@ -1,0 +1,40 @@
+{
+  "changed_paths": [
+    "ALGORITHM_VERSION",
+    "database/utils/scoring.py",
+    "monte_carlo_15dte.py",
+    "strategy_config.py",
+    "trader.py"
+  ],
+  "name_status": [
+    {
+      "path": "ALGORITHM_VERSION",
+      "status": "M"
+    },
+    {
+      "path": "database/utils/scoring.py",
+      "status": "M"
+    },
+    {
+      "path": "monte_carlo_15dte.py",
+      "status": "M"
+    },
+    {
+      "path": "strategy_config.py",
+      "status": "M"
+    },
+    {
+      "path": "trader.py",
+      "status": "M"
+    }
+  ],
+  "range": "e77714f6..d5ef1f52",
+  "stat": [
+    "ALGORITHM_VERSION         |   2 +-",
+    " database/utils/scoring.py |  26 +++---",
+    " monte_carlo_15dte.py      |  59 ++++++++----",
+    " strategy_config.py        |  38 ++++++--",
+    " trader.py                 | 233 +++++++++++++++++++++++++++++++++++++++++++---",
+    " 5 files changed, 302 insertions(+), 56 deletions(-)"
+  ]
+}

@@ -1,0 +1,182 @@
+{
+  "algorithm_version": {
+    "created_at": "2026-05-13T08:43:39",
+    "git_commit": "3cfc4dc2",
+    "git_message": "Retune continuation echo weights for v57 WR7 utility",
+    "id": 58,
+    "label": "v58",
+    "notes": null
+  },
+  "captured_at": "2026-05-13T15:36:56+00:00",
+  "files": {
+    "portfolio_sources": [
+      {
+        "bytes": 58714,
+        "path": "strategy_config.py",
+        "sha256": "8609ff2e81d382bdf78c710ea1b575e730b76cbc917ccbce144a93e5804714a2",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 21629,
+        "path": "mechanism_registry.py",
+        "sha256": "e13165cc300605a107a72ed0b9389eb573d24b651a26de3d1abc975ecdea60ba",
+        "source": "mechanism_registry.py"
+      },
+      {
+        "bytes": 119875,
+        "path": "monte_carlo.py",
+        "sha256": "624ee0f447b5c492073df9446dae1fd1c18ed43c625bfcfe34c93a4b0cb3d377",
+        "source": "monte_carlo.py"
+      },
+      {
+        "bytes": 92331,
+        "path": "monte_carlo_15dte.py",
+        "sha256": "aa55edb6961083fb59242893d755b7a5638a28ca299a2b4ce6d1ceaec3fdaf9e",
+        "source": "monte_carlo_15dte.py"
+      },
+      {
+        "bytes": 98582,
+        "path": "backtest_cascade.py",
+        "sha256": "a7b5bd00594026c6276ad3ee7ab393c1ba1d83659cf2e6111420456215fb1509",
+        "source": "backtest_cascade.py"
+      },
+      {
+        "bytes": 87282,
+        "path": "backtest_cascade_15dte.py",
+        "sha256": "6bf12444c15bc9f6eeee8a562ae056e301bbd197110ce0fc7c0e71737581fc2e",
+        "source": "backtest_cascade_15dte.py"
+      },
+      {
+        "bytes": 186016,
+        "path": "api.py",
+        "sha256": "551fc301471956982990fd6e10279dbbb3f2b2750caf45cf679eb3ddf471cfba",
+        "source": "api.py"
+      },
+      {
+        "bytes": 219428,
+        "path": "trader.py",
+        "sha256": "e1c027b056fc8fdec28fb895c257c6ed56cdd691899ce4810125744c6b1ced8c",
+        "source": "trader.py"
+      }
+    ],
+    "scoring": [
+      {
+        "bytes": 8,
+        "path": "ALGORITHM_VERSION",
+        "sha256": "8f6ed81f9c6b9d8f0910f9fbfc4f934b10d1d8b3cd6178c9db6903de1893e1c5",
+        "source": "ALGORITHM_VERSION"
+      },
+      {
+        "bytes": 58714,
+        "path": "strategy_config.py",
+        "sha256": "8609ff2e81d382bdf78c710ea1b575e730b76cbc917ccbce144a93e5804714a2",
+        "source": "strategy_config.py"
+      },
+      {
+        "bytes": 72004,
+        "path": "database/utils/scoring.py",
+        "sha256": "3ebfdea098828d1c869b9f079fe5b2e83f75045636ed190aa1059695afa8ddd0",
+        "source": "database/utils/scoring.py"
+      },
+      {
+        "bytes": 12988,
+        "path": "database/utils/sector_breadth_wave.py",
+        "sha256": "91e616822e0a36405fd25503139255a23efd3ec281ba92e9f9e70c664e99464d",
+        "source": "database/utils/sector_breadth_wave.py"
+      },
+      {
+        "bytes": 257439,
+        "path": "database/models/core.py",
+        "sha256": "8f1eb638a86a9cc36c1b3e7d5e6bcb5b9ca5930601b9310221d5dc7a763d7aaa",
+        "source": "database/models/core.py"
+      },
+      {
+        "bytes": 24027,
+        "path": "database/models/technical.py",
+        "sha256": "1dd87ce81603dfeb1c2fa0729b8c1b992215bcd1ee2ad3538a701ba143a71658",
+        "source": "database/models/technical.py"
+      },
+      {
+        "bytes": 1000,
+        "path": "database/project_root.py",
+        "sha256": "3648a2fd02fa8f7ca54b577878fb2973272f55fa23bd6e9b9917a00b0fb108e1",
+        "source": "database/project_root.py"
+      },
+      {
+        "bytes": 42034,
+        "path": "market_breadth.py",
+        "sha256": "0c7916c1f906bb487378b613ad18ce62e63f68b9322b4ddecd8c186f4afafe47",
+        "source": "market_breadth.py"
+      },
+      {
+        "bytes": 31763,
+        "path": "market_regime.py",
+        "sha256": "ebe3d5c61865ff51f84e3f19cbfe965093ecc62ae04624b3e4306dd18ece0960",
+        "source": "market_regime.py"
+      },
+      {
+        "bytes": 37617,
+        "path": "volume_amplifier.py",
+        "sha256": "81024253a9d76cf16e64d3fa21203c498e9ee6b94460c61a5696b9a3a38f0b80",
+        "source": "volume_amplifier.py"
+      },
+      {
+        "bytes": 41334,
+        "path": "simulator.py",
+        "sha256": "45ac97e4c8fefcf47c865221fc7b105c22bf684ad71d2cc64eac13cf4b9c74d0",
+        "source": "simulator.py"
+      },
+      {
+        "bytes": 10012,
+        "path": "recalculate_scores.py",
+        "sha256": "a727a78d1aaaa668d6f20833774ce8493aa7e78542dfa0dd6cc63955de8c6b7e",
+        "source": "recalculate_scores.py"
+      }
+    ]
+  },
+  "fingerprints": {
+    "manifest_inputs": "d33ccf13181f2f97087bf0e19abadd976834492337874124683204d62cb0bf4c",
+    "portfolio_config": "7e38fec7e176e9d031ee39a4c7e0c00d05327bf7a7d1fc7238718a2244147e29",
+    "portfolio_snapshot": "7c05698758310da8e1775063e84aa1fe3f9956ef260954b19092322da56594d6",
+    "portfolio_source_files": "4e103b842e16818bb715de4889833bc915cd254eebf7c526dd2cb7c14f56a594",
+    "scoring_config": "0678aa17990745676ad52245d97284e600cdba856cf44d3191975e1f82b8e4e8",
+    "scoring_files": "eef5e68a429474a43af5e8f4546e460421ae464930b4096507eb896efb7ae137"
+  },
+  "label": "current-staging-worktree",
+  "notes": [
+    "This snapshot is additive infrastructure. Runtime scoring still imports the checkout code until the injected loader phase lands.",
+    "Historical backfill is intentionally deferred because reconstructing old silos is resource-intensive during trading hours."
+  ],
+  "paths": {
+    "cache_root": ".cache/algorithm_versions/candidate-current-working-tree",
+    "evidence_manifest": "evidence_manifest.json",
+    "portfolio_config": "portfolio_config.json",
+    "portfolio_snapshot": "portfolio_snapshot.json",
+    "portfolio_sources": "portfolio_sources",
+    "root": "algorithm_versions/candidate-current-working-tree",
+    "scoring": "scoring",
+    "scoring_config": "scoring_config.json"
+  },
+  "schema_version": 1,
+  "silo_key": "candidate-current-working-tree",
+  "source": {
+    "algorithm_version_file": "3cfc4dc2",
+    "branch": "codex/algorithm-silos",
+    "dirty": true,
+    "dirty_status": [
+      "M AGENTS.md",
+      " M CLAUDE.md",
+      " M api.py",
+      " M database/models/core.py",
+      " M src/App.js",
+      " M src/components/Sidebar.js",
+      " M trader.py",
+      "?? algorithm_versions/",
+      "?? tests/test_algorithm_versions_manager.py"
+    ],
+    "head": "47a5ba72f59b5396f824d7cb8ba1dffa72d78d19",
+    "head_short": "47a5ba72",
+    "mode": "working_tree"
+  },
+  "status": "candidate"
+}
