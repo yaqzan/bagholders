@@ -4,7 +4,7 @@ Scores about 74,000 stocks from 0 to 100 every night and turns the strongest sco
 
 ![The Bagholders dashboard](docs/screenshot.webp)
 
-Live at https://trader.yaqzan.dev (also bagholders.ai; moving to quant.yaqzan.dev). The code, the `trader.py` CLI and the database still go by the project's original name, Trader.
+Live at https://quant.yaqzan.dev (also bagholders.ai; moving to quant.yaqzan.dev). The code, the `trader.py` CLI and the database still go by the project's original name, Trader.
 
 ## The nightly score
 
