@@ -1,8 +1,10 @@
-# Trader
+# Bagholders
+
+The code, CLI (`trader.py`) and database still call this project Trader; Bagholders is the public name.
 
 A technical analysis platform that scores stocks 0-100 every night and maps the strongest scores to ATM options entries.
 
-Live: https://trader.yaqzan.dev
+Live: https://quant.yaqzan.dev (also bagholders.ai)
 
 ## Why I built it
 
@@ -66,7 +68,7 @@ tools/               Capital-plan refresh and other one-off utilities
 
 ## Status
 
-Live at trader.yaqzan.dev, actively traded and actively developed. This is a snapshot of my private working repo; its commit history isn't published.
+Live at quant.yaqzan.dev, actively traded and actively developed. This is a snapshot of my private working repo; its commit history isn't published.
 
 ## License
 
